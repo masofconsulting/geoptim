@@ -50,7 +50,7 @@ export default async (req) => {
 
   const content = (rawContent || '').slice(0, 3000);
 
-  const promptOrg = `Génère les blocs Schema.org Organisation et Personne pour ce site. HTML brut uniquement, sans backtick.
+  const promptOrg = `Génère les blocs Schema.org entités pour ce site. HTML brut uniquement, sans backtick.
 
 DONNÉES :
 ${ctx}
@@ -58,22 +58,41 @@ ${ctx}
 CONTENU :
 ${content}
 
-FORMAT EXACT :
+GÉNÈRE LES BLOCS SUIVANTS (uniquement ceux pour lesquels tu as des données réelles) :
+
 <!-- ${name} — Schema.org JSON-LD | Geoptim.io | Coller dans <head> via RankMath, Yoast ou Insert Headers & Footers -->
 
-<!-- Organisation (toutes les pages) -->
+<!-- 1. Organisation/LocalBusiness — TOUJOURS inclus -->
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":["[TypeLePlusPrécis]","Organization"],"@id":"https://${domain}/#org","name":"[nom officiel]","description":"[description 1-2 phrases]","url":"https://${domain}"[ajouter si trouvé: ,"telephone":"...","email":"...","address":{"@type":"PostalAddress","streetAddress":"...","postalCode":"...","addressLocality":"...","addressCountry":"FR"},"geo":{"@type":"GeoCoordinates","latitude":...,"longitude":...},"openingHours":["..."],"areaServed":["..."],"sameAs":["url_facebook","url_linkedin","url_instagram","..."],"hasOfferCatalog":{"@type":"OfferCatalog","name":"[nom catalogue]","itemListElement":[{"@type":"Offer","itemOffered":{"@type":"Service","name":"[service]"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"[service]"}}]}]}
+{
+  "@context": "https://schema.org",
+  "@type": ["[TypeLePlusPrécis parmi: LocalBusiness, LegalService, MedicalBusiness, AccountingService, FinancialService, InsuranceAgency, RealEstateAgent, Restaurant, FoodEstablishment, Store, AutoRepair, Plumber, Electrician, HairSalon, SpaOrBeautySalon, ConstructionBusiness, HomeAndConstructionBusiness, MovingCompany, CleaningService, LandscapingBusiness, ITService, SoftwareApplication, EducationalOrganization, TutoringCenter, Dentist, Physician, Optician, Veterinary, HospitalDepartment, etc.]", "Organization"],
+  "@id": "https://${domain}/#org",
+  "name": "[nom officiel]",
+  "description": "[description précise 2-3 phrases]",
+  "url": "https://${domain}",
+  [si trouvé: "telephone", "email", "address" avec PostalAddress complet, "geo" avec GeoCoordinates, "openingHours", "openingHoursSpecification", "priceRange", "currenciesAccepted", "paymentAccepted", "areaServed", "serviceArea", "sameAs" avec tous les profils sociaux trouvés, "hasOfferCatalog" avec tous les services]
+}
 </script>
 
-<!-- Personne (une balise par personne identifiée) -->
+<!-- 2. WebSite — TOUJOURS inclus -->
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"Person","name":"[nom]","jobTitle":"[titre]","worksFor":{"@id":"https://${domain}/#org"}[ajouter si trouvé: ,"email":"...","telephone":"...","knowsAbout":["domaine1","domaine2"],"sameAs":["url_linkedin","url_twitter"]]}
+{"@context":"https://schema.org","@type":"WebSite","@id":"https://${domain}/#website","url":"https://${domain}","name":"[nom du site]","description":"[description courte]","publisher":{"@id":"https://${domain}/#org"}[si moteur de recherche interne: ,"potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://${domain}/?s={search_term_string}"},"query-input":"required name=search_term_string"}]}
 </script>
 
-RÈGLES : @type le plus précis possible (LegalService, MedicalBusiness, AccountingService, Restaurant, ConstructionBusiness...), valeurs réelles uniquement, omets les champs sans données, omets le bloc Personne si aucune personne identifiée.`;
+<!-- 3. Personne(s) — une balise par personne identifiée, omettre si aucune -->
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Person","@id":"https://${domain}/#[slug-nom]","name":"[nom complet]","jobTitle":"[titre réel]","worksFor":{"@id":"https://${domain}/#org"}[si trouvé: ,"email","telephone","description","image","knowsAbout":["spécialité1","spécialité2"],"hasCredential":[{"@type":"EducationalOccupationalCredential","name":"[diplôme/certification]"}],"sameAs":["linkedin","twitter","autres profils"]]}
+</script>
 
-  const promptFaq = `Génère le bloc FAQPage Schema.org pour ce site. HTML brut uniquement, sans backtick.
+<!-- 4. Service(s) — un bloc par service/prestation identifié(e), omettre si aucun -->
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Service","name":"[nom du service]","description":"[description]","provider":{"@id":"https://${domain}/#org"}[si trouvé: ,"areaServed","serviceType","offers":{"@type":"Offer","price":"...","priceCurrency":"EUR"}]}
+</script>
+
+RÈGLES : JSON valide et minifié, @type le plus précis possible, valeurs réelles uniquement, omets tout champ sans données.`;
+
+  const promptFaq = `Génère les blocs Schema.org contenu pour ce site. HTML brut uniquement, sans backtick.
 
 DONNÉES :
 ${ctx}
@@ -81,24 +100,31 @@ ${ctx}
 CONTENU :
 ${content}
 
-FORMAT EXACT :
-<!-- FAQPage — questions fréquentes du secteur -->
+GÉNÈRE LES BLOCS SUIVANTS (uniquement ceux pour lesquels tu as des données réelles) :
+
+<!-- 1. FAQPage — questions/réponses adaptées au secteur d'activité -->
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
-{"@type":"Question","name":"[question longue traîne précise]","acceptedAnswer":{"@type":"Answer","text":"[réponse factuelle 40-50 mots]"}},
-{"@type":"Question","name":"[question]","acceptedAnswer":{"@type":"Answer","text":"[réponse 40-50 mots]"}},
-{"@type":"Question","name":"[question]","acceptedAnswer":{"@type":"Answer","text":"[réponse 40-50 mots]"}},
-{"@type":"Question","name":"[question]","acceptedAnswer":{"@type":"Answer","text":"[réponse 40-50 mots]"}},
-{"@type":"Question","name":"[question]","acceptedAnswer":{"@type":"Answer","text":"[réponse 40-50 mots]"}},
-{"@type":"Question","name":"[question]","acceptedAnswer":{"@type":"Answer","text":"[réponse 40-50 mots]"}},
-{"@type":"Question","name":"[question]","acceptedAnswer":{"@type":"Answer","text":"[réponse 40-50 mots]"}},
-{"@type":"Question","name":"[question sur contact ou zone]","acceptedAnswer":{"@type":"Answer","text":"[réponse 40-50 mots avec coordonnées si dispo]"}}
+[Génère autant de Q&A que pertinent pour ce secteur (entre 6 et 12). Chaque entrée :
+{"@type":"Question","name":"[question précise qu'un client poserait]","acceptedAnswer":{"@type":"Answer","text":"[réponse factuelle complète, 40-60 mots]"}}]
 ]}
 </script>
 
+<!-- 2. AggregateRating — uniquement si des avis/notes sont mentionnés dans le contenu -->
+[Si avis trouvés, ajouter dans le bloc Organisation existant, ou créer un bloc séparé :
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"[même @type que l'Organisation]","@id":"https://${domain}/#org","aggregateRating":{"@type":"AggregateRating","ratingValue":"[note]","reviewCount":"[nombre]","bestRating":"5"}}
+</script>]
+
+<!-- 3. BreadcrumbList — pour les sites avec structure de navigation claire -->
+[Si structure de navigation claire, générer :
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Accueil","item":"https://${domain}"}[, autres niveaux si pertinents]]}
+</script>]
+
 <!-- Optimisation GEO par Geoptim.io — https://geoptim.io -->
 
-RÈGLES : 8 questions réelles liées à l'activité du site, réponses factuelles et concises en 40-50 mots, données réelles uniquement, pas de valeurs inventées.`;
+RÈGLES : JSON valide et minifié, questions FAQPage réelles et pertinentes pour le secteur, omets les blocs 2 et 3 si pas de données, données réelles uniquement.`;
 
   const enc = new TextEncoder();
   const stream = new ReadableStream({
@@ -106,8 +132,8 @@ RÈGLES : 8 questions réelles liées à l'activité du site, réponses factuell
       try {
         const system = "Tu es un expert Schema.org et structured data. Tu génères des balises JSON-LD complètes, précises et valides, en utilisant uniquement les données réelles fournies.";
         const [orgText, faqText] = await Promise.all([
-          collectStream(KEY, { model: "claude-sonnet-4-6", max_tokens: 2000, system, messages: [{ role: "user", content: promptOrg }] }),
-          collectStream(KEY, { model: "claude-sonnet-4-6", max_tokens: 1500, system, messages: [{ role: "user", content: promptFaq }] })
+          collectStream(KEY, { model: "claude-sonnet-4-6", max_tokens: 2500, system, messages: [{ role: "user", content: promptOrg }] }),
+          collectStream(KEY, { model: "claude-sonnet-4-6", max_tokens: 2000, system, messages: [{ role: "user", content: promptFaq }] })
         ]);
         const clean = t => t.trim().replace(/^```html?\n?/i, '').replace(/\n?```\s*$/i, '').trim();
         const combined = clean(orgText) + "\n\n" + clean(faqText);
