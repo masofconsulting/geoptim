@@ -210,7 +210,7 @@ h1 em{font-style:italic;color:var(--gold)}
 /* MODAL */
 .mo{position:fixed;inset:0;background:rgba(15,31,61,.52);backdrop-filter:blur(5px);z-index:1000;display:none;align-items:center;justify-content:center;padding:24px}
 .mo.open{display:flex}
-.mb{background:#fff;border-radius:22px;padding:24px 28px;max-width:420px;width:100%;box-shadow:0 24px 80px rgba(15,31,61,.18);animation:modalIn .3s cubic-bezier(.34,1.56,.64,1);overflow-y:auto;max-height:calc(100vh - 48px)}
+.mb{background:#fff;border-radius:22px;padding:36px 32px;max-width:440px;width:100%;box-shadow:0 24px 80px rgba(15,31,61,.18);animation:modalIn .3s cubic-bezier(.34,1.56,.64,1);overflow-y:auto;max-height:calc(100vh - 48px)}
 .mi-row{display:flex;align-items:center;gap:10px;padding:5px 0;border-bottom:1px solid var(--border);font-size:12px}
 .mi-row:last-child{border-bottom:none}
 .mo-spinner{width:48px;height:48px;border:3px solid var(--border);border-top-color:var(--gold);border-radius:50%;margin:0 auto 20px;animation:spin .8s linear infinite}
@@ -1102,22 +1102,18 @@ footer{background:var(--navy);padding:52px 32px 32px}
 <div class="mo" id="modal">
   <div class="mb">
     <div id="modConfirm">
-      <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px">
-        <div style="width:40px;height:40px;flex-shrink:0;background:#fef9ed;border:1px solid #f0e0a0;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px">✦</div>
-        <div>
-          <h3 id="modTitle" style="font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:var(--navy);margin:0 0 2px">Télécharger vos fichiers</h3>
-          <p style="font-size:12px;color:var(--text3);line-height:1.5;margin:0" id="modDesc">Personnalisés pour votre site.</p>
-        </div>
-      </div>
+      <div style="width:52px;height:52px;background:#fef9ed;border:1px solid #f0e0a0;border-radius:13px;display:flex;align-items:center;justify-content:center;font-size:24px;margin:0 auto 14px">✦</div>
+      <h3 id="modTitle" style="font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--navy);margin-bottom:6px;text-align:center">Télécharger vos fichiers</h3>
+      <p style="font-size:13px;color:var(--text3);line-height:1.6;text-align:center;margin-bottom:20px" id="modDesc">Personnalisés pour votre site.</p>
       <!-- File selector for single purchase -->
       <div id="modSingleSelector" style="display:none;margin-bottom:16px">
         <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--text4);text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px">Choisissez votre fichier</div>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px" id="modFileChoices"></div>
       </div>
       <!-- Items list — contenu injecté dynamiquement via openModal() depuis FILE_META -->
-      <div style="background:var(--cream);border-radius:10px;padding:10px 14px;margin-bottom:12px" id="modItems"></div>
+      <div style="background:var(--cream);border-radius:12px;padding:14px 18px;margin-bottom:18px" id="modItems"></div>
       <!-- COORDONNÉES DE FACTURATION -->
-      <div style="border:1px solid var(--border);border-radius:10px;padding:10px 14px;margin-bottom:10px">
+      <div style="border:1px solid var(--border);border-radius:10px;padding:12px 16px;margin-bottom:14px">
         <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--text4);text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px">Coordonnées de facturation</div>
         <div style="display:flex;gap:16px;margin-bottom:8px">
           <label style="font-size:12px;display:flex;align-items:center;gap:5px;cursor:pointer;color:var(--text2)"><input type="radio" name="mod-btype" value="particulier" checked onchange="modTypeChange()"> Particulier</label>
@@ -1138,11 +1134,9 @@ footer{background:var(--navy);padding:52px 32px 32px}
           <div id="modPromoMsg" style="font-size:12px;margin-top:7px;min-height:16px"></div>
         </div>
       </div>
-      <button id="btnPay" style="width:100%;padding:11px;border-radius:10px;background:var(--navy);font-weight:600;font-size:15px;color:#fff;margin-bottom:8px;transition:background .2s">Payer 49 € →</button>
-      <div style="display:flex;justify-content:space-between;align-items:center">
-        <p style="font-family:'DM Mono',monospace;font-size:10px;color:var(--text4);margin:0">🔒 Paiement sécurisé · Stripe</p>
-        <button id="btnModClose" style="font-size:12px;color:var(--text4);background:none;border:none;cursor:pointer;padding:0">Annuler</button>
-      </div>
+      <button id="btnPay" style="width:100%;padding:14px;border-radius:10px;background:var(--navy);font-weight:600;font-size:15px;color:#fff;margin-bottom:10px;transition:background .2s">Payer 49 € →</button>
+      <p style="text-align:center;font-family:'DM Mono',monospace;font-size:10px;color:var(--text4);margin-bottom:10px">🔒 Paiement sécurisé · Stripe</p>
+      <button id="btnModClose" style="display:block;margin:0 auto;font-size:12px;color:var(--text4);background:none;border:none;cursor:pointer">Annuler</button>
     </div>
     <div id="modProcessing" style="display:none;text-align:center;padding:20px 0">
       <div class="mo-spinner"></div>
@@ -2413,7 +2407,7 @@ function openModal(purchaseTarget) {
   var _pi = document.getElementById('modPromoInput'); if (_pi) _pi.style.display = 'none';
   var _pc = document.getElementById('mod-promo');     if (_pc) _pc.value = '';
   var _pm = document.getElementById('modPromoMsg');   if (_pm) _pm.textContent = '';
-  var _pb = document.getElementById('btnPay');        if (_pb) _pb.style.background = '';
+  var _pb = document.getElementById('btnPay');        if (_pb) { _pb.style.background = 'var(--navy)'; _pb.style.color = '#fff'; }
 
   document.getElementById('modal').classList.add('open');
   document.getElementById('modConfirm').style.display = 'block';
