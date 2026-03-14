@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>FAQ Geoptim — Questions fréquentes sur le GEO et l'optimisation IA</title>
+<title>FAQ Geoptim : Questions fréquentes sur le GEO et l'optimisation IA</title>
 <link rel="canonical" href="https://geoptim.io/faq"/>
 <link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
 <meta name="description" content="Toutes les réponses sur le GEO (Generative Engine Optimization), la visibilité dans ChatGPT, Claude, Perplexity, Gemini, les fichiers llms.txt, robots.txt et Schema.org."/>
-<meta property="og:title" content="FAQ Geoptim — GEO et optimisation IA"/>
+<meta property="og:title" content="FAQ Geoptim : GEO et optimisation IA"/>
 <meta property="og:description" content="Questions fréquentes sur le GEO, la visibilité dans les IA et les fichiers d'optimisation."/>
 <meta property="og:url" content="https://geoptim.io/faq"/>
 <meta property="og:type" content="website"/>
@@ -45,7 +45,9 @@ h1{font-family:'Playfair Display',serif;font-size:clamp(28px,4vw,44px);font-weig
 .btn-gold{background:var(--gold);color:var(--navy);padding:13px 32px;border-radius:9px;font-weight:700;font-size:15px;text-decoration:none;display:inline-block}
 footer{background:var(--navy);padding:32px;text-align:center;font-size:12px;color:#5a7a96}
 footer a{color:var(--gold)}
+.nav-links{display:flex;align-items:center;gap:20px}.nl{font-size:13px;font-weight:500;color:var(--text3);transition:color .2s;padding:4px;text-decoration:none}.nl:hover{color:var(--navy)}
 @media(max-width:640px){.wrap{padding:48px 20px 60px}}
+@media(max-width:600px){.nav-links .nl{display:none}}
 </style>
 <script type="application/ld+json">
 {
@@ -90,7 +92,13 @@ footer a{color:var(--gold)}
 <nav>
   <div class="ni">
     <a href="/" class="logo" style="text-decoration:none"><span class="logo-dot"></span>Geoptim</a>
-    <a href="/" class="btn-nav">Analyser mon site →</a>
+    <div class="nav-links">
+      <a href="/tarifs" class="nl">Tarifs</a>
+      <a href="/faq" class="nl">FAQ</a>
+      <a href="/a-propos" class="nl">À propos</a>
+      <a href="/blog" class="nl">Blog</a>
+      <a href="/" class="btn-nav">Analyser mon site →</a>
+    </div>
   </div>
 </nav>
 
@@ -105,22 +113,22 @@ footer a{color:var(--gold)}
 
     <div class="faq-item">
       <button class="faq-q" onclick="toggleFaq(this)"><span>Qu'est-ce que le GEO (Generative Engine Optimization) ?</span><span class="faq-icon">+</span></button>
-      <div class="faq-a"><p>Le GEO est l'équivalent du SEO pour les moteurs IA génératifs. Là où le SEO optimise un site pour être trouvé sur Google, le GEO optimise un site pour être <strong>cité par les assistants IA</strong> : ChatGPT, Perplexity, Claude, Gemini, Grok et Mistral Le Chat.</p><p>En 2026, une recherche sur trois passe directement par un assistant IA — sans passer par Google. Les sites non optimisés GEO sont simplement absents de ces réponses.</p></div>
+      <div class="faq-a"><p>Le GEO est l'équivalent du SEO pour les moteurs IA génératifs. Là où le SEO optimise un site pour être trouvé sur Google, le GEO optimise un site pour être <strong>cité par les assistants IA</strong> : ChatGPT, Perplexity, Claude, Gemini, Grok et Mistral Le Chat.</p><p>En 2026, une recherche sur trois passe directement par un assistant IA, sans passer par Google. Les sites non optimisés GEO sont simplement absents de ces réponses.</p></div>
     </div>
 
     <div class="faq-item">
       <button class="faq-q" onclick="toggleFaq(this)"><span>Mon site risque-t-il d'être ignoré par les IA ?</span><span class="faq-icon">+</span></button>
-      <div class="faq-a"><p>Oui, dans deux cas très fréquents :</p><p><strong>Un robots.txt mal configuré</strong> bloque les crawlers IA (GPTBot, ClaudeBot, PerplexityBot…). Si ces bots ne peuvent pas lire votre site, les modèles de langage ne l'ont pas indexé.</p><p><strong>L'absence de structure</strong> (pas de Schema.org, pas de llms.txt) empêche les IA de comprendre qui vous êtes et ce que vous faites — même si votre site est indexé.</p></div>
+      <div class="faq-a"><p>Oui, dans deux cas très fréquents :</p><p><strong>Un robots.txt mal configuré</strong> bloque les crawlers IA (GPTBot, ClaudeBot, PerplexityBot…). Si ces bots ne peuvent pas lire votre site, les modèles de langage ne l'ont pas indexé.</p><p><strong>L'absence de structure</strong> (pas de Schema.org, pas de llms.txt) empêche les IA de comprendre qui vous êtes et ce que vous faites, même si votre site est indexé.</p></div>
     </div>
 
     <div class="faq-item">
       <button class="faq-q" onclick="toggleFaq(this)"><span>En combien de temps voit-on des résultats dans les IA ?</span><span class="faq-icon">+</span></button>
-      <div class="faq-a"><p>L'effet sur les crawlers est quasi immédiat — un robots.txt corrigé est pris en compte lors du prochain passage du bot.</p><p>Pour apparaître dans les réponses des assistants IA, comptez <strong>2 à 6 semaines</strong> selon le cycle de mise à jour des modèles de langage.</p></div>
+      <div class="faq-a"><p>L'effet sur les crawlers est quasi immédiat : un robots.txt corrigé est pris en compte lors du prochain passage du bot.</p><p>Pour apparaître dans les réponses des assistants IA, comptez <strong>2 à 6 semaines</strong> selon le cycle de mise à jour des modèles de langage.</p></div>
     </div>
 
     <div class="faq-item">
       <button class="faq-q" onclick="toggleFaq(this)"><span>Quelle différence avec une agence SEO ?</span><span class="faq-icon">+</span></button>
-      <div class="faq-a"><p>Une agence SEO optimise pour Google. Geoptim optimise pour les assistants IA génératifs — deux choses distinctes et complémentaires.</p><p>Geoptim couvre l'ensemble des fichiers techniques GEO en quelques minutes à partir de 19 €. Une agence facturerait la même prestation entre 500 et 2 000 €.</p></div>
+      <div class="faq-a"><p>Une agence SEO optimise pour Google. Geoptim optimise pour les assistants IA génératifs : ce sont deux choses distinctes et complémentaires.</p><p>Geoptim couvre l'ensemble des fichiers techniques GEO en quelques minutes à partir de 19 €. Une agence facturerait la même prestation entre 500 et 2 000 €.</p></div>
     </div>
   </div>
 
@@ -130,12 +138,12 @@ footer a{color:var(--gold)}
 
     <div class="faq-item">
       <button class="faq-q" onclick="toggleFaq(this)"><span>L'analyse est-elle vraiment gratuite ?</span><span class="faq-icon">+</span></button>
-      <div class="faq-a"><p>Oui, entièrement. Entrez votre URL, recevez votre score GEO sur 100 et votre diagnostic complet — sans inscription, sans carte bancaire.</p><p>Vous payez uniquement si vous souhaitez télécharger les fichiers d'optimisation. <strong>1 fichier : 19 €</strong> — <strong>Pack 4 fichiers : 49 €</strong> (−35 %). Paiement unique, sans abonnement.</p></div>
+      <div class="faq-a"><p>Oui, entièrement. Entrez votre URL, recevez votre score GEO sur 100 et votre diagnostic complet, sans inscription, sans carte bancaire.</p><p>Vous payez uniquement si vous souhaitez télécharger les fichiers d'optimisation. <strong>1 fichier : 19 €</strong> · <strong>Pack 4 fichiers : 49 €</strong> (−35 %). Paiement unique, sans abonnement.</p></div>
     </div>
 
     <div class="faq-item">
       <button class="faq-q" onclick="toggleFaq(this)"><span>Quels fichiers Geoptim génère-t-il exactement ?</span><span class="faq-icon">+</span></button>
-      <div class="faq-a"><p>4 fichiers personnalisés pour votre site :</p><p><strong>robots.txt</strong> — autorise 30+ crawlers IA (GPTBot, ClaudeBot, PerplexityBot, Google-Extended, xAI-Bot, MistralBot, DeepSeekBot…)</p><p><strong>llms.txt</strong> — résumé Markdown de votre activité, lettre d'introduction aux LLMs</p><p><strong>Schema.org JSON-LD</strong> — balises Organization, FAQPage, Person adaptées à votre secteur</p><p><strong>Page FAQ GEO</strong> — questions/réponses longue traîne prêtes à déployer</p></div>
+      <div class="faq-a"><p>4 fichiers personnalisés pour votre site :</p><p><strong>robots.txt</strong> : autorise 30+ crawlers IA (GPTBot, ClaudeBot, PerplexityBot, Google-Extended, xAI-Bot, MistralBot, DeepSeekBot…)</p><p><strong>llms.txt</strong> : résumé Markdown de votre activité, lettre d'introduction aux LLMs</p><p><strong>Schema.org JSON-LD</strong> : balises Organization, FAQPage, Person adaptées à votre secteur</p><p><strong>Page FAQ GEO</strong> : questions/réponses longue traîne prêtes à déployer</p></div>
     </div>
 
     <div class="faq-item">
@@ -150,7 +158,7 @@ footer a{color:var(--gold)}
 
     <div class="faq-item">
       <button class="faq-q" onclick="toggleFaq(this)"><span>Geoptim fonctionne-t-il pour tous les secteurs ?</span><span class="faq-icon">+</span></button>
-      <div class="faq-a"><p>Oui. Geoptim détecte automatiquement le secteur, le ton du site, l'équipe et les services — et adapte les fichiers en conséquence.</p><p>Cabinets d'avocats, consultants, agences, startups, e-commerce, professionnels de santé, artisans, restaurants... tous les secteurs sont couverts.</p></div>
+      <div class="faq-a"><p>Oui. Geoptim détecte automatiquement le secteur, le ton du site, l'équipe et les services, puis adapte les fichiers en conséquence.</p><p>Cabinets d'avocats, consultants, agences, startups, e-commerce, professionnels de santé, artisans, restaurants... tous les secteurs sont couverts.</p></div>
     </div>
 
     <div class="faq-item">
@@ -168,7 +176,7 @@ footer a{color:var(--gold)}
 </div>
 
 <footer>
-  <p>© 2026 Geoptim — <a href="/">Accueil</a> · <a href="/tarifs">Tarifs</a> · <a href="/a-propos">À propos</a> · <a href="/#sec-legal">Mentions légales</a></p>
+  <p>© 2026 Geoptim · <a href="/">Accueil</a> · <a href="/tarifs">Tarifs</a> · <a href="/a-propos">À propos</a> · <a href="/#sec-legal">Mentions légales</a></p>
 </footer>
 
 <script>

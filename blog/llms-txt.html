@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>Le fichier llms.txt : le nouveau robots.txt de l'ère IA — Geoptim</title>
+<title>Le fichier llms.txt : le nouveau robots.txt de l'ère IA | Geoptim</title>
 <link rel="canonical" href="https://geoptim.io/blog/llms-txt"/>
 <meta name="description" content="Proposé en 2024, le standard llms.txt s'impose rapidement comme le nouveau moyen de se rendre visible auprès des assistants IA. Tout ce que vous devez savoir pour le créer."/>
 <meta name="robots" content="index, follow"/>
@@ -71,7 +71,9 @@ pre code{background:none;border:none;padding:0;font-size:13px;line-height:1.7;co
 .breadcrumb a:hover{color:var(--navy)}
 footer{background:var(--navy);padding:32px;text-align:center;font-size:12px;color:#3a5a7a}
 footer a{color:#5a7a96}
+.nav-links{display:flex;align-items:center;gap:20px}.nl{font-size:13px;font-weight:500;color:var(--text3);transition:color .2s;padding:4px;text-decoration:none}.nl:hover{color:var(--navy)}
 @media(max-width:600px){main{padding:40px 20px 60px}nav{padding:0 20px}}
+@media(max-width:640px){.nav-links .nl{display:none}}
 </style>
 </head>
 <body>
@@ -80,10 +82,16 @@ footer a{color:#5a7a96}
     <div class="logo-dot"></div>
     <span class="logo-name">Geoptim</span>
   </a>
-  <a class="btn-cta" href="/">Analyser mon site →</a>
+  <div class="nav-links">
+    <a href="/tarifs" class="nl">Tarifs</a>
+    <a href="/faq" class="nl">FAQ</a>
+    <a href="/a-propos" class="nl">À propos</a>
+    <a href="/blog" class="nl">Blog</a>
+    <a class="btn-cta" href="/">Analyser mon site →</a>
+  </div>
 </nav>
 <main>
-  <div class="breadcrumb"><a href="/">Accueil</a> › <a href="/#sec-blog">Blog</a> › llms.txt</div>
+  <div class="breadcrumb"><a href="/">Accueil</a> › <a href="/blog">Blog</a> › llms.txt</div>
   <div class="tag">Guide pratique</div>
   <h1>Le fichier llms.txt : le nouveau robots.txt de l'ère IA</h1>
   <div class="meta">
@@ -94,7 +102,7 @@ footer a{color:#5a7a96}
   <p>En 1994, le fichier robots.txt a été inventé pour dire aux moteurs de recherche ce qu'ils pouvaient indexer. Trente ans plus tard, un nouveau standard émerge : le fichier llms.txt.</p>
 
   <h2>Qu'est-ce que le fichier llms.txt ?</h2>
-  <p>C'est un fichier texte au format Markdown, placé à la racine de votre domaine (ex: <code>https://votre-site.fr/llms.txt</code>). Son objectif : fournir aux modèles de langage une description structurée et lisible de votre site — votre identité, vos activités, vos services, vos coordonnées.</p>
+  <p>C'est un fichier texte au format Markdown, placé à la racine de votre domaine (ex: <code>https://votre-site.fr/llms.txt</code>). Son objectif : fournir aux modèles de langage une description structurée et lisible de votre site : votre identité, vos activités, vos services, vos coordonnées.</p>
   <p>Là où le robots.txt dit aux bots <em>ce qu'ils peuvent faire</em>, le llms.txt leur dit <em>qui vous êtes</em>. C'est votre carte de visite pour les LLMs.</p>
 
   <h2>Exemple de llms.txt minimal</h2>
@@ -120,7 +128,7 @@ footer a{color:#5a7a96}
 
   <h2>Comment le créer ?</h2>
   <p>Le fichier llms.txt doit être personnalisé pour votre activité spécifique. Un fichier générique ou vide est moins utile qu'un fichier absent. Les informations clés à inclure : nom de votre structure, description factuelle de l'activité, liste des services ou produits, zone géographique d'intervention, coordonnées, liens vers les pages clés.</p>
-  <p>Geoptim génère automatiquement un fichier llms.txt personnalisé à partir de l'analyse de votre site — adapté à votre secteur, à votre positionnement, et optimisé pour être compris par les principaux LLMs du marché.</p>
+  <p>Geoptim génère automatiquement un fichier llms.txt personnalisé à partir de l'analyse de votre site, adapté à votre secteur, à votre positionnement, et optimisé pour être compris par les principaux LLMs du marché.</p>
 
   <hr class="divider"/>
 
@@ -131,7 +139,7 @@ footer a{color:#5a7a96}
   </div>
 </main>
 <footer>
-  <p>© 2026 <a href="/">Geoptim</a> · <a href="/#sec-blog">Blog</a> · <a href="/mentions-legales">Mentions légales</a></p>
+  <p>© 2026 <a href="/">Geoptim</a> · <a href="/blog">Blog</a> · <a href="/mentions-legales">Mentions légales</a></p>
 </footer>
 </body>
 </html>

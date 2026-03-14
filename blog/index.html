@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>Blog Geoptim — GEO, IA et visibilité dans les assistants IA</title>
+<title>Blog Geoptim : GEO, IA et visibilité dans les assistants IA</title>
 <link rel="canonical" href="https://geoptim.io/blog"/>
 <link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
 <meta name="description" content="Articles sur le GEO (Generative Engine Optimization), la visibilité dans ChatGPT, Perplexity, Claude et Gemini, et les meilleures pratiques pour optimiser votre site pour les IA."/>
-<meta property="og:title" content="Blog Geoptim — GEO et visibilité IA"/>
+<meta property="og:title" content="Blog Geoptim : GEO et visibilité IA"/>
 <meta property="og:description" content="Articles sur le GEO, la visibilité dans les assistants IA et les meilleures pratiques d'optimisation."/>
 <meta property="og:url" content="https://geoptim.io/blog"/>
 <meta property="og:type" content="website"/>
@@ -41,7 +41,9 @@ h1{font-family:'Playfair Display',serif;font-size:clamp(28px,4vw,44px);font-weig
 .cr{font-size:13px;color:var(--gold);font-weight:600}
 footer{background:var(--navy);padding:32px;text-align:center;font-size:12px;color:#5a7a96}
 footer a{color:var(--gold)}
+.nav-links{display:flex;align-items:center;gap:20px}.nl{font-size:13px;font-weight:500;color:var(--text3);transition:color .2s;padding:4px;text-decoration:none}.nl:hover{color:var(--navy)}
 @media(max-width:640px){.grid{grid-template-columns:1fr}.hero{padding:48px 20px 40px}}
+@media(max-width:600px){.nav-links .nl{display:none}}
 </style>
 <script type="application/ld+json">
 {
@@ -58,7 +60,13 @@ footer a{color:var(--gold)}
 <nav>
   <div class="ni">
     <a href="/" class="logo"><span class="logo-dot"></span>Geoptim</a>
-    <a href="/" class="btn-nav">Analyser mon site →</a>
+    <div class="nav-links">
+      <a href="/tarifs" class="nl">Tarifs</a>
+      <a href="/faq" class="nl">FAQ</a>
+      <a href="/a-propos" class="nl">À propos</a>
+      <a href="/blog" class="nl">Blog</a>
+      <a href="/" class="btn-nav">Analyser mon site →</a>
+    </div>
   </div>
 </nav>
 
@@ -88,7 +96,7 @@ footer a{color:var(--gold)}
         <span class="ctag">Technique</span>
         <span class="cread">8 min</span>
       </div>
-      <h2 class="ch">Comment ChatGPT choisit ses sources — et comment en faire partie</h2>
+      <h2 class="ch">Comment ChatGPT choisit ses sources, et comment en faire partie</h2>
       <p class="ce">Les modèles de langage ont des critères précis pour décider quelle source citer. Comprendre leur logique est la première étape.</p>
     </div>
     <div class="cf"><span class="cd">14 fév. 2026</span><span class="cr">Lire →</span></div>
@@ -121,7 +129,7 @@ footer a{color:var(--gold)}
 </div>
 
 <footer>
-  <p>© 2026 Geoptim — <a href="/">Accueil</a> · <a href="/tarifs">Tarifs</a> · <a href="/faq">FAQ</a> · <a href="/a-propos">À propos</a></p>
+  <p>© 2026 Geoptim · <a href="/">Accueil</a> · <a href="/tarifs">Tarifs</a> · <a href="/faq">FAQ</a> · <a href="/a-propos">À propos</a></p>
 </footer>
 </body>
 </html>

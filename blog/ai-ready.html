@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>AI Ready : les 5 critères d'un site vraiment visible par les IA — Geoptim</title>
+<title>AI Ready : les 5 critères d'un site vraiment visible par les IA | Geoptim</title>
 <link rel="canonical" href="https://geoptim.io/blog/ai-ready"/>
 <meta name="description" content="Être AI Ready ne signifie pas intégrer un chatbot. C'est repenser l'architecture de son site pour être cité par ChatGPT, Claude, Perplexity, Gemini et Grok."/>
 <meta name="robots" content="index, follow"/>
@@ -71,7 +71,9 @@ p{font-size:16px;color:var(--text2);line-height:1.8;margin-bottom:20px;font-weig
 .breadcrumb a:hover{color:var(--navy)}
 footer{background:var(--navy);padding:32px;text-align:center;font-size:12px;color:#3a5a7a}
 footer a{color:#5a7a96}
+.nav-links{display:flex;align-items:center;gap:20px}.nl{font-size:13px;font-weight:500;color:var(--text3);transition:color .2s;padding:4px;text-decoration:none}.nl:hover{color:var(--navy)}
 @media(max-width:600px){main{padding:40px 20px 60px}nav{padding:0 20px}}
+@media(max-width:640px){.nav-links .nl{display:none}}
 </style>
 </head>
 <body>
@@ -80,10 +82,16 @@ footer a{color:#5a7a96}
     <div class="logo-dot"></div>
     <span class="logo-name">Geoptim</span>
   </a>
-  <a class="btn-cta" href="/">Analyser mon site →</a>
+  <div class="nav-links">
+    <a href="/tarifs" class="nl">Tarifs</a>
+    <a href="/faq" class="nl">FAQ</a>
+    <a href="/a-propos" class="nl">À propos</a>
+    <a href="/blog" class="nl">Blog</a>
+    <a class="btn-cta" href="/">Analyser mon site →</a>
+  </div>
 </nav>
 <main>
-  <div class="breadcrumb"><a href="/">Accueil</a> › <a href="/#sec-blog">Blog</a> › AI Ready</div>
+  <div class="breadcrumb"><a href="/">Accueil</a> › <a href="/blog">Blog</a> › AI Ready</div>
   <div class="tag">Conception</div>
   <h1>AI Ready : les 5 critères d'un site vraiment visible par les IA</h1>
   <div class="meta">
@@ -94,7 +102,7 @@ footer a{color:#5a7a96}
   <p>Le terme « AI Ready » est devenu un buzzword. Tout le monde prétend l'être. Mais dans la pratique, la grande majorité des sites web restent invisibles pour ChatGPT, Claude, Perplexity et Gemini. Voici ce que cela signifie concrètement.</p>
 
   <h2>1. Crawlabilité IA</h2>
-  <p>Votre robots.txt doit explicitement autoriser GPTBot, ClaudeBot, PerplexityBot, Google-Extended, xAI-Bot (Grok), MistralBot (Mistral Le Chat), DeepSeekBot et Copilot-Bot — soit 30+ crawlers au total. Beaucoup de sites, configurés par défaut ou par des CMS anciens, bloquent ces robots sans le savoir.</p>
+  <p>Votre robots.txt doit explicitement autoriser GPTBot, ClaudeBot, PerplexityBot, Google-Extended, xAI-Bot (Grok), MistralBot (Mistral Le Chat), DeepSeekBot et Copilot-Bot, soit 30+ crawlers au total. Beaucoup de sites, configurés par défaut ou par des CMS anciens, bloquent ces robots sans le savoir.</p>
   <p>C'est le critère n°1, car si les crawlers IA ne peuvent pas lire votre site, aucun autre effort n'a d'impact. Vérifiez votre robots.txt dès maintenant.</p>
 
   <h2>2. Fichier llms.txt</h2>
@@ -103,14 +111,14 @@ footer a{color:#5a7a96}
 
   <h2>3. Données structurées JSON-LD</h2>
   <p>Les balises Schema.org transmettent aux IA les métadonnées essentielles. Organization, Person, FAQPage, Service, Product : chaque type répond à un type de requête différent. Un restaurant qui intègre un LocalBusiness Schema.org sera plus facilement cité quand un utilisateur demande « quel restaurant italien à Lyon ? ».</p>
-  <p>Le JSON-LD est le format recommandé — il est propre, non intrusif, et lu en priorité par Google et les LLMs avant même votre contenu HTML.</p>
+  <p>Le JSON-LD est le format recommandé, il est propre, non intrusif, et lu en priorité par Google et les LLMs avant même votre contenu HTML.</p>
 
   <h2>4. Architecture factuelle du contenu</h2>
-  <p>Les IA citent les contenus qui répondent directement. Chaque page devrait comporter au moins une section formulée comme une question suivie d'une réponse directe. Les titres sous forme de questions (H2, H3), les listes à puces, les tableaux comparatifs — tout ce qui facilite l'extraction d'une information précise est un signal positif.</p>
+  <p>Les IA citent les contenus qui répondent directement. Chaque page devrait comporter au moins une section formulée comme une question suivie d'une réponse directe. Les titres sous forme de questions (H2, H3), les listes à puces, les tableaux comparatifs : tout ce qui facilite l'extraction d'une information précise est un signal positif.</p>
   <p>À l'inverse, les pages trop promotionnelles, sans densité informationnelle, sont systématiquement ignorées par les LLMs au profit de sources plus factuelles.</p>
 
   <h2>5. Cohérence et fraîcheur</h2>
-  <p>Un site dont le contenu est cohérent, à jour et non contradictoire sera mieux représenté dans les modèles. Si votre page d'accueil dit que vous êtes à Paris, mais vos autres pages mentionnent Lyon, les modèles auront du mal à vous situer correctement — et préféreront une source plus claire.</p>
+  <p>Un site dont le contenu est cohérent, à jour et non contradictoire sera mieux représenté dans les modèles. Si votre page d'accueil dit que vous êtes à Paris, mais vos autres pages mentionnent Lyon, les modèles auront du mal à vous situer correctement, et préféreront une source plus claire.</p>
   <p>La fraîcheur compte aussi : un contenu mis à jour régulièrement, avec des dates visibles, est préféré à un contenu sans date ou manifestement obsolète.</p>
 
   <hr class="divider"/>
@@ -126,12 +134,12 @@ footer a{color:#5a7a96}
 
   <div class="cta-box">
     <h3>Vérifiez votre score AI Ready</h3>
-    <p>Analyse gratuite de vos 5 critères — score GEO sur 100 et recommandations personnalisées en 60 secondes.</p>
+    <p>Analyse gratuite de vos 5 critères, score GEO sur 100 et recommandations personnalisées en 60 secondes.</p>
     <a class="btn-gold" href="/">Tester mon site gratuitement →</a>
   </div>
 </main>
 <footer>
-  <p>© 2026 <a href="/">Geoptim</a> · <a href="/#sec-blog">Blog</a> · <a href="/mentions-legales">Mentions légales</a></p>
+  <p>© 2026 <a href="/">Geoptim</a> · <a href="/blog">Blog</a> · <a href="/mentions-legales">Mentions légales</a></p>
 </footer>
 </body>
 </html>

@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>Tarifs Geoptim — Optimisation GEO à partir de 19 €</title>
+<title>Tarifs Geoptim : Optimisation GEO à partir de 19 €</title>
 <link rel="canonical" href="https://geoptim.io/tarifs"/>
 <link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
 <meta name="description" content="Analyse GEO gratuite. Fichier unique à 19 € ou Pack 4 fichiers à 49 € (−35 %). Paiement unique, sans abonnement."/>
-<meta property="og:title" content="Tarifs Geoptim — À partir de 19 €"/>
+<meta property="og:title" content="Tarifs Geoptim : à partir de 19 €"/>
 <meta property="og:description" content="Analyse GEO gratuite. Fichier unique à 19 € ou Pack 4 fichiers à 49 €. Sans abonnement."/>
 <meta property="og:url" content="https://geoptim.io/tarifs"/>
 <meta property="og:type" content="website"/>
@@ -63,7 +63,9 @@ tr:last-child td{border:none}
 .highlight{background:#fef9ed}
 footer{background:var(--navy);padding:32px;text-align:center;font-size:12px;color:#5a7a96}
 footer a{color:var(--gold)}
+.nav-links{display:flex;align-items:center;gap:20px}.nl{font-size:13px;font-weight:500;color:var(--text3);transition:color .2s;padding:4px;text-decoration:none}.nl:hover{color:var(--navy)}
 @media(max-width:640px){.cards{grid-template-columns:1fr}.hero{padding:48px 20px 40px}}
+@media(max-width:600px){.nav-links .nl{display:none}}
 </style>
 <script type="application/ld+json">
 {
@@ -95,14 +97,20 @@ footer a{color:var(--gold)}
 <nav>
   <div class="ni">
     <a href="/" class="logo"><span class="logo-dot"></span>Geoptim</a>
-    <a href="/" class="btn-nav">Analyser mon site →</a>
+    <div class="nav-links">
+      <a href="/tarifs" class="nl">Tarifs</a>
+      <a href="/faq" class="nl">FAQ</a>
+      <a href="/a-propos" class="nl">À propos</a>
+      <a href="/blog" class="nl">Blog</a>
+      <a href="/" class="btn-nav">Analyser mon site →</a>
+    </div>
   </div>
 </nav>
 
 <div class="hero">
   <div class="tag">Tarifs</div>
   <h1>Simple, transparent,<br/>sans abonnement</h1>
-  <p class="sub">L'analyse GEO est entièrement gratuite. Vous choisissez ensuite le fichier dont vous avez besoin — ou prenez le pack avec 35 % de remise.</p>
+  <p class="sub">L'analyse GEO est entièrement gratuite. Vous choisissez ensuite le fichier dont vous avez besoin, ou prenez le pack avec 35 % de remise.</p>
 </div>
 
 <div class="cards">
@@ -124,8 +132,8 @@ footer a{color:var(--gold)}
     <div class="plan-tag">Pack 4 fichiers</div>
     <div class="price">49 <sup>€</sup></div>
     <div class="price-sub">paiement unique · tous les fichiers</div>
-    <div class="feat"><span class="feat-icon">✓</span>robots.txt — 30+ crawlers IA</div>
-    <div class="feat"><span class="feat-icon">✓</span>llms.txt — résumé LLM structuré</div>
+    <div class="feat"><span class="feat-icon">✓</span>robots.txt (30+ crawlers IA)</div>
+    <div class="feat"><span class="feat-icon">✓</span>llms.txt (résumé Markdown structuré)</div>
     <div class="feat"><span class="feat-icon">✓</span>Schema.org JSON-LD complet</div>
     <div class="feat"><span class="feat-icon">✓</span>Page FAQ GEO-optimisée</div>
     <div class="feat"><span class="feat-icon">✓</span>Analyse gratuite incluse</div>
@@ -158,7 +166,7 @@ footer a{color:var(--gold)}
 </div>
 
 <footer>
-  <p>© 2026 Geoptim — <a href="/">Accueil</a> · <a href="/faq">FAQ</a> · <a href="/a-propos">À propos</a> · <a href="/#sec-legal">Mentions légales</a></p>
+  <p>© 2026 Geoptim · <a href="/">Accueil</a> · <a href="/faq">FAQ</a> · <a href="/a-propos">À propos</a> · <a href="/#sec-legal">Mentions légales</a></p>
 </footer>
 </body>
 </html>
