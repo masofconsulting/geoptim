@@ -46,33 +46,40 @@ exports.handler = async (event) => {
     const billingVat     = (session.metadata && session.metadata.billing_vat)     || "";
     const purchaseType   = (session.metadata && session.metadata.purchase_type)   || "pack";
     const fileKey        = (session.metadata && session.metadata.file_key)        || "";
+    const lang           = (session.metadata && session.metadata.lang)            || "fr";
+    const isEn           = lang === "en";
 
     // ── Envoi du reçu par email (non-bloquant) ─────────────────────────────
     if (isPaid && email && process.env.RESEND_API_KEY) {
       try {
         const ttc  = amount / 100;
-        const ht   = Math.round(ttc / 1.20 * 100) / 100;
-        const tva  = Math.round((ttc - ht) * 100) / 100;
+        const ht   = isEn ? ttc : Math.round(ttc / 1.20 * 100) / 100;
+        const tva  = isEn ? 0 : Math.round((ttc - ht) * 100) / 100;
         const date = new Date(created * 1000);
-        const fmt  = (n) => n.toFixed(2).replace('.', ',') + ' €';
-        const dateStr = date.toLocaleDateString('fr-FR', { day: '2-digit', month: 'long', year: 'numeric' });
+        const fmt  = isEn
+          ? (n) => '$' + n.toFixed(2)
+          : (n) => n.toFixed(2).replace('.', ',') + ' \u20ac';
+        const dateStr = isEn
+          ? date.toLocaleDateString('en-US', { month: 'long', day: '2-digit', year: 'numeric' })
+          : date.toLocaleDateString('fr-FR', { day: '2-digit', month: 'long', year: 'numeric' });
         const sid  = sessionId.slice(-8).toUpperCase();
         const num  = 'GEO-' + date.getFullYear()
                    + String(date.getMonth() + 1).padStart(2, '0')
                    + String(date.getDate()).padStart(2, '0')
                    + (sid ? '-' + sid : '');
 
-        const FILE_LABELS = {
-          robots: "robots.txt optimisé",
-          llms:   "llms.txt personnalisé",
-          schema: "Schema.org JSON-LD",
-          faq:    "Page FAQ GEO-optimisée"
-        };
+        const FILE_LABELS = isEn
+          ? { robots: "Optimized robots.txt", llms: "Custom llms.txt", schema: "Schema.org JSON-LD", faq: "GEO-optimized FAQ Page" }
+          : { robots: "robots.txt optimisé", llms: "llms.txt personnalisé", schema: "Schema.org JSON-LD", faq: "Page FAQ GEO-optimisée" };
         const productLabel = purchaseType === "pack"
-          ? "Pack Optimisation GEO — 4 fichiers (robots.txt, llms.txt, Schema.org JSON-LD, FAQ GEO)"
-          : `Fichier GEO — ${FILE_LABELS[fileKey] || fileKey}`;
+          ? (isEn
+            ? "GEO Optimization Pack — 4 files (robots.txt, llms.txt, Schema.org JSON-LD, FAQ GEO)"
+            : "Pack Optimisation GEO — 4 fichiers (robots.txt, llms.txt, Schema.org JSON-LD, FAQ GEO)")
+          : (isEn
+            ? `GEO File — ${FILE_LABELS[fileKey] || fileKey}`
+            : `Fichier GEO — ${FILE_LABELS[fileKey] || fileKey}`);
 
-        const emailHtml = `<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8"><title>Reçu ${num}</title>
+        const emailHtml = `<!DOCTYPE html><html lang="${isEn ? 'en' : 'fr'}"><head><meta charset="UTF-8"><title>${isEn ? 'Receipt' : 'Reçu'} ${num}</title>
 <style>body{font-family:system-ui,sans-serif;color:#1f2937;max-width:600px;margin:0 auto;padding:0}
 .head{background:#0a2540;color:#fff;padding:28px 32px;border-radius:12px 12px 0 0}
 .head h1{margin:0 0 4px;font-size:20px}.head p{margin:0;font-size:13px;color:#7eb3d4}
@@ -89,25 +96,25 @@ td{padding:12px 14px;border-bottom:1px solid #f1f5f9;font-size:13px;vertical-ali
 .note{font-size:11px;color:#9ca3af;margin:16px 0 0;line-height:1.6}
 .foot{text-align:center;padding:20px;font-size:12px;color:#9ca3af;border-top:1px solid #f1f5f9;margin-top:24px}
 </style></head><body>
-<div class="head"><h1>Reçu de paiement</h1><p>${num} &mdash; ${dateStr}</p></div>
+<div class="head"><h1>${isEn ? 'Payment Receipt' : 'Reçu de paiement'}</h1><p>${num} &mdash; ${dateStr}</p></div>
 <div class="body">
 <div class="cols">
-<div class="col"><h4>Émetteur</h4><p><strong>HM CAPITAL</strong><br>SARL unipersonnelle<br>55 Rue du Bois d'Amour, 86280 Saint-Benoît<br>SIREN : 843 444 464 &mdash; TVA : FR37843444464</p></div>
-<div class="col"><h4>Client</h4><p>${billingName ? '<strong>' + billingName + '</strong><br>' : ''}${billingAddress ? billingAddress + '<br>' : ''}${billingVat ? 'TVA : ' + billingVat + '<br>' : ''}${email}</p></div>
+<div class="col"><h4>${isEn ? 'From' : 'Émetteur'}</h4><p><strong>HM CAPITAL</strong><br>SARL unipersonnelle<br>55 Rue du Bois d'Amour, 86280 Saint-Benoît<br>SIREN : 843 444 464 &mdash; TVA : FR37843444464</p></div>
+<div class="col"><h4>${isEn ? 'Customer' : 'Client'}</h4><p>${billingName ? '<strong>' + billingName + '</strong><br>' : ''}${billingAddress ? billingAddress + '<br>' : ''}${billingVat ? (isEn ? 'VAT: ' : 'TVA : ') + billingVat + '<br>' : ''}${email}</p></div>
 </div>
 <table>
-<thead><tr><th>Description</th><th style="text-align:right">Montant HT</th></tr></thead>
+<thead><tr><th>Description</th><th style="text-align:right">${isEn ? 'Amount' : 'Montant HT'}</th></tr></thead>
 <tbody><tr>
-<td>${productLabel}${siteName ? '<br><span style="color:#6b7280;font-size:12px">Site : ' + siteName + '</span>' : ''}</td>
+<td>${productLabel}${siteName ? '<br><span style="color:#6b7280;font-size:12px">' + (isEn ? 'Website: ' : 'Site : ') + siteName + '</span>' : ''}</td>
 <td style="text-align:right;white-space:nowrap">${fmt(ht)}</td>
 </tr></tbody></table>
 <div class="totals">
-<div class="tr"><span>Total HT</span><span>${fmt(ht)}</span></div>
+${isEn ? `<div class="ttc"><span>Total</span><span>${fmt(ttc)}</span></div>` : `<div class="tr"><span>Total HT</span><span>${fmt(ht)}</span></div>
 <div class="tr"><span>TVA 20 %</span><span>${fmt(tva)}</span></div>
-<div class="ttc"><span>Total TTC</span><span>${fmt(ttc)}</span></div>
+<div class="ttc"><span>Total TTC</span><span>${fmt(ttc)}</span></div>`}
 </div>
-<p class="note">Paiement par carte bancaire via Stripe. Service numérique livré immédiatement &mdash; droit de rétractation non applicable (art. L221-28 Code de la consommation).</p>
-<div class="foot">Geoptim est un service de HM CAPITAL &mdash; contact@geoptim.io &mdash; geoptim.io</div>
+<p class="note">${isEn ? 'Payment by credit card via Stripe. Digital service delivered immediately.' : 'Paiement par carte bancaire via Stripe. Service numérique livré immédiatement &mdash; droit de rétractation non applicable (art. L221-28 Code de la consommation).'}</p>
+<div class="foot">${isEn ? 'Geoptim is a service by HM CAPITAL' : 'Geoptim est un service de HM CAPITAL'} &mdash; contact@geoptim.io &mdash; geoptim.io</div>
 </div></body></html>`;
 
         await fetch("https://api.resend.com/emails", {
@@ -120,7 +127,7 @@ td{padding:12px 14px;border-bottom:1px solid #f1f5f9;font-size:13px;vertical-ali
             from: "Geoptim <receipts@geoptim.io>",
             to:   [email],
             bcc:  ["contact@geoptim.io"],
-            subject: `Votre reçu Geoptim — ${num}`,
+            subject: isEn ? `Your GEO files are ready — Geoptim` : `Votre reçu Geoptim — ${num}`,
             html: emailHtml
           }),
           signal: AbortSignal.timeout(5000)

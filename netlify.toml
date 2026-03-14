@@ -2,6 +2,13 @@
   publish = "."
   functions = "netlify/functions"
 
+# Language detection — redirect English browsers to /en/
+[[redirects]]
+  from = "/"
+  to = "/en/"
+  status = 302
+  conditions = {Language = ["en"]}
+
 [[redirects]]
   from = "/tarifs"
   to = "/tarifs.html"
@@ -40,6 +47,47 @@
 [[redirects]]
   from = "/blog"
   to = "/blog/index.html"
+  status = 200
+
+# English pages
+[[redirects]]
+  from = "/en/pricing"
+  to = "/en/pricing.html"
+  status = 200
+
+[[redirects]]
+  from = "/en/faq"
+  to = "/en/faq.html"
+  status = 200
+
+[[redirects]]
+  from = "/en/about"
+  to = "/en/about.html"
+  status = 200
+
+[[redirects]]
+  from = "/en/blog/geo-vs-seo"
+  to = "/en/blog/geo-vs-seo.html"
+  status = 200
+
+[[redirects]]
+  from = "/en/blog/chatgpt-sources"
+  to = "/en/blog/chatgpt-sources.html"
+  status = 200
+
+[[redirects]]
+  from = "/en/blog/llms-txt"
+  to = "/en/blog/llms-txt.html"
+  status = 200
+
+[[redirects]]
+  from = "/en/blog/ai-ready"
+  to = "/en/blog/ai-ready.html"
+  status = 200
+
+[[redirects]]
+  from = "/en/blog"
+  to = "/en/blog/index.html"
   status = 200
 
 [functions]

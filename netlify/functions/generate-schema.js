@@ -41,13 +41,82 @@ export default async (req) => {
   const KEY = process.env.ANTHROPIC_API_KEY;
   if (!KEY) return new Response(JSON.stringify({ error: "clé manquante" }), { status: 500, headers: { 'Content-Type': 'application/json' } });
 
-  let domain, name, ctx, rawContent;
-  try { ({ domain, name, ctx, rawContent } = await req.json()); }
+  let domain, name, ctx, rawContent, lang;
+  try { ({ domain, name, ctx, rawContent, lang } = await req.json()); }
   catch { return new Response(JSON.stringify({ error: "JSON invalide" }), { status: 400, headers: { 'Content-Type': 'application/json' } }); }
 
   const content = (rawContent || '').slice(0, 3000);
+  const isEn = lang === 'en';
 
-  const prompt = `Génère un fichier schema-jsonld.html complet et optimal pour ce site. HTML brut uniquement, sans backtick.
+  const prompt = isEn
+    ? `Generate a complete schema-jsonld.html file optimized for this website. Raw HTML only, no backticks.
+
+DATA:
+${ctx}
+
+WEBSITE CONTENT:
+${content}
+
+GENERATE ALL RELEVANT BLOCKS below. Use the same @id "https://${domain}/#org" so blocks reference each other.
+
+<!-- ${name} — Schema.org JSON-LD | Geoptim.io | Paste in <head> via RankMath, Yoast or Insert Headers & Footers -->
+
+<!-- ═══ 1. ORGANIZATION / LOCAL BUSINESS — always included ═══ -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": ["[PreciseType]", "Organization"],
+  "@id": "https://${domain}/#org",
+  "name": "...",
+  "description": "...",
+  "url": "https://${domain}"
+  [+ all found fields: telephone, email, address (full PostalAddress), geo (GeoCoordinates), openingHours, openingHoursSpecification, priceRange, areaServed, sameAs (all social profiles), hasOfferCatalog (all services)]
+}
+</script>
+Available precise types: LocalBusiness, LegalService, Notary, Attorney, MedicalBusiness, Physician, Dentist, Optician, Veterinary, AccountingService, FinancialService, InsuranceAgency, RealEstateAgent, Restaurant, CafeOrCoffeeShop, Bakery, FoodEstablishment, Store, ClothingStore, BookStore, AutoRepair, AutoDealer, Plumber, Electrician, HVACBusiness, Locksmith, Painter, Roofer, ConstructionBusiness, MovingCompany, CleaningService, LandscapingBusiness, HairSalon, SpaOrBeautySalon, NailSalon, GymOrHealthClub, SportsActivityLocation, ITService, SoftwareCompany, EducationalOrganization, TutoringCenter, DayCare, etc.
+
+<!-- ═══ 2. WEBSITE — always included ═══ -->
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebSite","@id":"https://${domain}/#website","url":"https://${domain}","name":"[name]","description":"[description]","publisher":{"@id":"https://${domain}/#org"}}
+</script>
+
+<!-- ═══ 3. PERSON(S) — one tag per identified person, omit if none ═══ -->
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Person","@id":"https://${domain}/#[slug]","name":"...","jobTitle":"...","worksFor":{"@id":"https://${domain}/#org"}[+ email, telephone, description, knowsAbout, hasCredential, sameAs if found]}
+</script>
+
+<!-- ═══ 4. SERVICE(S) — one block per identified service, omit if none ═══ -->
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Service","name":"...","description":"...","provider":{"@id":"https://${domain}/#org"}[+ serviceType, areaServed, offers with price/priceCurrency if found]}
+</script>
+
+<!-- ═══ 5. FAQPAGE — questions adapted to the sector, omit if insufficient content ═══ -->
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+[Between 6 and 12 Q&A depending on site richness. Each entry:
+{"@type":"Question","name":"[long-tail question]","acceptedAnswer":{"@type":"Answer","text":"[answer 40-60 words]"}}]
+]}
+</script>
+
+<!-- ═══ 6. AGGREGATERATING — only if reviews/ratings found in content ═══ -->
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"[same type as Organization]","@id":"https://${domain}/#org","aggregateRating":{"@type":"AggregateRating","ratingValue":"...","reviewCount":"...","bestRating":"5"}}
+</script>
+
+<!-- ═══ 7. BREADCRUMBLIST — if multi-level navigation identified ═══ -->
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://${domain}"}[, other levels if relevant]]}
+</script>
+
+<!-- GEO optimization by Geoptim.io — https://geoptim.io -->
+
+RULES:
+- Valid and minified JSON (except the Organization block which can be indented for readability)
+- Most precise @type possible
+- Real values only, no fabrication
+- Omit fields without data and entire blocks without data
+- @ids reference each other for maximum consistency`
+    : `Génère un fichier schema-jsonld.html complet et optimal pour ce site. HTML brut uniquement, sans backtick.
 
 DONNÉES :
 ${ctx}
@@ -115,6 +184,10 @@ RÈGLES :
 - Omets les champs sans données et les blocs entiers sans données
 - Les @id se référencent entre eux pour une cohérence maximale`;
 
+  const systemPrompt = isEn
+    ? "You are a Schema.org and structured data expert. You generate complete, valid and consistent JSON-LD files, with @id references between blocks. You only use real data provided."
+    : "Tu es un expert Schema.org et structured data. Tu génères des fichiers JSON-LD complets, valides et cohérents, avec des @id qui se référencent entre les blocs. Tu utilises uniquement les données réelles fournies.";
+
   const enc = new TextEncoder();
   const stream = new ReadableStream({
     async start(ctrl) {
@@ -122,7 +195,7 @@ RÈGLES :
         for await (const chunk of streamAnthropic(KEY, {
           model: "claude-sonnet-4-6",
           max_tokens: 8000,
-          system: "Tu es un expert Schema.org et structured data. Tu génères des fichiers JSON-LD complets, valides et cohérents, avec des @id qui se référencent entre les blocs. Tu utilises uniquement les données réelles fournies.",
+          system: systemPrompt,
           messages: [{ role: "user", content: prompt }]
         })) {
           ctrl.enqueue(enc.encode(chunk));
