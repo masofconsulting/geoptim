@@ -107,10 +107,10 @@ FORMAT HTML EXACT :
 Génère le HTML avec les vraies données. Respecte strictement la limite de 70 mots par réponse. Sans backtick. Sans émoji.`;
 
     const data = await callAnthropic(KEY, {
-      model: "claude-opus-4-6",
-      max_tokens: 2000,
+      model: "claude-sonnet-4-6",
+      max_tokens: 3500,
       messages: [{ role: "user", content: prompt }]
-    }, 25000);
+    }, 22000);
 
     if (data.error) throw new Error(data.error.message);
     const text = (data.content || []).map(b => b.text || "").join("").trim()

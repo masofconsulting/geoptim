@@ -96,10 +96,10 @@ FORMAT DE SORTIE OBLIGATOIRE :
 Réponds UNIQUEMENT avec le HTML brut, sans markdown ni backtick.`;
 
     const data = await callAnthropic(KEY, {
-      model: "claude-opus-4-6",
-      max_tokens: 3000,
+      model: "claude-sonnet-4-6",
+      max_tokens: 3500,
       messages: [{ role: "user", content: prompt }]
-    }, 25000);
+    }, 22000);
 
     if (data.error) throw new Error(data.error.message);
     const text = (data.content || []).map(b => b.text || "").join("").trim()
