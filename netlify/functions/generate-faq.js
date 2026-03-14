@@ -108,7 +108,7 @@ Génère le HTML avec les vraies données. Respecte strictement la limite de 70 
 
     const data = await callAnthropic(KEY, {
       model: "claude-opus-4-6",
-      max_tokens: 3500,
+      max_tokens: 2000,
       messages: [{ role: "user", content: prompt }]
     }, 25000);
 
