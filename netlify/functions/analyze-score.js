@@ -1,26 +1,45 @@
-// Retry helper — jusqu'à 3 tentatives si Anthropic renvoie overloaded_error
-async function callAnthropic(KEY, body, timeoutMs) {
+// Netlify v2 — accumule le stream Anthropic, retourne JSON complet
+async function callAnthropicStreaming(KEY, body) {
   const MAX = 3;
-  for (let i = 0; i < MAX; i++) {
+  for (let attempt = 0; attempt < MAX; attempt++) {
     const res = await fetch("https://api.anthropic.com/v1/messages", {
       method: "POST",
       headers: { "Content-Type": "application/json", "x-api-key": KEY, "anthropic-version": "2023-06-01" },
-      body: JSON.stringify(body),
-      signal: AbortSignal.timeout(timeoutMs)
+      body: JSON.stringify({ ...body, stream: true })
     });
-    const data = await res.json();
-    if (data.error && data.error.type === 'overloaded_error' && i < MAX - 1) {
-      await new Promise(r => setTimeout(r, 2000));
-      continue;
+    if (!res.ok) {
+      const errData = await res.json().catch(() => ({}));
+      if (errData.error?.type === 'overloaded_error' && attempt < MAX - 1) {
+        await new Promise(r => setTimeout(r, 2000));
+        continue;
+      }
+      throw new Error(errData.error?.message || `Erreur Anthropic ${res.status}`);
     }
-    return data;
+    const reader = res.body.getReader();
+    const decoder = new TextDecoder();
+    let buf = '', text = '';
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      buf += decoder.decode(value, { stream: true });
+      const lines = buf.split('\n');
+      buf = lines.pop();
+      for (const line of lines) {
+        if (!line.startsWith('data: ')) continue;
+        let ev;
+        try { ev = JSON.parse(line.slice(6)); } catch { continue; }
+        if (ev.type === 'content_block_delta' && ev.delta?.type === 'text_delta') text += ev.delta.text;
+        if (ev.type === 'error') throw new Error(ev.error?.message || 'Erreur stream Anthropic');
+      }
+    }
+    return text;
   }
 }
 
-exports.handler = async (event) => {
-  if (event.httpMethod !== "POST") return { statusCode: 405, body: "Method Not Allowed" };
+export default async (req) => {
+  if (req.method !== "POST") return new Response("Method Not Allowed", { status: 405 });
   const KEY = process.env.ANTHROPIC_API_KEY;
-  if (!KEY) return { statusCode: 500, body: JSON.stringify({ error: "ANTHROPIC_API_KEY manquante" }) };
+  if (!KEY) return new Response(JSON.stringify({ error: "ANTHROPIC_API_KEY manquante" }), { status: 500, headers: { 'Content-Type': 'application/json' } });
 
   function extractJsonLd(html) {
     const matches = [];
@@ -43,7 +62,7 @@ exports.handler = async (event) => {
   }
 
   try {
-    const { url } = JSON.parse(event.body);
+    const { url } = await req.json();
     const domain = url.replace(/https?:\/\//,'').replace(/\/.*$/,'');
     const base = 'https://' + domain;
 
@@ -109,16 +128,15 @@ Réponds UNIQUEMENT avec ce JSON sans markdown :
   "summary": "diagnostic GEO en 2-3 phrases"
 }`;
 
-    const data = await callAnthropic(KEY, {
+    const text = await callAnthropicStreaming(KEY, {
       model: "claude-sonnet-4-6",
-      max_tokens: 1500,
+      max_tokens: 2000,
       temperature: 0,
       messages: [{ role: "user", content: prompt }]
-    }, 22000);
+    });
 
-    if (data.error) throw new Error(data.error.message);
-    const text = (data.content||[]).map(b=>b.text||'').join('').trim().replace(/^```json\n?/,'').replace(/\n?```$/,'').trim();
-    const match = text.match(/\{[\s\S]*\}/);
+    const clean = text.trim().replace(/^```json\n?/,'').replace(/\n?```$/,'').trim();
+    const match = clean.match(/\{[\s\S]*\}/);
     if (!match) throw new Error("Réponse IA invalide");
     const score = JSON.parse(match[0]);
     const b = score.scoreBreakdown || {};
@@ -126,8 +144,8 @@ Réponds UNIQUEMENT avec ce JSON sans markdown :
     score.geoScore = b.robots + b.llmstxt + b.schema + b.content;
     score.scoreBreakdown = b;
 
-    return { statusCode: 200, headers: { "Content-Type": "application/json" }, body: JSON.stringify(score) };
+    return new Response(JSON.stringify(score), { status: 200, headers: { 'Content-Type': 'application/json' } });
   } catch(err) {
-    return { statusCode: 500, body: JSON.stringify({ error: err.message }) };
+    return new Response(JSON.stringify({ error: err.message }), { status: 500, headers: { 'Content-Type': 'application/json' } });
   }
 };

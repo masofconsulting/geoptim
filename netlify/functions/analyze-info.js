@@ -1,26 +1,45 @@
-// Retry helper — jusqu'à 3 tentatives si Anthropic renvoie overloaded_error
-async function callAnthropic(KEY, body, timeoutMs) {
+// Netlify v2 — accumule le stream Anthropic, retourne JSON complet
+async function callAnthropicStreaming(KEY, body) {
   const MAX = 3;
-  for (let i = 0; i < MAX; i++) {
+  for (let attempt = 0; attempt < MAX; attempt++) {
     const res = await fetch("https://api.anthropic.com/v1/messages", {
       method: "POST",
       headers: { "Content-Type": "application/json", "x-api-key": KEY, "anthropic-version": "2023-06-01" },
-      body: JSON.stringify(body),
-      signal: AbortSignal.timeout(timeoutMs)
+      body: JSON.stringify({ ...body, stream: true })
     });
-    const data = await res.json();
-    if (data.error && data.error.type === 'overloaded_error' && i < MAX - 1) {
-      await new Promise(r => setTimeout(r, 2000));
-      continue;
+    if (!res.ok) {
+      const errData = await res.json().catch(() => ({}));
+      if (errData.error?.type === 'overloaded_error' && attempt < MAX - 1) {
+        await new Promise(r => setTimeout(r, 2000));
+        continue;
+      }
+      throw new Error(errData.error?.message || `Erreur Anthropic ${res.status}`);
     }
-    return data;
+    const reader = res.body.getReader();
+    const decoder = new TextDecoder();
+    let buf = '', text = '';
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      buf += decoder.decode(value, { stream: true });
+      const lines = buf.split('\n');
+      buf = lines.pop();
+      for (const line of lines) {
+        if (!line.startsWith('data: ')) continue;
+        let ev;
+        try { ev = JSON.parse(line.slice(6)); } catch { continue; }
+        if (ev.type === 'content_block_delta' && ev.delta?.type === 'text_delta') text += ev.delta.text;
+        if (ev.type === 'error') throw new Error(ev.error?.message || 'Erreur stream Anthropic');
+      }
+    }
+    return text;
   }
 }
 
-exports.handler = async (event) => {
-  if (event.httpMethod !== "POST") return { statusCode: 405, body: "Method Not Allowed" };
+export default async (req) => {
+  if (req.method !== "POST") return new Response("Method Not Allowed", { status: 405 });
   const KEY = process.env.ANTHROPIC_API_KEY;
-  if (!KEY) return { statusCode: 500, body: JSON.stringify({ error: "ANTHROPIC_API_KEY manquante" }) };
+  if (!KEY) return new Response(JSON.stringify({ error: "ANTHROPIC_API_KEY manquante" }), { status: 500, headers: { 'Content-Type': 'application/json' } });
 
   function stripHtml(html) {
     return html
@@ -46,12 +65,11 @@ exports.handler = async (event) => {
   }
 
   try {
-    const { url } = JSON.parse(event.body);
+    const { url } = await req.json();
     const domain = url.replace(/https?:\/\//,'').replace(/\/.*$/,'');
     const base = 'https://' + domain;
 
     // ── Fetch agressif : 12 pages en parallèle avec timeouts courts ──────────
-    // Toutes les tentatives sont simultanées — le temps total = le plus lent ~4s
     const [
       home, contact, mentions,
       equipe1, equipe2, equipe3, equipe4,
@@ -72,41 +90,40 @@ exports.handler = async (event) => {
       fetchSafe(base + '/honoraires',          3000),
     ]);
 
-    // ── Construire le contenu brut consolidé (pour les generators) ───────────
     const sections = [
-      home              ? '=== ACCUEIL ===\n'      + home.slice(0, 2500) : '',
-      contact           ? '=== CONTACT ===\n'      + contact.slice(0, 1000) : '',
-      mentions          ? '=== MENTIONS ===\n'     + mentions.slice(0, 800) : '',
+      home              ? '=== ACCUEIL ===\n'      + home.slice(0, 3000) : '',
+      contact           ? '=== CONTACT ===\n'      + contact.slice(0, 1500) : '',
+      mentions          ? '=== MENTIONS ===\n'     + mentions.slice(0, 1000) : '',
       (equipe1 || equipe2 || equipe3 || equipe4)
-        ? '=== ÉQUIPE ===\n' + [equipe1, equipe2, equipe3, equipe4].filter(Boolean).join(' ').slice(0, 2000) : '',
+        ? '=== ÉQUIPE ===\n' + [equipe1, equipe2, equipe3, equipe4].filter(Boolean).join(' ').slice(0, 2500) : '',
       (expertises1 || expertises2 || expertises3)
-        ? '=== EXPERTISES ===\n' + [expertises1, expertises2, expertises3].filter(Boolean).join(' ').slice(0, 2000) : '',
-      cabinet           ? '=== CABINET ===\n'      + cabinet.slice(0, 1000) : '',
-      honoraires        ? '=== HONORAIRES ===\n'   + honoraires.slice(0, 800) : '',
+        ? '=== EXPERTISES ===\n' + [expertises1, expertises2, expertises3].filter(Boolean).join(' ').slice(0, 2500) : '',
+      cabinet           ? '=== CABINET ===\n'      + cabinet.slice(0, 1500) : '',
+      honoraires        ? '=== HONORAIRES ===\n'   + honoraires.slice(0, 1000) : '',
     ].filter(Boolean);
 
-    const rawContent = sections.join('\n\n').slice(0, 10000);
+    const rawContent = sections.join('\n\n').slice(0, 12000);
 
-    // ── Extraction structurée avec Haiku ─────────────────────────────────────
-    const prompt = `Tu es un expert en extraction d'information business. Extrais toutes les données réelles de ce site.
+    const prompt = `Tu es un expert en extraction d'information business. Extrais toutes les données réelles de ce site de façon exhaustive.
 
 URL : ${url}
 
 CONTENU RÉCUPÉRÉ (plusieurs pages) :
 ---
-${rawContent.slice(0, 6000)}
+${rawContent.slice(0, 8000)}
 ---
 
 RÈGLES STRICTES :
 - N'utilise QUE ce qui est EXPLICITEMENT présent dans le contenu. Jamais de devinette.
 - Téléphone / email : copie les valeurs EXACTES telles qu'affichées.
 - Location : uniquement depuis adresse postale ou footer ou mentions légales.
-- team : liste TOUS les noms et rôles trouvés (avocats, associés, collaborateurs).
-- services : tous les domaines d'expertise mentionnés explicitement.
+- team : liste TOUS les noms et rôles trouvés (avocats, associés, collaborateurs, fondateurs, dirigeants).
+- services : TOUS les domaines d'expertise mentionnés explicitement, sans limite de nombre.
+- offers : TOUTES les offres et prestations identifiées, avec descriptions si disponibles.
 - tone : "vouvoiement" si le site utilise vous/votre, "tutoiement" si tu/te/ton.
 - problemsSolved : 5 vraies douleurs clients déduites des services réels.
-- sectorKeywords : 5 requêtes longue traîne réelles que les clients taperaient.
-- useCases : 4 situations concrètes liées aux vrais services.
+- sectorKeywords : 8 requêtes longue traîne réelles que les clients taperaient.
+- useCases : 6 situations concrètes liées aux vrais services.
 - Si un champ est introuvable → null (pas de valeur inventée).
 
 Réponds UNIQUEMENT avec ce JSON sans markdown :
@@ -115,7 +132,7 @@ Réponds UNIQUEMENT avec ce JSON sans markdown :
   "siteDescription": "une phrase précise sur ce que fait réellement ce site",
   "siteType": "type précis (ex: Cabinet d'avocats, Agence SEO, Startup SaaS...)",
   "siteInfo": {
-    "mainActivity": "description de l'activité principale",
+    "mainActivity": "description complète de l'activité principale",
     "location": "ville + région depuis adresse ou null",
     "city": "ville ou null",
     "region": "région ou null",
@@ -126,8 +143,8 @@ Réponds UNIQUEMENT avec ce JSON sans markdown :
     "clientTypes": ["type client 1","type client 2","type client 3"],
     "offers": ["offre 1","offre 2","offre 3"],
     "problemsSolved": ["douleur 1","douleur 2","douleur 3","douleur 4","douleur 5"],
-    "sectorKeywords": ["requête 1","requête 2","requête 3","requête 4","requête 5"],
-    "useCases": ["situation 1","situation 2","situation 3","situation 4"],
+    "sectorKeywords": ["requête 1","requête 2","requête 3","requête 4","requête 5","requête 6","requête 7","requête 8"],
+    "useCases": ["situation 1","situation 2","situation 3","situation 4","situation 5","situation 6"],
     "entityType": "cabinet ou startup ou agence ou boutique ou clinique ou entreprise",
     "tone": "vouvoiement",
     "blogUrl": "url ou null",
@@ -135,27 +152,23 @@ Réponds UNIQUEMENT avec ce JSON sans markdown :
   }
 }`;
 
-    const data = await callAnthropic(KEY, {
+    const text = await callAnthropicStreaming(KEY, {
       model: "claude-sonnet-4-6",
-      max_tokens: 2000,
+      max_tokens: 4000,
       messages: [{ role: "user", content: prompt }]
-    }, 22000);
+    });
 
-    if (data.error) throw new Error(data.error.message);
-    const text = (data.content||[]).map(b=>b.text||'').join('').trim()
-      .replace(/^```json\n?/,'').replace(/\n?```$/,'').trim();
-    const match = text.match(/\{[\s\S]*\}/);
+    const clean = text.trim().replace(/^```json\n?/,'').replace(/\n?```$/,'').trim();
+    const match = clean.match(/\{[\s\S]*\}/);
     if (!match) throw new Error("Réponse IA invalide");
     const info = JSON.parse(match[0]);
 
-    // Inclure le contenu brut dans la réponse pour les generators
-    return {
-      statusCode: 200,
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ ...info, rawContent })
-    };
+    return new Response(JSON.stringify({ ...info, rawContent }), {
+      status: 200,
+      headers: { 'Content-Type': 'application/json' }
+    });
 
   } catch(err) {
-    return { statusCode: 500, body: JSON.stringify({ error: err.message }) };
+    return new Response(JSON.stringify({ error: err.message }), { status: 500, headers: { 'Content-Type': 'application/json' } });
   }
 };
