@@ -1,4 +1,3 @@
-// Retry helper — jusqu'à 3 tentatives si Anthropic renvoie overloaded_error
 async function callAnthropic(KEY, body, timeoutMs) {
   const MAX = 3;
   for (let i = 0; i < MAX; i++) {
@@ -24,17 +23,23 @@ exports.handler = async (event) => {
 
   try {
     const { domain, name, ctx, rawContent } = JSON.parse(event.body);
+    const content = (rawContent || '').slice(0, 800);
 
-    const prompt = `Génère des blocs Schema.org JSON-LD pour ce site. HTML brut uniquement, sans backtick.
+    // 2 appels en parallèle via Promise.all :
+    // Appel 1 : Organisation + Personne  → max_tokens 700 = 7s max à 100 tok/s
+    // Appel 2 : FAQPage                  → max_tokens 700 = 7s max à 100 tok/s
+    // Total en parallèle : 7s max — impossible de timeout à 26s
+
+    const promptOrg = `Génère les blocs Schema.org Organisation et Personne pour ce site. HTML brut uniquement, sans backtick.
 
 DONNÉES :
 ${ctx}
 
 CONTENU :
-${(rawContent || '').slice(0, 1500)}
+${content}
 
-FORMAT (3 blocs) :
-<!-- [NOM DU SITE] — Schema.org JSON-LD | Geoptim.io | Intégration : head via RankMath/Yoast ou Insert Headers & Footers -->
+FORMAT :
+<!-- ${name} — Schema.org JSON-LD | Geoptim.io | head via RankMath/Yoast ou Insert Headers & Footers -->
 
 <!-- Organisation (toutes les pages) -->
 <script type="application/ld+json">
@@ -46,29 +51,43 @@ FORMAT (3 blocs) :
 {"@context":"https://schema.org","@type":"Person","name":"...","jobTitle":"...","worksFor":{"@id":"https://${domain}/#org"}[,knowsAbout,sameAs si trouvés]}
 </script>
 
+RÈGLES : @type le plus précis (LegalService, MedicalBusiness, Restaurant...), valeurs réelles uniquement, omets les champs sans données, omets le bloc Personne si aucune personne identifiée.`;
+
+    const promptFaq = `Génère le bloc FAQPage Schema.org pour ce site. HTML brut uniquement, sans backtick.
+
+DONNÉES :
+${ctx}
+
+CONTENU :
+${content}
+
+FORMAT :
 <!-- FAQPage -->
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[6 questions réelles avec acceptedAnswer]}
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[5 questions réelles du secteur, chaque acceptedAnswer 30 mots max]}
 </script>
 
 <!-- Optimisation GEO par Geoptim.io — https://geoptim.io -->
 
-RÈGLES : @type le plus précis possible (LegalService, MedicalBusiness, Restaurant...), valeurs réelles uniquement, omets les champs sans données.`;
+RÈGLES : 5 questions réelles liées à l'activité, réponses factuelles et concises, données réelles uniquement.`;
 
-    const data = await callAnthropic(KEY, {
-      model: "claude-sonnet-4-6",
-      max_tokens: 2500,
-      messages: [{ role: "user", content: prompt }]
-    }, 24000);
+    const [dataOrg, dataFaq] = await Promise.all([
+      callAnthropic(KEY, { model: "claude-sonnet-4-6", max_tokens: 700, messages: [{ role: "user", content: promptOrg }] }, 22000),
+      callAnthropic(KEY, { model: "claude-sonnet-4-6", max_tokens: 700, messages: [{ role: "user", content: promptFaq }] }, 22000)
+    ]);
 
-    if (data.error) throw new Error(data.error.message);
-    const text = (data.content || []).map(b => b.text || "").join("").trim()
+    if (dataOrg.error) throw new Error(dataOrg.error.message);
+    if (dataFaq.error) throw new Error(dataFaq.error.message);
+
+    const orgText = (dataOrg.content || []).map(b => b.text || "").join("").trim()
+      .replace(/^```html?\n?/i, '').replace(/\n?```\s*$/i, '').trim();
+    const faqText = (dataFaq.content || []).map(b => b.text || "").join("").trim()
       .replace(/^```html?\n?/i, '').replace(/\n?```\s*$/i, '').trim();
 
     return {
       statusCode: 200,
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ schema: text })
+      body: JSON.stringify({ schema: orgText + "\n\n" + faqText })
     };
 
   } catch(err) {

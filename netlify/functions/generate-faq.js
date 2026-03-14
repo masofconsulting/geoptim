@@ -1,4 +1,3 @@
-// Retry helper — jusqu'à 3 tentatives si Anthropic renvoie overloaded_error
 async function callAnthropic(KEY, body, timeoutMs) {
   const MAX = 3;
   for (let i = 0; i < MAX; i++) {
@@ -25,13 +24,14 @@ exports.handler = async (event) => {
   try {
     const { domain, name, ctx, rawContent } = JSON.parse(event.body);
 
+    // max_tokens 1000 = 10s max à 100 tok/s (pire cas) — jamais de timeout
     const prompt = `Génère une page FAQ HTML pour ce site. HTML brut uniquement, sans backtick.
 
 DONNÉES :
 ${ctx}
 
 CONTENU :
-${(rawContent || '').slice(0, 1500)}
+${(rawContent || '').slice(0, 800)}
 
 FORMAT :
 <article class="faq-page">
@@ -41,15 +41,15 @@ FORMAT :
   </header>
   <section class="faq-section">
     <h2>[Thème 1]</h2>
-    <div class="faq-item" id="[slug-seo]"><h3>[question longue traîne client]</h3><p>[réponse, 60 mots max, point final]</p></div>
-    <div class="faq-item" id="[slug-seo]"><h3>[question]</h3><p>[réponse, 60 mots max]</p></div>
-    <div class="faq-item" id="[slug-seo]"><h3>[question]</h3><p>[réponse, 60 mots max]</p></div>
+    <div class="faq-item" id="[slug-seo]"><h3>[question longue traîne client]</h3><p>[réponse, 50 mots max]</p></div>
+    <div class="faq-item" id="[slug-seo]"><h3>[question]</h3><p>[réponse, 50 mots max]</p></div>
+    <div class="faq-item" id="[slug-seo]"><h3>[question]</h3><p>[réponse, 50 mots max]</p></div>
   </section>
   <section class="faq-section">
     <h2>[Thème 2]</h2>
-    <div class="faq-item" id="[slug-seo]"><h3>[question]</h3><p>[réponse, 60 mots max]</p></div>
-    <div class="faq-item" id="[slug-seo]"><h3>[question]</h3><p>[réponse, 60 mots max]</p></div>
-    <div class="faq-item" id="[slug-seo]"><h3>[question + lien tel/mailto si dispo]</h3><p>[réponse, 60 mots max]</p></div>
+    <div class="faq-item" id="[slug-seo]"><h3>[question]</h3><p>[réponse, 50 mots max]</p></div>
+    <div class="faq-item" id="[slug-seo]"><h3>[question]</h3><p>[réponse, 50 mots max]</p></div>
+    <div class="faq-item" id="[slug-seo]"><h3>[question + lien tel/mailto si dispo]</h3><p>[réponse, 50 mots max]</p></div>
   </section>
   <footer class="faq-footer">Optimisation GEO par <a href="https://geoptim.io">Geoptim.io</a></footer>
 </article>
@@ -58,9 +58,9 @@ RÈGLES : données réelles uniquement, pas d'invention, prose sans liste ni tir
 
     const data = await callAnthropic(KEY, {
       model: "claude-sonnet-4-6",
-      max_tokens: 2000,
+      max_tokens: 1000,
       messages: [{ role: "user", content: prompt }]
-    }, 24000);
+    }, 22000);
 
     if (data.error) throw new Error(data.error.message);
     const text = (data.content || []).map(b => b.text || "").join("").trim()
