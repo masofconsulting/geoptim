@@ -2697,7 +2697,7 @@ function handlePurchaseConfirmed(data, analysisUrl) {
 
   // Infos de reçu
   var savedBilling = JSON.parse(localStorage.getItem('geo_billing') || '{}');
-  var amount = data.amount || (purchaseType === 'pack' ? 4900 : 1900);
+  var amount = (data.amount != null) ? data.amount : (purchaseType === 'pack' ? 4900 : 1900);
   var productLabel = purchaseType === 'pack'
     ? 'Pack 4 fichiers GEO' + (result && result.siteName ? ' — ' + result.siteName : '')
     : (FILE_META.filter(function(f){ return f.key === fileKey; })[0] || {title: fileKey}).title + ' GEO' + (result && result.siteName ? ' — ' + result.siteName : '');
@@ -2775,7 +2775,7 @@ function openArticle(id) {
 // ── RECEIPT MODAL ──
 function showReceipt() {
   var d = window._receiptData || {};
-  var ttc    = (d.amount || 4900) / 100;
+  var ttc    = ((d.amount != null) ? d.amount : 4900) / 100;
   var ht     = Math.round(ttc / 1.20 * 100) / 100;
   var tva    = Math.round((ttc - ht) * 100) / 100;
   var date   = new Date((d.created || Date.now() / 1000) * 1000);
