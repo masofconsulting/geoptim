@@ -1,6 +1,5 @@
-// Netlify v2 — 2 appels Anthropic en parallèle (streaming interne)
-// Org+Person en parallèle avec FAQPage → temps total = max(t1, t2)
-async function collectStream(KEY, body) {
+// Netlify v2 — streaming, appel unique (cohérence cross-schemas)
+async function* streamAnthropic(KEY, body) {
   const MAX = 3;
   for (let attempt = 0; attempt < MAX; attempt++) {
     const res = await fetch("https://api.anthropic.com/v1/messages", {
@@ -19,7 +18,6 @@ async function collectStream(KEY, body) {
     const reader = res.body.getReader();
     const decoder = new TextDecoder();
     let buf = '';
-    let text = '';
     while (true) {
       const { done, value } = await reader.read();
       if (done) break;
@@ -30,13 +28,12 @@ async function collectStream(KEY, body) {
         if (!line.startsWith('data: ')) continue;
         let ev;
         try { ev = JSON.parse(line.slice(6)); } catch { continue; }
-        if (ev.type === 'content_block_delta' && ev.delta?.type === 'text_delta') text += ev.delta.text;
+        if (ev.type === 'content_block_delta' && ev.delta?.type === 'text_delta') yield ev.delta.text;
         if (ev.type === 'error') throw new Error(ev.error?.message || 'Erreur stream Anthropic');
       }
     }
-    return text;
+    return;
   }
-  return '';
 }
 
 export default async (req) => {
@@ -50,94 +47,86 @@ export default async (req) => {
 
   const content = (rawContent || '').slice(0, 3000);
 
-  const promptOrg = `Génère les blocs Schema.org entités pour ce site. HTML brut uniquement, sans backtick.
+  const prompt = `Génère un fichier schema-jsonld.html complet et optimal pour ce site. HTML brut uniquement, sans backtick.
 
 DONNÉES :
 ${ctx}
 
-CONTENU :
+CONTENU DU SITE :
 ${content}
 
-GÉNÈRE LES BLOCS SUIVANTS (uniquement ceux pour lesquels tu as des données réelles) :
+GÉNÈRE TOUS LES BLOCS PERTINENTS ci-dessous. Utilise le même @id "https://${domain}/#org" pour que les blocs se référencent entre eux.
 
 <!-- ${name} — Schema.org JSON-LD | Geoptim.io | Coller dans <head> via RankMath, Yoast ou Insert Headers & Footers -->
 
-<!-- 1. Organisation/LocalBusiness — TOUJOURS inclus -->
+<!-- ═══ 1. ORGANISATION / LOCAL BUSINESS — toujours inclus ═══ -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": ["[TypeLePlusPrécis parmi: LocalBusiness, LegalService, MedicalBusiness, AccountingService, FinancialService, InsuranceAgency, RealEstateAgent, Restaurant, FoodEstablishment, Store, AutoRepair, Plumber, Electrician, HairSalon, SpaOrBeautySalon, ConstructionBusiness, HomeAndConstructionBusiness, MovingCompany, CleaningService, LandscapingBusiness, ITService, SoftwareApplication, EducationalOrganization, TutoringCenter, Dentist, Physician, Optician, Veterinary, HospitalDepartment, etc.]", "Organization"],
+  "@type": ["[TypePrécis]", "Organization"],
   "@id": "https://${domain}/#org",
-  "name": "[nom officiel]",
-  "description": "[description précise 2-3 phrases]",
-  "url": "https://${domain}",
-  [si trouvé: "telephone", "email", "address" avec PostalAddress complet, "geo" avec GeoCoordinates, "openingHours", "openingHoursSpecification", "priceRange", "currenciesAccepted", "paymentAccepted", "areaServed", "serviceArea", "sameAs" avec tous les profils sociaux trouvés, "hasOfferCatalog" avec tous les services]
+  "name": "...",
+  "description": "...",
+  "url": "https://${domain}"
+  [+ tous les champs trouvés : telephone, email, address (PostalAddress complet), geo (GeoCoordinates), openingHours, openingHoursSpecification, priceRange, areaServed, sameAs (tous profils sociaux), hasOfferCatalog (tous services)]
 }
 </script>
+Types précis disponibles : LocalBusiness, LegalService, Notary, Attorney, MedicalBusiness, Physician, Dentist, Optician, Veterinary, AccountingService, FinancialService, InsuranceAgency, RealEstateAgent, Restaurant, CafeOrCoffeeShop, Bakery, FoodEstablishment, Store, ClothingStore, BookStore, AutoRepair, AutoDealer, Plumber, Electrician, HVACBusiness, Locksmith, Painter, Roofer, ConstructionBusiness, MovingCompany, CleaningService, LandscapingBusiness, HairSalon, SpaOrBeautySalon, NailSalon, GymOrHealthClub, SportsActivityLocation, ITService, SoftwareCompany, EducationalOrganization, TutoringCenter, DayCare, etc.
 
-<!-- 2. WebSite — TOUJOURS inclus -->
+<!-- ═══ 2. WEBSITE — toujours inclus ═══ -->
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebSite","@id":"https://${domain}/#website","url":"https://${domain}","name":"[nom du site]","description":"[description courte]","publisher":{"@id":"https://${domain}/#org"}[si moteur de recherche interne: ,"potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://${domain}/?s={search_term_string}"},"query-input":"required name=search_term_string"}]}
+{"@context":"https://schema.org","@type":"WebSite","@id":"https://${domain}/#website","url":"https://${domain}","name":"[nom]","description":"[description]","publisher":{"@id":"https://${domain}/#org"}}
 </script>
 
-<!-- 3. Personne(s) — une balise par personne identifiée, omettre si aucune -->
+<!-- ═══ 3. PERSONNE(S) — une balise par personne identifiée, omettre si aucune ═══ -->
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"Person","@id":"https://${domain}/#[slug-nom]","name":"[nom complet]","jobTitle":"[titre réel]","worksFor":{"@id":"https://${domain}/#org"}[si trouvé: ,"email","telephone","description","image","knowsAbout":["spécialité1","spécialité2"],"hasCredential":[{"@type":"EducationalOccupationalCredential","name":"[diplôme/certification]"}],"sameAs":["linkedin","twitter","autres profils"]]}
+{"@context":"https://schema.org","@type":"Person","@id":"https://${domain}/#[slug]","name":"...","jobTitle":"...","worksFor":{"@id":"https://${domain}/#org"}[+ email, telephone, description, knowsAbout, hasCredential, sameAs si trouvés]}
 </script>
 
-<!-- 4. Service(s) — un bloc par service/prestation identifié(e), omettre si aucun -->
+<!-- ═══ 4. SERVICE(S) — un bloc par prestation identifiée, omettre si aucune ═══ -->
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"Service","name":"[nom du service]","description":"[description]","provider":{"@id":"https://${domain}/#org"}[si trouvé: ,"areaServed","serviceType","offers":{"@type":"Offer","price":"...","priceCurrency":"EUR"}]}
+{"@context":"https://schema.org","@type":"Service","name":"...","description":"...","provider":{"@id":"https://${domain}/#org"}[+ serviceType, areaServed, offers avec price/priceCurrency si trouvés]}
 </script>
 
-RÈGLES : JSON valide et minifié, @type le plus précis possible, valeurs réelles uniquement, omets tout champ sans données.`;
-
-  const promptFaq = `Génère les blocs Schema.org contenu pour ce site. HTML brut uniquement, sans backtick.
-
-DONNÉES :
-${ctx}
-
-CONTENU :
-${content}
-
-GÉNÈRE LES BLOCS SUIVANTS (uniquement ceux pour lesquels tu as des données réelles) :
-
-<!-- 1. FAQPage — questions/réponses adaptées au secteur d'activité -->
+<!-- ═══ 5. FAQPAGE — questions adaptées au secteur, omettre si contenu insuffisant ═══ -->
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
-[Génère autant de Q&A que pertinent pour ce secteur (entre 6 et 12). Chaque entrée :
-{"@type":"Question","name":"[question précise qu'un client poserait]","acceptedAnswer":{"@type":"Answer","text":"[réponse factuelle complète, 40-60 mots]"}}]
+[Entre 6 et 12 Q&A selon la richesse du site. Chaque entrée :
+{"@type":"Question","name":"[question longue traîne]","acceptedAnswer":{"@type":"Answer","text":"[réponse 40-60 mots]"}}]
 ]}
 </script>
 
-<!-- 2. AggregateRating — uniquement si des avis/notes sont mentionnés dans le contenu -->
-[Si avis trouvés, ajouter dans le bloc Organisation existant, ou créer un bloc séparé :
+<!-- ═══ 6. AGGREGATERATING — uniquement si avis/notes trouvés dans le contenu ═══ -->
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"[même @type que l'Organisation]","@id":"https://${domain}/#org","aggregateRating":{"@type":"AggregateRating","ratingValue":"[note]","reviewCount":"[nombre]","bestRating":"5"}}
-</script>]
+{"@context":"https://schema.org","@type":"[même type que l'Organisation]","@id":"https://${domain}/#org","aggregateRating":{"@type":"AggregateRating","ratingValue":"...","reviewCount":"...","bestRating":"5"}}
+</script>
 
-<!-- 3. BreadcrumbList — pour les sites avec structure de navigation claire -->
-[Si structure de navigation claire, générer :
+<!-- ═══ 7. BREADCRUMBLIST — si navigation multi-niveaux identifiée ═══ -->
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Accueil","item":"https://${domain}"}[, autres niveaux si pertinents]]}
-</script>]
+</script>
 
 <!-- Optimisation GEO par Geoptim.io — https://geoptim.io -->
 
-RÈGLES : JSON valide et minifié, questions FAQPage réelles et pertinentes pour le secteur, omets les blocs 2 et 3 si pas de données, données réelles uniquement.`;
+RÈGLES :
+- JSON valide et minifié (sauf le bloc Organisation qui peut être indenté pour lisibilité)
+- @type le plus précis possible
+- Valeurs réelles uniquement, aucune invention
+- Omets les champs sans données et les blocs entiers sans données
+- Les @id se référencent entre eux pour une cohérence maximale`;
 
   const enc = new TextEncoder();
   const stream = new ReadableStream({
     async start(ctrl) {
       try {
-        const system = "Tu es un expert Schema.org et structured data. Tu génères des balises JSON-LD complètes, précises et valides, en utilisant uniquement les données réelles fournies.";
-        const [orgText, faqText] = await Promise.all([
-          collectStream(KEY, { model: "claude-sonnet-4-6", max_tokens: 2500, system, messages: [{ role: "user", content: promptOrg }] }),
-          collectStream(KEY, { model: "claude-sonnet-4-6", max_tokens: 2000, system, messages: [{ role: "user", content: promptFaq }] })
-        ]);
-        const clean = t => t.trim().replace(/^```html?\n?/i, '').replace(/\n?```\s*$/i, '').trim();
-        const combined = clean(orgText) + "\n\n" + clean(faqText);
-        ctrl.enqueue(enc.encode(combined));
+        for await (const chunk of streamAnthropic(KEY, {
+          model: "claude-sonnet-4-6",
+          max_tokens: 4000,
+          system: "Tu es un expert Schema.org et structured data. Tu génères des fichiers JSON-LD complets, valides et cohérents, avec des @id qui se référencent entre les blocs. Tu utilises uniquement les données réelles fournies.",
+          messages: [{ role: "user", content: prompt }]
+        })) {
+          ctrl.enqueue(enc.encode(chunk));
+        }
         ctrl.close();
       } catch (err) {
         ctrl.enqueue(enc.encode(`\n__GEOPTIM_ERROR__${err.message}`));

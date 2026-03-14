@@ -1862,31 +1862,103 @@ function buildFaqHtml(name, desc, faqPairs, faqObj, domain, location, phone, ema
 
 function buildRobotsTxt(domain, info) {
   var dateGen = new Date().toLocaleDateString('fr-FR');
-  var isWP = !!(info && info.extraUrls && info.extraUrls.clientSpace && info.extraUrls.clientSpace.indexOf('wp') > -1);
-  var clientPath = (info && info.extraUrls || {}).clientSpace || '';
-  var R = '# robots.txt — ' + domain + '\n# Optimisé GEO — ' + dateGen + '\n\n';
-  R += '# ————————————————————————————\n# Moteurs de recherche classiques\n# ————————————————————————————\n';
-  R += 'User-agent: Googlebot\nAllow: /\n\nUser-agent: Bingbot\nAllow: /\n\nUser-agent: Slurp\nAllow: /\n\nUser-agent: DuckDuckBot\nAllow: /\n\nUser-agent: Baiduspider\nAllow: /\n\nUser-agent: YandexBot\nAllow: /\n\n';
-  R += '# ————————————————————————————\n# Crawlers IA — modèles de langage\n# ————————————————————————————\n\n';
+  var clientPath = ((info && info.extraUrls) || {}).clientSpace || '';
+  var clientRel  = clientPath.replace(/https?:\/\/[^\/]+/, '');
+
+  // Détection CMS à partir des chemins trouvés lors de l'analyse
+  var isWP      = /wp-|wordpress/i.test(clientPath);
+  var isJoomla  = /administrator|joomla/i.test(clientPath);
+  var isDrupal  = /drupal/i.test(clientPath);
+  var isShopify = /\.myshopify\./i.test(domain);
+
+  var R = '';
+  R += '# robots.txt — ' + domain + '\n';
+  R += '# Généré par Geoptim.io le ' + dateGen + '\n';
+  R += '# Optimisé SEO + GEO (IA & modèles de langage)\n';
+
+  // ── Moteurs de recherche ──
+  R += '\n# ══════════════════════════════════════════\n';
+  R += '# MOTEURS DE RECHERCHE\n';
+  R += '# ══════════════════════════════════════════\n\n';
+  R += 'User-agent: Googlebot\nAllow: /\n\n';
+  R += 'User-agent: Bingbot\nAllow: /\n\n';
+  R += 'User-agent: Slurp\nAllow: /\n\n';
+  R += 'User-agent: DuckDuckBot\nAllow: /\n\n';
+  R += 'User-agent: Baiduspider\nAllow: /\n\n';
+  R += 'User-agent: YandexBot\nAllow: /\nHost: ' + domain + '\n\n';
+  R += 'User-agent: NaverBot\nAllow: /\n\n';
+  R += 'User-agent: Qwantify\nAllow: /\n\n';
+  R += 'User-agent: Sogou\nAllow: /\n\n';
+
+  // ── Crawlers IA / LLM ──
+  R += '# ══════════════════════════════════════════\n';
+  R += '# IA & GRANDS MODÈLES DE LANGAGE\n';
+  R += '# Tous autorisés — voir aussi /llms.txt\n';
+  R += '# ══════════════════════════════════════════\n\n';
   R += '# OpenAI (ChatGPT, SearchGPT)\nUser-agent: GPTBot\nAllow: /\n\nUser-agent: OAI-SearchBot\nAllow: /\n\nUser-agent: ChatGPT-User\nAllow: /\n\n';
   R += '# Anthropic (Claude)\nUser-agent: ClaudeBot\nAllow: /\n\nUser-agent: Claude-Web\nAllow: /\n\nUser-agent: anthropic-ai\nAllow: /\n\n';
-  R += '# Google (Gemini, AI Overviews)\nUser-agent: Google-Extended\nAllow: /\n\nUser-agent: GeminiBot\nAllow: /\n\n';
+  R += '# Google (Gemini, AI Overviews)\nUser-agent: Google-Extended\nAllow: /\n\nUser-agent: Googlebot-Extended\nAllow: /\n\n';
   R += '# Microsoft (Copilot)\nUser-agent: Copilot-Bot\nAllow: /\n\nUser-agent: bingbot-chat\nAllow: /\n\n';
   R += '# Perplexity AI\nUser-agent: PerplexityBot\nAllow: /\n\n';
   R += '# Mistral AI (Le Chat)\nUser-agent: MistralBot\nAllow: /\n\nUser-agent: mistral-ai\nAllow: /\n\n';
-  R += '# xAI (Grok)\nUser-agent: xAI-Bot\nAllow: /\n\nUser-agent: grok\nAllow: /\n\n';
+  R += '# xAI (Grok)\nUser-agent: xAI-Bot\nAllow: /\n\nUser-agent: Grok\nAllow: /\n\n';
   R += '# Meta (Meta AI, Llama)\nUser-agent: Meta-ExternalAgent\nAllow: /\n\nUser-agent: Meta-ExternalFetcher\nAllow: /\n\nUser-agent: FacebookBot\nAllow: /\n\n';
   R += '# Apple (Apple Intelligence)\nUser-agent: Applebot\nAllow: /\n\nUser-agent: Applebot-Extended\nAllow: /\n\n';
   R += '# DeepSeek\nUser-agent: DeepSeekBot\nAllow: /\n\nUser-agent: deepseek-ai\nAllow: /\n\n';
-  R += '# Cohere\nUser-agent: cohere-ai\nAllow: /\n\n# You.com / Common Crawl\nUser-agent: YouBot\nAllow: /\n\nUser-agent: CCBot\nAllow: /\n\n';
-  R += '# Autres crawlers IA\nUser-agent: Amazonbot\nAllow: /\n\nUser-agent: Diffbot\nAllow: /\n\nUser-agent: Bytespider\nAllow: /\n\nUser-agent: DuckAssistBot\nAllow: /\n\n';
-  R += '# ————————————————————————————\n# Ressources à exclure\n# ————————————————————————————\n';
-  R += 'Disallow: /wp-admin/\nDisallow: /wp-login.php\nDisallow: /wp-content/plugins/\nDisallow: /wp-json/\nDisallow: /?s=\n';
-  if (clientPath) R += 'Disallow: ' + clientPath.replace(/https?:\/\/[^/]+/, '') + '\n';
-  R += '\nUser-agent: *\nAllow: /\n\n';
-  R += '# ————————————————————————————\n# Sitemap\n# ————————————————————————————\n';
+  R += '# Cohere\nUser-agent: cohere-ai\nAllow: /\n\n';
+  R += '# You.com / Common Crawl\nUser-agent: YouBot\nAllow: /\n\nUser-agent: CCBot\nAllow: /\n\n';
+  R += '# Amazon, Diffbot, ByteDance, DuckAssist\nUser-agent: Amazonbot\nAllow: /\n\nUser-agent: Diffbot\nAllow: /\n\nUser-agent: Bytespider\nAllow: /\n\nUser-agent: DuckAssistBot\nAllow: /\n\n';
+  R += '# Allen Institute (AI2)\nUser-agent: AI2Bot\nAllow: /\n\n';
+  R += '# Timpi\nUser-agent: Timpibot\nAllow: /\n\n';
+
+  // ── Outils SEO bloqués ──
+  R += '# ══════════════════════════════════════════\n';
+  R += '# OUTILS SEO — bloqués par défaut\n';
+  R += '# (protège votre structure des concurrents)\n';
+  R += '# Décommentez si vous avez besoin d\'auditer\n';
+  R += '# ══════════════════════════════════════════\n\n';
+  R += 'User-agent: AhrefsBot\nDisallow: /\n\n';
+  R += 'User-agent: SemrushBot\nDisallow: /\n\n';
+  R += 'User-agent: MJ12bot\nDisallow: /\n\n';
+  R += 'User-agent: DotBot\nDisallow: /\n\n';
+  R += 'User-agent: BLEXBot\nDisallow: /\n\n';
+  R += 'User-agent: DataForSeoBot\nDisallow: /\n\n';
+
+  // ── Scrapers malveillants ──
+  R += '# ══════════════════════════════════════════\n';
+  R += '# SCRAPERS & BOTS NON DÉSIRÉS\n';
+  R += '# ══════════════════════════════════════════\n\n';
+  R += 'User-agent: Scrapy\nDisallow: /\n\n';
+  R += 'User-agent: HTTrack\nDisallow: /\n\n';
+  R += 'User-agent: EmailCollector\nDisallow: /\n\n';
+  R += 'User-agent: EmailSiphon\nDisallow: /\n\n';
+  R += 'User-agent: WebBandit\nDisallow: /\n\n';
+  R += 'User-agent: EmailWolf\nDisallow: /\n\n';
+  R += 'User-agent: ExtractorPro\nDisallow: /\n\n';
+
+  // ── Règle par défaut + chemins CMS ──
+  R += '# ══════════════════════════════════════════\n';
+  R += '# RÈGLE PAR DÉFAUT\n';
+  R += '# ══════════════════════════════════════════\n\n';
+  R += 'User-agent: *\nAllow: /\n';
+
+  if (isWP) {
+    R += 'Disallow: /wp-admin/\nDisallow: /wp-login.php\nDisallow: /wp-content/plugins/\nDisallow: /wp-json/\nDisallow: /?s=\nAllow: /wp-admin/admin-ajax.php\n';
+  } else if (isJoomla) {
+    R += 'Disallow: /administrator/\nDisallow: /cache/\nDisallow: /components/\nDisallow: /modules/\n';
+  } else if (isDrupal) {
+    R += 'Disallow: /admin/\nDisallow: /user/\nDisallow: /includes/\n';
+  } else if (isShopify) {
+    R += 'Disallow: /admin\nDisallow: /cart\nDisallow: /orders\nDisallow: /checkouts/\nDisallow: /account\n';
+  }
+  if (clientRel && !isWP) R += 'Disallow: ' + clientRel + '\n';
+
+  // ── Ressources ──
+  R += '\n# ══════════════════════════════════════════\n';
+  R += '# RESSOURCES\n';
+  R += '# ══════════════════════════════════════════\n\n';
   R += 'Sitemap: https://' + domain + '/sitemap.xml\n\n';
-  R += '# Fichier llms.txt : https://' + domain + '/llms.txt\n';
+  R += '# llms.txt (instructions pour les IA) : https://' + domain + '/llms.txt\n';
   R += '# Optimisation GEO par Geoptim.io — https://geoptim.io\n';
   return R;
 }
