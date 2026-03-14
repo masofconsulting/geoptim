@@ -1916,7 +1916,7 @@ function buildCtx(domain, r) {
   ].join('\n');
 }
 
-// Returns {state:'locked'|'purchased'|'generated', content:'', purchaseIdx:-1}
+/// Returns {state:'locked'|'purchased'|'generated', content:'', purchaseIdx:-1}
 function getFilePurchaseInfo(fileKey, analysisUrl) {
   var purchases = JSON.parse(localStorage.getItem('geo_purchases') || '[]');
   for (var i = 0; i < purchases.length; i++) {
@@ -1975,7 +1975,7 @@ function generateFile(fileKey) {
   fetch('/.netlify/functions/' + apiMap[fileKey], {
     method: 'POST', headers: { 'Content-Type': 'application/json' }, body: payload
   })
-  .then(function(r) { if (!r.ok) throw new Error('Erreur serveur ' + r.status); return r.json(); })
+  .then(function(r) { return r.json().then(function(data) { if (!r.ok) throw new Error((data && data.error) || ('Erreur serveur ' + r.status)); return data; }); })
   .then(function(data) {
     var content = data[responseKey] || '';
     if (!content) throw new Error('Réponse vide du serveur');
