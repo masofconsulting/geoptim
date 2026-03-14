@@ -33,21 +33,21 @@ exports.handler = async (event) => {
       throw new Error(session.error?.message || `Stripe ${res.status}`);
     }
 
-    const isPaid        = session.payment_status === "paid";
-    const email         = (session.customer_details && session.customer_details.email) || "";
-    const amount        = session.amount_total || 2900;
-    const created       = session.created || Math.floor(Date.now() / 1000);
-    const siteName      = (session.metadata && session.metadata.site_name)      || "";
-    const siteUrl       = (session.metadata && session.metadata.site_url)       || "";
-    const sessionId     = session.id || "";
-    const billingName   = (session.metadata && session.metadata.billing_name)    || "";
-    const billingAddress= (session.metadata && session.metadata.billing_address) || "";
-    const billingType   = (session.metadata && session.metadata.billing_type)    || "particulier";
-    const billingVat    = (session.metadata && session.metadata.billing_vat)     || "";
+    const isPaid         = session.payment_status === "paid";
+    const email          = (session.customer_details && session.customer_details.email) || "";
+    const amount         = session.amount_total || 4900;
+    const created        = session.created || Math.floor(Date.now() / 1000);
+    const siteName       = (session.metadata && session.metadata.site_name)       || "";
+    const siteUrl        = (session.metadata && session.metadata.site_url)        || "";
+    const sessionId      = session.id || "";
+    const billingName    = (session.metadata && session.metadata.billing_name)    || "";
+    const billingAddress = (session.metadata && session.metadata.billing_address) || "";
+    const billingType    = (session.metadata && session.metadata.billing_type)    || "particulier";
+    const billingVat     = (session.metadata && session.metadata.billing_vat)     || "";
+    const purchaseType   = (session.metadata && session.metadata.purchase_type)   || "pack";
+    const fileKey        = (session.metadata && session.metadata.file_key)        || "";
 
     // ── Envoi du reçu par email (non-bloquant) ─────────────────────────────
-    // Requiert la variable d'environnement RESEND_API_KEY sur Netlify.
-    // Créer un compte gratuit sur https://resend.com et vérifier le domaine geoptim.io.
     if (isPaid && email && process.env.RESEND_API_KEY) {
       try {
         const ttc  = amount / 100;
@@ -61,6 +61,16 @@ exports.handler = async (event) => {
                    + String(date.getMonth() + 1).padStart(2, '0')
                    + String(date.getDate()).padStart(2, '0')
                    + (sid ? '-' + sid : '');
+
+        const FILE_LABELS = {
+          robots: "robots.txt optimisé",
+          llms:   "llms.txt personnalisé",
+          schema: "Schema.org JSON-LD",
+          faq:    "Page FAQ GEO-optimisée"
+        };
+        const productLabel = purchaseType === "pack"
+          ? "Pack Optimisation GEO — 4 fichiers (robots.txt, llms.txt, Schema.org JSON-LD, FAQ GEO)"
+          : `Fichier GEO — ${FILE_LABELS[fileKey] || fileKey}`;
 
         const emailHtml = `<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8"><title>Reçu ${num}</title>
 <style>body{font-family:system-ui,sans-serif;color:#1f2937;max-width:600px;margin:0 auto;padding:0}
@@ -83,12 +93,12 @@ td{padding:12px 14px;border-bottom:1px solid #f1f5f9;font-size:13px;vertical-ali
 <div class="body">
 <div class="cols">
 <div class="col"><h4>Émetteur</h4><p><strong>HM CAPITAL</strong><br>SARL unipersonnelle<br>55 Rue du Bois d'Amour, 86280 Saint-Benoît<br>SIREN : 843 444 464 &mdash; TVA : FR37843444464</p></div>
-<div class="col"><h4>Client</h4><p>${billingName ? '<strong>' + billingName + '</strong><br>' : ''}${billingAddress ? billingAddress + '<br>' : ''}${billingVat ? 'TVA : ' + billingVat + '<br>' : ''}${email}${siteName && siteName !== billingName ? '<br>' + siteName : ''}${siteUrl && siteUrl !== siteName ? '<br><span style="color:#6b7280;font-size:12px">' + siteUrl + '</span>' : ''}</p></div>
+<div class="col"><h4>Client</h4><p>${billingName ? '<strong>' + billingName + '</strong><br>' : ''}${billingAddress ? billingAddress + '<br>' : ''}${billingVat ? 'TVA : ' + billingVat + '<br>' : ''}${email}</p></div>
 </div>
 <table>
 <thead><tr><th>Description</th><th style="text-align:right">Montant HT</th></tr></thead>
 <tbody><tr>
-<td>Pack Optimisation GEO<br><span style="color:#6b7280;font-size:12px">4 fichiers GEO personnalisés — robots.txt, llms.txt, Schema.org JSON-LD, FAQ GEO${siteName ? '<br>Site : ' + siteName : ''}</span></td>
+<td>${productLabel}${siteName ? '<br><span style="color:#6b7280;font-size:12px">Site : ' + siteName + '</span>' : ''}</td>
 <td style="text-align:right;white-space:nowrap">${fmt(ht)}</td>
 </tr></tbody></table>
 <div class="totals">
@@ -116,7 +126,6 @@ td{padding:12px 14px;border-bottom:1px solid #f1f5f9;font-size:13px;vertical-ali
           signal: AbortSignal.timeout(5000)
         });
       } catch (emailErr) {
-        // Non-bloquant : l'échec d'envoi d'email ne doit pas affecter la confirmation de paiement
         console.error("Receipt email failed:", emailErr.message);
       }
     }
@@ -124,8 +133,11 @@ td{padding:12px 14px;border-bottom:1px solid #f1f5f9;font-size:13px;vertical-ali
     return {
       statusCode: 200,
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ paid: isPaid, email, amount, created, siteName, siteUrl, sessionId,
-        billingName, billingAddress, billingType, billingVat }),
+      body: JSON.stringify({
+        paid: isPaid, email, amount, created, siteName, siteUrl, sessionId,
+        billingName, billingAddress, billingType, billingVat,
+        purchaseType, fileKey
+      }),
     };
 
   } catch (err) {

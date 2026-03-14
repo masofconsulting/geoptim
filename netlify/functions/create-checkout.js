@@ -1,5 +1,5 @@
 // netlify/functions/create-checkout.js
-// Crée une session Stripe Checkout pour 29 €
+// Crée une session Stripe Checkout — 19 € (fichier unique) ou 49 € (pack 4 fichiers)
 
 exports.handler = async (event) => {
   if (event.httpMethod !== "POST") {
@@ -12,10 +12,34 @@ exports.handler = async (event) => {
   }
 
   try {
-    const { siteName, siteUrl, billingName, billingAddress, billingType, billingVat } = JSON.parse(event.body);
+    const {
+      siteName, siteUrl,
+      billingName, billingAddress, billingType, billingVat,
+      purchaseType, // 'single' | 'pack' (défaut: 'pack')
+      fileKey       // 'robots' | 'llms' | 'schema' | 'faq' | null (pour pack)
+    } = JSON.parse(event.body);
+
     const host   = event.headers["x-forwarded-host"] || event.headers.host || "geoptim.io";
     const origin = `https://${host}`;
     const label  = siteName || siteUrl || "votre site";
+    const type   = purchaseType || "pack";
+
+    // Tarification
+    const amount = type === "pack" ? 4900 : 1900;
+
+    // Libellé produit
+    const FILE_LABELS = {
+      robots: "robots.txt optimisé",
+      llms:   "llms.txt personnalisé",
+      schema: "Schema.org JSON-LD",
+      faq:    "Page FAQ GEO-optimisée"
+    };
+    const productName = type === "pack"
+      ? "Pack Optimisation GEO — 4 fichiers"
+      : `Fichier GEO — ${FILE_LABELS[fileKey] || fileKey || "fichier"}`;
+    const productDesc = type === "pack"
+      ? `4 fichiers GEO personnalisés pour ${label} — robots.txt, llms.txt, Schema.org JSON-LD, FAQ GEO`
+      : `${FILE_LABELS[fileKey] || fileKey || "Fichier GEO"} personnalisé pour ${label}`;
 
     const params = new URLSearchParams();
     params.append("payment_method_types[]", "card");
@@ -25,18 +49,18 @@ exports.handler = async (event) => {
     params.append("cancel_url",  `${origin}/?payment=cancelled`);
     params.append("line_items[0][quantity]", "1");
     params.append("line_items[0][price_data][currency]", "eur");
-    params.append("line_items[0][price_data][unit_amount]", "2900");
-    params.append("line_items[0][price_data][product_data][name]", "Pack Optimisation GEO");
-    params.append("line_items[0][price_data][product_data][description]",
-      `4 fichiers GEO personnalisés pour ${label} — robots.txt, llms.txt, Schema.org JSON-LD, FAQ GEO`);
-    params.append("payment_intent_data[description]", `Geoptim — Pack GEO pour ${label}`);
-    params.append("metadata[site_url]",  siteUrl  || "");
-    params.append("metadata[site_name]", siteName || "");
-    // Coordonnées de facturation
-    params.append("metadata[billing_name]",    billingName    || "");
-    params.append("metadata[billing_address]", billingAddress || "");
-    params.append("metadata[billing_type]",    billingType    || "particulier");
-    params.append("metadata[billing_vat]",     billingVat     || "");
+    params.append("line_items[0][price_data][unit_amount]", String(amount));
+    params.append("line_items[0][price_data][product_data][name]", productName);
+    params.append("line_items[0][price_data][product_data][description]", productDesc);
+    params.append("payment_intent_data[description]", `Geoptim — ${productName} pour ${label}`);
+    params.append("metadata[site_url]",       siteUrl       || "");
+    params.append("metadata[site_name]",      siteName      || "");
+    params.append("metadata[billing_name]",   billingName   || "");
+    params.append("metadata[billing_address]",billingAddress|| "");
+    params.append("metadata[billing_type]",   billingType   || "particulier");
+    params.append("metadata[billing_vat]",    billingVat    || "");
+    params.append("metadata[purchase_type]",  type);
+    params.append("metadata[file_key]",       fileKey       || "");
 
     const res = await fetch("https://api.stripe.com/v1/checkout/sessions", {
       method: "POST",
