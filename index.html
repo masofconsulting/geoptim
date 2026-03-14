@@ -1932,8 +1932,8 @@ function getCurrentUrl() {
   return v.indexOf('http') === 0 ? v : 'https://' + v;
 }
 
-// ── ON-DEMAND FILE GENERATION ──
-function generateFile(fileKey) {
+// ── ON-DEMAND FILE GENERATION (streaming) ──
+async function generateFile(fileKey) {
   if (!result) { alert('Lancez d\'abord une analyse.'); return; }
   var url = getCurrentUrl();
   var domain = url.replace(/https?:\/\//, '').replace(/\/.*$/, '');
@@ -1941,10 +1941,10 @@ function generateFile(fileKey) {
   // Find relevant purchase
   var purchases = JSON.parse(localStorage.getItem('geo_purchases') || '[]');
   var purchaseIdx = -1;
-  for (var i = 0; i < purchases.length; i++) {
-    var p = purchases[i];
+  for (var pi = 0; pi < purchases.length; pi++) {
+    var p = purchases[pi];
     if (p.analysisUrl !== url) continue;
-    if (p.purchaseType === 'pack' || p.fileKey === fileKey) { purchaseIdx = i; break; }
+    if (p.purchaseType === 'pack' || p.fileKey === fileKey) { purchaseIdx = pi; break; }
   }
   if (purchaseIdx === -1) { alert('Achetez ce fichier d\'abord.'); return; }
 
@@ -1959,32 +1959,52 @@ function generateFile(fileKey) {
     return;
   }
 
-  // Show loading state on button
   var btn = document.getElementById('gen-btn-' + fileKey);
   if (btn) { btn.textContent = 'Génération…'; btn.disabled = true; }
 
   var apiMap = { llms: 'generate-llms', schema: 'generate-schema', faq: 'generate-faq' };
-  var responseKey = fileKey === 'llms' ? 'llms' : fileKey === 'schema' ? 'schema' : 'faq';
   var ctx = buildCtx(domain, result);
   var payload = JSON.stringify({ domain: domain, name: result.siteName, ctx: ctx, rawContent: result.rawContent || '' });
 
-  fetch('/.netlify/functions/' + apiMap[fileKey], {
-    method: 'POST', headers: { 'Content-Type': 'application/json' }, body: payload
-  })
-  .then(function(r) { return r.json().then(function(data) { if (!r.ok) throw new Error((data && data.error) || ('Erreur serveur ' + r.status)); return data; }); })
-  .then(function(data) {
-    var content = data[responseKey] || '';
+  try {
+    var resp = await fetch('/.netlify/functions/' + apiMap[fileKey], {
+      method: 'POST', headers: { 'Content-Type': 'application/json' }, body: payload
+    });
+    if (!resp.ok) {
+      var errData = await resp.json().catch(function() { return {}; });
+      throw new Error((errData && errData.error) || ('Erreur serveur ' + resp.status));
+    }
+
+    // Lecture streaming — affiche la progression en temps réel
+    var reader = resp.body.getReader();
+    var decoder = new TextDecoder();
+    var content = '';
+    var chunkCount = 0;
+    while (true) {
+      var read = await reader.read();
+      if (read.done) break;
+      content += decoder.decode(read.value, { stream: true });
+      if (btn && (++chunkCount % 4 === 0)) btn.textContent = 'Génération… ' + content.length + ' car.';
+    }
+
+    // Détection erreur en cours de stream
+    if (content.indexOf('__GEOPTIM_ERROR__') !== -1) {
+      throw new Error(content.split('__GEOPTIM_ERROR__').pop().trim());
+    }
+
+    // Nettoyage backticks résiduels
+    content = content.replace(/^```\w*\n?/i, '').replace(/\n?```\s*$/i, '').trim();
     if (!content) throw new Error('Réponse vide du serveur');
+
     purchases[purchaseIdx].generatedFiles = purchases[purchaseIdx].generatedFiles || {};
     purchases[purchaseIdx].generatedFiles[fileKey] = content;
     localStorage.setItem('geo_purchases', JSON.stringify(purchases));
     result.files[fileKey] = content;
     renderFiles();
-  })
-  .catch(function(err) {
+  } catch (err) {
     if (btn) { btn.textContent = 'Réessayer →'; btn.disabled = false; }
     alert('Erreur génération : ' + err.message);
-  });
+  }
 }
 
 // ── RESULTS ──
