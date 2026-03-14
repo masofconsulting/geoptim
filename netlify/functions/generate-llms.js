@@ -111,7 +111,7 @@ RÈGLES :
       try {
         for await (const chunk of streamAnthropic(KEY, {
           model: "claude-sonnet-4-6",
-          max_tokens: 4000,
+          max_tokens: 8000,
           system: "Tu es un expert en optimisation GEO (Generative Engine Optimization). Tu génères des fichiers llms.txt professionnels, complets et précis pour aider les IA à comprendre et recommander des sites. Tu utilises uniquement les données réelles fournies.",
           messages: [{ role: "user", content: prompt }]
         })) {
