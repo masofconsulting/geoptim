@@ -136,7 +136,7 @@ Réponds UNIQUEMENT avec ce JSON sans markdown :
       try {
         for await (const chunk of streamAnthropic(KEY, {
           model: "claude-sonnet-4-6",
-          max_tokens: 2000,
+          max_tokens: 8000,
           temperature: 0,
           messages: [{ role: "user", content: prompt }]
         })) {
