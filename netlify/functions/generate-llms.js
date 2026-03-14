@@ -1,4 +1,3 @@
-// Retry helper — jusqu'à 3 tentatives si Anthropic renvoie overloaded_error
 async function callAnthropic(KEY, body, timeoutMs) {
   const MAX = 3;
   for (let i = 0; i < MAX; i++) {
@@ -9,7 +8,6 @@ async function callAnthropic(KEY, body, timeoutMs) {
       signal: AbortSignal.timeout(timeoutMs)
     });
     const data = await res.json();
-    // Overloaded = réponse instantanée (~200ms) → on peut retenter sans risquer le timeout
     if (data.error && data.error.type === 'overloaded_error' && i < MAX - 1) {
       await new Promise(r => setTimeout(r, 2000));
       continue;
@@ -26,13 +24,14 @@ exports.handler = async (event) => {
   try {
     const { domain, name, ctx, rawContent } = JSON.parse(event.body);
 
+    // max_tokens 900 = 9s max à 100 tok/s (pire cas) — jamais de timeout
     const prompt = `Génère un fichier llms.txt Markdown pour ce site. Markdown brut uniquement, sans backtick.
 
 DONNÉES :
 ${ctx}
 
 CONTENU :
-${(rawContent || '').slice(0, 1500)}
+${(rawContent || '').slice(0, 800)}
 
 STRUCTURE :
 # [Nom du site]
@@ -66,9 +65,9 @@ RÈGLES : données réelles uniquement, omets les sections sans données, termin
 
     const data = await callAnthropic(KEY, {
       model: "claude-sonnet-4-6",
-      max_tokens: 2500,
+      max_tokens: 900,
       messages: [{ role: "user", content: prompt }]
-    }, 24000);
+    }, 22000);
 
     if (data.error) throw new Error(data.error.message);
     const text = (data.content || []).map(b => b.text || "").join("").trim();
