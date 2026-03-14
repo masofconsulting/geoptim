@@ -27,6 +27,19 @@
 
   <url>
     <loc>https://geoptim.io/tarifs</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://geoptim.io/tarifs"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://geoptim.io/en/pricing"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://geoptim.io/tarifs"/>
+    <lastmod>2026-03-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://geoptim.io/en/pricing</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://geoptim.io/tarifs"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://geoptim.io/en/pricing"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://geoptim.io/tarifs"/>
     <lastmod>2026-03-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
@@ -34,6 +47,19 @@
 
   <url>
     <loc>https://geoptim.io/faq</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://geoptim.io/faq"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://geoptim.io/en/faq"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://geoptim.io/faq"/>
+    <lastmod>2026-03-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://geoptim.io/en/faq</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://geoptim.io/faq"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://geoptim.io/en/faq"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://geoptim.io/faq"/>
     <lastmod>2026-03-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -41,6 +67,19 @@
 
   <url>
     <loc>https://geoptim.io/a-propos</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://geoptim.io/a-propos"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://geoptim.io/en/about"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://geoptim.io/a-propos"/>
+    <lastmod>2026-03-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://geoptim.io/en/about</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://geoptim.io/a-propos"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://geoptim.io/en/about"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://geoptim.io/a-propos"/>
     <lastmod>2026-03-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>

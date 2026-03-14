@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Geoptim FAQ: Frequently Asked Questions About GEO and AI Optimization</title>
+<link rel="canonical" href="https://geoptim.io/en/faq"/>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
+<meta name="description" content="All your answers about GEO (Generative Engine Optimization), visibility in ChatGPT, Claude, Perplexity, Gemini, llms.txt files, robots.txt and Schema.org."/>
+<meta property="og:title" content="Geoptim FAQ: GEO and AI Optimization"/>
+<meta property="og:description" content="Frequently asked questions about GEO, AI visibility and optimization files."/>
+<meta property="og:url" content="https://geoptim.io/en/faq"/>
+<meta property="og:type" content="website"/>
+<meta name="twitter:card" content="summary"/>
+<link rel="alternate" hreflang="fr" href="https://geoptim.io/faq"/>
+<link rel="alternate" hreflang="en" href="https://geoptim.io/en/faq"/>
+<link rel="alternate" hreflang="x-default" href="https://geoptim.io/faq"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+:root{--navy:#0f1f3d;--gold:#c9a84c;--cream:#faf8f5;--border:#e8e4dc;--text:#0f1f3d;--text2:#4a4438;--text3:#6b6358;--text4:#aaa09a}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--cream);color:var(--text);font-family:'DM Sans',sans-serif;line-height:1.7}
+a{text-decoration:none;color:var(--gold)}
+nav{position:sticky;top:0;z-index:100;background:rgba(250,248,245,.95);backdrop-filter:blur(14px);border-bottom:1px solid var(--border)}
+.ni{max-width:1100px;margin:0 auto;padding:0 32px;height:64px;display:flex;align-items:center;justify-content:space-between}
+.logo{display:flex;align-items:center;gap:8px;font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--navy)}
+.logo-dot{width:9px;height:9px;background:var(--gold);border-radius:50%}
+.btn-nav{background:var(--navy);color:#fff;padding:10px 22px;border-radius:9px;font-weight:600;font-size:13px;cursor:pointer;border:none;text-decoration:none}
+.wrap{max-width:780px;margin:0 auto;padding:72px 32px 80px}
+.tag{display:inline-flex;align-items:center;gap:7px;font-family:'DM Mono',monospace;font-size:11px;color:var(--gold);letter-spacing:.08em;text-transform:uppercase;background:#fef9ed;border:1px solid #f0e0a0;padding:5px 14px;border-radius:999px;margin-bottom:22px}
+h1{font-family:'Playfair Display',serif;font-size:clamp(28px,4vw,44px);font-weight:900;color:var(--navy);margin-bottom:12px;line-height:1.12}
+.intro{font-size:15px;color:var(--text3);font-weight:300;max-width:600px;margin-bottom:56px}
+.faq-section{margin-bottom:56px}
+.faq-section h2{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--navy);margin-bottom:24px;padding-bottom:10px;border-bottom:2px solid var(--navy)}
+.faq-item{margin-bottom:24px;border:1px solid var(--border);border-radius:12px;overflow:hidden;background:#fff}
+.faq-q{width:100%;display:flex;justify-content:space-between;align-items:center;padding:18px 22px;font-size:15px;font-weight:600;color:var(--navy);background:none;border:none;cursor:pointer;text-align:left;gap:16px}
+.faq-icon{font-size:18px;color:var(--gold);flex-shrink:0;transition:transform .2s}
+.faq-q.open .faq-icon{transform:rotate(45deg)}
+.faq-a{display:none;padding:0 22px 20px;font-size:14px;color:var(--text2);line-height:1.8}
+.faq-a.open{display:block}
+.faq-a strong{color:var(--navy)}
+.faq-a p{margin-bottom:10px}
+.faq-a p:last-child{margin:0}
+.cta-box{background:var(--navy);border-radius:16px;padding:40px 36px;text-align:center;margin-top:64px}
+.cta-box h2{font-family:'Playfair Display',serif;font-size:26px;font-weight:700;color:#fff;margin-bottom:10px}
+.cta-box p{font-size:14px;color:#5a7a96;margin-bottom:24px}
+.btn-gold{background:var(--gold);color:var(--navy);padding:13px 32px;border-radius:9px;font-weight:700;font-size:15px;text-decoration:none;display:inline-block}
+footer{background:var(--navy);padding:32px;text-align:center;font-size:12px;color:#5a7a96}
+footer a{color:var(--gold)}
+.nav-links{display:flex;align-items:center;gap:20px}.nl{font-size:13px;font-weight:500;color:var(--text3);transition:color .2s;padding:4px;text-decoration:none}.nl:hover{color:var(--navy)}
+.lang-switch{font-size:13px;font-weight:500;color:var(--text3);padding:4px;text-decoration:none;transition:color .2s}.lang-switch:hover{color:var(--navy)}
+@media(max-width:640px){.wrap{padding:48px 20px 60px}}
+@media(max-width:600px){.nav-links .nl{display:none}}
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is GEO (Generative Engine Optimization)?",
+      "acceptedAnswer": {"@type": "Answer", "text": "GEO is the equivalent of SEO for generative AI engines. While SEO optimizes a site for Google, GEO optimizes a site to be cited by ChatGPT, Perplexity, Claude, Gemini, Grok and Mistral. In 2026, one in three searches goes directly through an AI assistant."}
+    },
+    {
+      "@type": "Question",
+      "name": "Is Geoptim's GEO analysis really free?",
+      "acceptedAnswer": {"@type": "Answer", "text": "Yes, entirely. Enter your URL, receive your GEO score out of 100 and your full diagnostic with no sign-up. You only pay if you want to generate the files: 1 file at $19 or the 4-file bundle at $49."}
+    },
+    {
+      "@type": "Question",
+      "name": "What files does Geoptim generate?",
+      "acceptedAnswer": {"@type": "Answer", "text": "4 files: robots.txt (30+ AI crawlers), llms.txt (Markdown summary), Schema.org JSON-LD (Organization, FAQPage, Person) and a GEO FAQ page in HTML. Each file can be purchased separately at $19 or as a bundle at $49."}
+    },
+    {
+      "@type": "Question",
+      "name": "Which AI model generates the files?",
+      "acceptedAnswer": {"@type": "Answer", "text": "The files are generated by AI on demand, with one dedicated call per file, for maximum quality. The GEO score analysis is completed in a few seconds."}
+    },
+    {
+      "@type": "Question",
+      "name": "How do I integrate the files on my site?",
+      "acceptedAnswer": {"@type": "Answer", "text": "robots.txt and llms.txt: place at the root of your site. Schema.org JSON-LD: in the head via RankMath, Yoast or Insert Headers & Footers. FAQ page: create as a WordPress page in HTML Gutenberg mode. Compatible with WordPress, Webflow, Wix, Shopify."}
+    },
+    {
+      "@type": "Question",
+      "name": "How long before I see results in AI assistants?",
+      "acceptedAnswer": {"@type": "Answer", "text": "The effect on crawlers is almost immediate. To appear in AI assistant responses, expect 2 to 6 weeks depending on the language model update cycle."}
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<nav>
+  <div class="ni">
+    <a href="/en/" class="logo" style="text-decoration:none"><span class="logo-dot"></span>Geoptim</a>
+    <div class="nav-links">
+      <a href="/en/pricing" class="nl">Pricing</a>
+      <a href="/en/faq" class="nl">FAQ</a>
+      <a href="/en/about" class="nl">About</a>
+      <a href="/en/blog" class="nl">Blog</a>
+      <a href="/faq" class="lang-switch">&#127467;&#127479; FR</a>
+      <a href="/en/" class="btn-nav">Analyze my site &rarr;</a>
+    </div>
+  </div>
+</nav>
+
+<div class="wrap">
+  <div class="tag">FAQ</div>
+  <h1>Frequently Asked Questions</h1>
+  <p class="intro">Everything you need to know about GEO, AI visibility and using Geoptim.</p>
+
+  <!-- Section 1: GEO -->
+  <div class="faq-section">
+    <h2>GEO and AI visibility</h2>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)"><span>What is GEO (Generative Engine Optimization)?</span><span class="faq-icon">+</span></button>
+      <div class="faq-a"><p>GEO is the equivalent of SEO for generative AI engines. While SEO optimizes a site to be found on Google, GEO optimizes a site to be <strong>cited by AI assistants</strong>: ChatGPT, Perplexity, Claude, Gemini, Grok and Mistral Le Chat.</p><p>In 2026, one in three searches goes directly through an AI assistant, bypassing Google entirely. Sites not optimized for GEO are simply absent from these responses.</p></div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)"><span>Could my site be ignored by AI assistants?</span><span class="faq-icon">+</span></button>
+      <div class="faq-a"><p>Yes, in two very common cases:</p><p><strong>A misconfigured robots.txt</strong> blocks AI crawlers (GPTBot, ClaudeBot, PerplexityBot...). If these bots cannot read your site, the language models have not indexed it.</p><p><strong>Lack of structure</strong> (no Schema.org, no llms.txt) prevents AI from understanding who you are and what you do, even if your site is indexed.</p></div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)"><span>How long before I see results in AI assistants?</span><span class="faq-icon">+</span></button>
+      <div class="faq-a"><p>The effect on crawlers is almost immediate: a corrected robots.txt is taken into account on the bot's next visit.</p><p>To appear in AI assistant responses, expect <strong>2 to 6 weeks</strong> depending on the language model update cycle.</p></div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)"><span>How is this different from an SEO agency?</span><span class="faq-icon">+</span></button>
+      <div class="faq-a"><p>An SEO agency optimizes for Google. Geoptim optimizes for generative AI assistants: these are two distinct and complementary things.</p><p>Geoptim covers all the technical GEO files in minutes starting at $19. An agency would charge between $500 and $2,000 for the same service.</p></div>
+    </div>
+  </div>
+
+  <!-- Section 2: Geoptim -->
+  <div class="faq-section">
+    <h2>Using Geoptim</h2>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)"><span>Is the analysis really free?</span><span class="faq-icon">+</span></button>
+      <div class="faq-a"><p>Yes, entirely. Enter your URL, receive your GEO score out of 100 and your full diagnostic, with no sign-up and no credit card required.</p><p>You only pay if you want to download the optimization files. <strong>1 file: $19</strong> &middot; <strong>4-file bundle: $49</strong> (-35%). One-time payment, no subscription.</p></div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)"><span>What files does Geoptim generate exactly?</span><span class="faq-icon">+</span></button>
+      <div class="faq-a"><p>4 files customized for your site:</p><p><strong>robots.txt</strong>: authorizes 30+ AI crawlers (GPTBot, ClaudeBot, PerplexityBot, Google-Extended, xAI-Bot, MistralBot, DeepSeekBot...)</p><p><strong>llms.txt</strong>: Markdown summary of your business, a letter of introduction to LLMs</p><p><strong>Schema.org JSON-LD</strong>: Organization, FAQPage, Person markup tailored to your industry</p><p><strong>GEO FAQ page</strong>: long-tail Q&amp;A ready to deploy</p></div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)"><span>Which AI model generates the files?</span><span class="faq-icon">+</span></button>
+      <div class="faq-a"><p>The files are generated on demand by AI, with one dedicated call per file. This approach guarantees optimal quality on each file, with no compromises.</p><p>The GEO score analysis is completed in a few seconds and is entirely free.</p></div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)"><span>How do I integrate the files on my site?</span><span class="faq-icon">+</span></button>
+      <div class="faq-a"><p>Each file comes with its own instructions:</p><p><strong>robots.txt</strong> &rarr; place at the root (mysite.com/robots.txt)<br/><strong>llms.txt</strong> &rarr; same (mysite.com/llms.txt)<br/><strong>Schema.org JSON-LD</strong> &rarr; in the &lt;head&gt; via RankMath, Yoast, or Insert Headers &amp; Footers<br/><strong>GEO FAQ</strong> &rarr; WordPress page in HTML Gutenberg mode</p><p>Compatible with WordPress, Webflow, Wix, Shopify and any static site.</p></div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)"><span>Does Geoptim work for all industries?</span><span class="faq-icon">+</span></button>
+      <div class="faq-a"><p>Yes. Geoptim automatically detects your industry, site tone, team and services, then adapts the files accordingly.</p><p>Law firms, consultants, agencies, startups, e-commerce, healthcare professionals, tradespeople, restaurants... all industries are covered.</p></div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)"><span>Can I regenerate a file if I'm not satisfied?</span><span class="faq-icon">+</span></button>
+      <div class="faq-a"><p>If the result doesn't meet your expectations, contact <a href="mailto:support@geoptim.io">support@geoptim.io</a> with your URL and Stripe session ID. Our team will help you resolve the issue.</p></div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-box">
+    <h2>Ready to optimize your site?</h2>
+    <p>Free analysis in 60 seconds. No sign-up required.</p>
+    <a href="/en/" class="btn-gold">Analyze my site &rarr;</a>
+  </div>
+</div>
+
+<footer>
+  <p>&copy; 2026 Geoptim &middot; <a href="/en/">Home</a> &middot; <a href="/en/pricing">Pricing</a> &middot; <a href="/en/about">About</a> &middot; <a href="/en/#sec-legal">Legal</a></p>
+</footer>
+
+<script>
+function toggleFaq(btn) {
+  var answer = btn.nextElementSibling;
+  var isOpen = answer.classList.contains('open');
+  document.querySelectorAll('.faq-q').forEach(function(b) { b.classList.remove('open'); });
+  document.querySelectorAll('.faq-a').forEach(function(a) { a.classList.remove('open'); });
+  if (!isOpen) { btn.classList.add('open'); answer.classList.add('open'); }
+}
+</script>
+</body>
+</html>
