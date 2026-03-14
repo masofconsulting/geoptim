@@ -16,7 +16,8 @@ exports.handler = async (event) => {
       siteName, siteUrl,
       billingName, billingAddress, billingType, billingVat,
       purchaseType, // 'single' | 'pack' (défaut: 'pack')
-      fileKey       // 'robots' | 'llms' | 'schema' | 'faq' | null (pour pack)
+      fileKey,      // 'robots' | 'llms' | 'schema' | 'faq' | null (pour pack)
+      promoCode     // code promo optionnel
     } = JSON.parse(event.body);
 
     const host   = event.headers["x-forwarded-host"] || event.headers.host || "geoptim.io";
@@ -24,8 +25,20 @@ exports.handler = async (event) => {
     const label  = siteName || siteUrl || "votre site";
     const type   = purchaseType || "pack";
 
-    // Tarification
-    const amount = type === "pack" ? 4900 : 1900;
+    // Tarification — validation promo côté serveur (ne jamais faire confiance au client)
+    const base = type === "pack" ? 4900 : 1900;
+    let amount = base;
+    let promoPercent = 0;
+    if (promoCode) {
+      let codes = {};
+      try { codes = JSON.parse(process.env.PROMO_CODES || '{}'); } catch {}
+      const pct = codes[(promoCode || '').trim().toUpperCase()];
+      if (pct && pct > 0 && pct < 100) {
+        promoPercent = pct;
+        amount = Math.round(base * (1 - pct / 100));
+      }
+      // 100% : doit passer par apply-free-promo, pas create-checkout
+    }
 
     // Libellé produit
     const FILE_LABELS = {
@@ -61,6 +74,8 @@ exports.handler = async (event) => {
     params.append("metadata[billing_vat]",    billingVat    || "");
     params.append("metadata[purchase_type]",  type);
     params.append("metadata[file_key]",       fileKey       || "");
+    params.append("metadata[promo_code]",     promoPercent ? (promoCode || "") : "");
+    params.append("metadata[promo_percent]",  promoPercent ? String(promoPercent) : "");
 
     const res = await fetch("https://api.stripe.com/v1/checkout/sessions", {
       method: "POST",
