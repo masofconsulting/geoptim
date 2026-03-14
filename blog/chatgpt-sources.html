@@ -3,19 +3,19 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>Comment ChatGPT choisit ses sources — et comment en faire partie — Geoptim</title>
+<title>Comment ChatGPT choisit ses sources, et comment en faire partie | Geoptim</title>
 <link rel="canonical" href="https://geoptim.io/blog/chatgpt-sources"/>
 <meta name="description" content="Les modèles de langage ont des critères précis pour décider quelle source citer. Comprendre leur logique est la première étape pour apparaître dans les réponses de ChatGPT, Claude et Perplexity."/>
 <meta name="robots" content="index, follow"/>
 <meta property="og:type" content="article"/>
 <meta property="og:locale" content="fr_FR"/>
 <meta property="og:site_name" content="Geoptim"/>
-<meta property="og:title" content="Comment ChatGPT choisit ses sources — et comment en faire partie"/>
+<meta property="og:title" content="Comment ChatGPT choisit ses sources, et comment en faire partie"/>
 <meta property="og:description" content="Les modèles de langage ont des critères précis pour décider quelle source citer. Comprendre leur logique est la première étape."/>
 <meta property="og:url" content="https://geoptim.io/blog/chatgpt-sources"/>
 <meta property="og:image" content="https://geoptim.io/og-image.png"/>
 <meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:title" content="Comment ChatGPT choisit ses sources — et comment en faire partie"/>
+<meta name="twitter:title" content="Comment ChatGPT choisit ses sources, et comment en faire partie"/>
 <meta name="twitter:description" content="Les modèles de langage ont des critères précis pour décider quelle source citer."/>
 <meta name="twitter:image" content="https://geoptim.io/og-image.png"/>
 <link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
@@ -26,7 +26,7 @@
 {
   "@context": "https://schema.org",
   "@type": "Article",
-  "headline": "Comment ChatGPT choisit ses sources — et comment en faire partie",
+  "headline": "Comment ChatGPT choisit ses sources, et comment en faire partie",
   "description": "Les modèles de langage ont des critères précis pour décider quelle source citer. Comprendre leur logique est la première étape.",
   "datePublished": "2026-02-14",
   "dateModified": "2026-02-14",
@@ -68,7 +68,9 @@ p{font-size:16px;color:var(--text2);line-height:1.8;margin-bottom:20px;font-weig
 .breadcrumb a:hover{color:var(--navy)}
 footer{background:var(--navy);padding:32px;text-align:center;font-size:12px;color:#3a5a7a}
 footer a{color:#5a7a96}
+.nav-links{display:flex;align-items:center;gap:20px}.nl{font-size:13px;font-weight:500;color:var(--text3);transition:color .2s;padding:4px;text-decoration:none}.nl:hover{color:var(--navy)}
 @media(max-width:600px){main{padding:40px 20px 60px}nav{padding:0 20px}}
+@media(max-width:640px){.nav-links .nl{display:none}}
 </style>
 </head>
 <body>
@@ -77,12 +79,18 @@ footer a{color:#5a7a96}
     <div class="logo-dot"></div>
     <span class="logo-name">Geoptim</span>
   </a>
-  <a class="btn-cta" href="/">Analyser mon site →</a>
+  <div class="nav-links">
+    <a href="/tarifs" class="nl">Tarifs</a>
+    <a href="/faq" class="nl">FAQ</a>
+    <a href="/a-propos" class="nl">À propos</a>
+    <a href="/blog" class="nl">Blog</a>
+    <a class="btn-cta" href="/">Analyser mon site →</a>
+  </div>
 </nav>
 <main>
-  <div class="breadcrumb"><a href="/">Accueil</a> › <a href="/#sec-blog">Blog</a> › Sources des LLMs</div>
+  <div class="breadcrumb"><a href="/">Accueil</a> › <a href="/blog">Blog</a> › Sources des LLMs</div>
   <div class="tag">Technique</div>
-  <h1>Comment ChatGPT choisit ses sources — et comment en faire partie</h1>
+  <h1>Comment ChatGPT choisit ses sources, et comment en faire partie</h1>
   <div class="meta">
     <span>14 février 2026</span>
     <span>8 min de lecture</span>
@@ -91,18 +99,18 @@ footer a{color:#5a7a96}
   <p>La question que tout responsable marketing devrait se poser en 2026 n'est plus « suis-je en première page Google ? » mais « suis-je cité quand on pose une question sur mon secteur à une IA ? ».</p>
 
   <h2>Les 4 critères de sélection des LLMs</h2>
-  <p><strong>1. Accessibilité technique</strong> — Le crawler doit pouvoir lire votre site. Un robots.txt qui bloque GPTBot, ClaudeBot ou MistralBot exclut votre site de l'index de ces modèles. C'est la base : si les robots IA ne peuvent pas crawler votre contenu, vous n'existez pas pour eux.</p>
-  <p><strong>2. Structure de l'information</strong> — Les IA préfèrent les contenus qui répondent directement à une question. Un paragraphe factuel sera toujours préféré à un paragraphe commercial. Les titres H2 et H3 formulés comme des questions, les listes à puces, les réponses directes et concises — tout cela augmente significativement vos chances d'être cité.</p>
-  <p><strong>3. Données structurées</strong> — Le JSON-LD Schema.org est le langage que les IA lisent avant votre contenu. Organization, FAQPage, Service, Person : ces balises transmettent aux modèles exactement ce que vous faites, qui vous êtes et pourquoi vous êtes une source fiable.</p>
-  <p><strong>4. Autorité et cohérence</strong> — Un site dont le contenu est cohérent, non contradictoire, et régulièrement mis à jour inspire davantage confiance aux modèles. La fraîcheur et la cohérence du contenu sont des signaux positifs pour tous les LLMs.</p>
+  <p><strong>1. Accessibilité technique</strong> : Le crawler doit pouvoir lire votre site. Un robots.txt qui bloque GPTBot, ClaudeBot ou MistralBot exclut votre site de l'index de ces modèles. C'est la base : si les robots IA ne peuvent pas crawler votre contenu, vous n'existez pas pour eux.</p>
+  <p><strong>2. Structure de l'information</strong> : Les IA préfèrent les contenus qui répondent directement à une question. Un paragraphe factuel sera toujours préféré à un paragraphe commercial. Les titres H2 et H3 formulés comme des questions, les listes à puces, les réponses directes et concises : tout cela augmente significativement vos chances d'être cité.</p>
+  <p><strong>3. Données structurées</strong> : Le JSON-LD Schema.org est le langage que les IA lisent avant votre contenu. Organization, FAQPage, Service, Person : ces balises transmettent aux modèles exactement ce que vous faites, qui vous êtes et pourquoi vous êtes une source fiable.</p>
+  <p><strong>4. Autorité et cohérence</strong> : Un site dont le contenu est cohérent, non contradictoire, et régulièrement mis à jour inspire davantage confiance aux modèles. La fraîcheur et la cohérence du contenu sont des signaux positifs pour tous les LLMs.</p>
 
   <h2>Le rôle clé du fichier llms.txt</h2>
   <p>Standard émergent apparu en 2024, le fichier llms.txt contient un résumé Markdown structuré de votre activité. C'est votre lettre d'introduction aux LLMs. Placé à la racine de votre domaine (ex: <code>https://votre-site.fr/llms.txt</code>), il résume qui vous êtes, ce que vous faites, et comment vous contacter.</p>
-  <p>20 minutes de travail pour une visibilité potentielle auprès de centaines de millions d'utilisateurs de ChatGPT, Claude, Perplexity et Mistral Le Chat. Les modèles qui intègrent ce standard privilégient les sites qui le respectent — notamment Perplexity, qui l'a adopté très tôt.</p>
+  <p>20 minutes de travail pour une visibilité potentielle auprès de centaines de millions d'utilisateurs de ChatGPT, Claude, Perplexity et Mistral Le Chat. Les modèles qui intègrent ce standard privilégient les sites qui le respectent, notamment Perplexity, qui l'a adopté très tôt.</p>
 
   <h2>Ce que vous pouvez faire maintenant</h2>
   <p>Commencez par un audit de l'état actuel de votre site : votre robots.txt autorise-t-il les crawlers IA ? Avez-vous un llms.txt ? Votre Schema.org est-il complet et à jour ? Ces trois questions résument l'essentiel.</p>
-  <p>Une fois cet état des lieux établi, les corrections sont rapides à implémenter — et leur impact sur votre visibilité dans les IA peut être mesurable en quelques semaines.</p>
+  <p>Une fois cet état des lieux établi, les corrections sont rapides à implémenter, et leur impact sur votre visibilité dans les IA peut être mesurable en quelques semaines.</p>
 
   <hr class="divider"/>
 
@@ -113,7 +121,7 @@ footer a{color:#5a7a96}
   </div>
 </main>
 <footer>
-  <p>© 2026 <a href="/">Geoptim</a> · <a href="/#sec-blog">Blog</a> · <a href="/mentions-legales">Mentions légales</a></p>
+  <p>© 2026 <a href="/">Geoptim</a> · <a href="/blog">Blog</a> · <a href="/mentions-legales">Mentions légales</a></p>
 </footer>
 </body>
 </html>

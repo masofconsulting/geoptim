@@ -25,75 +25,35 @@ exports.handler = async (event) => {
   try {
     const { domain, name, ctx, rawContent } = JSON.parse(event.body);
 
-    const prompt = `Tu es un expert Schema.org et GEO senior. Génère un fichier HTML avec des blocs JSON-LD Schema.org complets et professionnels pour ce site.
+    const prompt = `Génère des blocs Schema.org JSON-LD pour ce site. HTML brut uniquement, sans backtick.
 
-━━━ DONNÉES EXTRAITES (structurées) ━━━
+DONNÉES :
 ${ctx}
 
-━━━ CONTENU BRUT RÉCUPÉRÉ DU SITE ━━━
-${(rawContent || '').slice(0, 2500)}
+CONTENU :
+${(rawContent || '').slice(0, 1500)}
 
-━━━ RÈGLES ABSOLUES ━━━
-1. Utilise le contenu brut pour compléter les données manquantes dans les données extraites.
-2. @type : choisis le type Schema.org LE PLUS PRÉCIS possible pour le secteur réel.
-   Exemples : LegalService, Attorney, MedicalBusiness, LocalBusiness, ProfessionalService, SoftwareApplication, Store, Restaurant...
-3. Toutes les valeurs doivent être RÉELLES — jamais de placeholder.
-4. Si une donnée est vraiment absente → omets le champ (ne pas l'inclure du tout).
-5. sameAs : uniquement les vrais URLs de réseaux sociaux trouvés.
-6. hasOfferCatalog : uniquement les vraies offres/services réels avec descriptions précises.
-7. FAQPage : questions formulées comme de VRAIES requêtes clients, réponses de 3-4 phrases denses avec vraies données.
+FORMAT (3 blocs) :
+<!-- [NOM DU SITE] — Schema.org JSON-LD | Geoptim.io | Intégration : head via RankMath/Yoast ou Insert Headers & Footers -->
 
-━━━ STRUCTURE À GÉNÉRER ━━━
-
-BLOC 1 — Organisation principale :
-Type : @type adapté + Organization en tableau
-Champs obligatoires : @context, @type, @id, name, description (phrase précise), url
-Champs si disponibles : telephone, email, address (PostalAddress), geo, openingHours, areaServed, priceRange, serviceType, knowsAbout, sameAs, hasOfferCatalog
-
-BLOC 2 — Person (un bloc par personne réelle trouvée) :
-@context, @type, @id, name, jobTitle, description, worksFor, knowsAbout, sameAs
-
-BLOC 3 — FAQPage :
-8 questions sectorielles précises avec réponses de 3-4 phrases utilisant les VRAIES données du site.
-Questions formulées comme des recherches Google/ChatGPT réelles de clients.
-
-FORMAT DE SORTIE OBLIGATOIRE :
-<!--
-  ════════════════════════════════════════
-  [NOM DU SITE EN MAJUSCULES] — Schema.org JSON-LD
-  À insérer dans le <head> de chaque page via RankMath / Yoast / Insert Headers & Footers
-  Généré par Geoptim.io — https://geoptim.io
-  ════════════════════════════════════════
--->
-
-<!-- ① ORGANISATION (toutes les pages) -->
+<!-- Organisation (toutes les pages) -->
 <script type="application/ld+json">
-{ ... }
+{"@context":"https://schema.org","@type":["[TypePrécis]","Organization"],"@id":"https://${domain}/#org","name":"...","description":"...","url":"https://${domain}"[,telephone,email,address,geo,openingHours,areaServed,sameAs,hasOfferCatalog si trouvés]}
 </script>
 
-<!-- ② PERSONNE (une par membre d'équipe trouvé) -->
+<!-- Personne (répéter par personne trouvée) -->
 <script type="application/ld+json">
-{ ... }
+{"@context":"https://schema.org","@type":"Person","name":"...","jobTitle":"...","worksFor":{"@id":"https://${domain}/#org"}[,knowsAbout,sameAs si trouvés]}
 </script>
 
-<!-- ③ FAQ PAGE (uniquement sur la page FAQ) -->
+<!-- FAQPage -->
 <script type="application/ld+json">
-{ ... }
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[6 questions réelles avec acceptedAnswer]}
 </script>
 
-<!--
-  INSTRUCTIONS D'INTÉGRATION :
-  Option A — Extension SEO (RankMath / Yoast) : coller chaque bloc dans "Schema personnalisé"
-  Option B — functions.php WordPress :
-    add_action('wp_head', function() {
-      echo '[bloc organisation]'; // toutes les pages
-      if (is_page('faq')) echo '[bloc FAQ]'; // page FAQ uniquement
-    });
-  Option C — Insert Headers & Footers plugin : coller dans "Scripts in Header"
--->
 <!-- Optimisation GEO par Geoptim.io — https://geoptim.io -->
 
-Réponds UNIQUEMENT avec le HTML brut, sans markdown ni backtick.`;
+RÈGLES : @type le plus précis possible (LegalService, MedicalBusiness, Restaurant...), valeurs réelles uniquement, omets les champs sans données.`;
 
     const data = await callAnthropic(KEY, {
       model: "claude-sonnet-4-6",
