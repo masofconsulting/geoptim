@@ -89,7 +89,7 @@ RÈGLES :
       try {
         for await (const chunk of streamAnthropic(KEY, {
           model: "claude-sonnet-4-6",
-          max_tokens: 4000,
+          max_tokens: 8000,
           system: "Tu es un expert en optimisation GEO et SEO technique. Tu génères des pages FAQ complètes, précises et utiles, en utilisant uniquement les données réelles fournies. Tu ne tronques jamais ta réponse.",
           messages: [{ role: "user", content: prompt }]
         })) {

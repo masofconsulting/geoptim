@@ -121,7 +121,7 @@ RÈGLES :
       try {
         for await (const chunk of streamAnthropic(KEY, {
           model: "claude-sonnet-4-6",
-          max_tokens: 4000,
+          max_tokens: 8000,
           system: "Tu es un expert Schema.org et structured data. Tu génères des fichiers JSON-LD complets, valides et cohérents, avec des @id qui se référencent entre les blocs. Tu utilises uniquement les données réelles fournies.",
           messages: [{ role: "user", content: prompt }]
         })) {
