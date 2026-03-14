@@ -1,5 +1,5 @@
-// Netlify v2 — accumule le stream Anthropic, retourne JSON complet
-async function callAnthropicStreaming(KEY, body) {
+// Netlify v2 — streaming immédiat → frontend accumule et parse le JSON
+async function* streamAnthropic(KEY, body) {
   const MAX = 3;
   for (let attempt = 0; attempt < MAX; attempt++) {
     const res = await fetch("https://api.anthropic.com/v1/messages", {
@@ -17,7 +17,7 @@ async function callAnthropicStreaming(KEY, body) {
     }
     const reader = res.body.getReader();
     const decoder = new TextDecoder();
-    let buf = '', text = '';
+    let buf = '';
     while (true) {
       const { done, value } = await reader.read();
       if (done) break;
@@ -28,11 +28,11 @@ async function callAnthropicStreaming(KEY, body) {
         if (!line.startsWith('data: ')) continue;
         let ev;
         try { ev = JSON.parse(line.slice(6)); } catch { continue; }
-        if (ev.type === 'content_block_delta' && ev.delta?.type === 'text_delta') text += ev.delta.text;
+        if (ev.type === 'content_block_delta' && ev.delta?.type === 'text_delta') yield ev.delta.text;
         if (ev.type === 'error') throw new Error(ev.error?.message || 'Erreur stream Anthropic');
       }
     }
-    return text;
+    return;
   }
 }
 
@@ -61,21 +61,23 @@ export default async (req) => {
     } catch(e) { return ''; }
   }
 
-  try {
-    const { url } = await req.json();
-    const domain = url.replace(/https?:\/\//,'').replace(/\/.*$/,'');
-    const base = 'https://' + domain;
+  let url;
+  try { ({ url } = await req.json()); }
+  catch { return new Response(JSON.stringify({ error: "JSON invalide" }), { status: 400, headers: { 'Content-Type': 'application/json' } }); }
 
-    const [homeRaw, robots, llms] = await Promise.all([
-      fetchSafe(base + '/', 4000, false),
-      fetchSafe(base + '/robots.txt', 2000, false),
-      fetchSafe(base + '/llms.txt', 2000, false),
-    ]);
+  const domain = url.replace(/https?:\/\//,'').replace(/\/.*$/,'');
+  const base = 'https://' + domain;
 
-    const homeJsonLd = extractJsonLd(homeRaw);
-    const homeText = stripHtml(homeRaw).slice(0, 2000);
+  const [homeRaw, robots, llms] = await Promise.all([
+    fetchSafe(base + '/', 4000, false),
+    fetchSafe(base + '/robots.txt', 2000, false),
+    fetchSafe(base + '/llms.txt', 2000, false),
+  ]);
 
-    const prompt = `Tu es un auditeur GEO. Évalue ce site avec des critères précis et reproductibles. Utilise temperature=0 mentalement : pour des données identiques, tu dois toujours donner le même score.
+  const homeJsonLd = extractJsonLd(homeRaw);
+  const homeText = stripHtml(homeRaw).slice(0, 2000);
+
+  const prompt = `Tu es un auditeur GEO. Évalue ce site avec des critères précis et reproductibles. Utilise temperature=0 mentalement : pour des données identiques, tu dois toujours donner le même score.
 
 URL : ${url}
 robots.txt : ${robots.slice(0,600) || '(absent)'}
@@ -128,24 +130,25 @@ Réponds UNIQUEMENT avec ce JSON sans markdown :
   "summary": "diagnostic GEO en 2-3 phrases"
 }`;
 
-    const text = await callAnthropicStreaming(KEY, {
-      model: "claude-sonnet-4-6",
-      max_tokens: 2000,
-      temperature: 0,
-      messages: [{ role: "user", content: prompt }]
-    });
+  const enc = new TextEncoder();
+  const stream = new ReadableStream({
+    async start(ctrl) {
+      try {
+        for await (const chunk of streamAnthropic(KEY, {
+          model: "claude-sonnet-4-6",
+          max_tokens: 8000,
+          temperature: 0,
+          messages: [{ role: "user", content: prompt }]
+        })) {
+          ctrl.enqueue(enc.encode(chunk));
+        }
+        ctrl.close();
+      } catch(err) {
+        ctrl.enqueue(enc.encode(`\n__GEOPTIM_ERROR__${err.message}`));
+        ctrl.close();
+      }
+    }
+  });
 
-    const clean = text.trim().replace(/^```json\n?/,'').replace(/\n?```$/,'').trim();
-    const match = clean.match(/\{[\s\S]*\}/);
-    if (!match) throw new Error("Réponse IA invalide");
-    const score = JSON.parse(match[0]);
-    const b = score.scoreBreakdown || {};
-    ['robots','llmstxt','schema','content'].forEach(k => { b[k] = Math.min(Math.max(parseInt(b[k])||0,0),25); });
-    score.geoScore = b.robots + b.llmstxt + b.schema + b.content;
-    score.scoreBreakdown = b;
-
-    return new Response(JSON.stringify(score), { status: 200, headers: { 'Content-Type': 'application/json' } });
-  } catch(err) {
-    return new Response(JSON.stringify({ error: err.message }), { status: 500, headers: { 'Content-Type': 'application/json' } });
-  }
+  return new Response(stream, { headers: { 'Content-Type': 'text/plain; charset=utf-8' } });
 };

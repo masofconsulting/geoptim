@@ -1233,16 +1233,42 @@ function startAnalysis() {
     document.getElementById('stepTxt').textContent = STEPS[si];
   }, 1900);
 
+  // ── Lit un stream texte, détecte __GEOPTIM_ERROR__ et __RC__, retourne objet JSON ──
+  async function readJsonStream(resp, hasRawContent) {
+    if (!resp.ok) throw new Error('Erreur ' + resp.status);
+    var reader = resp.body.getReader();
+    var decoder = new TextDecoder();
+    var text = '';
+    while (true) {
+      var read = await reader.read();
+      if (read.done) break;
+      text += decoder.decode(read.value, { stream: true });
+    }
+    if (text.indexOf('__GEOPTIM_ERROR__') !== -1)
+      throw new Error(text.split('__GEOPTIM_ERROR__').pop().trim());
+    var rawContent = '';
+    if (hasRawContent) {
+      var rcIdx = text.lastIndexOf('\n__RC__');
+      if (rcIdx !== -1) { rawContent = JSON.parse(text.slice(rcIdx + 7)); text = text.slice(0, rcIdx); }
+    }
+    text = text.trim().replace(/^```json\n?/, '').replace(/\n?```$/, '').trim();
+    var match = text.match(/\{[\s\S]*\}/);
+    if (!match) throw new Error('Réponse IA invalide');
+    var obj = JSON.parse(match[0]);
+    if (hasRawContent) obj.rawContent = rawContent;
+    return obj;
+  }
+
   // ── ÉTAPE 1 : Analyse score + info en parallèle ────────────────────────
   Promise.all([
     fetch('/.netlify/functions/analyze-score', {
       method: 'POST', headers: {'Content-Type':'application/json'},
       body: JSON.stringify({ url: url })
-    }).then(function(r) { if (!r.ok) throw new Error('Erreur analyse score ' + r.status); return r.json(); }),
+    }).then(function(r) { return readJsonStream(r, false); }),
     fetch('/.netlify/functions/analyze-info', {
       method: 'POST', headers: {'Content-Type':'application/json'},
       body: JSON.stringify({ url: url })
-    }).then(function(r) { if (!r.ok) throw new Error('Erreur analyse info ' + r.status); return r.json(); })
+    }).then(function(r) { return readJsonStream(r, true); })
   ])
   .then(function(results) {
     var score = results[0];
