@@ -48,7 +48,7 @@ export default async (req) => {
 
   const content = (rawContent || '').slice(0, 3000);
 
-  const prompt = `Génère une page FAQ HTML complète et détaillée pour ce site. HTML brut uniquement, sans backtick ni balise style.
+  const prompt = `Génère une page FAQ HTML complète et optimale pour ce site. HTML brut uniquement, sans backtick ni balise style.
 
 DONNÉES :
 ${ctx}
@@ -56,43 +56,32 @@ ${ctx}
 CONTENU DU SITE :
 ${content}
 
-FORMAT EXACT À RESPECTER :
+STRUCTURE :
+- Crée autant de sections thématiques que le contenu du site le justifie (entre 2 et 5 sections selon la richesse du site)
+- Dans chaque section, génère autant de questions que pertinent (entre 3 et 6 selon le thème)
+- Les thèmes sont à déduire du secteur d'activité réel : services/prestations, tarifs/devis, processus/délais, garanties/SAV, contact/zones, équipe/expertise, etc.
+
+FORMAT :
 <article class="faq-page">
   <header class="faq-header">
     <h1>Questions fréquentes : ${name}</h1>
-    <p class="faq-intro">[activité réelle, types de clients, zone géographique, 2-3 phrases précises et informatives]</p>
+    <p class="faq-intro">[activité réelle, types de clients, zone géographique, valeur ajoutée, 2-3 phrases précises]</p>
   </header>
   <section class="faq-section">
-    <h2>[Thème 1 : Services et prestations]</h2>
-    <div class="faq-item" id="[slug-seo]"><h3>[question longue traîne client précise]</h3><p>[réponse complète, 70-80 mots, concrète et utile]</p></div>
-    <div class="faq-item" id="[slug-seo]"><h3>[question]</h3><p>[réponse 70-80 mots]</p></div>
-    <div class="faq-item" id="[slug-seo]"><h3>[question]</h3><p>[réponse 70-80 mots]</p></div>
+    <h2>[Thème pertinent pour ce site]</h2>
+    <div class="faq-item" id="[slug-kebab-seo]"><h3>[question longue traîne précise qu'un client poserait]</h3><p>[réponse complète en prose, 70-80 mots, concrète et utile, sans liste ni tiret]</p></div>
+    [répéter pour chaque question du thème]
   </section>
-  <section class="faq-section">
-    <h2>[Thème 2 : Tarifs, devis et conditions]</h2>
-    <div class="faq-item" id="[slug-seo]"><h3>[question sur les tarifs]</h3><p>[réponse 70-80 mots]</p></div>
-    <div class="faq-item" id="[slug-seo]"><h3>[question sur le devis ou la durée]</h3><p>[réponse 70-80 mots]</p></div>
-    <div class="faq-item" id="[slug-seo]"><h3>[question]</h3><p>[réponse 70-80 mots]</p></div>
-  </section>
-  <section class="faq-section">
-    <h2>[Thème 3 : Processus, délais et garanties]</h2>
-    <div class="faq-item" id="[slug-seo]"><h3>[question sur la façon de travailler]</h3><p>[réponse 70-80 mots]</p></div>
-    <div class="faq-item" id="[slug-seo]"><h3>[question sur les délais ou garanties]</h3><p>[réponse 70-80 mots]</p></div>
-  </section>
-  <section class="faq-section">
-    <h2>[Thème 4 : Contact, zones et disponibilités]</h2>
-    <div class="faq-item" id="[slug-seo]"><h3>[question avec tel/mailto si disponibles dans les données]</h3><p>[réponse 70-80 mots avec coordonnées réelles]</p></div>
-    <div class="faq-item" id="[slug-seo]"><h3>[question sur la zone géographique ou le déplacement]</h3><p>[réponse 70-80 mots]</p></div>
-  </section>
+  [répéter pour chaque thème pertinent]
   <footer class="faq-footer">Optimisation GEO par <a href="https://geoptim.io">Geoptim.io</a></footer>
 </article>
 
-RÈGLES IMPÉRATIVES :
-- EXACTEMENT 10 questions : 3 en section 1, 3 en section 2, 2 en section 3, 2 en section 4
-- Utilise uniquement les données réelles du site, aucune invention
-- Chaque réponse en prose (pas de listes ni de tirets), 70-80 mots
-- Les id des div sont des slugs SEO kebab-case en français
-- Génère l'article COMPLET jusqu'au </article> inclus, sans rien omettre`;
+RÈGLES :
+- Adapte entièrement la structure au site analysé, ne force aucun thème absent du contenu
+- Données réelles uniquement, aucune invention
+- Chaque réponse en prose sans liste ni tiret, 70-80 mots
+- Les id sont des slugs SEO kebab-case descriptifs en français
+- Termine IMPÉRATIVEMENT par le footer et </article>`;
 
   const enc = new TextEncoder();
   const stream = new ReadableStream({
