@@ -1123,6 +1123,17 @@ footer{background:var(--navy);padding:52px 32px 32px}
         <input id="mod-baddress" placeholder="Adresse postale" style="width:100%;border:1px solid var(--border);border-radius:7px;padding:9px 11px;font-size:12px;margin-bottom:7px;outline:none;font-family:inherit;color:var(--text);box-sizing:border-box">
         <input id="mod-bvat" placeholder="N° TVA intracommunautaire" style="width:100%;border:1px solid var(--border);border-radius:7px;padding:9px 11px;font-size:12px;display:none;outline:none;font-family:inherit;color:var(--text);box-sizing:border-box">
       </div>
+      <!-- CODE PROMO -->
+      <div style="margin-bottom:14px">
+        <button type="button" onclick="togglePromo()" style="background:none;border:none;font-size:12px;color:var(--text4);cursor:pointer;padding:0;font-family:'DM Mono',monospace;letter-spacing:.03em">J'ai un code promo →</button>
+        <div id="modPromoInput" style="display:none;margin-top:10px">
+          <div style="display:flex;gap:8px">
+            <input id="mod-promo" placeholder="CODE PROMO" autocomplete="off" style="flex:1;border:1px solid var(--border);border-radius:7px;padding:9px 11px;font-size:12px;outline:none;font-family:'DM Mono',monospace;color:var(--text);text-transform:uppercase;box-sizing:border-box">
+            <button type="button" onclick="applyPromo()" style="padding:9px 16px;border-radius:7px;background:var(--navy);color:#fff;font-size:12px;font-weight:600;border:none;cursor:pointer;white-space:nowrap">Appliquer</button>
+          </div>
+          <div id="modPromoMsg" style="font-size:12px;margin-top:7px;min-height:16px"></div>
+        </div>
+      </div>
       <button id="btnPay" style="width:100%;padding:14px;border-radius:10px;background:var(--navy);font-weight:600;font-size:15px;color:#fff;margin-bottom:12px;transition:background .2s">Payer 49 € →</button>
       <p style="text-align:center;font-family:'DM Mono',monospace;font-size:10px;color:var(--text4);margin-bottom:12px">🔒 Paiement sécurisé · Stripe</p>
       <button id="btnModClose" style="display:block;margin:0 auto;font-size:12px;color:var(--text4)">Annuler</button>
@@ -2379,6 +2390,13 @@ function openModal(purchaseTarget) {
     }
   }
 
+  // Reset promo
+  window._promoData = null;
+  var _pi = document.getElementById('modPromoInput'); if (_pi) _pi.style.display = 'none';
+  var _pc = document.getElementById('mod-promo');     if (_pc) _pc.value = '';
+  var _pm = document.getElementById('modPromoMsg');   if (_pm) _pm.textContent = '';
+  var _pb = document.getElementById('btnPay');        if (_pb) _pb.style.background = '';
+
   document.getElementById('modal').classList.add('open');
   document.getElementById('modConfirm').style.display = 'block';
   document.getElementById('modProcessing').style.display = 'none';
@@ -2408,6 +2426,52 @@ function modTypeChange() {
 
 function closeModal() { document.getElementById('modal').classList.remove('open'); }
 
+function togglePromo() {
+  var el = document.getElementById('modPromoInput');
+  el.style.display = el.style.display === 'none' ? 'block' : 'none';
+}
+
+function applyPromo() {
+  var code = (document.getElementById('mod-promo').value || '').trim().toUpperCase();
+  var msgEl = document.getElementById('modPromoMsg');
+  if (!code) return;
+  var purchaseTarget = window._modalPurchaseTarget || 'pack';
+  var purchaseType = (purchaseTarget === 'pack') ? 'pack' : 'single';
+  msgEl.style.color = 'var(--text4)';
+  msgEl.textContent = 'Vérification…';
+  fetch('/.netlify/functions/validate-promo', {
+    method: 'POST', headers: {'Content-Type':'application/json'},
+    body: JSON.stringify({ code, purchaseType })
+  })
+  .then(function(r) { return r.json(); })
+  .then(function(data) {
+    var priceEl = document.getElementById('modPrice');
+    var btnPay  = document.getElementById('btnPay');
+    if (!data.valid) {
+      msgEl.textContent = 'Code invalide.'; msgEl.style.color = '#c0392b';
+      window._promoData = null;
+      if (priceEl) priceEl.innerHTML = (purchaseType === 'pack' ? '49' : '19') + ' €';
+      if (btnPay)  { btnPay.textContent = 'Payer ' + (purchaseType === 'pack' ? '49' : '19') + ' € →'; btnPay.style.background = ''; }
+      return;
+    }
+    window._promoData = { code: code, percent: data.percent, finalAmount: data.finalAmount, isFree: data.isFree };
+    var baseStr  = (purchaseType === 'pack' ? '49' : '19') + ' €';
+    if (data.isFree) {
+      if (priceEl) priceEl.innerHTML = '<span style="text-decoration:line-through;font-size:16px;color:var(--text4)">' + baseStr + '</span> <span style="color:#16a34a">Gratuit</span>';
+      if (btnPay)  { btnPay.textContent = 'Obtenir gratuitement →'; btnPay.style.background = '#16a34a'; }
+      msgEl.textContent = '🎉 Code valide — accès 100 % gratuit !'; msgEl.style.color = '#16a34a';
+    } else {
+      var finalStr = (data.finalAmount / 100 % 1 === 0)
+        ? (data.finalAmount / 100).toFixed(0) + ' €'
+        : (data.finalAmount / 100).toFixed(2) + ' €';
+      if (priceEl) priceEl.innerHTML = '<span style="text-decoration:line-through;font-size:16px;color:var(--text4)">' + baseStr + '</span> ' + finalStr;
+      if (btnPay)  { btnPay.textContent = 'Payer ' + finalStr + ' →'; btnPay.style.background = ''; }
+      msgEl.textContent = '✓ −' + data.percent + ' % appliqués.'; msgEl.style.color = '#16a34a';
+    }
+  })
+  .catch(function() { msgEl.textContent = 'Erreur réseau.'; msgEl.style.color = '#c0392b'; window._promoData = null; });
+}
+
 // ── STRIPE PAYMENT ─────────────────────────────────────────────────────────
 
 function processPayment() {
@@ -2428,9 +2492,10 @@ function processPayment() {
     } catch(e) {}
   }
 
+  var promoData = window._promoData || null;
+
   document.getElementById('modConfirm').style.display = 'none';
   document.getElementById('modProcessing').style.display = 'block';
-  document.getElementById('modProcessing').querySelector('p').textContent = 'Redirection vers le paiement…';
 
   // Sauvegarder les coordonnées de facturation
   var billingChecked = document.querySelector('input[name="mod-btype"]:checked');
@@ -2443,6 +2508,47 @@ function processPayment() {
   if (billing.name) localStorage.setItem('geo_billing', JSON.stringify(billing));
   window._billingData = billing;
 
+  // ── Flux 100% gratuit (code promo) ──────────────────────────────────────
+  if (promoData && promoData.isFree) {
+    document.getElementById('modProcessing').querySelector('p').textContent = 'Application du code promo…';
+    fetch('/.netlify/functions/apply-free-promo', {
+      method: 'POST', headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({
+        code:         promoData.code,
+        purchaseType: purchaseType,
+        fileKey:      fileKey,
+        siteName:     result ? (result.siteName || '') : '',
+        siteUrl:      currentUrl
+      })
+    })
+    .then(function(r) { if (!r.ok) throw new Error('Erreur serveur ' + r.status); return r.json(); })
+    .then(function(data) {
+      if (!data.paid) throw new Error('Code refusé par le serveur');
+      handlePurchaseConfirmed(data, currentUrl);
+      document.getElementById('modProcessing').style.display = 'none';
+      document.getElementById('modDone').style.display = 'block';
+      document.getElementById('modDone').querySelector('p:last-child').textContent = 'Vos fichiers sont déverrouillés.';
+      setTimeout(closeModal, 1800);
+    })
+    .catch(function(err) {
+      document.getElementById('modProcessing').style.display = 'none';
+      document.getElementById('modConfirm').style.display = 'block';
+      alert('Erreur : ' + err.message);
+    });
+    return;
+  }
+
+  // ── Flux Stripe (paiement normal ou remise partielle) ───────────────────
+  document.getElementById('modProcessing').querySelector('p').textContent = 'Redirection vers le paiement…';
+
+  // Sauvegarder l'analyse avant redirect Stripe (sessionStorage survit au redirect Stripe)
+  if (result) {
+    try {
+      sessionStorage.setItem('geo_analysis', JSON.stringify(result));
+      sessionStorage.setItem('geo_url', currentUrl);
+    } catch(e) {}
+  }
+
   fetch('/.netlify/functions/create-checkout', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -2454,7 +2560,8 @@ function processPayment() {
       billingType:    billing.type,
       billingVat:     billing.vat,
       purchaseType:   purchaseType,
-      fileKey:        fileKey
+      fileKey:        fileKey,
+      promoCode:      promoData ? promoData.code : ''
     })
   })
   .then(function(r) {
@@ -2531,77 +2638,7 @@ function processPayment() {
   .then(function(r) { return r.json(); })
   .then(function(data) {
     if (!data.paid) throw new Error('Paiement non confirmé');
-
-    var purchaseType = data.purchaseType || 'pack';
-    var fileKey      = data.fileKey      || '';
-    var domain = savedUrl.replace(/https?:\/\//, '').replace(/\/.*$/, '');
-
-    // Dédupliquer par sessionId
-    var purchases = JSON.parse(localStorage.getItem('geo_purchases') || '[]');
-    var isDup = false;
-    for (var di = 0; di < purchases.length; di++) {
-      if (purchases[di].sessionId === (data.sessionId || stripeSessionId)) { isDup = true; break; }
-    }
-
-    if (!isDup) {
-      // robots.txt généré client-side immédiatement si dans le scope
-      var generatedFiles = {};
-      if (purchaseType === 'pack' || fileKey === 'robots') {
-        generatedFiles.robots = buildRobotsTxt(domain, (result.siteInfo || {}));
-        result.files.robots = generatedFiles.robots;
-      }
-      purchases.push({
-        sessionId:      data.sessionId  || stripeSessionId,
-        purchaseType:   purchaseType,
-        fileKey:        fileKey,
-        analysisUrl:    savedUrl,
-        generatedFiles: generatedFiles,
-        createdAt:      Math.floor(Date.now() / 1000)
-      });
-      localStorage.setItem('geo_purchases', JSON.stringify(purchases));
-    }
-
-    // Infos de reçu
-    var savedBilling = JSON.parse(localStorage.getItem('geo_billing') || '{}');
-    var amount = data.amount || (purchaseType === 'pack' ? 4900 : 1900);
-    var productLabel = purchaseType === 'pack'
-      ? 'Pack 4 fichiers GEO' + (result.siteName ? ' — ' + result.siteName : '')
-      : (FILE_META.filter(function(f){ return f.key === fileKey; })[0] || {title: fileKey}).title + ' GEO' + (result.siteName ? ' — ' + result.siteName : '');
-    window._receiptData = {
-      email:          data.email          || '',
-      amount:         amount,
-      created:        data.created        || Math.floor(Date.now() / 1000),
-      siteName:       data.siteName       || (result && result.siteName) || '',
-      siteUrl:        data.siteUrl        || savedUrl,
-      sessionId:      data.sessionId      || stripeSessionId,
-      billingName:    data.billingName    || savedBilling.name    || '',
-      billingAddress: data.billingAddress || savedBilling.address || '',
-      billingType:    data.billingType    || savedBilling.type    || 'particulier',
-      billingVat:     data.billingVat     || savedBilling.vat     || '',
-      productLabel:   productLabel
-    };
-    window._billingData = { name: window._receiptData.billingName, address: window._receiptData.billingAddress, type: window._receiptData.billingType, vat: window._receiptData.billingVat };
-
-    // Mettre à jour la description du reçu dans la receiptCard
-    var rcDesc = document.getElementById('rc-receipt-desc');
-    if (rcDesc) {
-      var ttc = amount / 100;
-      rcDesc.textContent = productLabel + ' · ' + ttc.toFixed(2).replace('.', ',') + ' € TTC (TVA 20 % incluse)';
-    }
-
-    renderFiles();
-
-    var b2 = document.getElementById('unlockBanner');
-    if (b2) {
-      b2.style.display = 'flex';
-      b2.style.background = 'linear-gradient(135deg,#1a4a2a,#1a7a4a)';
-      b2.innerHTML = '<div style="display:flex;align-items:center;gap:16px;color:#fff;flex-wrap:wrap">'
-        + '<span style="font-size:22px">✅</span>'
-        + '<div style="flex:1"><div style="font-weight:700;font-size:15px">Achat confirmé !</div>'
-        + '<div style="font-size:12px;color:#a0e0b8;margin-top:2px">Cliquez sur "Générer →" pour chaque fichier acheté.</div></div>'
-        + '<button onclick="showReceipt()" style="background:#fff;border:none;color:#0a2540;padding:9px 18px;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;flex-shrink:0">Télécharger le reçu</button>'
-        + '</div>';
-    }
+    handlePurchaseConfirmed(data, savedUrl);
     setTimeout(showReceipt, 1400);
   })
   .catch(function(err) {
@@ -2616,6 +2653,77 @@ function processPayment() {
     }
   });
 })();
+
+// ── Confirmation achat (partagé Stripe + code promo gratuit) ────────────────
+function handlePurchaseConfirmed(data, analysisUrl) {
+  var purchaseType = data.purchaseType || 'pack';
+  var fileKey      = data.fileKey      || '';
+  var domain = analysisUrl.replace(/https?:\/\//, '').replace(/\/.*$/, '');
+
+  // Dédupliquer par sessionId
+  var purchases = JSON.parse(localStorage.getItem('geo_purchases') || '[]');
+  var isDup = false;
+  for (var di = 0; di < purchases.length; di++) {
+    if (purchases[di].sessionId === data.sessionId) { isDup = true; break; }
+  }
+  if (!isDup) {
+    var generatedFiles = {};
+    if (purchaseType === 'pack' || fileKey === 'robots') {
+      generatedFiles.robots = buildRobotsTxt(domain, (result.siteInfo || {}));
+      result.files.robots = generatedFiles.robots;
+    }
+    purchases.push({
+      sessionId:      data.sessionId,
+      purchaseType:   purchaseType,
+      fileKey:        fileKey,
+      analysisUrl:    analysisUrl,
+      generatedFiles: generatedFiles,
+      createdAt:      Math.floor(Date.now() / 1000)
+    });
+    localStorage.setItem('geo_purchases', JSON.stringify(purchases));
+  }
+
+  // Infos de reçu
+  var savedBilling = JSON.parse(localStorage.getItem('geo_billing') || '{}');
+  var amount = data.amount || (purchaseType === 'pack' ? 4900 : 1900);
+  var productLabel = purchaseType === 'pack'
+    ? 'Pack 4 fichiers GEO' + (result && result.siteName ? ' — ' + result.siteName : '')
+    : (FILE_META.filter(function(f){ return f.key === fileKey; })[0] || {title: fileKey}).title + ' GEO' + (result && result.siteName ? ' — ' + result.siteName : '');
+  window._receiptData = {
+    email:          data.email          || '',
+    amount:         amount,
+    created:        data.created        || Math.floor(Date.now() / 1000),
+    siteName:       data.siteName       || (result && result.siteName) || '',
+    siteUrl:        data.siteUrl        || analysisUrl,
+    sessionId:      data.sessionId      || '',
+    billingName:    data.billingName    || savedBilling.name    || '',
+    billingAddress: data.billingAddress || savedBilling.address || '',
+    billingType:    data.billingType    || savedBilling.type    || 'particulier',
+    billingVat:     data.billingVat     || savedBilling.vat     || '',
+    productLabel:   productLabel
+  };
+  window._billingData = { name: window._receiptData.billingName, address: window._receiptData.billingAddress, type: window._receiptData.billingType, vat: window._receiptData.billingVat };
+
+  var rcDesc = document.getElementById('rc-receipt-desc');
+  if (rcDesc) {
+    var ttc = amount / 100;
+    rcDesc.textContent = productLabel + ' · ' + (amount === 0 ? 'Gratuit' : ttc.toFixed(2).replace('.', ',') + ' € TTC (TVA 20 % incluse)');
+  }
+
+  renderFiles();
+
+  var b2 = document.getElementById('unlockBanner');
+  if (b2) {
+    b2.style.display = 'flex';
+    b2.style.background = 'linear-gradient(135deg,#1a4a2a,#1a7a4a)';
+    b2.innerHTML = '<div style="display:flex;align-items:center;gap:16px;color:#fff;flex-wrap:wrap">'
+      + '<span style="font-size:22px">✅</span>'
+      + '<div style="flex:1"><div style="font-weight:700;font-size:15px">Accès déverrouillé !</div>'
+      + '<div style="font-size:12px;color:#a0e0b8;margin-top:2px">Cliquez sur "Générer →" pour chaque fichier.</div></div>'
+      + (amount > 0 ? '<button onclick="showReceipt()" style="background:#fff;border:none;color:#0a2540;padding:9px 18px;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;flex-shrink:0">Télécharger le reçu</button>' : '')
+      + '</div>';
+  }
+}
 // ── BLOG ──
 function renderBlog() {
   var grid = document.getElementById('blogGrid');
