@@ -88,11 +88,11 @@ FORMAT EXACT À RESPECTER :
 </article>
 
 RÈGLES IMPÉRATIVES :
-- Minimum 10 questions réparties sur 4 sections
+- EXACTEMENT 10 questions : 3 en section 1, 3 en section 2, 2 en section 3, 2 en section 4
 - Utilise uniquement les données réelles du site, aucune invention
 - Chaque réponse en prose (pas de listes ni de tirets), 70-80 mots
 - Les id des div sont des slugs SEO kebab-case en français
-- Génère l'article complet jusqu'au footer, ne tronque pas`;
+- Génère l'article COMPLET jusqu'au </article> inclus, sans rien omettre`;
 
   const enc = new TextEncoder();
   const stream = new ReadableStream({
@@ -100,7 +100,7 @@ RÈGLES IMPÉRATIVES :
       try {
         for await (const chunk of streamAnthropic(KEY, {
           model: "claude-sonnet-4-6",
-          max_tokens: 2500,
+          max_tokens: 4000,
           system: "Tu es un expert en optimisation GEO et SEO technique. Tu génères des pages FAQ complètes, précises et utiles, en utilisant uniquement les données réelles fournies. Tu ne tronques jamais ta réponse.",
           messages: [{ role: "user", content: prompt }]
         })) {
