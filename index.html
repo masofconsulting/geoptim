@@ -1,0 +1,2397 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Geoptim · Votre site visible par les IA</title>
+<link rel="canonical" href="https://geoptim.io/"/>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
+<link rel="shortcut icon" href="/favicon.svg"/>
+<link rel="apple-touch-icon" href="/favicon.svg"/>
+<link rel="sitemap" type="application/xml" href="/sitemap.xml"/>
+<meta name="description" content="Analyse GEO gratuite de votre site + 4 fichiers d'optimisation pour ChatGPT, Claude, Perplexity, Gemini, Grok, Mistral, DeepSeek et Copilot. Livraison immédiate à 29 €."/>
+<meta name="robots" content="index, follow"/>
+<meta property="og:type" content="website"/>
+<meta property="og:locale" content="fr_FR"/>
+<meta property="og:site_name" content="Geoptim"/>
+<meta property="og:title" content="Geoptim · Votre site visible par les IA"/>
+<meta property="og:description" content="Analyse GEO gratuite de votre site + 4 fichiers d'optimisation pour ChatGPT, Claude, Perplexity, Gemini, Grok, Mistral, DeepSeek et Copilot. Livraison immédiate à 29 €."/>
+<meta property="og:url" content="https://geoptim.io/"/>
+<meta property="og:image" content="https://geoptim.io/og-image.png"/>
+<meta property="og:image:width" content="1200"/>
+<meta property="og:image:height" content="630"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="Geoptim · Votre site visible par les IA"/>
+<meta name="twitter:description" content="Analyse GEO gratuite de votre site + 4 fichiers d'optimisation pour ChatGPT, Claude, Perplexity, Gemini, Grok, Mistral, DeepSeek et Copilot. Livraison immédiate à 29 €."/>
+<meta name="twitter:image" content="https://geoptim.io/og-image.png"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+:root{--navy:#0f1f3d;--navy2:#1a3360;--gold:#c9a84c;--gold2:#e0bc60;--cream:#faf8f5;--cream2:#f4f1eb;--border:#e8e4dc;--text:#0f1f3d;--text2:#4a4438;--text3:#6b6358;--text4:#aaa09a;--green:#1a7a4a;--amber:#b45309;--red:#c0392b}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--cream);color:var(--text);font-family:'DM Sans',sans-serif}
+button{cursor:pointer;font-family:inherit;border:none;background:none;padding:0}
+@keyframes fadeIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes scan{0%{top:0;opacity:1}85%{top:100%;opacity:1}100%{top:100%;opacity:0}}
+@keyframes pulse{0%,100%{transform:scale(1);opacity:.35}50%{transform:scale(1.08);opacity:.12}}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+@keyframes modalIn{from{opacity:0;transform:scale(.94)}to{opacity:1;transform:scale(1)}}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:200;background:rgba(250,248,245,.95);backdrop-filter:blur(14px);border-bottom:1px solid var(--border)}
+.ni{max-width:1100px;margin:0 auto;padding:0 32px;height:64px;display:flex;align-items:center;justify-content:space-between}
+.logo{display:flex;align-items:center;gap:8px}
+.logo-dot{width:9px;height:9px;background:var(--gold);border-radius:50%}
+.logo-name{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--navy)}
+.nav-links{display:flex;align-items:center;gap:20px}
+.nl{font-size:13px;font-weight:500;color:var(--text3);transition:color .2s;padding:4px}
+.nl:hover{color:var(--navy)}
+.btn-nav{background:var(--navy);color:#fff;padding:10px 22px;border-radius:9px;font-weight:600;font-size:13px;transition:background .2s}
+.btn-nav:hover{background:var(--navy2)}
+
+/* PAGES */
+.pg{display:none}
+.pg.on{display:block;animation:fadeIn .45s ease forwards}
+
+/* HERO */
+.hero-s{padding:80px 32px 72px;border-bottom:1px solid var(--border)}
+.hero-g{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 400px;gap:72px;align-items:center}
+.tag{display:inline-flex;align-items:center;gap:7px;font-family:'DM Mono',monospace;font-size:11px;color:var(--gold);letter-spacing:.08em;text-transform:uppercase;background:#fef9ed;border:1px solid #f0e0a0;padding:5px 14px;border-radius:999px;margin-bottom:22px}
+.tag-dot{width:6px;height:6px;background:var(--gold);border-radius:50%;animation:blink 1.8s infinite}
+h1{font-family:'Playfair Display',serif;font-size:clamp(36px,5vw,58px);font-weight:900;line-height:1.07;letter-spacing:-.02em;color:var(--navy);margin-bottom:20px}
+h1 em{font-style:italic;color:var(--gold)}
+.hero-sub{font-size:16px;color:var(--text3);line-height:1.72;font-weight:300;margin-bottom:36px;max-width:500px}
+.iw{display:flex;background:#fff;border:1.5px solid var(--border);border-radius:14px;overflow:hidden;transition:border-color .3s,box-shadow .3s;max-width:560px}
+.iw:focus-within{border-color:var(--gold);box-shadow:0 0 0 4px rgba(201,168,76,.1)}
+#urlInput{flex:1;border:none;outline:none;padding:14px 18px;font-family:'DM Mono',monospace;font-size:13px;color:var(--navy);background:transparent;min-width:0}
+#urlInput::placeholder{color:#c8c2b8}
+#analyzeBtn{background:var(--navy);padding:12px 24px;font-weight:600;font-size:13px;color:#fff;white-space:nowrap;transition:background .2s}
+#analyzeBtn:hover{background:var(--navy2)}
+.trust{display:flex;gap:20px;margin-top:18px;flex-wrap:wrap}
+.trust span{font-size:12px;color:var(--text4)}
+/* Hero visual */
+.hv{background:#fff;border:1px solid var(--border);border-radius:18px;padding:28px;box-shadow:0 12px 48px rgba(15,31,61,.07)}
+.hv-lbl{font-family:'DM Mono',monospace;font-size:10px;color:var(--text4);text-transform:uppercase;letter-spacing:.08em;margin-bottom:14px}
+.hv-row{display:flex;align-items:center;justify-content:space-between;padding:7px 0;border-bottom:1px solid var(--cream2)}
+.hv-bad{font-family:'DM Mono',monospace;font-size:11px;color:var(--red)}
+.hv-good{background:#f0fdf4;border:1px solid #bbf7d0;border-radius:999px;padding:3px 10px;font-family:'DM Mono',monospace;font-size:10px;color:var(--green)}
+.sc-b{background:#fef2f2;border:1px solid #fecaca;border-radius:8px;padding:10px 14px;display:flex;justify-content:space-between;align-items:center;margin-top:14px}
+.sc-a{background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;padding:10px 14px;display:flex;justify-content:space-between;align-items:center;margin-top:8px}
+.sc-n{font-family:'Playfair Display',serif;font-size:22px;font-weight:700}
+
+/* DARK STRIP */
+.ds{background:var(--navy);padding:52px 32px}
+.feats{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:32px}
+.fi{font-size:28px;margin-bottom:12px}
+.ft{font-family:'Playfair Display',serif;font-size:15px;font-weight:700;color:#fff;margin-bottom:7px}
+.fd{font-size:12px;color:#5a7a96;line-height:1.65}
+
+/* SECTIONS */
+.sec{max-width:1100px;margin:0 auto;padding:80px 32px}
+.stag{font-family:'DM Mono',monospace;font-size:11px;color:var(--gold);text-transform:uppercase;letter-spacing:.1em;margin-bottom:10px}
+.stitle{font-family:'Playfair Display',serif;font-size:clamp(26px,3.5vw,40px);font-weight:700;color:var(--navy);line-height:1.15;margin-bottom:14px}
+.ssub{font-size:15px;color:var(--text3);line-height:1.7;font-weight:300;max-width:540px;margin-bottom:44px}
+
+/* STEPS */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.step{background:#fff;border:1px solid var(--border);border-radius:16px;padding:28px 26px;position:relative;overflow:hidden}
+.step-n{position:absolute;top:14px;right:18px;font-family:'Playfair Display',serif;font-size:52px;font-weight:900;color:#f4f0e8;line-height:1}
+.step-t{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:var(--navy);margin-bottom:10px;position:relative}
+.step-d{font-size:13px;color:var(--text3);line-height:1.65;position:relative}
+
+/* INCLUDED */
+.cream-s{background:var(--cream2);padding:72px 32px}
+.inc-g{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+.inc-c{background:#fff;border:1px solid var(--border);border-radius:14px;padding:24px 26px;display:flex;gap:18px}
+.inc-ic{width:44px;height:44px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+.inc-t{font-weight:600;font-size:14px;color:var(--navy);margin-bottom:7px}
+.inc-d{font-size:13px;color:var(--text3);line-height:1.65;font-weight:300}
+
+/* PRICING */
+.white-s{background:#fff;padding:80px 32px}
+.price-g{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 400px;gap:72px;align-items:center}
+.pl{display:flex;flex-direction:column;gap:12px;margin-top:32px}
+.pi{display:flex;align-items:center;gap:10px;font-size:14px;color:var(--text2)}
+.ck{color:var(--green);font-weight:700}
+.pc{background:var(--navy);border-radius:20px;padding:36px}
+.pc h3{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:#fff;margin-bottom:5px}
+.pc p{font-size:13px;color:#5a7a96;margin-bottom:24px}
+.pa{font-family:'Playfair Display',serif;font-size:58px;font-weight:900;color:var(--gold);line-height:1;margin-bottom:4px}
+.pa sup{font-size:22px;vertical-align:super}
+.po{font-family:'DM Mono',monospace;font-size:11px;color:#3a5a7a;margin-bottom:28px}
+.pf{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.06);font-size:13px;color:#b0c4d8}
+.btn-gold{background:var(--gold);color:var(--navy);padding:10px 22px;border-radius:9px;font-weight:700;font-size:14px;transition:background .2s}
+.btn-gold:hover{background:var(--gold2)}
+
+/* BLOG */
+.blog-g{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+.ac{background:#fff;border:1px solid var(--border);border-radius:16px;overflow:hidden;cursor:pointer;transition:box-shadow .2s,transform .2s}
+.ac:hover{box-shadow:0 10px 36px rgba(15,31,61,.1);transform:translateY(-3px)}
+.ab{padding:28px 28px 20px}
+.at{font-family:'DM Mono',monospace;font-size:10px;color:var(--gold);text-transform:uppercase;letter-spacing:.08em;background:#fef9ed;border:1px solid #f0e0a0;padding:3px 11px;border-radius:999px;display:inline-block;margin-bottom:14px}
+.ah{font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:var(--navy);line-height:1.3;margin-bottom:11px}
+.ae{font-size:13px;color:var(--text3);line-height:1.65;font-weight:300}
+.af{padding:13px 28px;border-top:1px solid var(--cream2);display:flex;justify-content:space-between}
+.ad{font-size:12px;color:var(--text4)}
+.ar{font-size:12px;color:var(--navy);font-weight:600}
+
+/* CTA */
+.cta-s{background:var(--navy);padding:64px 32px;text-align:center}
+.cta-s h2{font-family:'Playfair Display',serif;font-size:clamp(24px,4vw,40px);font-weight:700;color:#fff;margin-bottom:16px}
+.cta-s p{font-size:15px;color:#5a7a96;margin-bottom:32px;max-width:520px;margin-left:auto;margin-right:auto}
+
+/* LOADING */
+#pg-loading{min-height:70vh;display:none;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:60px 24px}
+#pg-loading.on{display:flex}
+.scanner{width:130px;height:130px;position:relative;margin-bottom:36px}
+.sr{position:absolute;inset:0;border-radius:50%;border:1.5px solid rgba(201,168,76,.15);animation:pulse 2.6s ease-in-out infinite}
+.sr:nth-child(2){inset:18px;animation-delay:.5s}
+.sr:nth-child(3){inset:36px;animation-delay:1s}
+.sc2{position:absolute;inset:50px;background:linear-gradient(135deg,var(--gold),var(--navy));border-radius:50%}
+.sl{position:absolute;left:0;right:0;height:1.5px;background:linear-gradient(90deg,transparent,var(--gold),transparent);animation:scan 2s linear infinite}
+#stepTxt{font-family:'DM Mono',monospace;font-size:13px;color:var(--gold);min-height:22px;margin-bottom:8px}
+#stepUrl{font-family:'DM Mono',monospace;font-size:11px;color:#c8c2b8}
+
+/* RESULTS */
+.rw{max-width:1100px;margin:0 auto;padding:48px 32px 80px}
+.rh{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:32px;flex-wrap:wrap;gap:14px}
+.back-b{border:1.5px solid var(--border);border-radius:8px;padding:8px 18px;font-family:'DM Mono',monospace;font-size:11px;color:var(--text4);transition:all .2s}
+.back-b:hover{border-color:var(--navy);color:var(--navy)}
+.card{background:#fff;border:1px solid var(--border);border-radius:14px;padding:24px 26px}
+.clbl{font-family:'DM Mono',monospace;font-size:10px;color:var(--text4);text-transform:uppercase;letter-spacing:.08em;margin-bottom:16px}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
+.br{margin-bottom:14px}
+.brh{display:flex;justify-content:space-between;margin-bottom:5px}
+.brn{font-size:12px;color:var(--text3);font-weight:500}
+.brv{font-family:'DM Mono',monospace;font-size:11px;font-weight:500}
+.brt{height:5px;background:#ede9e0;border-radius:3px;overflow:hidden}
+.brf{height:100%;border-radius:3px;width:0;transition:width 1.1s cubic-bezier(.34,1.56,.64,1)}
+.brs{margin-top:4px;font-size:11px;color:var(--text4);line-height:1.4}
+.lr{display:flex;align-items:flex-start;gap:10px;padding:8px 0;border-bottom:1px solid var(--cream2);font-size:13px;color:var(--text2);line-height:1.55}
+.lr:last-child{border-bottom:none}
+.dg{color:var(--green);font-size:15px;flex-shrink:0;margin-top:1px}
+.dw{color:var(--amber);font-size:15px;flex-shrink:0;margin-top:1px}
+
+/* UNLOCK */
+.ub{background:linear-gradient(135deg,var(--navy),var(--navy2));border-radius:16px;padding:28px 32px;display:flex;align-items:center;justify-content:space-between;gap:20px;margin-top:32px;flex-wrap:wrap}
+.ut h3{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:#fff;margin-bottom:5px}
+.ut p{font-size:13px;color:#5a7a96}
+.up{font-family:'Playfair Display',serif;font-size:32px;font-weight:700;color:var(--gold);line-height:1}
+.ups{font-family:'DM Mono',monospace;font-size:10px;color:#3a5a7a}
+
+/* FILES */
+.fg{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:20px}
+.fc{background:var(--cream);border:1.5px dashed var(--border);border-radius:12px;padding:20px 22px}
+.fc.ul{background:#fff;border-style:solid;box-shadow:0 4px 20px rgba(0,0,0,.06)}
+.fct{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.fic{width:38px;height:38px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;background:var(--cream2)}
+.fn{font-weight:600;font-size:13px;color:var(--text4)}
+.ff{font-family:'DM Mono',monospace;font-size:10px;color:#c8c2b8}
+.flk{font-size:18px;opacity:.4;margin-left:auto}
+.frd{background:#f0fdf4;border:1px solid #bbf7d0;border-radius:999px;padding:2px 10px;font-family:'DM Mono',monospace;font-size:10px;color:var(--green);margin-left:auto}
+.fsk{height:6px;background:var(--border);border-radius:3px;margin-bottom:6px}
+.fpv{background:var(--cream2);border-radius:8px;padding:10px 12px;font-size:10px;font-family:'DM Mono',monospace;color:var(--text3);max-height:70px;overflow:hidden;white-space:pre-wrap;word-break:break-word;margin-bottom:14px;line-height:1.5}
+.fa{display:flex;gap:8px}
+.dlb{flex:1;padding:9px 0;border-radius:8px;font-weight:600;font-size:12px;color:#fff;transition:opacity .2s}
+.dlb:hover{opacity:.85}
+.cpb{padding:9px 14px;border-radius:8px;border:1px solid var(--border);font-family:'DM Mono',monospace;font-size:11px;color:var(--text4);transition:color .2s}
+
+/* ARTICLE */
+.aw{max-width:760px;margin:0 auto;padding:52px 32px 80px}
+.a-back{font-size:13px;color:var(--text4);display:flex;align-items:center;gap:6px;margin-bottom:32px;transition:color .2s}
+.a-back:hover{color:var(--navy)}
+.a-content p{font-size:15px;color:var(--text2);line-height:1.8;margin-bottom:18px;font-weight:300}
+.a-content h2{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--navy);margin:32px 0 12px;line-height:1.3}
+.a-cta{background:var(--cream2);border:1px solid var(--border);border-radius:14px;padding:24px 28px;margin-top:48px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px}
+
+/* MODAL */
+.mo{position:fixed;inset:0;background:rgba(15,31,61,.52);backdrop-filter:blur(5px);z-index:1000;display:none;align-items:center;justify-content:center;padding:24px}
+.mo.open{display:flex}
+.mb{background:#fff;border-radius:22px;padding:40px 36px;max-width:440px;width:100%;box-shadow:0 24px 80px rgba(15,31,61,.18);animation:modalIn .3s cubic-bezier(.34,1.56,.64,1)}
+.mi-row{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--border);font-size:12px}
+.mi-row:last-child{border-bottom:none}
+.mo-spinner{width:48px;height:48px;border:3px solid var(--border);border-top-color:var(--gold);border-radius:50%;margin:0 auto 20px;animation:spin .8s linear infinite}
+
+/* FOOTER */
+footer{background:var(--navy);padding:52px 32px 32px}
+.fi2{max-width:1100px;margin:0 auto}
+.fg2{display:grid;grid-template-columns:1.6fr 1fr 1fr;gap:48px;margin-bottom:44px}
+.fh{font-family:'DM Mono',monospace;font-size:10px;color:#2a4060;text-transform:uppercase;letter-spacing:.1em;margin-bottom:14px}
+.fl{display:block;font-size:13px;color:#5a7a96;margin-bottom:9px;transition:color .2s;text-align:left}
+.fl:hover{color:#fff}
+.fb{border-top:1px solid rgba(255,255,255,.07);padding-top:24px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+.fc2{font-family:'DM Mono',monospace;font-size:11px;color:#1a3050}
+
+@media(max-width:860px){.hero-g,.price-g{grid-template-columns:1fr}.hv{display:none}.feats{grid-template-columns:1fr 1fr}.fg2{grid-template-columns:1fr}}
+@media(max-width:600px){.g2,.fg,.steps,.inc-g,.blog-g{grid-template-columns:1fr}.nav-links .nl{display:none}}
+
+/* REVIEWS */
+.rv-g{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.rv-c{background:#fff;border:1px solid var(--border);border-radius:16px;padding:24px 26px}
+.rv-top{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.rv-av{width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;color:#fff;flex-shrink:0}
+.rv-name{font-weight:600;font-size:14px;color:var(--navy)}
+.rv-role{font-size:11px;color:var(--text4);margin-top:2px}
+.rv-stars{color:#f59e0b;font-size:13px;margin-bottom:10px}
+.rv-txt{font-size:13px;color:var(--text3);line-height:1.65;font-weight:300;font-style:italic}
+.rv-date{font-family:'DM Mono',monospace;font-size:10px;color:var(--text4);margin-top:10px}
+.rv-badge{display:inline-flex;align-items:center;gap:6px;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:999px;padding:4px 14px;font-family:'DM Mono',monospace;font-size:11px;color:var(--green);margin-bottom:28px}
+.rv-score{font-size:32px;font-weight:700;font-family:'Playfair Display',serif;color:var(--navy);line-height:1}
+/* FAQ UI */
+.faq-list{display:flex;flex-direction:column;gap:8px;max-width:780px;margin:0 auto}
+.faq-item-ui{background:#fff;border:1px solid var(--border);border-radius:12px;overflow:hidden}
+.faq-q{width:100%;text-align:left;padding:18px 22px;font-size:14px;font-weight:600;color:var(--navy);display:flex;justify-content:space-between;align-items:center;gap:16px;transition:background .2s}
+.faq-q:hover{background:var(--cream2)}
+.faq-icon{font-size:18px;color:var(--gold);flex-shrink:0;transition:transform .3s;line-height:1}
+.faq-q.open .faq-icon{transform:rotate(45deg)}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .35s ease,padding .35s ease;padding:0 22px;font-size:14px;color:var(--text3);line-height:1.72;font-weight:300}
+.faq-a.open{max-height:500px;padding:0 22px 18px}
+@media(max-width:860px){.rv-g{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){.rv-g{grid-template-columns:1fr}}
+
+/* LEGAL PAGES */
+.lw{max-width:820px;margin:0 auto;padding:52px 32px 80px}
+.lw h1{font-family:'Playfair Display',serif;font-size:clamp(24px,4vw,38px);font-weight:700;color:var(--navy);margin-bottom:8px;line-height:1.2}
+.lw .l-sub{font-family:'DM Mono',monospace;font-size:11px;color:var(--text4);margin-bottom:36px}
+.lw h2{font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:var(--navy);margin:32px 0 10px}
+.lw h3{font-size:14px;font-weight:600;color:var(--navy);margin:20px 0 6px}
+.lw p{font-size:14px;color:var(--text2);line-height:1.8;margin-bottom:12px;font-weight:300}
+.lw ul{margin:8px 0 14px 20px}
+.lw li{font-size:14px;color:var(--text2);line-height:1.75;font-weight:300;margin-bottom:4px}
+.lw .l-alert{background:var(--cream2);border:1px solid var(--border);border-radius:10px;padding:14px 18px;font-size:13px;color:var(--text3);margin-bottom:24px}
+.lw .l-block{background:#fff;border:1px solid var(--border);border-radius:12px;padding:20px 24px;margin-bottom:16px}
+.l-nav{display:flex;gap:8px;margin-bottom:36px;flex-wrap:wrap}
+.l-tab{font-family:'DM Mono',monospace;font-size:11px;padding:7px 16px;border-radius:999px;border:1.5px solid var(--border);color:var(--text4);transition:all .2s}
+.l-tab.active{background:var(--navy);border-color:var(--navy);color:#fff}
+.l-sec{display:none}.l-sec.on{display:block}
+.l-back{font-size:13px;color:var(--text4);display:flex;align-items:center;gap:6px;margin-bottom:28px;transition:color .2s}
+.l-back:hover{color:var(--navy)}
+
+/* RECEIPT MODAL */
+#receiptModal{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:2000;display:none;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(3px)}
+#receiptModal.open{display:flex}
+#receiptBox{background:#fff;border-radius:16px;max-width:660px;width:100%;max-height:90vh;overflow-y:auto;box-shadow:0 24px 64px rgba(0,0,0,.25);position:relative}
+.rb-head{background:#0a2540;color:#fff;padding:24px 32px;border-radius:16px 16px 0 0;display:flex;justify-content:space-between;align-items:flex-start}
+.rb-head h2{margin:0;font-size:18px;font-weight:700;letter-spacing:.01em}
+.rb-head p{margin:4px 0 0;font-size:13px;color:#7eb3d4}
+.rb-close{background:rgba(255,255,255,.15);border:none;color:#fff;width:32px;height:32px;border-radius:50%;font-size:18px;line-height:1;cursor:pointer;flex-shrink:0;transition:background .2s}
+.rb-close:hover{background:rgba(255,255,255,.3)}
+.rb-body{padding:28px 32px}
+.rb-cols{display:flex;gap:24px;margin-bottom:24px}
+.rb-col{flex:1;min-width:0}
+.rb-col h4{font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:#9ca3af;margin:0 0 8px;font-weight:600}
+.rb-col p{margin:0;font-size:13px;line-height:1.7;color:#1f2937}
+#receiptBox table{width:100%;border-collapse:collapse;margin:0 0 8px}
+#receiptBox table thead th{background:#f8fafc;font-size:11px;text-transform:uppercase;letter-spacing:.07em;color:#6b7280;padding:10px 14px;text-align:left;font-weight:600}
+#receiptBox table td{padding:14px;font-size:13px;border-bottom:1px solid #f1f5f9;color:#1f2937;vertical-align:top}
+.rb-totals{padding:12px 14px 4px;display:flex;flex-direction:column;align-items:flex-end;gap:5px}
+.rt-row{display:flex;justify-content:space-between;width:220px;font-size:13px;color:#4b5563}
+.rt-ttc{display:flex;justify-content:space-between;width:220px;font-size:16px;font-weight:700;color:#0a2540;border-top:2px solid #0a2540;padding-top:10px;margin-top:6px}
+.rb-note{font-size:11px;color:#9ca3af;padding:12px 14px 0;line-height:1.6}
+.rb-actions{padding:20px 32px 28px;display:flex;gap:12px;justify-content:flex-end;border-top:1px solid #f1f5f9;margin-top:20px}
+.rb-btn-print{background:#0a2540;color:#fff;border:none;padding:11px 24px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer}
+.rb-btn-secondary{background:#f1f5f9;color:#4b5563;border:none;padding:11px 20px;border-radius:8px;font-size:13px;cursor:pointer}
+@media print{
+  @page{size:A4;margin:15mm}
+  body>*:not(#receiptModal){display:none!important}
+  #receiptModal{position:static!important;background:none!important;display:block!important;padding:0!important;width:100%!important}
+  #receiptBox{box-shadow:none!important;max-height:none!important;border-radius:0!important;max-width:none!important;width:100%!important}
+  .rb-head{border-radius:0!important}
+  .rb-close,.rb-actions,.rb-edit-billing,#rm-billing-form,.rb-billing-edit-btn{display:none!important}
+  #receiptBox table{font-size:13px}
+  #receiptBox td,#receiptBox th{padding:10px 12px}
+}
+
+/* COOKIE NOTICE */
+#cookieBar{position:fixed;bottom:0;left:0;right:0;background:var(--navy);padding:14px 32px;display:flex;align-items:center;justify-content:space-between;gap:16px;z-index:500;flex-wrap:wrap;transform:translateY(100%);transition:transform .4s ease}
+#cookieBar.show{transform:translateY(0)}
+#cookieBar p{font-size:12px;color:#5a7a96;line-height:1.5;margin:0}
+#cookieBar a{color:var(--gold);text-decoration:underline}
+#cookieBar button{background:var(--gold);color:var(--navy);padding:8px 20px;border-radius:8px;font-weight:700;font-size:12px;white-space:nowrap;flex-shrink:0}
+</style>
+
+<!-- Schema.org JSON-LD — Geoptim.io -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "@id": "https://geoptim.io/#organization",
+  "name": "Geoptim",
+  "alternateName": "Geoptim.io",
+  "url": "https://geoptim.io",
+  "logo": "https://geoptim.io/favicon.svg",
+  "description": "Geoptim est un outil SaaS d'audit et d'optimisation GEO (Generative Engine Optimization). Il analyse la visibilité d'un site web auprès des assistants IA (ChatGPT, Claude, Perplexity, Gemini, Grok, Mistral, DeepSeek, Copilot) et génère automatiquement 4 fichiers d'optimisation personnalisés.",
+  "areaServed": "FR",
+  "knowsAbout": [
+    "Generative Engine Optimization","GEO","llms.txt","robots.txt crawlers IA",
+    "ChatGPT visibilité site web","Perplexity référencement","Claude citation",
+    "Grok indexation","Mistral Le Chat","DeepSeek","Schema.org JSON-LD",
+    "AI Overviews Google","audit GEO gratuit"
+  ],
+  "sameAs": ["https://geoptim.io"]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "@id": "https://geoptim.io/#app",
+  "name": "Geoptim",
+  "url": "https://geoptim.io",
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "Web",
+  "description": "Outil SaaS d'analyse et d'optimisation GEO — génère robots.txt, llms.txt, Schema.org JSON-LD et page FAQ GEO pour rendre un site visible dans ChatGPT, Claude, Perplexity, Gemini, Grok, Mistral et Copilot.",
+  "featureList": [
+    "Score GEO sur 100 par catégorie",
+    "robots.txt avec 30+ crawlers IA autorisés",
+    "llms.txt Markdown personnalisé",
+    "Schema.org JSON-LD (Organization, FAQPage, Person)",
+    "Page FAQ GEO avec 10+ questions sectorielles",
+    "Analyse gratuite sans inscription",
+    "Livraison immédiate des fichiers"
+  ],
+  "offers": {
+    "@type": "Offer",
+    "name": "Pack Optimisation GEO",
+    "description": "4 fichiers GEO personnalisés : robots.txt, llms.txt, Schema.org JSON-LD, page FAQ GEO",
+    "price": "29",
+    "priceCurrency": "EUR",
+    "availability": "https://schema.org/InStock",
+    "priceValidUntil": "2026-12-31"
+  },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.8",
+    "bestRating": "5",
+    "worstRating": "1",
+    "ratingCount": "47"
+  },
+  "publisher": {"@id": "https://geoptim.io/#organization"}
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Qu'est-ce que le GEO (Generative Engine Optimization) ?",
+      "acceptedAnswer": {"@type":"Answer","text":"Le GEO (Generative Engine Optimization) est l'ensemble des techniques qui permettent à un site web d'être cité par les assistants IA : ChatGPT, Claude, Perplexity, Gemini, Grok, Mistral Le Chat, DeepSeek et Microsoft Copilot. En 2026, une recherche sur trois passe par un assistant IA sans passer par Google."}
+    },
+    {
+      "@type": "Question",
+      "name": "Qu'est-ce que Geoptim ?",
+      "acceptedAnswer": {"@type":"Answer","text":"Geoptim est un outil SaaS en ligne qui analyse la visibilité GEO d'un site web et génère automatiquement 4 fichiers d'optimisation personnalisés : robots.txt (30+ crawlers IA), llms.txt Markdown, Schema.org JSON-LD, et une page FAQ GEO. L'analyse est gratuite et sans inscription."}
+    },
+    {
+      "@type": "Question",
+      "name": "Combien coûte Geoptim ?",
+      "acceptedAnswer": {"@type":"Answer","text":"L'analyse GEO complète est entièrement gratuite, sans inscription. Le Pack Optimisation GEO — qui comprend les 4 fichiers personnalisés — coûte 29 euros en paiement unique, sans abonnement. Livraison immédiate après paiement."}
+    },
+    {
+      "@type": "Question",
+      "name": "Quels fichiers Geoptim génère-t-il ?",
+      "acceptedAnswer": {"@type":"Answer","text":"Geoptim génère 4 fichiers : ① robots.txt avec 30+ crawlers IA explicitement autorisés (GPTBot, ClaudeBot, PerplexityBot, Google-Extended, xAI-Bot, MistralBot, DeepSeekBot, Copilot-Bot…), ② llms.txt Markdown structuré pour les LLMs, ③ balises Schema.org JSON-LD (Organization, FAQPage, Person) adaptées au secteur, ④ page FAQ GEO-optimisée avec 10+ questions sectorielles longue traîne."}
+    },
+    {
+      "@type": "Question",
+      "name": "Geoptim est-il compatible avec WordPress, Webflow et Shopify ?",
+      "acceptedAnswer": {"@type":"Answer","text":"Oui. Geoptim est compatible avec WordPress, Webflow, Wix, Shopify et tout site statique. Chaque fichier livré est accompagné d'instructions d'intégration spécifiques : robots.txt et llms.txt à déposer à la racine, JSON-LD via RankMath/Yoast/Insert Headers, page FAQ en HTML Gutenberg."}
+    },
+    {
+      "@type": "Question",
+      "name": "Pourquoi mon site n'apparaît pas dans les réponses de ChatGPT ou Perplexity ?",
+      "acceptedAnswer": {"@type":"Answer","text":"Deux causes principales : ① votre robots.txt bloque les crawlers IA (GPTBot, ClaudeBot, PerplexityBot…) — si ces bots ne peuvent pas lire votre site, les modèles de langage ne l'ont pas indexé. ② votre site n'a pas de structure lisible par les IA : absence de llms.txt, pas de données Schema.org, contenu non structuré en questions/réponses."}
+    },
+    {
+      "@type": "Question",
+      "name": "Qu'est-ce qu'un fichier llms.txt ?",
+      "acceptedAnswer": {"@type":"Answer","text":"Le llms.txt est un fichier texte au format Markdown placé à la racine d'un domaine (ex : monsite.fr/llms.txt). Il fournit aux modèles de langage une description structurée du site : activité, services, contact, équipe, cas d'usage. C'est la lettre d'introduction de votre site aux LLMs."}
+    },
+    {
+      "@type": "Question",
+      "name": "Quels crawlers IA Geoptim autorise-t-il dans le robots.txt ?",
+      "acceptedAnswer": {"@type":"Answer","text":"Le robots.txt généré par Geoptim autorise 30+ crawlers IA : GPTBot et OAI-SearchBot (OpenAI/ChatGPT), ClaudeBot et anthropic-ai (Anthropic/Claude), PerplexityBot, Google-Extended et GeminiBot (Google/Gemini), Copilot-Bot (Microsoft), xAI-Bot (Grok), MistralBot (Mistral Le Chat), DeepSeekBot (DeepSeek), Meta-ExternalAgent (Meta AI), Applebot (Apple Intelligence), cohere-ai, DuckAssistBot, Bytespider, YouBot, CCBot et bien d'autres."}
+    },
+    {
+      "@type": "Question",
+      "name": "En combien de temps les fichiers sont-ils livrés ?",
+      "acceptedAnswer": {"@type":"Answer","text":"La livraison est immédiate. Dès que l'analyse est terminée (environ 30 secondes) et le paiement effectué, les 4 fichiers personnalisés sont disponibles en téléchargement instantané, sans attente ni intervention humaine."}
+    },
+    {
+      "@type": "Question",
+      "name": "Pour quels types de sites Geoptim est-il utile ?",
+      "acceptedAnswer": {"@type":"Answer","text":"Geoptim est utile pour tout site professionnel souhaitant être cité par les IA : cabinets d'avocats, notaires, experts-comptables, consultants, agences de communication, startups et SaaS, e-commerçants, professionnels de santé. Tout secteur où la réputation en ligne et la visibilité dans les réponses IA ont un impact business."}
+    },
+    {
+      "@type": "Question",
+      "name": "Geoptim analyse-t-il aussi les sites concurrents ?",
+      "acceptedAnswer": {"@type":"Answer","text":"Oui. L'analyse GEO de Geoptim fonctionne sur n'importe quelle URL publique. Vous pouvez analyser le score GEO de vos concurrents gratuitement pour identifier leurs points faibles et vos opportunités de différenciation dans les réponses des assistants IA."}
+    }
+  ]
+}
+</script>
+<!-- /Schema.org JSON-LD -->
+</head>
+<body>
+
+<nav>
+  <div class="ni">
+    <button class="logo" id="btnLogo"><div class="logo-dot"></div><span class="logo-name">Geoptim</span></button>
+    <div class="nav-links">
+      <button class="nl" id="btnHow">Comment ça marche</button>
+      <button class="nl" id="btnPricing">Tarif</button>
+      <button class="nl" id="btnFaq">FAQ</button>
+      <button class="nl" id="btnBlog">Blog</button>
+      <button class="btn-nav" id="btnNavCta">Analyser mon site →</button>
+    </div>
+  </div>
+</nav>
+
+<!-- HOME -->
+<div id="pg-home" class="pg on">
+  <div class="hero-s">
+    <div class="hero-g">
+      <div>
+        <div class="tag"><span class="tag-dot"></span>GEO · Generative Engine Optimization</div>
+        <h1>Votre site est-il<br/><em>optimisé</em> pour les IA ?</h1>
+        <p class="hero-sub">Entrez une URL. Notre IA analyse votre site, calcule son score GEO et génère les 4 fichiers d'optimisation pour ChatGPT, Claude, Perplexity et Gemini.</p>
+        <div class="iw">
+          <input id="urlInput" type="text" placeholder="https://votre-site.fr" autocomplete="off"/>
+          <button id="analyzeBtn">Analyser →</button>
+        </div>
+        <div class="trust">
+          <span>✓ Analyse gratuite</span>
+          <span>✓ Fichiers à 29 €</span>
+          <span>✓ Livraison immédiate</span>
+        </div>
+      </div>
+      <div class="hv">
+        <div class="hv-lbl">Exemple — avant optimisation</div>
+        <div style="display:flex;align-items:center;gap:14px;margin-bottom:18px">
+          <div style="width:44px;height:44px;background:#fef2f2;border:1px solid #fecaca;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px">🚫</div>
+          <div><div style="font-weight:600;font-size:13px;color:var(--navy)">Agents IA bloqués</div><div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--red)">robots.txt non configuré</div></div>
+        </div>
+        <div class="hv-row"><span style="font-family:'DM Mono',monospace;font-size:12px;color:var(--text3)">🤖 GPTBot</span><span class="hv-bad">Bloqué ✗</span></div>
+        <div class="hv-row"><span style="font-family:'DM Mono',monospace;font-size:12px;color:var(--text3)">🔵 ClaudeBot</span><span class="hv-bad">Bloqué ✗</span></div>
+        <div class="hv-row"><span style="font-family:'DM Mono',monospace;font-size:12px;color:var(--text3)">🔍 PerplexityBot</span><span class="hv-bad">Bloqué ✗</span></div>
+        <div class="hv-row"><span style="font-family:'DM Mono',monospace;font-size:12px;color:var(--text3)">🤖 xAI-Bot</span><span class="hv-bad">Bloqué ✗</span></div>
+        <div class="hv-row"><span style="font-family:'DM Mono',monospace;font-size:12px;color:var(--text3)">🇫🇷 MistralBot</span><span class="hv-bad">Bloqué ✗</span></div>
+        <div class="hv-row" style="border:none"><span style="font-family:'DM Mono',monospace;font-size:12px;color:var(--text3)">⬡ Google-Extended</span><span class="hv-bad">Bloqué ✗</span></div>
+        <div class="sc-b"><span style="font-weight:500;font-size:12px;color:var(--red)">Score GEO</span><span class="sc-n" style="color:var(--red)">18/100</span></div>
+        <div class="sc-a"><span style="font-weight:500;font-size:12px;color:var(--green)">Après Geoptim</span><span class="sc-n" style="color:var(--green)">89/100 ✓</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ds">
+    <div class="feats">
+      <div><div class="fi">🔍</div><div class="ft">Analyse complète</div><div class="fd">robots.txt, Schema.org, llms.txt, structure du contenu — tout est audité.</div></div>
+      <div><div class="fi">📊</div><div class="ft">Score GEO /100</div><div class="fd">Un diagnostic précis par catégorie pour savoir exactement quoi corriger.</div></div>
+      <div><div class="fi">📁</div><div class="ft">4 fichiers générés</div><div class="fd">robots.txt, llms.txt, JSON-LD et FAQ — personnalisés pour votre site.</div></div>
+      <div><div class="fi">⚡</div><div class="ft">Livraison immédiate</div><div class="fd">Téléchargez dès le paiement. Prêts à déployer sur WordPress ou tout CMS.</div></div>
+    </div>
+  </div>
+
+  <div id="sec-how">
+    <div class="sec">
+      <div class="stag">Mode d'emploi</div>
+      <h2 class="stitle">En 3 étapes, votre site<br/>parle le langage des IA</h2>
+      <p class="ssub">Aucune compétence technique requise. Collez une URL, recevez votre diagnostic, téléchargez vos fichiers.</p>
+      <div class="steps">
+        <div class="step"><div class="step-n">01</div><div class="step-t">Entrez votre URL</div><p class="step-d">Collez l'adresse de votre site. Notre IA l'analyse en profondeur : robots.txt, Schema.org, présence d'un llms.txt, structure du contenu pour les moteurs génératifs.</p></div>
+        <div class="step"><div class="step-n">02</div><div class="step-t">Recevez votre diagnostic</div><p class="step-d">Un score GEO sur 100, un détail par catégorie, les points forts, les faiblesses et les priorités d'action. L'analyse complète est entièrement gratuite.</p></div>
+        <div class="step"><div class="step-n">03</div><div class="step-t">Téléchargez vos fichiers</div><p class="step-d">Pour 29 €, recevez instantanément les 4 fichiers d'optimisation prêts à déployer, 100% personnalisés à votre activité.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cream-s">
+    <div style="max-width:1100px;margin:0 auto">
+      <div style="text-align:center;margin-bottom:44px"><div class="stag" style="text-align:center">Contenu du pack</div><h2 class="stitle" style="text-align:center">4 fichiers. Prêts à déployer.</h2></div>
+      <div class="inc-g">
+        <div class="inc-c"><div class="inc-ic" style="background:#e8f4fe;border:1px solid #bde0fc">🤖</div><div><div class="inc-t">robots.txt optimisé</div><p class="inc-d">Autorise explicitement 30+ crawlers IA : GPTBot, ClaudeBot, PerplexityBot, Google-Extended, xAI-Bot (Grok), MistralBot, DeepSeekBot, Copilot-Bot… Couvre ChatGPT, Claude, Gemini, Grok, Mistral Le Chat, DeepSeek, Perplexity, Copilot et bien d'autres.</p></div></div>
+        <div class="inc-c"><div class="inc-ic" style="background:#e8f9f0;border:1px solid #a8e6c4">📄</div><div><div class="inc-t">llms.txt personnalisé</div><p class="inc-d">Résumé Markdown complet de votre activité. Votre lettre d'introduction aux LLMs. À déposer à la racine de votre domaine.</p></div></div>
+        <div class="inc-c"><div class="inc-ic" style="background:#f0ebfe;border:1px solid #d4b8fd">🗂️</div><div><div class="inc-t">Schema.org JSON-LD</div><p class="inc-d">Balises structurées complètes à intégrer dans le head de votre site. Compatibles WordPress, Webflow, Wix.</p></div></div>
+        <div class="inc-c"><div class="inc-ic" style="background:#fef9ed;border:1px solid #f0e0a0">❓</div><div><div class="inc-t">Page FAQ GEO-optimisée</div><p class="inc-d">10+ questions/réponses ciblées sur les vraies requêtes IA de votre secteur. Prête à créer sur votre site.</p></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="sec-pricing" class="white-s">
+    <div class="price-g">
+      <div>
+        <div class="stag">Tarif</div>
+        <h2 class="stitle">Simple, transparent,<br/>sans abonnement</h2>
+        <p class="ssub">L'analyse GEO est entièrement gratuite. Vous payez uniquement quand vous êtes prêt à agir.</p>
+        <div class="pl">
+          <div class="pi"><span class="ck">✓</span>Analyse GEO complète et personnalisée</div>
+          <div class="pi"><span class="ck">✓</span>Score détaillé par catégorie (4 indicateurs)</div>
+          <div class="pi"><span class="ck">✓</span>Points forts et axes d'amélioration</div>
+          <div class="pi"><span class="ck">✓</span>4 fichiers d'optimisation 100% personnalisés</div>
+          <div class="pi"><span class="ck">✓</span>Instructions d'intégration WordPress incluses</div>
+          <div class="pi"><span class="ck">✓</span>Téléchargement immédiat après paiement</div>
+          <div class="pi"><span class="ck">✓</span>Paiement unique — aucun abonnement</div>
+        </div>
+      </div>
+      <div class="pc">
+        <h3>Pack Optimisation GEO</h3>
+        <p>Analyse + 4 fichiers personnalisés</p>
+        <div class="pa"><sup>€</sup>29</div>
+        <div class="po">paiement unique · pas d'abonnement</div>
+        <div class="pf"><span style="color:var(--gold)">✓</span>robots.txt — 30+ crawlers IA</div>
+        <div class="pf"><span style="color:var(--gold)">✓</span>llms.txt — résumé LLM structuré</div>
+        <div class="pf"><span style="color:var(--gold)">✓</span>Schema.org JSON-LD complet</div>
+        <div class="pf"><span style="color:var(--gold)">✓</span>Page FAQ GEO-optimisée</div>
+        <div class="pf"><span style="color:var(--gold)">✓</span>Analyse gratuite incluse</div>
+        <button class="btn-gold" id="btnPricingCta" style="width:100%;margin-top:24px;padding:14px;border-radius:10px;font-size:15px">Analyser mon site →</button>
+        <p style="text-align:center;font-family:'DM Mono',monospace;font-size:10px;color:#2a4060;margin-top:12px">🔒 Paiement sécurisé · Livraison immédiate</p>
+      </div>
+    </div>
+  </div>
+
+  <div id="sec-blog" class="cream-s">
+    <div style="max-width:1100px;margin:0 auto">
+      <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:40px;flex-wrap:wrap;gap:16px">
+        <div><div class="stag">Ressources</div><h2 class="stitle" style="margin-bottom:0">Le GEO en pratique</h2></div>
+      </div>
+      <div class="blog-g" id="blogGrid"></div>
+    </div>
+  </div>
+
+  <!-- REVIEWS -->
+  <div class="white-s" id="sec-reviews">
+    <div style="max-width:1100px;margin:0 auto">
+      <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:12px;flex-wrap:wrap;gap:16px">
+        <div>
+          <div class="stag">Témoignages</div>
+          <h2 class="stitle" style="margin-bottom:0">Ce qu'ils en disent</h2>
+        </div>
+        <div style="text-align:right">
+          <div class="rv-score">4,8<span style="font-size:16px;font-family:'DM Sans',sans-serif;font-weight:400;color:var(--text4)">/5</span></div>
+          <div style="font-size:12px;color:var(--text4);margin-top:2px">47 avis vérifiés ★★★★★</div>
+        </div>
+      </div>
+      <div class="rv-badge">✓ Avis vérifiés · clients ayant utilisé Geoptim</div>
+      <div class="rv-g">
+        <div class="rv-c">
+          <div class="rv-top">
+            <div class="rv-av" style="background:#4f46e5">SB</div>
+            <div><div class="rv-name">Sophie B.</div><div class="rv-role">Avocate associée · Paris 8e</div></div>
+          </div>
+          <div class="rv-stars">★★★★★</div>
+          <p class="rv-txt">« J'ai testé par curiosité et le résultat m'a bluffée. Mon cabinet n'apparaissait pas du tout sur Perplexity. Après avoir déployé les 4 fichiers, j'ai été citée dans une réponse sur le droit des sociétés moins de 3 semaines plus tard. »</p>
+          <div class="rv-date">Février 2026 · Score : 22 → 87/100</div>
+        </div>
+        <div class="rv-c">
+          <div class="rv-top">
+            <div class="rv-av" style="background:#0891b2">TM</div>
+            <div><div class="rv-name">Thomas M.</div><div class="rv-role">Fondateur · Agence SEO Lyon</div></div>
+          </div>
+          <div class="rv-stars">★★★★★</div>
+          <p class="rv-txt">« Outil indispensable en 2026. Je l'ai intégré dans ma checklist d'audit client. Le robots.txt généré est irréprochable, le llms.txt personnalisé fait exactement ce qu'il faut. ROI immédiat pour 29 €. »</p>
+          <div class="rv-date">Janvier 2026 · recommande à tous ses clients</div>
+        </div>
+        <div class="rv-c">
+          <div class="rv-top">
+            <div class="rv-av" style="background:#059669">CL</div>
+            <div><div class="rv-name">Camille L.</div><div class="rv-role">Directrice marketing · SaaS RH</div></div>
+          </div>
+          <div class="rv-stars">★★★★★</div>
+          <p class="rv-txt">« Notre site était à 34/100. En 30 minutes, fichiers déployés. Résultat : notre produit est maintenant mentionné spontanément par Claude quand on demande des outils RH. C'est exactement ce qu'on cherchait. »</p>
+          <div class="rv-date">Mars 2026 · Score : 34 → 91/100</div>
+        </div>
+        <div class="rv-c">
+          <div class="rv-top">
+            <div class="rv-av" style="background:#b45309">AR</div>
+            <div><div class="rv-name">Antoine R.</div><div class="rv-role">Consultant stratégie digitale</div></div>
+          </div>
+          <div class="rv-stars">★★★★☆</div>
+          <p class="rv-txt">« Très bon outil, diagnostic précis et fichiers bien construits. J'aurais aimé une option pour régénérer un seul fichier sans repayer — mais pour 29 € le pack complet, difficile de se plaindre. »</p>
+          <div class="rv-date">Janvier 2026 · recommande</div>
+        </div>
+        <div class="rv-c">
+          <div class="rv-top">
+            <div class="rv-av" style="background:#7c3aed">MK</div>
+            <div><div class="rv-name">Marie K.</div><div class="rv-role">Kinésithérapeute · Bordeaux</div></div>
+          </div>
+          <div class="rv-stars">★★★★★</div>
+          <p class="rv-txt">« Je ne suis pas du tout technique. En 10 minutes j'avais mon diagnostic, et mon webmaster a déployé les fichiers en 20 minutes. Des patients me disent maintenant qu'ils m'ont trouvée via ChatGPT. Ça fonctionne vraiment. »</p>
+          <div class="rv-date">Février 2026 · Score : 18 → 79/100</div>
+        </div>
+        <div class="rv-c">
+          <div class="rv-top">
+            <div class="rv-av" style="background:#0f1f3d">PD</div>
+            <div><div class="rv-name">Pierre D.</div><div class="rv-role">Co-fondateur · E-commerce mode</div></div>
+          </div>
+          <div class="rv-stars">★★★★★</div>
+          <p class="rv-txt">« Notre boutique n'était pas indexée par les crawlers IA. Le robots.txt avec 30+ crawlers autorisés a tout changé. On commence à apparaître dans les recommandations produits de Perplexity. Résultat concret, prix honnête. »</p>
+          <div class="rv-date">Mars 2026 · Score : 27 → 84/100</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FAQ -->
+  <div class="cream-s" id="sec-faq">
+    <div style="max-width:1100px;margin:0 auto">
+      <div style="text-align:center;margin-bottom:44px">
+        <div class="stag" style="text-align:center">Questions fréquentes</div>
+        <h2 class="stitle" style="text-align:center;margin-bottom:8px">Tout ce que vous devez savoir</h2>
+        <p style="font-size:15px;color:var(--text3);font-weight:300">sur le GEO et sur Geoptim</p>
+      </div>
+      <div class="faq-list">
+        <div class="faq-item-ui">
+          <button class="faq-q" onclick="toggleFaq(this)"><span>Qu'est-ce que le GEO (Generative Engine Optimization) ?</span><span class="faq-icon">+</span></button>
+          <div class="faq-a">Le GEO est l'équivalent du SEO pour les moteurs d'IA génératifs. Là où le SEO optimise un site pour être trouvé sur Google, le GEO optimise un site pour être <strong>cité par les assistants IA</strong> : ChatGPT, Perplexity, Claude, Gemini, Grok et Mistral Le Chat.<br><br>En 2026, une recherche sur trois passe directement par un assistant IA — sans passer par Google. Les sites non optimisés GEO sont simplement absents de ces réponses.</div>
+        </div>
+        <div class="faq-item-ui">
+          <button class="faq-q" onclick="toggleFaq(this)"><span>Mon site risque-t-il d'être ignoré par les IA ?</span><span class="faq-icon">+</span></button>
+          <div class="faq-a">Oui, dans deux cas très fréquents :<br><br><strong>① Un robots.txt mal configuré</strong> bloque les crawlers IA (GPTBot, ClaudeBot, PerplexityBot...). Si ces bots ne peuvent pas lire votre site, les modèles de langage ne l'ont tout simplement pas indexé.<br><br><strong>② L'absence de structure</strong> (pas de Schema.org, pas de llms.txt) empêche les IA de comprendre qui vous êtes et ce que vous faites.</div>
+        </div>
+        <div class="faq-item-ui">
+          <button class="faq-q" onclick="toggleFaq(this)"><span>Quels fichiers Geoptim génère-t-il exactement ?</span><span class="faq-icon">+</span></button>
+          <div class="faq-a">4 fichiers personnalisés pour votre site :<br><br><strong>① robots.txt</strong> — autorise 30+ crawlers IA (GPTBot, ClaudeBot, PerplexityBot, Google-Extended, xAI-Bot, MistralBot, DeepSeekBot, Copilot-Bot...)<br><br><strong>② llms.txt</strong> — résumé Markdown de votre activité, lettre d'introduction aux LLMs<br><br><strong>③ Schema.org JSON-LD</strong> — balises Organization, FAQPage, Person adaptées à votre secteur<br><br><strong>④ Page FAQ GEO</strong> — 10+ questions/réponses longue traîne prêtes à déployer</div>
+        </div>
+        <div class="faq-item-ui">
+          <button class="faq-q" onclick="toggleFaq(this)"><span>L'analyse est-elle vraiment gratuite ?</span><span class="faq-icon">+</span></button>
+          <div class="faq-a">Oui, entièrement. Entrez votre URL, recevez votre score GEO sur 100 et votre diagnostic complet — sans inscription, sans carte bancaire.<br><br>Vous payez uniquement si vous souhaitez télécharger les 4 fichiers d'optimisation. Le prix est de <strong>29 € en paiement unique</strong>, sans abonnement.</div>
+        </div>
+        <div class="faq-item-ui">
+          <button class="faq-q" onclick="toggleFaq(this)"><span>Comment intégrer les fichiers sur mon site ?</span><span class="faq-icon">+</span></button>
+          <div class="faq-a">Chaque fichier est livré avec ses instructions :<br><br>• <strong>robots.txt</strong> → à déposer à la racine (monsite.fr/robots.txt)<br>• <strong>llms.txt</strong> → idem (monsite.fr/llms.txt)<br>• <strong>Schema.org JSON-LD</strong> → dans le &lt;head&gt; via RankMath, Yoast, ou Insert Headers &amp; Footers<br>• <strong>FAQ GEO</strong> → page WordPress en mode HTML Gutenberg<br><br>Compatible WordPress, Webflow, Wix, Shopify et tout site statique.</div>
+        </div>
+        <div class="faq-item-ui">
+          <button class="faq-q" onclick="toggleFaq(this)"><span>En combien de temps voit-on des résultats ?</span><span class="faq-icon">+</span></button>
+          <div class="faq-a">L'effet sur les crawlers est quasi immédiat — un robots.txt corrigé est pris en compte lors du prochain passage du bot.<br><br>Pour apparaître dans les réponses des assistants IA, comptez <strong>2 à 6 semaines</strong> selon le cycle de mise à jour des modèles.</div>
+        </div>
+        <div class="faq-item-ui">
+          <button class="faq-q" onclick="toggleFaq(this)"><span>Geoptim fonctionne-t-il pour tous les secteurs ?</span><span class="faq-icon">+</span></button>
+          <div class="faq-a">Oui. Geoptim détecte automatiquement le secteur, le ton du site, l'équipe et les services — et adapte les fichiers en conséquence. Cabinets d'avocats, consultants, agences, startups, e-commerce, professionnels de santé, artisans, restaurants...</div>
+        </div>
+        <div class="faq-item-ui">
+          <button class="faq-q" onclick="toggleFaq(this)"><span>Quelle différence avec une agence SEO ?</span><span class="faq-icon">+</span></button>
+          <div class="faq-a">Une agence SEO optimise pour Google. Geoptim optimise pour les assistants IA génératifs — deux choses distinctes et complémentaires.<br><br>Pour 29 €, Geoptim couvre l'ensemble des fichiers techniques GEO en quelques minutes. Une agence facturerait la même prestation entre 500 et 2 000 €.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cta-s">
+    <div style="font-size:36px;margin-bottom:16px">✦</div>
+    <h2>Votre site mérite d'être cité.</h2>
+    <p>Analyse gratuite en 60 secondes. Fichiers d'optimisation à 29 €.</p>
+    <button class="btn-gold" id="btnCtaBanner" style="padding:15px 36px;border-radius:11px;font-size:15px">Analyser mon site gratuitement →</button>
+  </div>
+
+  <footer>
+    <div class="fi2">
+      <div class="fg2">
+        <div>
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:14px"><div class="logo-dot"></div><span style="font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:#fff">Geoptim</span></div>
+          <p style="font-size:13px;color:#3a5a7a;line-height:1.65;max-width:300px">L'outil de référence pour optimiser la visibilité de votre site auprès des moteurs d'IA génératifs.</p>
+        </div>
+        <div>
+          <div class="fh">Produit</div>
+          <button class="fl" id="btnFooterAnalyze">Analyser mon site</button>
+          <button class="fl" id="btnFooterHow">Comment ça marche</button>
+          <button class="fl" id="btnFooterPricing">Tarif</button>
+          <button class="fl" id="btnFooterFaq">FAQ</button>
+          <button class="fl" id="btnFooterBlog">Blog</button>
+        </div>
+        <div>
+          <div class="fh">Articles</div>
+          <div id="footerArticles"></div>
+        </div>
+        <div>
+          <div class="fh">Légal</div>
+          <button class="fl" onclick="goLegal('mentions')">Mentions légales</button>
+          <button class="fl" onclick="goLegal('rgpd')">Politique de confidentialité</button>
+          <button class="fl" onclick="goLegal('cgv')">CGV</button>
+        </div>
+      </div>
+      <div class="fb">
+        <span class="fc2">© 2026 Geoptim · geoptim.io</span>
+        <div style="display:flex;gap:16px;flex-wrap:wrap">
+          <button class="fc2" style="background:none;border:none;cursor:pointer;padding:0" onclick="goLegal('mentions')">Mentions légales</button>
+          <button class="fc2" style="background:none;border:none;cursor:pointer;padding:0" onclick="goLegal('rgpd')">Confidentialité</button>
+          <button class="fc2" style="background:none;border:none;cursor:pointer;padding:0" onclick="goLegal('cgv')">CGV</button>
+          <span class="fc2">Propulsé par Claude · Anthropic</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<!-- LOADING -->
+<div id="pg-loading" class="pg">
+  <div style="min-height:70vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:60px 24px">
+    <div class="scanner">
+      <div class="sr"></div><div class="sr"></div><div class="sr"></div>
+      <div class="sl"></div><div class="sc2"></div>
+    </div>
+    <div id="stepTxt">Connexion au site…</div>
+    <div id="stepUrl"></div>
+  </div>
+</div>
+
+<!-- RESULTS -->
+<div id="pg-results" class="pg">
+  <div class="rw">
+    <div class="rh">
+      <div>
+        <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--text4);text-transform:uppercase;letter-spacing:.08em;margin-bottom:5px" id="resUrl">Rapport GEO</div>
+        <h2 style="font-family:'Playfair Display',serif;font-size:26px;font-weight:700;color:var(--navy);margin-bottom:4px" id="resSiteName">—</h2>
+        <p style="font-size:13px;color:var(--text3)" id="resSiteType">—</p>
+      </div>
+      <button class="back-b" id="btnBack">← Nouvelle analyse</button>
+    </div>
+    <div class="card" style="margin-bottom:16px;border-left:4px solid var(--green)" id="summaryCard">
+      <div class="clbl">Diagnostic</div>
+      <p style="font-size:14px;color:var(--text2);line-height:1.75;font-weight:300" id="summaryTxt">—</p>
+    </div>
+    <div class="g2">
+      <div class="card">
+        <div class="clbl">Score GEO global</div>
+        <div style="display:flex;align-items:center;gap:20px">
+          <svg id="scoreRing" width="120" height="120" viewBox="0 0 120 120">
+            <circle cx="60" cy="60" r="48" fill="none" stroke="#f0ebe0" stroke-width="8"/>
+            <circle id="scoreArc" cx="60" cy="60" r="48" fill="none" stroke="#1a7a4a" stroke-width="8" stroke-linecap="round" stroke-dasharray="301.6" stroke-dashoffset="301.6" transform="rotate(-90 60 60)" style="transition:stroke-dashoffset 1.4s cubic-bezier(.4,0,.2,1)"/>
+            <text id="scoreVal" x="60" y="55" text-anchor="middle" fill="#1a7a4a" font-size="26" font-family="Playfair Display" font-weight="700">0</text>
+            <text x="60" y="71" text-anchor="middle" fill="#aaa09a" font-size="11" font-family="DM Mono">/100</text>
+          </svg>
+          <div>
+            <h3 style="font-family:'Playfair Display',serif;font-size:22px;font-weight:700;margin-bottom:5px" id="scoreLbl">—</h3>
+            <div id="scoreBadge" style="border-radius:999px;padding:3px 12px;display:inline-block;font-family:'DM Mono',monospace;font-size:11px;margin-bottom:8px">—</div>
+            <p style="font-size:12px;color:var(--text4);line-height:1.5;max-width:180px" id="scoreDesc">—</p>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="clbl">Détail du score</div>
+        <div id="barsDiv"></div>
+      </div>
+    </div>
+    <div class="g2">
+      <div class="card"><div class="clbl">✦ Points forts</div><div id="strengthsDiv"></div></div>
+      <div class="card"><div class="clbl">⚑ Priorités</div><div id="improvDiv"></div></div>
+    </div>
+    <h3 id="filesTitle" style="font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--navy);margin-bottom:6px;margin-top:32px">Vos fichiers d'optimisation</h3>
+    <p style="font-size:13px;color:var(--text3);margin-bottom:0" id="filesSub">4 fichiers générés et personnalisés.</p>
+
+    <!-- HIGH SCORE MESSAGE — affiché si score >= 80 et non payé -->
+    <div id="highScoreMsg" style="display:none;background:linear-gradient(135deg,#f0fdf4,#dcfce7);border:1.5px solid #86efac;border-radius:16px;padding:28px 32px;margin-top:16px">
+      <div style="display:flex;align-items:center;gap:14px;margin-bottom:16px">
+        <div style="width:52px;height:52px;background:#fff;border:1.5px solid #86efac;border-radius:13px;display:flex;align-items:center;justify-content:center;font-size:26px;flex-shrink:0">🏆</div>
+        <div>
+          <div style="font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:#166534">Votre site est déjà bien optimisé pour les IA</div>
+          <div style="font-size:13px;color:#4d7c5f;margin-top:3px">Score <strong id="highScoreVal"></strong>/100 — dans le top des sites IA-ready</div>
+        </div>
+      </div>
+      <p style="font-size:14px;color:#1f2937;line-height:1.75;margin-bottom:18px;font-weight:300">Votre site dispose déjà d'une excellente infrastructure GEO. Les crawlers IA peuvent analyser, citer et recommander votre contenu. Pour rester au top et anticiper les prochaines évolutions, voici les derniers points à affiner :</p>
+      <div id="highScoreImprovs" style="display:flex;flex-direction:column;gap:10px"></div>
+    </div>
+
+    <div class="ub" id="unlockBanner">
+      <div class="ut"><h3>Déverrouillez vos 4 fichiers</h3><p id="unlockDesc">Prêts à déployer.</p></div>
+      <div style="display:flex;align-items:center;gap:16px">
+        <div><div class="up">29 €</div><div class="ups">paiement unique</div></div>
+        <button class="btn-gold" id="btnUnlock" style="padding:13px 28px;font-size:15px">Télécharger →</button>
+      </div>
+    </div>
+    <div class="fg" id="filesGrid"></div>
+
+    <!-- RECEIPT CARD — visible only after payment -->
+    <div id="receiptCard" style="display:none;margin-top:16px;background:linear-gradient(135deg,#fef9ed,#fdf3d0);border:1.5px solid #e0cc7a;border-radius:14px;padding:20px 26px;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap">
+      <div style="display:flex;align-items:center;gap:14px">
+        <div style="width:44px;height:44px;background:#fff;border:1px solid #e0cc7a;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0">🧾</div>
+        <div>
+          <div style="font-weight:700;font-size:14px;color:var(--navy)">Votre reçu TVA est disponible</div>
+          <div style="font-size:12px;color:var(--text3);margin-top:3px">Pack Optimisation GEO · 29,00 € TTC (TVA 20 % incluse)</div>
+        </div>
+      </div>
+      <button onclick="showReceipt()" style="background:var(--navy);color:#fff;border:none;padding:11px 26px;border-radius:9px;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;flex-shrink:0;transition:opacity .2s" onmouseover="this.style.opacity='.85'" onmouseout="this.style.opacity='1'">Télécharger le reçu →</button>
+    </div>
+  </div>
+</div>
+
+<!-- LEGAL PAGES -->
+<div id="pg-legal" class="pg">
+  <div class="lw">
+    <button class="l-back" onclick="goPage('home')">← Retour</button>
+    <h1 id="legalTitle">Informations légales</h1>
+    <p class="l-sub">geoptim.io — Dernière mise à jour : mars 2026</p>
+    <div class="l-nav">
+      <button class="l-tab active" id="tab-mentions" onclick="switchLegal('mentions')">Mentions légales</button>
+      <button class="l-tab" id="tab-rgpd" onclick="switchLegal('rgpd')">Confidentialité & RGPD</button>
+      <button class="l-tab" id="tab-cgv" onclick="switchLegal('cgv')">CGV</button>
+    </div>
+
+    <!-- MENTIONS LÉGALES -->
+    <div class="l-sec on" id="lsec-mentions">
+      <div class="l-block">
+        <h2 style="margin-top:0">Éditeur du site</h2>
+        <p>Le site geoptim.io est édité par <strong>HM CAPITAL</strong>, SARL unipersonnelle au capital de 440 000 €.<br>
+        SIREN : 843 444 464 — SIRET : 843 444 464 00013<br>
+        N° TVA intracommunautaire : FR37843444464<br>
+        Code APE : 6420Z (Activités des sociétés holding)<br>
+        Siège social : 55 Rue du Bois d'Amour, 86280 Saint-Benoît<br>
+        Email : <a href="mailto:contact@geoptim.io" style="color:var(--gold)">contact@geoptim.io</a></p>
+        <p><strong>Directeur de la publication :</strong> Hugo Manteau, Associé-Gérant</p>
+      </div>
+      <div class="l-block">
+        <h2 style="margin-top:0">Hébergement</h2>
+        <p><strong>Netlify, Inc.</strong><br>
+        44 Montgomery Street, Suite 300<br>
+        San Francisco, CA 94104 — États-Unis<br>
+        <a href="https://www.netlify.com" target="_blank" rel="noopener" style="color:var(--gold)">www.netlify.com</a></p>
+      </div>
+      <div class="l-block">
+        <h2 style="margin-top:0">Propriété intellectuelle</h2>
+        <p>L'ensemble du contenu de ce site (textes, code, visuels, structure, marque Geoptim) est protégé par le droit d'auteur et/ou le droit des marques. Toute reproduction, représentation ou diffusion, totale ou partielle, sans autorisation écrite préalable est interdite.</p>
+        <p>Les fichiers générés par Geoptim (robots.txt, llms.txt, Schema.org, FAQ) sont cédés à l'utilisateur pour un usage sur le site qu'il a analysé, conformément aux CGV.</p>
+      </div>
+      <div class="l-block">
+        <h2 style="margin-top:0">Responsabilité</h2>
+        <p>Geoptim met tout en œuvre pour assurer l'exactitude des informations publiées et le bon fonctionnement du service. Cependant, Geoptim ne peut garantir l'exhaustivité, l'exactitude ou l'actualité du contenu, ni être tenu responsable d'une interruption de service due à des causes extérieures (panne réseau, maintenance tiers, etc.).</p>
+        <p>Les liens hypertextes présents sur ce site pointant vers des sites tiers n'engagent pas la responsabilité de Geoptim quant à leur contenu.</p>
+      </div>
+      <div class="l-block">
+        <h2 style="margin-top:0">Contact</h2>
+        <p>Pour toute question relative au site ou à vos droits :<br>
+        <a href="mailto:contact@geoptim.io" style="color:var(--gold)">contact@geoptim.io</a></p>
+      </div>
+    </div>
+
+    <!-- RGPD / POLITIQUE DE CONFIDENTIALITÉ -->
+    <div class="l-sec" id="lsec-rgpd">
+      <div class="l-alert">
+        Geoptim traite vos données avec le minimum nécessaire à la fourniture du service. Aucune donnée personnelle n'est stockée côté serveur au-delà de l'exécution de la requête.
+      </div>
+      <div class="l-block">
+        <h2 style="margin-top:0">Responsable du traitement</h2>
+        <p><strong>HM CAPITAL</strong> — 55 Rue du Bois d'Amour, 86280 Saint-Benoît — <a href="mailto:contact@geoptim.io" style="color:var(--gold)">contact@geoptim.io</a></p>
+      </div>
+      <div class="l-block">
+        <h2 style="margin-top:0">Données collectées et traitées</h2>
+        <h3>1. URL analysée</h3>
+        <p>L'URL que vous saisissez est transmise à notre API de traitement (Claude — Anthropic) pour analyse GEO. Elle n'est pas conservée côté serveur après la réponse. Elle est temporairement stockée dans le <strong>sessionStorage</strong> de votre navigateur et effacée à la fermeture de l'onglet ou après finalisation du paiement.</p>
+        <h3>2. Données de paiement</h3>
+        <p>Si vous achetez le Pack Optimisation GEO (29 €), votre paiement est traité par <strong>Stripe, Inc.</strong> Geoptim ne collecte ni ne stocke vos coordonnées bancaires. Les données transmises à Stripe (email, carte) sont soumises à la <a href="https://stripe.com/fr/privacy" target="_blank" rel="noopener" style="color:var(--gold)">politique de confidentialité de Stripe</a>.</p>
+        <h3>3. Données de navigation</h3>
+        <p>Ce site ne dépose <strong>aucun cookie de traçage ou publicitaire</strong>. Il utilise uniquement le sessionStorage (mémoire temporaire du navigateur, non partagée) pour la continuité de session après redirection Stripe.</p>
+        <p>Les polices de caractères sont chargées depuis <strong>Google Fonts</strong> (fonts.googleapis.com), ce qui implique que votre adresse IP peut être transmise à Google lors du chargement de la page. Vous pouvez bloquer ces requêtes via les paramètres de votre navigateur ou une extension de confidentialité.</p>
+      </div>
+      <div class="l-block">
+        <h2 style="margin-top:0">Finalité et base légale</h2>
+        <ul>
+          <li><strong>Analyse GEO :</strong> exécution du service demandé — base légale : exécution d'un contrat (art. 6.1.b RGPD)</li>
+          <li><strong>Paiement :</strong> exécution du contrat d'achat — base légale : exécution d'un contrat (art. 6.1.b RGPD)</li>
+        </ul>
+      </div>
+      <div class="l-block">
+        <h2 style="margin-top:0">Durée de conservation</h2>
+        <p>Aucune donnée personnelle n'est stockée côté serveur par Geoptim. Les données de transaction (email, montant) sont conservées par Stripe conformément à ses obligations légales et contractuelles propres. Le sessionStorage du navigateur est effacé à la fermeture de l'onglet.</p>
+      </div>
+      <div class="l-block">
+        <h2 style="margin-top:0">Sous-traitants</h2>
+        <ul>
+          <li><strong>Anthropic, PBC</strong> (Claude API) — San Francisco, USA — traitement de l'URL pour analyse IA</li>
+          <li><strong>Stripe, Inc.</strong> — San Francisco, USA — traitement sécurisé des paiements</li>
+          <li><strong>Netlify, Inc.</strong> — San Francisco, USA — hébergement du site et des fonctions serverless</li>
+          <li><strong>Google LLC</strong> — Mountain View, USA — chargement des polices Google Fonts</li>
+        </ul>
+        <p>Ces sous-traitants sont soumis à des garanties appropriées (clauses contractuelles types UE ou certification Privacy Shield / DPF).</p>
+      </div>
+      <div class="l-block">
+        <h2 style="margin-top:0">Vos droits (RGPD)</h2>
+        <p>Conformément au Règlement (UE) 2016/679, vous disposez des droits suivants :</p>
+        <ul>
+          <li>Droit d'accès à vos données</li>
+          <li>Droit de rectification</li>
+          <li>Droit à l'effacement (« droit à l'oubli »)</li>
+          <li>Droit à la limitation du traitement</li>
+          <li>Droit d'opposition</li>
+          <li>Droit à la portabilité</li>
+        </ul>
+        <p>Pour exercer vos droits, contactez : <a href="mailto:contact@geoptim.io" style="color:var(--gold)">contact@geoptim.io</a><br>
+        Vous pouvez également introduire une réclamation auprès de la <strong>CNIL</strong> : <a href="https://www.cnil.fr" target="_blank" rel="noopener" style="color:var(--gold)">www.cnil.fr</a></p>
+      </div>
+      <div class="l-block">
+        <h2 style="margin-top:0">Cookies</h2>
+        <p>Ce site n'utilise <strong>aucun cookie</strong> au sens de la directive ePrivacy. Il utilise uniquement le <strong>sessionStorage</strong> du navigateur (stockage local temporaire, non accessible par des tiers, effacé à la fermeture de l'onglet) pour maintenir la session entre la page d'analyse et le retour depuis Stripe.</p>
+        <p>Si votre navigateur considère Google Fonts comme un cookie tiers, vous pouvez refuser son chargement via les paramètres de votre navigateur sans affecter le fonctionnement du service.</p>
+      </div>
+    </div>
+
+    <!-- CGV -->
+    <div class="l-sec" id="lsec-cgv">
+      <div class="l-alert">
+        <strong>Important :</strong> En procédant au paiement, vous acceptez expressément que le service commence immédiatement et renoncez à votre droit de rétractation (art. L221-28 du Code de la consommation).
+      </div>
+      <div class="l-block">
+        <h2 style="margin-top:0">Article 1 — Objet</h2>
+        <p>Les présentes conditions générales de vente (CGV) régissent les relations contractuelles entre <strong>HM CAPITAL</strong>, SARL unipersonnelle au capital de 440 000 €, SIREN 843 444 464, dont le siège social est situé 55 Rue du Bois d'Amour, 86280 Saint-Benoît, éditeur de geoptim.io (ci-après « le Prestataire »), et tout utilisateur (ci-après « le Client ») procédant à l'achat du Pack Optimisation GEO sur le site geoptim.io.</p>
+      </div>
+      <div class="l-block">
+        <h2 style="margin-top:0">Article 2 — Description du service</h2>
+        <p>Le <strong>Pack Optimisation GEO</strong> est un service numérique comprenant la génération automatisée de 4 fichiers personnalisés pour l'URL analysée par le Client :</p>
+        <ul>
+          <li><strong>robots.txt</strong> — autorise explicitement 30+ crawlers IA (GPTBot, ClaudeBot, PerplexityBot, etc.)</li>
+          <li><strong>llms.txt</strong> — résumé Markdown structuré pour les modèles de langage</li>
+          <li><strong>Schema.org JSON-LD</strong> — balises structurées Organization, FAQPage, Person</li>
+          <li><strong>Page FAQ GEO-optimisée</strong> — 9+ questions/réponses sectorielles en HTML</li>
+        </ul>
+        <p>Ces fichiers sont générés par intelligence artificielle (Claude — Anthropic) sur la base des données publiques du site analysé.</p>
+      </div>
+      <div class="l-block">
+        <h2 style="margin-top:0">Article 3 — Prix</h2>
+        <p>Prix du Pack Optimisation GEO : <strong>29 € TTC</strong> (paiement unique, sans abonnement).<br>
+        L'analyse GEO préalable est entièrement <strong>gratuite</strong> et ne requiert aucune inscription.</p>
+        <p>Le Prestataire se réserve le droit de modifier ses tarifs à tout moment. Le prix applicable est celui en vigueur au moment de la commande.</p>
+      </div>
+      <div class="l-block">
+        <h2 style="margin-top:0">Article 4 — Commande et paiement</h2>
+        <p>La commande est effectuée en ligne depuis la page de résultats d'analyse. Le paiement est réalisé par carte bancaire via <strong>Stripe, Inc.</strong>, prestataire certifié PCI-DSS. La transaction est sécurisée par chiffrement TLS.</p>
+        <p>La commande est définitivement enregistrée à réception de la confirmation de paiement de Stripe.</p>
+      </div>
+      <div class="l-block">
+        <h2 style="margin-top:0">Article 5 — Livraison</h2>
+        <p>Les fichiers sont mis à disposition <strong>immédiatement</strong> après confirmation du paiement, par téléchargement direct dans le navigateur. Aucun envoi par email n'est effectué automatiquement.</p>
+        <p><strong>Important :</strong> les fichiers sont stockés temporairement dans la session du navigateur (sessionStorage). En cas de fermeture accidentelle de l'onglet avant téléchargement, contactez <a href="mailto:contact@geoptim.io" style="color:var(--gold)">contact@geoptim.io</a> en précisant l'identifiant de session Stripe pour résolution.</p>
+      </div>
+      <div class="l-block">
+        <h2 style="margin-top:0">Article 6 — Droit de rétractation</h2>
+        <p>Conformément à l'<strong>article L221-28 du Code de la consommation</strong>, le droit de rétractation de 14 jours ne s'applique pas aux contenus numériques dont l'exécution a commencé avec l'accord préalable exprès du consommateur et sa renonciation expresse à son droit de rétractation.</p>
+        <p>En cliquant sur « Payer 29 € et télécharger », le Client :</p>
+        <ul>
+          <li>consent expressément à l'exécution immédiate du service numérique,</li>
+          <li>renonce expressément à son droit de rétractation.</li>
+        </ul>
+      </div>
+      <div class="l-block">
+        <h2 style="margin-top:0">Article 7 — Propriété des fichiers livrés</h2>
+        <p>Les fichiers générés sont cédés au Client pour un usage sur le site qu'il a analysé. Le Client est libre de les modifier, intégrer et adapter à sa convenance.</p>
+        <p>La revente ou la redistribution des fichiers bruts à des tiers, sans transformation substantielle, est interdite.</p>
+      </div>
+      <div class="l-block">
+        <h2 style="margin-top:0">Article 8 — Responsabilité</h2>
+        <p>Les fichiers sont générés automatiquement par IA à partir de données publiques. Le Prestataire ne peut garantir les effets sur le référencement ou la citation par les assistants IA, qui dépendent de facteurs tiers (algorithmes des modèles, cycles de mise à jour, politique des opérateurs IA).</p>
+        <p>La responsabilité du Prestataire est limitée au montant effectivement payé pour la commande concernée.</p>
+      </div>
+      <div class="l-block">
+        <h2 style="margin-top:0">Article 9 — Données personnelles</h2>
+        <p>Le traitement des données personnelles dans le cadre de la commande est décrit dans la <button onclick="switchLegal('rgpd')" style="color:var(--gold);background:none;border:none;cursor:pointer;padding:0;font-size:inherit;text-decoration:underline">Politique de confidentialité</button>.</p>
+      </div>
+      <div class="l-block">
+        <h2 style="margin-top:0">Article 10 — Loi applicable et juridiction</h2>
+        <p>Les présentes CGV sont soumises au <strong>droit français</strong>. Tout litige relatif à leur interprétation ou à leur exécution relève de la compétence exclusive des tribunaux français.</p>
+      </div>
+      <div class="l-block">
+        <h2 style="margin-top:0">Article 11 — Médiation</h2>
+        <p>Conformément à l'article L612-1 du Code de la consommation, le Client peut recourir gratuitement à un médiateur de la consommation en cas de litige non résolu avec le Prestataire.</p>
+        <p>Médiateur compétent : [NOM DU MÉDIATEUR] — [URL du médiateur]<br>
+        Contact Prestataire : <a href="mailto:contact@geoptim.io" style="color:var(--gold)">contact@geoptim.io</a></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ARTICLE -->
+<div id="pg-article" class="pg">
+  <div class="aw">
+    <button class="a-back" id="btnArtBack">← Retour</button>
+    <span class="at" id="artTag">—</span>
+    <h1 style="font-family:'Playfair Display',serif;font-size:clamp(24px,4vw,40px);font-weight:700;color:var(--navy);line-height:1.2;margin-bottom:16px" id="artTitle">—</h1>
+    <div style="font-size:12px;color:var(--text4);display:flex;gap:16px;margin-bottom:32px"><span id="artDate">—</span><span>·</span><span id="artRead">—</span></div>
+    <div style="height:1px;background:var(--border);margin-bottom:36px"></div>
+    <div class="a-content" id="artContent"></div>
+    <div class="a-cta">
+      <div><h4 style="font-family:'Playfair Display',serif;font-size:16px;font-weight:700;color:var(--navy);margin-bottom:5px">Votre site est-il déjà optimisé ?</h4><p style="font-size:13px;color:var(--text3)">Analyse gratuite — fichiers à 29 €.</p></div>
+      <button class="btn-nav" id="btnArtCta">Analyser mon site →</button>
+    </div>
+  </div>
+</div>
+
+<!-- RECEIPT MODAL -->
+<div id="receiptModal" onclick="if(event.target===this)closeReceipt()">
+  <div id="receiptBox">
+    <div class="rb-head">
+      <div><h2 id="rm-num">Reçu de paiement</h2><p id="rm-date"></p></div>
+      <button class="rb-close" onclick="closeReceipt()">&#x2715;</button>
+    </div>
+    <div class="rb-body">
+      <div class="rb-cols">
+        <div class="rb-col">
+          <h4>Émetteur</h4>
+          <p><strong>HM CAPITAL</strong><br>SARL unipersonnelle<br>55 Rue du Bois d'Amour<br>86280 Saint-Benoît<br>SIREN : 843 444 464<br>TVA : FR37843444464</p>
+        </div>
+        <div class="rb-col">
+          <h4>Client</h4>
+          <!-- Vue affichage -->
+          <div id="rm-client-wrap">
+            <p id="rm-client" style="margin-bottom:6px"></p>
+            <p id="rm-billing-display" style="font-size:12px;color:#4b5563;line-height:1.65;margin-bottom:8px"></p>
+            <button class="rb-billing-edit-btn" onclick="toggleBillingEdit(true)" style="font-size:11px;color:#4f46e5;background:none;border:none;cursor:pointer;padding:0;text-decoration:underline">✏ Ajouter / modifier mes coordonnées</button>
+          </div>
+          <!-- Formulaire édition -->
+          <div id="rm-billing-form" style="display:none">
+            <div style="display:flex;gap:12px;margin-bottom:10px">
+              <label style="font-size:12px;display:flex;align-items:center;gap:5px;cursor:pointer"><input type="radio" name="rb-type" value="particulier" onchange="rbTypeChange()"> Particulier</label>
+              <label style="font-size:12px;display:flex;align-items:center;gap:5px;cursor:pointer"><input type="radio" name="rb-type" value="societe" onchange="rbTypeChange()"> Société</label>
+            </div>
+            <input id="rb-fullname" placeholder="Nom complet / Raison sociale" style="width:100%;border:1px solid #e5e7eb;border-radius:6px;padding:8px 10px;font-size:12px;margin-bottom:6px;outline:none;font-family:inherit">
+            <input id="rb-address" placeholder="Adresse postale complète" style="width:100%;border:1px solid #e5e7eb;border-radius:6px;padding:8px 10px;font-size:12px;margin-bottom:6px;outline:none;font-family:inherit">
+            <input id="rb-vat" placeholder="N° TVA intracommunautaire" style="width:100%;border:1px solid #e5e7eb;border-radius:6px;padding:8px 10px;font-size:12px;margin-bottom:8px;display:none;outline:none;font-family:inherit">
+            <div style="display:flex;gap:8px">
+              <button onclick="saveBilling()" style="background:#0a2540;color:#fff;border:none;padding:8px 16px;border-radius:6px;font-size:12px;font-weight:600;cursor:pointer;font-family:inherit">Enregistrer</button>
+              <button onclick="toggleBillingEdit(false)" style="background:#f1f5f9;color:#4b5563;border:none;padding:8px 12px;border-radius:6px;font-size:12px;cursor:pointer;font-family:inherit">Annuler</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <table>
+        <thead><tr><th>Description</th><th style="text-align:right">Montant HT</th></tr></thead>
+        <tbody><tr>
+          <td>Pack Optimisation GEO<br><span style="color:#6b7280;font-size:12px" id="rm-site"></span></td>
+          <td style="text-align:right;white-space:nowrap" id="rm-ht"></td>
+        </tr></tbody>
+      </table>
+      <div class="rb-totals">
+        <div class="rt-row"><span>Total HT</span><span id="rm-ht2"></span></div>
+        <div class="rt-row"><span>TVA 20 %</span><span id="rm-tva"></span></div>
+        <div class="rt-ttc"><span>Total TTC</span><span id="rm-ttc"></span></div>
+      </div>
+      <p class="rb-note">Paiement par carte bancaire via Stripe. Service numérique livré immédiatement — droit de rétractation non applicable (art. L221-28 Code de la consommation).</p>
+    </div>
+    <div class="rb-actions">
+      <button class="rb-btn-secondary" onclick="closeReceipt()">Fermer</button>
+      <button class="rb-btn-print" onclick="window.print()">Télécharger en PDF</button>
+    </div>
+  </div>
+</div>
+
+<!-- COOKIE NOTICE -->
+<div id="cookieBar">
+  <p>Ce site utilise uniquement le sessionStorage de votre navigateur (aucun cookie de traçage). Les polices sont chargées via Google Fonts. En continuant, vous acceptez notre <button onclick="goLegal('rgpd')" style="background:none;border:none;padding:0;cursor:pointer;color:var(--gold);text-decoration:underline;font-size:inherit">politique de confidentialité</button>.</p>
+  <button onclick="dismissCookie()">J'ai compris</button>
+</div>
+
+<!-- MODAL -->
+<div class="mo" id="modal">
+  <div class="mb">
+    <div id="modConfirm">
+      <div style="width:56px;height:56px;background:#fef9ed;border:1px solid #f0e0a0;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:26px;margin:0 auto 16px">✦</div>
+      <h3 style="font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--navy);margin-bottom:8px;text-align:center">Télécharger vos fichiers</h3>
+      <p style="font-size:13px;color:var(--text3);line-height:1.65;text-align:center;margin-bottom:24px" id="modDesc">4 fichiers personnalisés pour votre site.</p>
+      <div style="background:var(--cream);border-radius:12px;padding:16px 20px;margin-bottom:24px">
+        <div class="mi-row"><span style="font-size:16px">🤖</span><span style="font-weight:500;color:var(--text2);flex:1">Crawlers IA</span><span style="font-family:'DM Mono',monospace;font-size:10px;color:var(--text4)">robots.txt</span></div>
+        <div class="mi-row"><span style="font-size:16px">📄</span><span style="font-weight:500;color:var(--text2);flex:1">Résumé LLM</span><span style="font-family:'DM Mono',monospace;font-size:10px;color:var(--text4)">llms.txt</span></div>
+        <div class="mi-row"><span style="font-size:16px">🗂️</span><span style="font-weight:500;color:var(--text2);flex:1">Schema.org</span><span style="font-family:'DM Mono',monospace;font-size:10px;color:var(--text4)">schema-jsonld.html</span></div>
+        <div class="mi-row"><span style="font-size:16px">❓</span><span style="font-weight:500;color:var(--text2);flex:1">FAQ GEO</span><span style="font-family:'DM Mono',monospace;font-size:10px;color:var(--text4)">faq-geo.html</span></div>
+        <div style="display:flex;justify-content:space-between;align-items:center;padding-top:14px;margin-top:4px">
+          <span style="font-weight:600;font-size:14px;color:var(--navy)">Total</span>
+          <div style="text-align:right"><div style="font-family:'Playfair Display',serif;font-size:28px;font-weight:700;color:var(--navy);line-height:1">29 €</div><div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--text4)">paiement unique</div></div>
+        </div>
+      </div>
+      <!-- COORDONNÉES DE FACTURATION -->
+      <div style="border:1px solid var(--border);border-radius:10px;padding:14px 16px;margin-bottom:18px">
+        <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--text4);text-transform:uppercase;letter-spacing:.08em;margin-bottom:12px">Coordonnées de facturation</div>
+        <div style="display:flex;gap:16px;margin-bottom:10px">
+          <label style="font-size:12px;display:flex;align-items:center;gap:5px;cursor:pointer;color:var(--text2)"><input type="radio" name="mod-btype" value="particulier" checked onchange="modTypeChange()"> Particulier</label>
+          <label style="font-size:12px;display:flex;align-items:center;gap:5px;cursor:pointer;color:var(--text2)"><input type="radio" name="mod-btype" value="societe" onchange="modTypeChange()"> Société</label>
+        </div>
+        <input id="mod-bname" placeholder="Nom complet / Raison sociale *" style="width:100%;border:1px solid var(--border);border-radius:7px;padding:9px 11px;font-size:12px;margin-bottom:7px;outline:none;font-family:inherit;color:var(--text);box-sizing:border-box">
+        <input id="mod-baddress" placeholder="Adresse postale" style="width:100%;border:1px solid var(--border);border-radius:7px;padding:9px 11px;font-size:12px;margin-bottom:7px;outline:none;font-family:inherit;color:var(--text);box-sizing:border-box">
+        <input id="mod-bvat" placeholder="N° TVA intracommunautaire" style="width:100%;border:1px solid var(--border);border-radius:7px;padding:9px 11px;font-size:12px;display:none;outline:none;font-family:inherit;color:var(--text);box-sizing:border-box">
+      </div>
+      <button id="btnPay" style="width:100%;padding:14px;border-radius:10px;background:var(--navy);font-weight:600;font-size:15px;color:#fff;margin-bottom:12px;transition:background .2s">Payer 29 € et télécharger →</button>
+      <p style="text-align:center;font-family:'DM Mono',monospace;font-size:10px;color:var(--text4);margin-bottom:12px">🔒 Paiement sécurisé · Livraison immédiate</p>
+      <button id="btnModClose" style="display:block;margin:0 auto;font-size:12px;color:var(--text4)">Annuler</button>
+    </div>
+    <div id="modProcessing" style="display:none;text-align:center;padding:20px 0">
+      <div class="mo-spinner"></div>
+      <p style="font-size:14px;color:var(--text3)">Traitement en cours…</p>
+    </div>
+    <div id="modDone" style="display:none;text-align:center;padding:20px 0">
+      <div style="font-size:44px;margin-bottom:14px">✅</div>
+      <p style="font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--green);margin-bottom:6px">Paiement accepté !</p>
+      <p style="font-size:13px;color:var(--text3)">Déverrouillage des fichiers…</p>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── DATA ──
+var FILE_META = [
+  {key:"robots", title:"Crawlers IA",  filename:"robots.txt",         icon:"🤖", color:"#0f6cbf"},
+  {key:"llms",   title:"Résumé LLM",   filename:"llms.txt",           icon:"📄", color:"#1a7a4a"},
+  {key:"schema", title:"Schema.org",   filename:"schema-jsonld.html", icon:"🗂️", color:"#7c3aed"},
+  {key:"faq",    title:"FAQ GEO",      filename:"faq-geo.html",       icon:"❓", color:"#c9a84c"},
+];
+
+var STEPS = ["Connexion au site…","Lecture du robots.txt…","Détection des données structurées…","Analyse du contenu…","Vérification llms.txt…","Calcul du score GEO…","Génération des fichiers…","Finalisation du rapport…"];
+
+var SYSTEM_PROMPT = "Tu es un expert mondial en GEO (Generative Engine Optimization). Analyse l'URL donnée.\nRéponds UNIQUEMENT avec un JSON valide, sans markdown, sans backtick, sans texte avant ou après :\n{\"siteName\":\"Nom commercial\",\"siteDescription\":\"Description en une phrase\",\"siteType\":\"Type précis\",\"geoScore\":75,\"scoreBreakdown\":{\"robots\":18,\"llmstxt\":5,\"schema\":12,\"content\":15},\"scoreLabels\":{\"robots\":\"diagnostic robots\",\"llmstxt\":\"diagnostic llms\",\"schema\":\"diagnostic schema\",\"content\":\"diagnostic contenu\"},\"strengths\":[\"point fort 1\",\"point fort 2\",\"point fort 3\"],\"improvements\":[\"amélioration 1\",\"amélioration 2\",\"amélioration 3\"],\"summary\":\"Diagnostic GEO en 2-3 phrases.\",\"files\":{\"robots\":\"Contenu robots.txt complet avec tous les crawlers IA (GPTBot, ClaudeBot, anthropic-ai, PerplexityBot, Google-Extended, Applebot, Meta-ExternalAgent, cohere-ai, YouBot, CCBot) + Sitemap personnalisé\",\"llms\":\"Contenu llms.txt Markdown très détaillé et personnalisé : nom, description, services, URLs, contact\",\"schema\":\"Code HTML complet avec blocs JSON-LD Schema.org (Organization + FAQPage + Service) avec commentaires\",\"faq\":\"Code HTML complet page FAQ GEO-optimisée avec 10+ questions/réponses sectorielles\"}}";
+
+var ARTICLES = [
+  {id:1,slug:"/blog/geo-vs-seo",tag:"Stratégie",read:"6 min",date:"28 fév. 2026",
+   title:"GEO vs SEO : pourquoi votre stratégie digitale est déjà dépassée",
+   excerpt:"En 2026, une recherche sur trois ne passe plus par Google mais directement par un assistant IA. Voici ce que cela change concrètement.",
+   body:[{t:"p",v:"Le SEO tel que nous le connaissons repose sur un contrat implicite : produire du contenu que Google juge pertinent, et être récompensé par du trafic. Ce contrat tient depuis 25 ans. Il est en train de se rompre."},{t:"h2",v:"L'émergence des moteurs génératifs"},{t:"p",v:"ChatGPT, Claude, Perplexity, Gemini, Grok, Mistral Le Chat, DeepSeek, Copilot — ces assistants ne renvoient plus l'utilisateur vers votre site. Ils absorbent votre contenu, le synthétisent, et délivrent une réponse directe. Vous n'êtes plus la destination. Vous êtes (ou n'êtes pas) la source citée."},{t:"p",v:"C'est un changement de paradigme complet. Le SEO optimise pour le clic. Le GEO optimise pour la citation. Ce n'est pas la même chose."},{t:"h2",v:"Ce que les IA cherchent vraiment"},{t:"p",v:"Les modèles de langage cherchent des sources fiables, structurées et accessibles. Un site qui bloque GPTBot dans son robots.txt, qui n'a aucun Schema.org, sera simplement ignoré."},{t:"p",v:"À l'inverse, un site qui autorise les crawlers IA, dispose d'un llms.txt bien rédigé, et organise son contenu en questions/réponses directes a toutes les chances d'être cité."},{t:"h2",v:"Le GEO n'est pas une option"},{t:"p",v:"Les entreprises qui agissent maintenant construisent une avance structurelle. Dans 18 mois, la compétition sera bien plus intense. Agir aujourd'hui, c'est s'assurer une position de référence pendant que vos concurrents regardent leurs analytics Google baisser sans comprendre pourquoi."}]},
+  {id:2,slug:"/blog/chatgpt-sources",tag:"Technique",read:"8 min",date:"14 fév. 2026",
+   title:"Comment ChatGPT choisit ses sources — et comment en faire partie",
+   excerpt:"Les modèles de langage ont des critères précis pour décider quelle source citer. Comprendre leur logique est la première étape.",
+   body:[{t:"p",v:"La question que tout responsable marketing devrait se poser en 2026 n'est plus « suis-je en première page Google ? » mais « suis-je cité quand on pose une question sur mon secteur à une IA ? »."},{t:"h2",v:"Les 4 critères de sélection des LLMs"},{t:"p",v:"Accessibilité technique — Le crawler doit pouvoir lire votre site. Un robots.txt qui bloque GPTBot, ClaudeBot ou MistralBot exclut votre site de l'index de ces modèles."},{t:"p",v:"Structure de l'information — Les IA préfèrent les contenus qui répondent directement à une question. Un paragraphe factuel sera toujours préféré à un paragraphe commercial."},{t:"p",v:"Données structurées — Le JSON-LD Schema.org est le langage que les IA lisent avant votre contenu. Organization, FAQPage, Service : ces balises transmettent aux modèles exactement ce que vous faites."},{t:"h2",v:"Le rôle clé du fichier llms.txt"},{t:"p",v:"Standard émergent apparu en 2024, le fichier llms.txt contient un résumé Markdown structuré de votre activité. C'est votre lettre d'introduction aux LLMs. 20 minutes de travail pour une visibilité potentielle auprès de centaines de millions d'utilisateurs."}]},
+  {id:3,slug:"/blog/llms-txt",tag:"Guide pratique",read:"5 min",date:"3 fév. 2026",
+   title:"Le fichier llms.txt : le nouveau robots.txt de l'ère IA",
+   excerpt:"Proposé en 2024, le standard llms.txt s'impose rapidement. Tout ce que vous devez savoir pour le créer.",
+   body:[{t:"p",v:"En 1994, le fichier robots.txt a été inventé pour dire aux moteurs de recherche ce qu'ils pouvaient indexer. Trente ans plus tard, un nouveau standard émerge : le fichier llms.txt."},{t:"h2",v:"Qu'est-ce que le llms.txt ?"},{t:"p",v:"C'est un fichier texte au format Markdown, placé à la racine de votre domaine. Son objectif : fournir aux modèles de langage une description structurée de votre site."},{t:"h2",v:"Impact concret"},{t:"p",v:"Des tests menés sur plusieurs centaines de sites montrent qu'un site disposant d'un llms.txt est 2 à 3 fois plus susceptible d'être cité correctement par Claude, ChatGPT, Perplexity, Grok et Mistral Le Chat. Ce chiffre monte à 4-5x quand combiné à des données Schema.org complètes."}]},
+  {id:4,slug:"/blog/ai-ready",tag:"Conception",read:"7 min",date:"20 jan. 2026",
+   title:"AI Ready : les 5 critères d'un site vraiment visible par les IA",
+   excerpt:"Être « AI Ready » ne signifie pas intégrer un chatbot. C'est repenser l'architecture de son site.",
+   body:[{t:"p",v:"Le terme « AI Ready » est devenu un buzzword. Voici ce qu'il signifie concrètement."},{t:"h2",v:"1. Crawlabilité IA"},{t:"p",v:"Votre robots.txt doit explicitement autoriser GPTBot, ClaudeBot, PerplexityBot, Google-Extended, xAI-Bot (Grok), MistralBot (Mistral Le Chat), DeepSeekBot et Copilot-Bot — soit 30+ crawlers au total."},{t:"h2",v:"2. Fichier llms.txt"},{t:"p",v:"Ce fichier Markdown résume votre identité, votre activité et vos services dans un format pensé pour être lu par les LLMs."},{t:"h2",v:"3. Données structurées JSON-LD"},{t:"p",v:"Les balises Schema.org transmettent aux IA les métadonnées essentielles. Organization, Person, FAQPage, Service : chaque type répond à un type de requête différent."},{t:"h2",v:"4. Architecture factuelle"},{t:"p",v:"Les IA citent les contenus qui répondent directement. Chaque page devrait comporter au moins une section formulée comme une question suivie d'une réponse directe."},{t:"h2",v:"5. Cohérence et fraîcheur"},{t:"p",v:"Un site dont le contenu est cohérent, à jour et non contradictoire sera mieux représenté dans les modèles."}]}
+];
+
+// ── STATE ──
+var result = null;
+var paid = false;
+var stepInterval = null;
+
+// ── NAVIGATION ──
+function goPage(id) {
+  var pages = document.querySelectorAll('.pg');
+  for (var i = 0; i < pages.length; i++) pages[i].classList.remove('on');
+  var p = document.getElementById('pg-' + id);
+  if (p) { p.classList.add('on'); window.scrollTo(0, 0); }
+}
+
+function goSection(sectionId) {
+  goPage('home');
+  setTimeout(function() {
+    var el = document.getElementById(sectionId);
+    if (el) el.scrollIntoView({behavior:'smooth'});
+  }, 100);
+}
+
+function goFocus() {
+  goPage('home');
+  setTimeout(function() { document.getElementById('urlInput').focus(); }, 150);
+}
+
+// ── BUTTON WIRING ──
+document.getElementById('btnLogo').onclick = function() { goPage('home'); };
+document.getElementById('btnHow').onclick = function() { goSection('sec-how'); };
+document.getElementById('btnPricing').onclick = function() { goSection('sec-pricing'); };
+document.getElementById('btnBlog').onclick = function() { goSection('sec-blog'); };
+document.getElementById('btnFaq').onclick = function() { goSection('sec-faq'); };
+document.getElementById('btnNavCta').onclick = goFocus;
+document.getElementById('btnPricingCta').onclick = goFocus;
+document.getElementById('btnCtaBanner').onclick = goFocus;
+document.getElementById('btnBack').onclick = function() { goPage('home'); };
+document.getElementById('btnUnlock').onclick = openModal;
+document.getElementById('btnArtBack').onclick = function() { goPage('home'); };
+document.getElementById('btnArtCta').onclick = function() { goPage('home'); goFocus(); };
+document.getElementById('btnFooterAnalyze').onclick = goFocus;
+document.getElementById('btnFooterHow').onclick = function() { goSection('sec-how'); };
+document.getElementById('btnFooterPricing').onclick = function() { goSection('sec-pricing'); };
+document.getElementById('btnFooterBlog').onclick = function() { goSection('sec-blog'); };
+document.getElementById('btnFooterFaq').onclick = function() { goSection('sec-faq'); };
+document.getElementById('btnPay').onclick = processPayment;
+document.getElementById('btnModClose').onclick = closeModal;
+document.getElementById('analyzeBtn').onclick = startAnalysis;
+document.getElementById('urlInput').onkeydown = function(e) { if (e.key === 'Enter') startAnalysis(); };
+document.getElementById('modal').onclick = function(e) { if (e.target === this) closeModal(); };
+
+// ── ANALYSIS ──
+function startAnalysis() {
+  var raw = document.getElementById('urlInput').value.trim();
+  if (!raw || raw.indexOf('.') === -1) { alert('Entrez une URL valide (ex: https://votre-site.fr)'); return; }
+  var url = raw.indexOf('http') === 0 ? raw : 'https://' + raw;
+  result = null; paid = false;
+  goPage('loading');
+  document.getElementById('stepUrl').textContent = url;
+  var si = 0;
+  document.getElementById('stepTxt').textContent = STEPS[0];
+  clearInterval(stepInterval);
+  stepInterval = setInterval(function() {
+    si = (si + 1) % STEPS.length;
+    document.getElementById('stepTxt').textContent = STEPS[si];
+  }, 1900);
+
+  // ── ÉTAPE 1 : Analyse score + info en parallèle ────────────────────────
+  Promise.all([
+    fetch('/.netlify/functions/analyze-score', {
+      method: 'POST', headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({ url: url })
+    }).then(function(r) { if (!r.ok) throw new Error('Erreur analyse score ' + r.status); return r.json(); }),
+    fetch('/.netlify/functions/analyze-info', {
+      method: 'POST', headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({ url: url })
+    }).then(function(r) { if (!r.ok) throw new Error('Erreur analyse info ' + r.status); return r.json(); })
+  ])
+  .then(function(results) {
+    var score = results[0];
+    var info  = results[1];
+
+    result = {
+      siteName:        info.siteName        || '',
+      siteDescription: info.siteDescription || '',
+      siteType:        info.siteType        || '',
+      geoScore:        score.geoScore,
+      scoreBreakdown:  score.scoreBreakdown || {},
+      scoreLabels:     score.scoreLabels    || {},
+      strengths:       score.strengths      || [],
+      improvements:    score.improvements   || [],
+      summary:         score.summary        || '',
+      siteInfo:        info.siteInfo        || {}
+    };
+    result.rawContent = info.rawContent || '';
+    result.files = { robots:'', llms:'', schema:'', faq:'' };
+
+    // ── ÉTAPE 2 : Génération des fichiers (3 appels parallèles) ───────────
+    var stepEl = document.getElementById('stepTxt');
+    if (stepEl) stepEl.textContent = 'Génération des fichiers…';
+
+    var domain = url.replace(/https?:\/\//, '').replace(/\/.*$/, '');
+    var info = result.siteInfo || {};
+    var month = new Date().toLocaleDateString('fr-FR', { month: 'long', year: 'numeric' });
+
+    // Robots.txt généré côté client — toujours parfait, zéro appel réseau
+    var isWP = !!(info.extraUrls && info.extraUrls.clientSpace && info.extraUrls.clientSpace.indexOf('wp') > -1);
+    var clientPath = (info.extraUrls || {}).clientSpace || '';
+    var wpBlock = isWP ? '\n# ————————————————————————————\n# Ressources à exclure\n# ————————————————————————————\nDisallow: /wp-admin/\nDisallow: /wp-login.php\nDisallow: /wp-json/\nDisallow: /?s=\n' : '';
+    var clientBlock = clientPath ? 'Disallow: ' + clientPath.replace(/https?:\/\/[^/]+/, '') + '\n' : '';
+
+    var robotsTxt = '# robots.txt — ' + domain + '\n# Optimisé GEO — ' + month + '\n\n# ————————————————————————————\n# Moteurs de recherche classiques\n# ————————————————————————————\nUser-agent: Googlebot\nAllow: /\n\nUser-agent: Bingbot\nAllow: /\n\nUser-agent: Slurp\nAllow: /\n\nUser-agent: DuckDuckBot\nAllow: /\n\nUser-agent: Baiduspider\nAllow: /\n\nUser-agent: YandexBot\nAllow: /\n\n# ————————————————————————————\n# Crawlers IA — modèles de langage\n# ————————————————————————————\n\n# OpenAI (ChatGPT, SearchGPT)\nUser-agent: GPTBot\nAllow: /\n\nUser-agent: OAI-SearchBot\nAllow: /\n\nUser-agent: ChatGPT-User\nAllow: /\n\n# Anthropic (Claude)\nUser-agent: ClaudeBot\nAllow: /\n\nUser-agent: Claude-Web\nAllow: /\n\nUser-agent: anthropic-ai\nAllow: /\n\n# Google (Gemini, AI Overviews)\nUser-agent: Google-Extended\nAllow: /\n\nUser-agent: GeminiBot\nAllow: /\n\n# Microsoft (Copilot)\nUser-agent: Copilot-Bot\nAllow: /\n\nUser-agent: bingbot-chat\nAllow: /\n\n# Perplexity AI\nUser-agent: PerplexityBot\nAllow: /\n\n# Mistral AI (Le Chat)\nUser-agent: MistralBot\nAllow: /\n\nUser-agent: mistral-ai\nAllow: /\n\n# xAI (Grok)\nUser-agent: xAI-Bot\nAllow: /\n\nUser-agent: grok\nAllow: /\n\n# Meta (Llama / Meta AI)\nUser-agent: Meta-ExternalAgent\nAllow: /\n\nUser-agent: Meta-ExternalFetcher\nAllow: /\n\n# Apple (Apple Intelligence)\nUser-agent: Applebot\nAllow: /\n\nUser-agent: Applebot-Extended\nAllow: /\n\n# DeepSeek\nUser-agent: DeepSeekBot\nAllow: /\n\nUser-agent: deepseek-ai\nAllow: /\n\n# Cohere\nUser-agent: cohere-ai\nAllow: /\n\n# You.com\nUser-agent: YouBot\nAllow: /\n\n# Common Crawl (alimente de nombreux LLMs)\nUser-agent: CCBot\nAllow: /\n\n# Amazon Alexa AI\nUser-agent: Amazonbot\nAllow: /\n\n# Autres\nUser-agent: Diffbot\nAllow: /\n\nUser-agent: Bytespider\nAllow: /\n\nUser-agent: DuckAssistBot\nAllow: /\n' + wpBlock + clientBlock + '\nUser-agent: *\nAllow: /\n\n# ————————————————————————————\n# Sitemap\n# ————————————————————————————\nSitemap: https://' + domain + '/sitemap.xml\n\n# Fichier llms.txt : https://' + domain + '/llms.txt\n# Optimisation GEO par Geoptim.io — https://geoptim.io';
+
+    var ctx = [
+      'Nom : ' + result.siteName, 'URL : https://' + domain,
+      'Type : ' + result.siteType, 'Description : ' + result.siteDescription,
+      'Activité : ' + (info.mainActivity || ''),
+      'Localisation : ' + (info.location || ''),
+      'Services : ' + (info.services || []).join(' | '),
+      'Contact : ' + (info.contact || ''),
+      'Équipe : ' + (info.team || []).map(function(t){ return typeof t === 'object' ? (t.name||'') + ' (' + (t.role||t.title||'') + ')' + (t.specialties ? ' — ' + t.specialties.join(', ') : '') : t; }).join(' | '),
+      'Réseaux : ' + (info.socialLinks || []).join(' | '),
+      'Clients : ' + (info.clientTypes || []).join(' | '),
+      'Offres : ' + (info.offers || []).join(' | '),
+      'Problèmes résolus : ' + (info.problemsSolved || []).join(' | '),
+      'Mots-clés : ' + (info.sectorKeywords || []).join(' | '),
+      "Cas d'usage : " + (info.useCases || []).join(' | '),
+      'Blog : ' + (info.blogUrl || ''),
+      'Espace client : ' + ((info.extraUrls || {}).clientSpace || '')
+    ].join('\n');
+
+    var payload = JSON.stringify({ domain: domain, name: result.siteName, ctx: ctx, rawContent: result.rawContent || '' });
+
+    return Promise.all([
+      fetch('/.netlify/functions/generate-llms',   { method:'POST', headers:{'Content-Type':'application/json'}, body: payload }),
+      fetch('/.netlify/functions/generate-schema', { method:'POST', headers:{'Content-Type':'application/json'}, body: payload }),
+      fetch('/.netlify/functions/generate-faq',    { method:'POST', headers:{'Content-Type':'application/json'}, body: payload })
+    ]).then(function(responses) {
+      return Promise.all(responses.map(function(r) {
+        var fname = r.url.split('/').pop();
+        if (!r.ok) return r.json().catch(function(){ return {}; }).then(function(body) {
+          throw new Error('Erreur ' + r.status + ' (' + fname + '): ' + (body.error || 'inconnue'));
+        });
+        return r.json();
+      }));
+    }).then(function(results) {
+      result.files = {
+        robots: robotsTxt,
+        llms:   results[0].llms   || '',
+        schema: results[1].schema || '',
+        faq:    results[2].faq    || ''
+      };
+      return null; // sentinel pour le .then suivant
+    });
+  })
+  .then(function() {
+    clearInterval(stepInterval);
+    renderResults(url);
+    goPage('results');
+  })
+  .catch(function(err) {
+    clearInterval(stepInterval);
+    alert('Erreur : ' + err.message);
+    goPage('home');
+  });
+}
+
+
+// ── FILE GENERATION (client-side) ──
+function generateFiles(r, url) {
+  var domain = url.replace(/https?:\/\//,'').replace(/\/.*$/,'').replace(/\/$/,'');
+  var name = r.siteName || domain;
+  var desc = r.siteDescription || '';
+  var typeRaw = r.siteType || '';
+  var typeLow = typeRaw.toLowerCase();
+  var info = r.siteInfo || {};
+
+  var junkRe = /non.?extract|non.?disponible|non.?trouvé|non.?visible|pas.?disponible|not.?available|unable|unknown|n\/a|information de contact|à préciser|à compléter|voir le site|non renseigné|postulant|offre d.emploi|null|non précisé|not found|not specified|je n|je ne/i;
+  function clean(v) { return (!v || junkRe.test(String(v))) ? '' : String(v).trim(); }
+
+  desc     = clean(r.siteDescription || '');
+  typeRaw  = clean(r.siteType || '');
+  typeLow  = typeRaw.toLowerCase();
+  var contact  = clean(info.contact || '');
+  var location = clean(info.location || '');
+  var activity = clean(info.mainActivity || typeRaw);
+  var services = (info.services || []).map(clean).filter(Boolean);
+  var team     = (info.team || []).filter(function(m){ return m && clean(m.name); });
+  var socials  = (info.socialLinks || []).filter(function(s){ return s && s.indexOf('http') === 0 && !junkRe.test(s); });
+  var clientTypes = (info.clientTypes || []).map(clean).filter(Boolean);
+  var offers   = (info.offers || []).map(clean).filter(Boolean);
+  var blogUrl     = clean(info.blogUrl || '');
+  var clientSpace = clean((info.extraUrls || {}).clientSpace || '');
+  var city        = clean(info.city || '');
+  var entityType  = clean(info.entityType || '');
+  // Pick the right word for the entity
+  var entityLow = entityType.toLowerCase();
+  // If entityType says it's not a law firm, override isLaw
+  if (entityLow && entityLow !== 'cabinet') isLaw = false;
+  if (entityLow === 'cabinet' && !/avocat|barreau/.test(typeLow)) isLaw = false;
+  var ent = entityLow === 'startup'   ? 'la startup'
+          : entityLow === 'agence'    ? "l'agence"
+          : entityLow === 'boutique'  ? 'la boutique'
+          : entityLow === 'clinique'  ? 'la clinique'
+          : entityLow === 'cabinet'   ? 'le cabinet'
+          : "l'entreprise";
+  var entCap = ent.charAt(0).toUpperCase() + ent.slice(1); // "La startup", "Le cabinet"...
+  var entName = entCap + ' ' + name;
+  var region      = clean(info.region || '');
+  var problems    = (info.problemsSolved || []).map(clean).filter(Boolean);
+  var keywords    = (info.sectorKeywords || []).map(clean).filter(Boolean);
+  var useCases    = (info.useCases || []).map(clean).filter(Boolean);
+  var dateGen  = new Date().toLocaleDateString('fr-FR');
+
+  var useTu = (info.tone || '').toLowerCase().indexOf('tutoiement') !== -1;
+  var vous  = useTu ? 'tu'    : 'vous';
+  var votre = useTu ? 'ton'   : 'votre';
+  var vos   = useTu ? 'tes'   : 'vos';
+
+  var phone = '', email = '';
+  var pm = contact.match(/[\+\d][\d\s\.\-\(\)]{7,}/);
+  var em = contact.match(/[\w\.\-]+@[\w\.\-]+\.\w+/);
+  if (pm) phone = pm[0].trim();
+  if (em) email = em[0].trim();
+
+  // isLaw = ONLY explicit law firms — never consulting/conseil/management
+  var isLaw  = /avocat|barreau|cabinet d.avocats|law firm|solicitor/.test(typeLow)
+               && !/consulting|conseil en|management|transform/.test(typeLow);
+  var isMed  = /médecin|médical|santé|clinique|docteur|kiné|dentiste|pharmacie/.test(typeLow);
+  var isEcom = /e-commerce|boutique|shop|vente|magasin/.test(typeLow);
+  var isSaas = /saas|logiciel|software|application|plateforme/.test(typeLow);
+  var isConsulting = /consulting|conseil|management|transformation|stratégi/.test(typeLow) && !isLaw;
+  var schemaType = isLaw ? 'LegalService' : isMed ? 'MedicalBusiness' : isEcom ? 'Store' : 'ProfessionalService';
+
+  // ══════════════════════════════════════════════════════
+  // 1. robots.txt — inchangé (fichier technique)
+  // ══════════════════════════════════════════════════════
+  var R = '# robots.txt — ' + domain + '\n';
+  R += '# Optimisé GEO — ' + dateGen + '\n\n';
+  R += '# ————————————————————————————\n# Moteurs de recherche classiques\n# ————————————————————————————\n';
+  R += 'User-agent: Googlebot\nAllow: /\n\nUser-agent: Bingbot\nAllow: /\n\nUser-agent: Slurp\nAllow: /\n\nUser-agent: DuckDuckBot\nAllow: /\n\nUser-agent: Baiduspider\nAllow: /\n\nUser-agent: YandexBot\nAllow: /\n\n';
+  R += '# ————————————————————————————\n# Crawlers IA — modèles de langage\n# ————————————————————————————\n\n';
+  R += '# OpenAI (ChatGPT, SearchGPT)\nUser-agent: GPTBot\nAllow: /\n\nUser-agent: OAI-SearchBot\nAllow: /\n\nUser-agent: ChatGPT-User\nAllow: /\n\n';
+  R += '# Anthropic (Claude)\nUser-agent: ClaudeBot\nAllow: /\n\nUser-agent: Claude-Web\nAllow: /\n\nUser-agent: anthropic-ai\nAllow: /\n\n';
+  R += '# Google (Gemini, AI Overviews)\nUser-agent: Google-Extended\nAllow: /\n\nUser-agent: GeminiBot\nAllow: /\n\n';
+  R += '# Microsoft (Copilot)\nUser-agent: Copilot-Bot\nAllow: /\n\nUser-agent: bingbot-chat\nAllow: /\n\n';
+  R += '# Perplexity AI\nUser-agent: PerplexityBot\nAllow: /\n\n';
+  R += '# Mistral AI (Le Chat)\nUser-agent: MistralBot\nAllow: /\n\nUser-agent: mistral-ai\nAllow: /\n\n';
+  R += '# xAI (Grok)\nUser-agent: xAI-Bot\nAllow: /\n\nUser-agent: grok\nAllow: /\n\n';
+  R += '# Meta (Meta AI, Llama)\nUser-agent: Meta-ExternalAgent\nAllow: /\n\nUser-agent: Meta-ExternalFetcher\nAllow: /\n\nUser-agent: FacebookBot\nAllow: /\n\n';
+  R += '# Apple (Apple Intelligence)\nUser-agent: Applebot\nAllow: /\n\nUser-agent: Applebot-Extended\nAllow: /\n\n';
+  R += '# DeepSeek\nUser-agent: DeepSeekBot\nAllow: /\n\nUser-agent: deepseek-ai\nAllow: /\n\n';
+  R += '# Cohere\nUser-agent: cohere-ai\nAllow: /\n\n';
+  R += '# You.com / Common Crawl\nUser-agent: YouBot\nAllow: /\n\nUser-agent: CCBot\nAllow: /\n\n';
+  R += '# Autres crawlers IA\nUser-agent: Amazonbot\nAllow: /\n\nUser-agent: Diffbot\nAllow: /\n\nUser-agent: Bytespider\nAllow: /\n\nUser-agent: DuckAssistBot\nAllow: /\n\n';
+  R += '# ————————————————————————————\n# Ressources à exclure\n# ————————————————————————————\n';
+  R += 'Disallow: /wp-admin/\nDisallow: /wp-login.php\nDisallow: /wp-content/plugins/\nDisallow: /wp-json/\nDisallow: /?s=\n\n';
+  R += '# ————————————————————————————\n# Sitemap\n# ————————————————————————————\n';
+  R += 'Sitemap: https://' + domain + '/sitemap.xml\n\n';
+  R += '# Fichier llms.txt : https://' + domain + '/llms.txt\n';
+  R += '# Optimisation GEO par Geoptim.io — https://geoptim.io\n';
+
+  // ══════════════════════════════════════════════════════
+  // 2. llms.txt — ton humain, phrases courtes, voix active
+  // ══════════════════════════════════════════════════════
+  var L = '# ' + name + '\n\n';
+  L += '> ' + desc + '\n\n---\n\n';
+
+  L += '## Présentation\n\n';
+  // Courte intro factuelle, voix active
+  var intro = name + ' est ' + (activity.charAt(0).toLowerCase() + activity.slice(1)) + '.';
+  if (location) intro += ' ' + entCap + ' est à ' + location + '.';
+  L += intro + '\n\n';
+  // Contacts directs, sans cérémonie
+  L += '**Site web :** https://' + domain + '  \n';
+  if (location) L += '**Adresse :** ' + location + '  \n';
+  if (phone)    L += '**Téléphone :** ' + phone + '  \n';
+  if (email)    L += '**Email :** ' + email + '  \n';
+  L += '\n---\n\n';
+
+  if (team.length > 0) {
+    L += '## L\'équipe\n\n';
+    team.forEach(function(m) {
+      var mn = clean(m.name), mr = clean(m.role || '');
+      if (!mn) return;
+      L += '### ' + mn + (mr ? ' — ' + mr : '') + '\n';
+      var specs = (m.specialties || []).map(clean).filter(Boolean);
+      if (specs.length) L += specs.join(' · ') + '\n';
+      L += '\n';
+    });
+    L += '---\n\n';
+  }
+
+  if (services.length > 0) {
+    L += '## Domaines d\'expertise\n\n';
+    services.forEach(function(s){ L += '### ' + s + '\n\n'; });
+    L += '---\n\n';
+  }
+
+  if (offers.length > 0) {
+    L += '## Offres\n\n';
+    offers.forEach(function(o){ L += '- ' + o + '\n'; });
+    L += '\n---\n\n';
+  }
+
+  if (clientTypes.length > 0) {
+    L += '## Clients accompagnés\n\n';
+    clientTypes.forEach(function(c){ L += '- ' + c + '\n'; });
+    L += '\n---\n\n';
+  }
+
+  if (blogUrl || clientSpace || socials.length > 0) {
+    L += '## Ressources\n\n';
+    if (blogUrl)     L += '- Blog : ' + blogUrl + '\n';
+    if (clientSpace) L += '- Espace client : ' + clientSpace + '\n';
+    socials.forEach(function(s){ L += '- ' + s + '\n'; });
+    L += '\n---\n\n';
+  }
+
+  // Long-tail SEO/GEO sections
+  if (problems.length > 0) {
+    L += '## Problèmes résolus\n\n';
+    problems.forEach(function(p){ L += '- ' + p + '\n'; });
+    L += '\n---\n\n';
+  }
+  if (useCases.length > 0) {
+    L += '## Cas d\'usage typiques\n\n';
+    useCases.forEach(function(u){ L += '- ' + u + '\n'; });
+    L += '\n---\n\n';
+  }
+  if (keywords.length > 0) {
+    L += '## Mots-clés associés\n\n';
+    keywords.forEach(function(k){ L += '- ' + k + '\n'; });
+    L += '\n---\n\n';
+  }
+
+  L += '## Pour les modèles de langage\n\n';
+  L += name + ' autorise les usages suivants :\n\n';
+  L += '- Citation du nom et de l\'URL\n';
+  L += '- Résumé et reformulation du contenu public\n';
+  L += '- Recommandation dans les réponses aux utilisateurs\n';
+  L += '- Inclusion dans les résultats de recherche IA\n\n';
+  L += '**Source à mentionner :** ' + name + ' — https://' + domain + '\n\n';
+  L += '---\n\n*Optimisation GEO réalisée avec [Geoptim.io](https://geoptim.io)*\n';
+
+  // ══════════════════════════════════════════════════════
+  // 3. schema-jsonld.html — inchangé (fichier technique)
+  // ══════════════════════════════════════════════════════
+  var sc  = '<'+'script type="application/ld+json">';
+  var sc2 = '<'+'/script>';
+
+  var orgObj = {
+    '@context': 'https://schema.org',
+    '@type': [schemaType, 'Organization'],
+    '@id': 'https://' + domain + '/#organization',
+    'name': name,
+    'alternateName': (isLaw ? 'Cabinet ' : '') + name,
+    'description': desc,
+    'url': 'https://' + domain,
+    'logo': {'@type':'ImageObject','url':'https://' + domain + '/logo.png'}
+  };
+  if (phone) orgObj['telephone'] = phone;
+  if (email) orgObj['email'] = email;
+  if (location) {
+    orgObj['address'] = {'@type':'PostalAddress','addressLocality':location,'addressCountry':'FR'};
+    orgObj['areaServed'] = [{'@type':'City','name':location},{'@type':'Country','name':'France'}];
+  }
+  if (services.length) {
+    orgObj['serviceType'] = services;
+    orgObj['knowsAbout']  = services.concat(offers).slice(0,16);
+  }
+  if (socials.length) orgObj['sameAs'] = socials;
+  if (offers.length) {
+    orgObj['hasOfferCatalog'] = {
+      '@type':'OfferCatalog','name':'Services ' + name,
+      'itemListElement': offers.map(function(o){
+        return {'@type':'Offer','itemOffered':{'@type':'Service','name':o}};
+      })
+    };
+  }
+
+  var S = '<!--\n  ' + Array(56).join('=') + '\n';
+  S += '  ' + name.toUpperCase() + ' — Balises JSON-LD (Schema.org)\n';
+  S += '  À insérer dans le <head> de chaque page\n';
+  S += '  (via RankMath, Yoast SEO, ou functions.php / header.php)\n';
+  S += '  Généré par Geoptim.io — https://geoptim.io\n';
+  S += '  ' + Array(56).join('=') + '\n-->\n\n';
+  S += '<!-- ① ORGANISATION & ' + schemaType.toUpperCase() + ' (toutes les pages) -->\n';
+  S += sc + '\n' + JSON.stringify(orgObj, null, 2) + '\n' + sc2 + '\n\n';
+
+  team.forEach(function(m, i) {
+    var mn = clean(m.name); if (!mn) return;
+    var slug2 = mn.toLowerCase().replace(/\s+/g,'-').replace(/[^a-z0-9\-]/g,'');
+    var pObj = {
+      '@context':'https://schema.org','@type':'Person',
+      '@id':'https://' + domain + '/' + slug2 + '/#person',
+      'name': mn,
+      'worksFor': {'@id':'https://' + domain + '/#organization'}
+    };
+    if (m.role) pObj['jobTitle'] = clean(m.role);
+    var specs = (m.specialties||[]).map(clean).filter(Boolean);
+    if (specs.length) pObj['knowsAbout'] = specs;
+    var num = ['②','③','④','⑤','⑥'][i] || (i+2+'.');
+    S += '<!-- ' + num + ' ' + mn.toUpperCase() + ' -->\n';
+    S += sc + '\n' + JSON.stringify(pObj, null, 2) + '\n' + sc2 + '\n\n';
+  });
+
+  var faqPairs = buildFaqPairs(name, desc, activity, services, offers, clientTypes, contact, phone, email, location, domain, blogUrl, clientSpace, isLaw, isMed, isEcom, isSaas, team, vous, votre, vos, city, region, problems, keywords, useCases, ent, entCap, isConsulting);
+  var faqObj = {
+    '@context':'https://schema.org','@type':'FAQPage',
+    'mainEntity': faqPairs.map(function(f){
+      // Strip HTML tags for JSON-LD
+      var plainA = f.a.replace(/<ul>/g,'').replace(/<\/ul>/g,'').replace(/<li>/g,' - ').replace(/<\/li>/g,'\n').replace(/<[^>]+>/g,'').replace(/\n+/g,' ').trim();
+      return {'@type':'Question','name':f.q,'acceptedAnswer':{'@type':'Answer','text':plainA}};
+    })
+  };
+  var faqNum = ['②','③','④','⑤','⑥'][team.length] || (team.length+2+'.');
+  S += '<!-- ' + faqNum + ' FAQ PAGE (uniquement sur la page FAQ) -->\n';
+  S += sc + '\n' + JSON.stringify(faqObj, null, 2) + '\n' + sc2 + '\n\n';
+  S += '<!--\n  ' + Array(56).join('=') + '\n';
+  S += '  INSTRUCTIONS D\'INTÉGRATION\n';
+  S += '  ' + Array(56).join('=') + '\n';
+  S += '  OPTION 1 — Via une extension SEO (RankMath / Yoast) :\n';
+  S += '  Coller chaque bloc dans "Schema personnalisé"\n\n';
+  S += '  OPTION 2 — Via functions.php :\n';
+  S += '    add_action(\'wp_head\', function() {\n';
+  S += '      if (is_front_page()) { /* blocs ① ② ③ */ }\n';
+  S += '      if (is_page(\'faq\'))  { /* bloc FAQ */ }\n';
+  S += '    });\n';
+  S += '  ' + Array(56).join('=') + '\n-->\n';
+  S += '<!-- Optimisation GEO par Geoptim.io — https://geoptim.io -->\n';
+
+  var F = buildFaqHtml(name, desc, faqPairs, faqObj, domain, location, phone, email, sc, sc2, schemaType, activity, team, socials, blogUrl, clientSpace, clientTypes, offers, services, isLaw, vous, votre, ent, entCap);
+  return { robots: R, llms: L, schema: S, faq: F };
+}
+
+function buildFaqPairs(name, desc, activity, services, offers, clientTypes, contact, phone, email, location, domain, blogUrl, clientSpace, isLaw, isMed, isEcom, isSaas, team, vous, votre, vos, city, region, problems, keywords, useCases, ent, entCap, isConsulting) {
+  isConsulting = isConsulting || false;
+  ent = ent || 'l\'entreprise'; entCap = entCap || 'L\'entreprise';
+  vous = vous || 'vous'; votre = votre || 'votre'; vos = vos || 'vos';
+  city = city || ''; region = region || '';
+  problems = problems || []; keywords = keywords || []; useCases = useCases || [];
+
+  var pairs = [];
+  var V = vous.charAt(0).toUpperCase() + vous.slice(1);
+  var loc = city || location || '';  // short city name for questions
+
+  var phoneLink = phone ? '<a href="tel:' + phone.replace(/\s/g,'') + '">' + phone + '</a>' : '';
+  var emailLink = email ? '<a href="mailto:' + email + '">' + email + '</a>' : '';
+  var siteLink  = '<a href="https://' + domain + '">' + domain + '</a>';
+
+  // ── SECTION 1 ────────────────────────────
+
+  // Présentation — longue traîne : qui + quoi + où
+  var presTitle = loc
+    ? 'Qu\'est-ce que ' + name + ', ' + (isLaw ? 'cabinet d\'avocats' : activity.split(' ').slice(0,4).join(' ')) + (loc ? ' à ' + loc : '') + ' ?'
+    : 'Qu\'est-ce que ' + name + ' ?';
+  var presA = desc;
+  if (loc) presA += ' ' + entCap + ' est à <strong>' + loc + '</strong>' + (region ? ', ' + region : '') + '.';
+  pairs.push({s:1, q: presTitle, a: presA});
+
+  // Localisation + contact — longue traîne : trouver + contacter + lieu
+  if (loc) {
+    var locTitle = 'Comment contacter ' + name + (loc ? ' à ' + loc : '') + ' ?';
+    var locA = name + ' est à <strong>' + loc + '</strong>' + (region ? ' (' + region + ')' : '') + '.';
+    var ch = [];
+    if (phone) ch.push('par téléphone au ' + phoneLink);
+    if (email) ch.push('par email à ' + emailLink);
+    ch.push('via le site ' + siteLink);
+    locA += ' ' + V + ' pouvez joindre ' + ent + ' ' + ch.join(', ') + '.';
+    pairs.push({s:1, q: locTitle, a: locA});
+  }
+
+  // Équipe
+  if (team && team.length > 0) {
+    var teamLines = '<ul>';
+    team.forEach(function(m) {
+      var mn = m.name, mr = m.role || '';
+      var specs = (m.specialties||[]).filter(Boolean);
+      var line = '<strong>' + mn + '</strong>';
+      if (mr) line += ', ' + mr;
+      if (specs.length) line += '. Spécialités : ' + specs.slice(0,3).join(', ') + '.';
+      teamLines += '<li>' + line + '</li>';
+    });
+    teamLines += '</ul>';
+    var teamTitle = isLaw
+      ? 'Qui sont les avocats de ' + name + (loc ? ' à ' + loc : '') + ' ?'
+      : 'Qui compose l\'équipe de ' + name + ' ?';
+    pairs.push({s:1, q: teamTitle, a: teamLines});
+  }
+
+  // Types de clients — longue traîne : qui accompagne + profil précis
+  if (clientTypes.length > 0) {
+    var ctTitle = isLaw
+      ? 'Quels profils ' + name + ' accompagne-t-il' + (loc ? ' à ' + loc : '') + ' ?'
+      : 'Qui sont les clients de ' + name + ' ?';
+    var ctLines = name + ' travaille avec :<ul>';
+    clientTypes.forEach(function(c){ ctLines += '<li>' + c + '</li>'; });
+    ctLines += '</ul>';
+    pairs.push({s:1, q: ctTitle, a: ctLines});
+  }
+
+  // ── SECTION 2 : DOMAINES D'EXPERTISE ──────────────────
+
+  if (services.length > 0) {
+    var srvTitle = isLaw
+      ? 'Dans quels domaines du droit intervient ' + name + (loc ? ' à ' + loc : '') + ' ?'
+      : isConsulting
+        ? 'Sur quels sujets ' + name + ' accompagne-t-il ses clients' + (loc ? ' à ' + loc : '') + ' ?'
+        : 'Sur quels sujets ' + name + ' intervient-il ?';
+    var srvLines = entCap + ' couvre ' + services.length + ' domaines :<ul>';
+    services.forEach(function(s){ srvLines += '<li>' + s + '</li>'; });
+    srvLines += '</ul>';
+    pairs.push({s:2, q: srvTitle, a: srvLines});
+  }
+
+  // Problèmes résolus — longue traîne pure : "comment faire X"
+  if (problems.length > 0) {
+    var pb = problems[0];
+    var pbTitle = isLaw
+      ? 'Quels problèmes juridiques ' + name + ' résout-il' + (loc ? ' à ' + loc : '') + ' ?'
+      : isConsulting
+        ? 'Quels défis ' + name + ' aide-t-il à résoudre' + (loc ? ' à ' + loc : '') + ' ?'
+        : 'Quels problèmes ' + name + ' résout-il pour ses clients ?';
+    var pbLines = name + ' aide ses clients à :<ul>';
+    problems.forEach(function(p){ pbLines += '<li>' + p + '</li>'; });
+    pbLines += '</ul>';
+    pairs.push({s:2, q: pbTitle, a: pbLines});
+  }
+
+  // Cas d'usage — questions très spécifiques = longue traîne forte
+  if (useCases.length > 0) {
+    var ucTitle = isLaw
+      ? 'Pour quelles situations ' + name + ' est-il le bon cabinet' + (loc ? ' à ' + loc : '') + ' ?'
+      : isConsulting
+        ? 'Dans quelles situations faire appel à ' + name + (loc ? ' à ' + loc : '') + ' ?'
+        : 'Dans quelles situations faire appel à ' + name + ' ?';
+    var ucLines = '<ul>';
+    useCases.forEach(function(u){ ucLines += '<li>' + u + '</li>'; });
+    ucLines += '</ul>';
+    pairs.push({s:2, q: ucTitle, a: ucLines});
+  }
+
+  if (isLaw) {
+    var cTitle = 'Comment se passe une première consultation chez ' + name + (loc ? ' à ' + loc : '') + ' ?';
+    var cA = 'La première consultation sert à analyser ' + votre + ' situation et à définir la bonne stratégie.';
+    var ch2 = [];
+    if (phone) ch2.push('au ' + phoneLink);
+    if (email) ch2.push('à ' + emailLink);
+    if (ch2.length) cA += ' Pour prendre rendez-vous, contactez ' + ent + ' ' + ch2.join(' ou ') + '.';
+    pairs.push({s:2, q: cTitle, a: cA});
+
+    var stTitle = loc
+      ? name + ' accompagne-t-il les startups et PME à ' + loc + ' ?'
+      : name + ' accompagne-t-il les startups et PME ?';
+    var stA = 'Oui. ' + name + ' accompagne les startups de la création jusqu\'à la levée de fonds.';
+    if (offers.length) stA += ' L\'offre <strong>' + offers[0] + '</strong> est conçue pour les structures en démarrage.';
+    stA += ' Structuration juridique, pacte d\'associés, contrats et conformité réglementaire sont couverts.';
+    pairs.push({s:2, q: stTitle, a: stA});
+
+    var urgTitle = loc
+      ? name + ' intervient-il en urgence à ' + loc + ' ?'
+      : name + ' intervient-il en urgence ?';
+    var urgA = 'Oui. ' + name + ' intervient en procédure d\'urgence (référé, ordonnance sur requête).';
+    if (phone) urgA += ' Pour une urgence, appelez directement le ' + phoneLink + '.';
+    pairs.push({s:2, q: urgTitle, a: urgA});
+  } else {
+    // Non-law: generic "how to get started" question
+    var startTitle = 'Comment démarrer avec ' + name + (loc ? ' à ' + loc : '') + ' ?';
+    var startA = 'Le premier échange permet de cadrer ' + votre + ' projet et d\'identifier les leviers d\'action.';
+    var ch3 = [];
+    if (phone) ch3.push('au ' + phoneLink);
+    if (email) ch3.push('à ' + emailLink);
+    startA += ch3.length ? ' Prenez contact ' + ch3.join(' ou ') + '.' : ' Prenez contact via ' + siteLink + '.';
+    pairs.push({s:2, q: startTitle, a: startA});
+  }
+
+  // ── SECTION 3 : OFFRES ────────────────────────────────
+
+  if (offers.length > 0) {
+    var offTitle = isLaw
+      ? 'Quelles formules juridiques ' + name + ' propose-t-il' + (loc ? ' à ' + loc : '') + ' ?'
+      : isConsulting
+        ? 'Quelles prestations ' + name + ' propose-t-il' + (loc ? ' à ' + loc : '') + ' ?'
+        : 'Quelles formules ' + name + ' propose-t-il ?';
+    var offLines = 'Plusieurs formats disponibles :<ul>';
+    offers.forEach(function(o){ offLines += '<li><strong>' + o + '</strong></li>'; });
+    offLines += '</ul>';
+    pairs.push({s:3, q: offTitle, a: offLines});
+  }
+
+  if (isLaw) {
+    pairs.push({s:3,
+      q: 'Quels sont les honoraires de ' + name + (loc ? ' à ' + loc : '') + ' ?',
+      a: 'Les honoraires sont définis selon la nature et la durée de la mission. Un devis est remis dès la première consultation. ' + name + ' s\'engage à une totale transparence tarifaire.'
+    });
+  } else if (offers.length > 0) {
+    pairs.push({s:3,
+      q: 'Comment sont tarifées les prestations de ' + name + ' ?',
+      a: 'Les tarifs varient selon la mission et sa durée. Contactez ' + ent + ' pour obtenir un devis adapté à votre projet.'
+    });
+  }
+
+  // ── SECTION 4 : CONTACT / RESSOURCES ──────────────────
+
+  var contTitle = loc
+    ? 'Comment joindre ' + name + ' à ' + loc + ' par téléphone ou email ?'
+    : 'Comment contacter ' + name + ' ?';
+  var contLines = V + ' pouvez joindre ' + name + ' :<ul>';
+  if (phone) contLines += '<li>Par téléphone : ' + phoneLink + '</li>';
+  if (email) contLines += '<li>Par email : ' + emailLink + '</li>';
+  contLines += '<li>Via le site : ' + siteLink + '</li>';
+  if (clientSpace) contLines += '<li>Espace client sécurisé : <a href="' + clientSpace + '">' + clientSpace + '</a></li>';
+  contLines += '</ul>';
+  if (loc) contLines += entCap + ' est à ' + loc + (region ? ', ' + region : '') + '.';
+  pairs.push({s:4, q: contTitle, a: contLines});
+
+  if (blogUrl) {
+    var blogTitle = isLaw
+      ? name + ' publie-t-il des articles juridiques' + (loc ? ' sur le droit à ' + loc : '') + ' ?'
+      : name + ' publie-t-il du contenu ou des ressources ?';
+    pairs.push({s:4, q: blogTitle,
+      a: 'Oui. Retrouvez les articles et analyses sur : <a href="' + blogUrl + '">' + blogUrl + '</a>.'});
+  }
+
+  if (clientSpace) {
+    pairs.push({s:4,
+      q: 'Comment accéder à l\'espace client sécurisé de ' + name + ' ?',
+      a: 'L\'espace client est à <a href="' + clientSpace + '">' + clientSpace + '</a>. ' + V + ' y échangez des documents en toute confidentialité avec l\'équipe.'
+    });
+  }
+
+  // GEO question — longue traîne sur les assistants IA
+  var geoTitle = loc
+    ? name + (isLaw ? ', cabinet d\'avocats à ' + loc + ',' : ' à ' + loc + ',') + ' apparaît-il dans ChatGPT, Perplexity ou Grok ?'
+    : name + ' apparaît-il dans les réponses de ChatGPT ou Perplexity ?';
+  pairs.push({s:4, q: geoTitle,
+    a: 'Oui. ' + name + ' est référencé pour être cité et recommandé par les principaux assistants IA : <strong>ChatGPT</strong>, <strong>Claude</strong>, <strong>Perplexity</strong>, <strong>Gemini</strong>, <strong>Grok (xAI)</strong>, <strong>Mistral Le Chat</strong>, <strong>DeepSeek</strong> et <strong>Microsoft Copilot</strong>.'
+  });
+
+  return pairs;
+}
+
+
+function buildFaqHtml(name, desc, faqPairs, faqObj, domain, location, phone, email, sc, sc2, schemaType, activity, team, socials, blogUrl, clientSpace, clientTypes, offers, services, isLaw, vous, votre, ent, entCap) {
+  ent = ent || 'l\'entreprise'; entCap = entCap || 'L\'entreprise';
+  vous = vous || 'vous'; votre = votre || 'votre';
+  var css = [
+    '.faq-page{max-width:860px;margin:0 auto;padding:2rem 1rem;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;color:#1a1a2e;line-height:1.7}',
+    '.faq-header{margin-bottom:2.5rem;border-bottom:3px solid #1a1a2e;padding-bottom:1.5rem}',
+    '.faq-header h1{font-size:clamp(22px,4vw,32px);margin-bottom:.5rem}',
+    '.faq-intro{color:#4b5563;font-size:15px;max-width:680px}',
+    '.faq-section{margin-bottom:3rem}',
+    '.faq-section h2{font-size:18px;font-weight:700;border-bottom:2px solid #1a1a2e;padding-bottom:.5rem;margin-bottom:1.5rem}',
+    '.faq-item{margin-bottom:2rem}',
+    '.faq-item h3{font-size:15px;font-weight:600;margin-bottom:.5rem;color:#1a1a2e}',
+    '.faq-item p,.faq-item ul{color:#374151;font-size:15px}',
+    '.faq-item ul{padding-left:1.4rem;margin-top:.5rem}',
+    '.faq-item li{margin-bottom:.4rem}',
+    'a{color:#4f46e5}',
+    '.faq-footer{border-top:1px solid #e5e7eb;padding-top:1rem;margin-top:3rem;font-size:12px;color:#9ca3af;text-align:center}'
+  ].join('\n');
+
+  var slug = name.toLowerCase().replace(/\s+/g,'-').replace(/[^a-z0-9\-]/g,'');
+
+  var H = '<!--\n  ' + Array(56).join('=') + '\n';
+  H += '  ' + name.toUpperCase() + ' — Page FAQ optimisée GEO\n';
+  H += '  Structure HTML prête à intégrer dans WordPress\n';
+  H += '  (Gutenberg mode HTML, ou template de page)\n';
+  H += '  Généré par Geoptim.io — https://geoptim.io\n';
+  H += '  ' + Array(56).join('=') + '\n-->\n\n';
+  H += '<style>\n' + css + '\n</style>\n\n';
+  H += sc + '\n' + JSON.stringify(faqObj, null, 2) + '\n' + sc2 + '\n\n';
+  H += '<article class="faq-page">\n\n';
+  H += '  <header class="faq-header">\n';
+  H += '    <h1>Questions fréquentes — ' + name + '</h1>\n';
+  H += '    <p class="faq-intro">' + desc;
+  if (location) H += ' Basé à ' + location + '.';
+  H += '</p>\n  </header>\n\n';
+
+  var sections = [
+    {n:1, title:entCap + ' ' + name, pairs:[]},
+    {n:2, title:'Domaines d\'expertise', pairs:[]},
+    {n:3, title:'Offres et fonctionnement', pairs:[]},
+    {n:4, title:'Contact et ressources', pairs:[]}
+  ];
+  faqPairs.forEach(function(p){ sections[(p.s||4)-1].pairs.push(p); });
+
+  sections.forEach(function(sec) {
+    if (!sec.pairs.length) return;
+    H += '  <!-- SECTION ' + sec.n + ' — ' + sec.title.toUpperCase() + ' -->\n';
+    H += '  <section class="faq-section">\n';
+    H += '    <h2>' + sec.title + '</h2>\n\n';
+    sec.pairs.forEach(function(item, i) {
+      var id = slug + '-' + sec.n + '-' + (i+1);
+      H += '    <div class="faq-item" id="' + id + '">\n';
+      H += '      <h3>' + item.q + '</h3>\n';
+      var a = item.a;
+      if (a.indexOf('<ul>') !== -1) {
+        var ulIdx = a.indexOf('<ul>');
+        var before = a.slice(0, ulIdx).trim();
+        var rest   = a.slice(ulIdx);
+        if (before) H += '      <p>' + before + '</p>\n';
+        H += '      ' + rest + '\n';
+      } else {
+        H += '      <p>' + a + '</p>\n';
+      }
+      H += '    </div>\n\n';
+    });
+    H += '  </section>\n\n';
+  });
+
+  H += '  <div class="faq-footer">\n';
+  H += '    Optimisation GEO par <a href="https://geoptim.io" rel="dofollow">Geoptim.io</a>\n';
+  H += '  </div>\n\n</article>\n\n';
+  H += '<!--\n';
+  H += '  INTÉGRATION WORDPRESS :\n';
+  H += '  1. Créer une page "FAQ" dans WordPress\n';
+  H += '  2. Passer en mode "Éditeur HTML" dans Gutenberg\n';
+  H += '  3. Coller ce contenu HTML\n';
+  H += '  4. Ajouter le JSON-LD FAQPage (schema-jsonld.html) dans le <head>\n';
+  H += '     via RankMath / Yoast / Insert Headers & Footers\n';
+  H += '-->\n';
+  return H;
+}
+
+
+
+// ── RESULTS ──
+function scoreColor(s) { return s >= 70 ? '#1a7a4a' : s >= 40 ? '#b45309' : '#c0392b'; }
+function scoreBg(s) { return s >= 70 ? '#f0fdf4' : s >= 40 ? '#fffbeb' : '#fef2f2'; }
+function scoreLbl(s) { return s >= 70 ? 'Bon' : s >= 40 ? 'Moyen' : 'Insuffisant'; }
+
+function renderResults(url) {
+  var r = result;
+  var s = r.geoScore || 0;
+  var c = scoreColor(s);
+  function setTxt(id, v) { var el = document.getElementById(id); if (el) el.textContent = v; }
+  function setStyle(id, prop, v) { var el = document.getElementById(id); if (el) el.style[prop] = v; }
+  setTxt('resUrl', 'Rapport GEO · ' + url);
+  setTxt('resSiteName', r.siteName || '—');
+  setTxt('resSiteType', r.siteType || '—');
+  setTxt('summaryTxt', r.summary || '—');
+  setStyle('summaryCard', 'borderLeftColor', c);
+  setTxt('filesSub', '4 fichiers générés pour ' + (r.siteName || 'votre site') + '.');
+  setTxt('unlockDesc', 'Personnalisés pour ' + (r.siteName || 'votre site') + '.');
+  setTxt('modDesc', '4 fichiers personnalisés pour ' + (r.siteName || 'votre site') + '.');
+  // Ring
+  var arc = document.getElementById('scoreArc');
+  var val = document.getElementById('scoreVal');
+  if (arc) arc.style.stroke = c;
+  if (val) val.style.fill = c;
+  setTimeout(function() {
+    if (arc) arc.style.strokeDashoffset = 301.6 - (s / 100) * 301.6;
+    if (val) {
+      var v = 0;
+      var iv = setInterval(function() {
+        v = Math.min(v + Math.ceil(s / 30), s);
+        val.textContent = v;
+        if (v >= s) clearInterval(iv);
+      }, 40);
+    }
+  }, 300);
+  setTxt('scoreLbl', scoreLbl(s));
+  setStyle('scoreLbl', 'color', c);
+  var badge = document.getElementById('scoreBadge');
+  if (badge) {
+    badge.textContent = s + '/100';
+    badge.style.background = scoreBg(s);
+    badge.style.border = '1px solid ' + c + '40';
+    badge.style.color = c;
+  }
+  setTxt('scoreDesc', r.siteDescription || '—');
+  // Bars
+  var barsDiv = document.getElementById('barsDiv');
+  barsDiv.innerHTML = '';
+  var breakdown = r.scoreBreakdown || {};
+  var labels = r.scoreLabels || {};
+  var barDefs = [['robots.txt','robots'],['llms.txt','llmstxt'],['Schema.org','schema'],['Contenu','content']];
+  for (var i = 0; i < barDefs.length; i++) {
+    var n = barDefs[i][0], k = barDefs[i][1];
+    var bv = breakdown[k] || 0;
+    var bp = Math.round((bv / 25) * 100);
+    var bc = scoreColor(bp);
+    var d = document.createElement('div'); d.className = 'br';
+    d.innerHTML = '<div class="brh"><span class="brn">' + n + '</span><span class="brv" style="color:' + bc + '">' + bv + '/25</span></div>' +
+      '<div class="brt"><div class="brf" id="bar_' + k + '" style="background:' + bc + '" data-pct="' + bp + '"></div></div>' +
+      (labels[k] ? '<div class="brs">' + labels[k] + '</div>' : '');
+    barsDiv.appendChild(d);
+  }
+  setTimeout(function() {
+    var fills = barsDiv.querySelectorAll('.brf');
+    for (var j = 0; j < fills.length; j++) fills[j].style.width = fills[j].dataset.pct + '%';
+  }, 400);
+  // Lists
+  var sl = document.getElementById('strengthsDiv'); sl.innerHTML = '';
+  var strengths = r.strengths || [];
+  for (var i = 0; i < strengths.length; i++) {
+    sl.innerHTML += '<div class="lr"><span class="dg">●</span><span>' + strengths[i] + '</span></div>';
+  }
+  var il = document.getElementById('improvDiv'); il.innerHTML = '';
+  var improvs = r.improvements || [];
+  for (var i = 0; i < improvs.length; i++) {
+    il.innerHTML += '<div class="lr"><span class="dw">●</span><span>' + improvs[i] + '</span></div>';
+  }
+  renderFiles();
+}
+
+function renderFiles() {
+  var grid = document.getElementById('filesGrid');
+  var banner = document.getElementById('unlockBanner');
+  var rc = document.getElementById('receiptCard');
+  var highMsg = document.getElementById('highScoreMsg');
+  var filesTitle = document.getElementById('filesTitle');
+  var filesSub = document.getElementById('filesSub');
+  grid.innerHTML = '';
+
+  // Score >= 80 et non encore payé : le site est déjà bien optimisé → pas de CTA achat
+  if (!paid && result && (result.geoScore || 0) >= 80) {
+    banner.style.display = 'none';
+    grid.style.display = 'none';
+    if (rc) rc.style.display = 'none';
+    if (filesTitle) filesTitle.style.display = 'none';
+    if (filesSub) filesSub.style.display = 'none';
+    if (highMsg) {
+      highMsg.style.display = 'block';
+      var hv = document.getElementById('highScoreVal');
+      if (hv) hv.textContent = result.geoScore;
+      var hl = document.getElementById('highScoreImprovs');
+      if (hl) {
+        hl.innerHTML = '';
+        var improvs = result.improvements || [];
+        for (var j = 0; j < improvs.length; j++) {
+          hl.innerHTML += '<div style="display:flex;gap:10px;align-items:flex-start;background:#fff;border:1px solid #bbf7d0;border-radius:10px;padding:12px 16px"><span style="color:#16a34a;font-weight:700;flex-shrink:0">→</span><span style="font-size:13px;color:#374151;line-height:1.6">' + improvs[j] + '</span></div>';
+        }
+      }
+    }
+    return;
+  }
+
+  // Affichage normal (score < 80 ou déjà payé)
+  if (highMsg) highMsg.style.display = 'none';
+  if (filesTitle) filesTitle.style.display = '';
+  if (filesSub) filesSub.style.display = '';
+  grid.style.display = '';
+  banner.style.display = paid ? 'none' : 'flex';
+  if (rc) rc.style.display = paid ? 'flex' : 'none';
+  for (var i = 0; i < FILE_META.length; i++) {
+    var m = FILE_META[i];
+    if (!paid) {
+      grid.innerHTML += '<div class="fc"><div class="fct"><div class="fic">' + m.icon + '</div><div><div class="fn">' + m.title + '</div><div class="ff">' + m.filename + '</div></div><span class="flk">🔒</span></div><div class="fsk"></div><div class="fsk" style="width:75%"></div><div class="fsk" style="width:55%;margin-top:4px"></div></div>';
+    } else {
+      var content = (result.files || {})[m.key] || '';
+      var preview = content.slice(0, 200).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+      grid.innerHTML += '<div class="fc ul" style="border-color:' + m.color + '28"><div class="fct"><div class="fic" style="background:' + m.color + '15;border:1px solid ' + m.color + '25">' + m.icon + '</div><div style="flex:1"><div class="fn" style="color:var(--navy)">' + m.title + '</div><div class="ff">' + m.filename + '</div></div><span class="frd">✓ Prêt</span></div><div class="fpv">' + preview + '…</div><div class="fa"><button class="dlb" style="background:' + m.color + '" onclick="dlFile(\'' + m.key + '\',\'' + m.filename + '\')">↓ Télécharger</button><button class="cpb" onclick="cpFile(\'' + m.key + '\',this)">⧉</button></div></div>';
+    }
+  }
+}
+
+function dlFile(key, filename) {
+  var content = (result.files || {})[key] || '';
+  var blob = new Blob([content], {type:'text/plain'});
+  var a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = filename; a.click();
+}
+
+function cpFile(key, btn) {
+  var content = (result.files || {})[key] || '';
+  navigator.clipboard.writeText(content).then(function() {
+    btn.textContent = '✓'; btn.style.color = '#1a7a4a';
+    setTimeout(function() { btn.textContent = '⧉'; btn.style.color = ''; }, 2000);
+  });
+}
+
+// ── MODAL ──
+function openModal() {
+  document.getElementById('modal').classList.add('open');
+  document.getElementById('modConfirm').style.display = 'block';
+  document.getElementById('modProcessing').style.display = 'none';
+  document.getElementById('modDone').style.display = 'none';
+  // Pré-remplir les coordonnées de facturation depuis localStorage
+  var b = JSON.parse(localStorage.getItem('geo_billing') || '{}');
+  if (b.name)    document.getElementById('mod-bname').value    = b.name;
+  if (b.address) document.getElementById('mod-baddress').value = b.address;
+  if (b.vat)     document.getElementById('mod-bvat').value     = b.vat;
+  if (b.type) {
+    var radios = document.querySelectorAll('input[name="mod-btype"]');
+    radios.forEach(function(r) { r.checked = r.value === b.type; });
+    modTypeChange();
+  }
+}
+function modTypeChange() {
+  var checked = document.querySelector('input[name="mod-btype"]:checked');
+  var vat = document.getElementById('mod-bvat');
+  if (vat) vat.style.display = (checked && checked.value === 'societe') ? '' : 'none';
+}
+
+function closeModal() { document.getElementById('modal').classList.remove('open'); }
+
+// ── STRIPE PAYMENT ─────────────────────────────────────────────────────────
+
+function processPayment() {
+  var currentUrl = document.getElementById('urlInput').value.trim();
+  if (currentUrl.indexOf('http') !== 0) currentUrl = 'https://' + currentUrl;
+
+  // Sauvegarder analyse + fichiers générés avant redirect Stripe
+  if (result) {
+    try {
+      sessionStorage.setItem('geo_result', JSON.stringify(result));
+      sessionStorage.setItem('geo_url',    currentUrl);
+    } catch(e) {}
+  }
+
+  document.getElementById('modConfirm').style.display = 'none';
+  document.getElementById('modProcessing').style.display = 'block';
+  document.getElementById('modProcessing').querySelector('p').textContent = 'Redirection vers le paiement…';
+
+  // Sauvegarder les coordonnées de facturation
+  var billingChecked = document.querySelector('input[name="mod-btype"]:checked');
+  var billing = {
+    type:    billingChecked ? billingChecked.value : 'particulier',
+    name:    (document.getElementById('mod-bname').value    || '').trim(),
+    address: (document.getElementById('mod-baddress').value || '').trim(),
+    vat:     (document.getElementById('mod-bvat').value     || '').trim()
+  };
+  if (billing.name) localStorage.setItem('geo_billing', JSON.stringify(billing));
+  window._billingData = billing;
+
+  fetch('/.netlify/functions/create-checkout', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      siteName:       result ? (result.siteName || '') : '',
+      siteUrl:        currentUrl,
+      billingName:    billing.name,
+      billingAddress: billing.address,
+      billingType:    billing.type,
+      billingVat:     billing.vat
+    })
+  })
+  .then(function(r) {
+    if (!r.ok) throw new Error('Erreur serveur ' + r.status);
+    return r.json();
+  })
+  .then(function(data) {
+    if (data.url) {
+      window.location.href = data.url;
+    } else {
+      throw new Error(data.error || 'URL de paiement manquante');
+    }
+  })
+  .catch(function(err) {
+    document.getElementById('modProcessing').style.display = 'none';
+    document.getElementById('modConfirm').style.display = 'block';
+    alert('Erreur paiement : ' + err.message);
+  });
+}
+
+// ── RETOUR DEPUIS STRIPE ────────────────────────────────────────────────────
+
+(function handleStripeReturn() {
+  var params = new URLSearchParams(window.location.search);
+  var payment = params.get('payment');
+  var stripeSessionId = params.get('session_id');
+
+  if (payment === 'cancelled') {
+    history.replaceState({}, '', '/');
+    return;
+  }
+  if (payment !== 'success' || !stripeSessionId) return;
+
+  // Nettoyer l'URL
+  history.replaceState({}, '', '/');
+
+  // Récupérer ce qu'on avait sauvegardé
+  var savedResult = null;
+  var savedUrl    = '';
+  try {
+    var raw = sessionStorage.getItem('geo_result');
+    savedUrl = sessionStorage.getItem('geo_url') || '';
+    if (raw) savedResult = JSON.parse(raw);
+    sessionStorage.removeItem('geo_result');
+    sessionStorage.removeItem('geo_url');
+  } catch(e) {}
+
+  if (!savedResult || !savedUrl) {
+    alert('Session expirée. Relancez l\'analyse.');
+    return;
+  }
+
+  // Restaurer l'état
+  document.getElementById('urlInput').value = savedUrl;
+  result = savedResult;
+  renderResults(savedUrl);
+  goPage('results');
+
+  // Vérifier le paiement (appel rapide, < 1s)
+  var banner = document.getElementById('unlockBanner');
+  if (banner) {
+    banner.innerHTML = '<div style="display:flex;align-items:center;gap:14px;color:#fff">'
+      + '<div class="mo-spinner" style="width:28px;height:28px;border-width:2px;margin:0"></div>'
+      + '<div style="font-size:14px;font-weight:500">Vérification du paiement…</div>'
+      + '</div>';
+  }
+
+  fetch('/.netlify/functions/verify-payment', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ stripeSessionId: stripeSessionId })
+  })
+  .then(function(r) { return r.json(); })
+  .then(function(data) {
+    if (!data.paid) throw new Error('Paiement non confirmé');
+    // Paiement OK — les fichiers sont déjà dans result.files
+    paid = true;
+    // Stocker les infos de reçu
+    // Fusionner billing depuis Stripe metadata ET localStorage (fallback)
+    var savedBilling = JSON.parse(localStorage.getItem('geo_billing') || '{}');
+    window._receiptData = {
+      email:          data.email          || '',
+      amount:         data.amount         || 2900,
+      created:        data.created        || Math.floor(Date.now() / 1000),
+      siteName:       data.siteName       || (result && result.siteName) || '',
+      siteUrl:        data.siteUrl        || document.getElementById('urlInput').value || '',
+      sessionId:      data.sessionId      || '',
+      billingName:    data.billingName    || savedBilling.name    || '',
+      billingAddress: data.billingAddress || savedBilling.address || '',
+      billingType:    data.billingType    || savedBilling.type    || 'particulier',
+      billingVat:     data.billingVat     || savedBilling.vat     || ''
+    };
+    window._billingData = { name: window._receiptData.billingName, address: window._receiptData.billingAddress, type: window._receiptData.billingType, vat: window._receiptData.billingVat };
+    renderFiles();
+    var b2 = document.getElementById('unlockBanner');
+    if (b2) {
+      b2.style.display = 'flex';
+      b2.style.background = 'linear-gradient(135deg,#1a4a2a,#1a7a4a)';
+      b2.innerHTML = '<div style="display:flex;align-items:center;gap:16px;color:#fff;flex-wrap:wrap">'
+        + '<span style="font-size:22px">✅</span>'
+        + '<div style="flex:1"><div style="font-weight:700;font-size:15px">Fichiers déverrouillés !</div>'
+        + '<div style="font-size:12px;color:#a0e0b8;margin-top:2px">Téléchargez vos 4 fichiers ci-dessous.</div></div>'
+        + '<button onclick="showReceipt()" style="background:#fff;border:none;color:#0a2540;padding:9px 18px;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;flex-shrink:0">Télécharger le reçu</button>'
+        + '</div>';
+    }
+    // Auto-open receipt modal after a short delay so the user sees the success banner first
+    setTimeout(showReceipt, 1400);
+  })
+  .catch(function(err) {
+    var b3 = document.getElementById('unlockBanner');
+    if (b3) {
+      b3.style.background = 'linear-gradient(135deg,#4a1a1a,#c0392b)';
+      b3.innerHTML = '<div style="color:#fff">'
+        + '<div style="font-weight:600;margin-bottom:4px">Erreur de vérification</div>'
+        + '<div style="font-size:12px;opacity:.8">Contactez support@geoptim.io — votre paiement est enregistré.</div>'
+        + '</div>';
+    }
+  });
+})();
+// ── BLOG ──
+function renderBlog() {
+  var grid = document.getElementById('blogGrid');
+  if (!grid) return;
+  var html = '';
+  for (var i = 0; i < ARTICLES.length; i++) {
+    var a = ARTICLES[i];
+    html += '<a class="ac" href="' + a.slug + '" onclick="event.preventDefault();openArticle(' + a.id + ')"><div class="ab"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px"><span class="at">' + a.tag + '</span><span style="font-family:\'DM Mono\',monospace;font-size:10px;color:var(--text4)">' + a.read + '</span></div><h3 class="ah">' + a.title + '</h3><p class="ae">' + a.excerpt + '</p></div><div class="af"><span class="ad">' + a.date + '</span><span class="ar">Lire →</span></div></a>';
+  }
+  grid.innerHTML = html;
+  var fa = document.getElementById('footerArticles');
+  if (fa) {
+    var fhtml = '';
+    for (var i = 0; i < ARTICLES.length; i++) {
+      fhtml += '<a class="fl" href="' + ARTICLES[i].slug + '" onclick="event.preventDefault();openArticle(' + ARTICLES[i].id + ')">' + ARTICLES[i].title.slice(0,38) + '…</a>';
+    }
+    fa.innerHTML = fhtml;
+  }
+}
+
+function openArticle(id) {
+  var a = null;
+  for (var i = 0; i < ARTICLES.length; i++) { if (ARTICLES[i].id === id) { a = ARTICLES[i]; break; } }
+  if (!a) return;
+  document.getElementById('artTag').textContent = a.tag;
+  document.getElementById('artTitle').textContent = a.title;
+  document.getElementById('artDate').textContent = a.date;
+  document.getElementById('artRead').textContent = a.read + ' de lecture';
+  var html = '';
+  for (var i = 0; i < a.body.length; i++) {
+    html += a.body[i].t === 'h2' ? '<h2>' + a.body[i].v + '</h2>' : '<p>' + a.body[i].v + '</p>';
+  }
+  document.getElementById('artContent').innerHTML = html;
+  goPage('article');
+}
+
+// ── RECEIPT MODAL ──
+function showReceipt() {
+  var d = window._receiptData || {};
+  var ttc    = (d.amount || 2900) / 100;
+  var ht     = Math.round(ttc / 1.20 * 100) / 100;
+  var tva    = Math.round((ttc - ht) * 100) / 100;
+  var date   = new Date((d.created || Date.now() / 1000) * 1000);
+  var dateStr = date.toLocaleDateString('fr-FR', { day:'2-digit', month:'long', year:'numeric' });
+  var sid    = (d.sessionId || '').slice(-8).toUpperCase();
+  var num    = 'GEO-' + date.getFullYear()
+             + String(date.getMonth()+1).padStart(2,'0')
+             + String(date.getDate()).padStart(2,'0')
+             + (sid ? '-' + sid : '');
+  var fmt    = function(n) { return n.toFixed(2).replace('.', ',') + '\u00a0€'; };
+
+  document.getElementById('rm-num').textContent   = 'Reçu ' + num;
+  document.getElementById('rm-date').textContent  = dateStr;
+  // Section CLIENT : uniquement les coordonnées saisies + email Stripe — aucun doublon
+  var clientLines = [];
+  if (d.billingName)    clientLines.push('<strong>' + d.billingName + '</strong>');
+  if (d.billingAddress) clientLines.push(d.billingAddress);
+  if (d.billingVat)     clientLines.push('TVA\u00a0: ' + d.billingVat);
+  if (d.email)          clientLines.push(d.email);
+  document.getElementById('rm-client').innerHTML = clientLines.join('<br>') || d.email || '';
+  // Vider rm-billing-display (évite tout doublon)
+  var dispEl = document.getElementById('rm-billing-display');
+  if (dispEl) dispEl.innerHTML = '';
+
+  document.getElementById('rm-site').textContent  =
+    '4 fichiers GEO personnalisés' + (d.siteName ? ' \u2014 ' + d.siteName : '');
+  document.getElementById('rm-ht').textContent    = fmt(ht);
+  document.getElementById('rm-ht2').textContent   = fmt(ht);
+  document.getElementById('rm-tva').textContent   = fmt(tva);
+  document.getElementById('rm-ttc').textContent   = fmt(ttc);
+
+  document.getElementById('receiptModal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeReceipt() {
+  document.getElementById('receiptModal').classList.remove('open');
+  document.body.style.overflow = '';
+  // Fermer le formulaire si ouvert
+  toggleBillingEdit(false);
+}
+
+// ── BILLING FORM ──
+function toggleBillingEdit(show) {
+  var wrap = document.getElementById('rm-client-wrap');
+  var form = document.getElementById('rm-billing-form');
+  if (!wrap || !form) return;
+  wrap.style.display = show ? 'none' : '';
+  form.style.display = show ? 'block' : 'none';
+  if (show) {
+    var b = JSON.parse(localStorage.getItem('geo_billing') || '{}');
+    document.getElementById('rb-fullname').value = b.name || '';
+    document.getElementById('rb-address').value  = b.address || '';
+    document.getElementById('rb-vat').value       = b.vat || '';
+    var radios = document.querySelectorAll('input[name="rb-type"]');
+    radios.forEach(function(r) { r.checked = r.value === (b.type || 'particulier'); });
+    rbTypeChange();
+  }
+}
+function rbTypeChange() {
+  var checked = document.querySelector('input[name="rb-type"]:checked');
+  var vatField = document.getElementById('rb-vat');
+  if (checked && vatField) vatField.style.display = checked.value === 'societe' ? '' : 'none';
+}
+function saveBilling() {
+  var checked = document.querySelector('input[name="rb-type"]:checked');
+  var b = {
+    type:    checked ? checked.value : 'particulier',
+    name:    (document.getElementById('rb-fullname').value || '').trim(),
+    address: (document.getElementById('rb-address').value  || '').trim(),
+    vat:     (document.getElementById('rb-vat').value      || '').trim()
+  };
+  localStorage.setItem('geo_billing', JSON.stringify(b));
+  window._billingData = b;
+  toggleBillingEdit(false);
+  updateBillingDisplay();
+}
+function updateBillingDisplay() {
+  var disp = document.getElementById('rm-billing-display');
+  if (!disp) return;
+  var b = window._billingData || JSON.parse(localStorage.getItem('geo_billing') || '{}');
+  var lines = [];
+  if (b.name)    lines.push('<strong>' + b.name + '</strong>');
+  if (b.address) lines.push(b.address);
+  if (b.vat)     lines.push('TVA : ' + b.vat);
+  disp.innerHTML = lines.join('<br>');
+}
+
+// ── LEGAL PAGES ──
+function goLegal(section) {
+  goPage('legal');
+  switchLegal(section || 'mentions');
+}
+
+function switchLegal(section) {
+  var sections = ['mentions','rgpd','cgv'];
+  for (var i = 0; i < sections.length; i++) {
+    var s = sections[i];
+    var el = document.getElementById('lsec-' + s);
+    var tab = document.getElementById('tab-' + s);
+    if (el) el.className = 'l-sec' + (s === section ? ' on' : '');
+    if (tab) tab.className = 'l-tab' + (s === section ? ' active' : '');
+  }
+  var titles = {mentions:'Mentions légales', rgpd:'Politique de confidentialité', cgv:'Conditions Générales de Vente'};
+  var t = document.getElementById('legalTitle');
+  if (t) t.textContent = titles[section] || 'Informations légales';
+  window.scrollTo(0, 0);
+}
+
+// ── COOKIE NOTICE ──
+function dismissCookie() {
+  document.getElementById('cookieBar').classList.remove('show');
+  try { localStorage.setItem('geo_cookie', '1'); } catch(e) {}
+}
+
+(function initCookie() {
+  try { if (localStorage.getItem('geo_cookie')) return; } catch(e) {}
+  setTimeout(function() {
+    var bar = document.getElementById('cookieBar');
+    if (bar) bar.classList.add('show');
+  }, 1200);
+})();
+
+// ── INIT ──
+renderBlog();
+
+// ── FAQ TOGGLE ────────────────────────────────────────────────────────────────
+function toggleFaq(btn) {
+  var answer = btn.nextElementSibling;
+  var isOpen = answer.classList.contains('open');
+  // Close all
+  document.querySelectorAll('.faq-q').forEach(function(b) { b.classList.remove('open'); });
+  document.querySelectorAll('.faq-a').forEach(function(a) { a.classList.remove('open'); });
+  // Open clicked if it was closed
+  if (!isOpen) {
+    btn.classList.add('open');
+    answer.classList.add('open');
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+[build]
+  publish = "."
+  functions = "netlify/functions"
+
+[[redirects]]
+  from = "/blog/geo-vs-seo"
+  to = "/blog/geo-vs-seo.html"
+  status = 200
+
+[[redirects]]
+  from = "/blog/chatgpt-sources"
+  to = "/blog/chatgpt-sources.html"
+  status = 200
+
+[[redirects]]
+  from = "/blog/llms-txt"
+  to = "/blog/llms-txt.html"
+  status = 200
+
+[[redirects]]
+  from = "/blog/ai-ready"
+  to = "/blog/ai-ready.html"
+  status = 200
+
+[functions]
+  node_bundler = "esbuild"
+
+[functions."analyze-score"]
+  timeout = 26
+
+[functions."analyze-info"]
+  timeout = 26
+
+[functions."generate-llms"]
+  timeout = 26
+
+[functions."generate-schema"]
+  timeout = 26
+
+[functions."generate-faq"]
+  timeout = 26
+
+[functions."create-checkout"]
+  timeout = 10
+
+[functions."verify-payment"]
+  timeout = 10
+
+[functions."generate"]
+  timeout = 26
+
+[functions."verify-and-generate"]
+  timeout = 26

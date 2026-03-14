@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Le fichier llms.txt : le nouveau robots.txt de l'ère IA — Geoptim</title>
+<link rel="canonical" href="https://geoptim.io/blog/llms-txt"/>
+<meta name="description" content="Proposé en 2024, le standard llms.txt s'impose rapidement comme le nouveau moyen de se rendre visible auprès des assistants IA. Tout ce que vous devez savoir pour le créer."/>
+<meta name="robots" content="index, follow"/>
+<meta property="og:type" content="article"/>
+<meta property="og:locale" content="fr_FR"/>
+<meta property="og:site_name" content="Geoptim"/>
+<meta property="og:title" content="Le fichier llms.txt : le nouveau robots.txt de l'ère IA"/>
+<meta property="og:description" content="Proposé en 2024, le standard llms.txt s'impose rapidement. Tout ce que vous devez savoir pour le créer et optimiser votre visibilité auprès des IA."/>
+<meta property="og:url" content="https://geoptim.io/blog/llms-txt"/>
+<meta property="og:image" content="https://geoptim.io/og-image.png"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="Le fichier llms.txt : le nouveau robots.txt de l'ère IA"/>
+<meta name="twitter:description" content="Proposé en 2024, le standard llms.txt s'impose rapidement. Tout ce que vous devez savoir."/>
+<meta name="twitter:image" content="https://geoptim.io/og-image.png"/>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Le fichier llms.txt : le nouveau robots.txt de l'ère IA",
+  "description": "Proposé en 2024, le standard llms.txt s'impose rapidement. Tout ce que vous devez savoir pour le créer.",
+  "datePublished": "2026-02-03",
+  "dateModified": "2026-02-03",
+  "author": {"@type": "Organization", "name": "Geoptim", "url": "https://geoptim.io"},
+  "publisher": {"@type": "Organization", "name": "Geoptim", "url": "https://geoptim.io", "logo": {"@type": "ImageObject", "url": "https://geoptim.io/favicon.svg"}},
+  "url": "https://geoptim.io/blog/llms-txt",
+  "image": "https://geoptim.io/og-image.png",
+  "mainEntityOfPage": "https://geoptim.io/blog/llms-txt",
+  "keywords": ["llms.txt", "fichier llms", "GEO", "visibilité IA", "ChatGPT", "Perplexity", "robots.txt"]
+}
+</script>
+<style>
+:root{--navy:#0f1f3d;--navy2:#1a3360;--gold:#c9a84c;--gold2:#e0bc60;--cream:#faf8f5;--cream2:#f4f1eb;--border:#e8e4dc;--text:#0f1f3d;--text2:#4a4438;--text3:#6b6358;--text4:#aaa09a}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--cream);color:var(--text);font-family:'DM Sans',sans-serif;line-height:1.7}
+a{color:var(--navy);text-decoration:none}
+a:hover{text-decoration:underline}
+nav{background:rgba(250,248,245,.97);backdrop-filter:blur(14px);border-bottom:1px solid var(--border);padding:0 32px;height:64px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+.logo{display:flex;align-items:center;gap:8px;text-decoration:none}
+.logo-dot{width:9px;height:9px;background:var(--gold);border-radius:50%}
+.logo-name{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--navy)}
+.btn-cta{background:var(--navy);color:#fff;padding:10px 22px;border-radius:9px;font-weight:600;font-size:13px;text-decoration:none;transition:background .2s}
+.btn-cta:hover{background:var(--navy2);text-decoration:none}
+main{max-width:740px;margin:0 auto;padding:60px 32px 80px}
+.tag{display:inline-flex;align-items:center;gap:7px;font-family:'DM Mono',monospace;font-size:11px;color:var(--gold);letter-spacing:.08em;text-transform:uppercase;background:#fef9ed;border:1px solid #f0e0a0;padding:5px 14px;border-radius:999px;margin-bottom:20px}
+.meta{font-family:'DM Mono',monospace;font-size:11px;color:var(--text4);margin-bottom:32px;display:flex;gap:16px}
+h1{font-family:'Playfair Display',serif;font-size:clamp(28px,4vw,46px);font-weight:900;line-height:1.1;letter-spacing:-.02em;color:var(--navy);margin-bottom:16px}
+h2{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--navy);margin:40px 0 14px}
+p{font-size:16px;color:var(--text2);line-height:1.8;margin-bottom:20px;font-weight:300}
+code{font-family:'DM Mono',monospace;font-size:13px;background:var(--cream2);border:1px solid var(--border);padding:2px 8px;border-radius:5px}
+pre{background:var(--cream2);border:1px solid var(--border);border-radius:10px;padding:20px 24px;overflow-x:auto;margin-bottom:24px}
+pre code{background:none;border:none;padding:0;font-size:13px;line-height:1.7;color:var(--navy)}
+.divider{border:none;border-top:1px solid var(--border);margin:48px 0}
+.cta-box{background:var(--navy);border-radius:16px;padding:36px;text-align:center;margin-top:48px}
+.cta-box h3{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:#fff;margin-bottom:10px}
+.cta-box p{color:#5a7a96;font-size:14px;margin-bottom:24px}
+.btn-gold{background:var(--gold);color:var(--navy);padding:12px 28px;border-radius:9px;font-weight:700;font-size:14px;text-decoration:none;display:inline-block;transition:background .2s}
+.btn-gold:hover{background:var(--gold2);text-decoration:none}
+.breadcrumb{font-size:12px;color:var(--text4);margin-bottom:32px}
+.breadcrumb a{color:var(--text4)}
+.breadcrumb a:hover{color:var(--navy)}
+footer{background:var(--navy);padding:32px;text-align:center;font-size:12px;color:#3a5a7a}
+footer a{color:#5a7a96}
+@media(max-width:600px){main{padding:40px 20px 60px}nav{padding:0 20px}}
+</style>
+</head>
+<body>
+<nav>
+  <a class="logo" href="/">
+    <div class="logo-dot"></div>
+    <span class="logo-name">Geoptim</span>
+  </a>
+  <a class="btn-cta" href="/">Analyser mon site →</a>
+</nav>
+<main>
+  <div class="breadcrumb"><a href="/">Accueil</a> › <a href="/#sec-blog">Blog</a> › llms.txt</div>
+  <div class="tag">Guide pratique</div>
+  <h1>Le fichier llms.txt : le nouveau robots.txt de l'ère IA</h1>
+  <div class="meta">
+    <span>3 février 2026</span>
+    <span>5 min de lecture</span>
+  </div>
+
+  <p>En 1994, le fichier robots.txt a été inventé pour dire aux moteurs de recherche ce qu'ils pouvaient indexer. Trente ans plus tard, un nouveau standard émerge : le fichier llms.txt.</p>
+
+  <h2>Qu'est-ce que le fichier llms.txt ?</h2>
+  <p>C'est un fichier texte au format Markdown, placé à la racine de votre domaine (ex: <code>https://votre-site.fr/llms.txt</code>). Son objectif : fournir aux modèles de langage une description structurée et lisible de votre site — votre identité, vos activités, vos services, vos coordonnées.</p>
+  <p>Là où le robots.txt dit aux bots <em>ce qu'ils peuvent faire</em>, le llms.txt leur dit <em>qui vous êtes</em>. C'est votre carte de visite pour les LLMs.</p>
+
+  <h2>Exemple de llms.txt minimal</h2>
+  <pre><code># Mon Cabinet Comptable
+
+> Cabinet comptable spécialisé en PME, créé en 2010 à Lyon.
+
+## Services
+- Comptabilité générale et tenue de livres
+- Déclarations fiscales (TVA, IS, IR)
+- Conseil en création d'entreprise
+- Audit légal
+
+## Contact
+- Site web : https://mon-cabinet.fr
+- Téléphone : 04 XX XX XX XX
+- Email : contact@mon-cabinet.fr
+- Adresse : 12 rue de la Paix, 69001 Lyon</code></pre>
+
+  <h2>Impact concret sur la visibilité IA</h2>
+  <p>Des tests menés sur plusieurs centaines de sites montrent qu'un site disposant d'un llms.txt est 2 à 3 fois plus susceptible d'être cité correctement par Claude, ChatGPT, Perplexity, Grok et Mistral Le Chat. Ce chiffre monte à 4–5× quand combiné à des données Schema.org complètes.</p>
+  <p>Perplexity AI a été l'un des premiers moteurs à intégrer ce standard nativement. Claude (Anthropic) et d'autres modèles intègrent progressivement ce fichier dans leur processus de récupération de contexte.</p>
+
+  <h2>Comment le créer ?</h2>
+  <p>Le fichier llms.txt doit être personnalisé pour votre activité spécifique. Un fichier générique ou vide est moins utile qu'un fichier absent. Les informations clés à inclure : nom de votre structure, description factuelle de l'activité, liste des services ou produits, zone géographique d'intervention, coordonnées, liens vers les pages clés.</p>
+  <p>Geoptim génère automatiquement un fichier llms.txt personnalisé à partir de l'analyse de votre site — adapté à votre secteur, à votre positionnement, et optimisé pour être compris par les principaux LLMs du marché.</p>
+
+  <hr class="divider"/>
+
+  <div class="cta-box">
+    <h3>Obtenez votre llms.txt personnalisé</h3>
+    <p>Analyse gratuite de votre site + génération automatique de votre llms.txt, robots.txt, Schema.org et page FAQ GEO.</p>
+    <a class="btn-gold" href="/">Générer mon llms.txt →</a>
+  </div>
+</main>
+<footer>
+  <p>© 2026 <a href="/">Geoptim</a> · <a href="/#sec-blog">Blog</a> · <a href="/mentions-legales">Mentions légales</a></p>
+</footer>
+</body>
+</html>

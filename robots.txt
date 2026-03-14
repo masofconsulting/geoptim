@@ -1,0 +1,115 @@
+# robots.txt — geoptim.io
+# Optimisé GEO — 08/03/2026
+
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+User-agent: YandexBot
+Allow: /
+
+# OpenAI (ChatGPT, SearchGPT)
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+# Anthropic (Claude)
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+# Google (Gemini, AI Overviews)
+User-agent: Google-Extended
+Allow: /
+
+User-agent: GeminiBot
+Allow: /
+
+# Microsoft (Copilot)
+User-agent: Copilot-Bot
+Allow: /
+
+User-agent: bingbot-chat
+Allow: /
+
+# Perplexity AI
+User-agent: PerplexityBot
+Allow: /
+
+# Mistral AI
+User-agent: MistralBot
+Allow: /
+
+User-agent: mistral-ai
+Allow: /
+
+# xAI (Grok)
+User-agent: xAI-Bot
+Allow: /
+
+User-agent: grok
+Allow: /
+
+# Meta
+User-agent: Meta-ExternalAgent
+Allow: /
+
+User-agent: Meta-ExternalFetcher
+Allow: /
+
+# Apple
+User-agent: Applebot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+# DeepSeek
+User-agent: DeepSeekBot
+Allow: /
+
+User-agent: deepseek-ai
+Allow: /
+
+# Cohere
+User-agent: cohere-ai
+Allow: /
+
+# Autres
+User-agent: YouBot
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: Amazonbot
+Allow: /
+
+User-agent: Diffbot
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
+User-agent: DuckAssistBot
+Allow: /
+
+Sitemap: https://geoptim.io/sitemap.xml
+
+# Fichier llms.txt : https://geoptim.io/llms.txt
+# Optimisation GEO par Geoptim.io — https://geoptim.io

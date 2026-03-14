@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(gh auth status)",
+      "Bash(git -C /Users/hugomanteau/Downloads/geoptim-main remote -v)"
+    ]
+  }
+}

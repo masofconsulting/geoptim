@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>AI Ready : les 5 critères d'un site vraiment visible par les IA — Geoptim</title>
+<link rel="canonical" href="https://geoptim.io/blog/ai-ready"/>
+<meta name="description" content="Être AI Ready ne signifie pas intégrer un chatbot. C'est repenser l'architecture de son site pour être cité par ChatGPT, Claude, Perplexity, Gemini et Grok."/>
+<meta name="robots" content="index, follow"/>
+<meta property="og:type" content="article"/>
+<meta property="og:locale" content="fr_FR"/>
+<meta property="og:site_name" content="Geoptim"/>
+<meta property="og:title" content="AI Ready : les 5 critères d'un site vraiment visible par les IA"/>
+<meta property="og:description" content="Être AI Ready ne signifie pas intégrer un chatbot. C'est repenser l'architecture de son site pour être cité par les assistants IA."/>
+<meta property="og:url" content="https://geoptim.io/blog/ai-ready"/>
+<meta property="og:image" content="https://geoptim.io/og-image.png"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="AI Ready : les 5 critères d'un site vraiment visible par les IA"/>
+<meta name="twitter:description" content="Être AI Ready ne signifie pas intégrer un chatbot. C'est repenser l'architecture de son site."/>
+<meta name="twitter:image" content="https://geoptim.io/og-image.png"/>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "AI Ready : les 5 critères d'un site vraiment visible par les IA",
+  "description": "Être AI Ready ne signifie pas intégrer un chatbot. C'est repenser l'architecture de son site.",
+  "datePublished": "2026-01-20",
+  "dateModified": "2026-01-20",
+  "author": {"@type": "Organization", "name": "Geoptim", "url": "https://geoptim.io"},
+  "publisher": {"@type": "Organization", "name": "Geoptim", "url": "https://geoptim.io", "logo": {"@type": "ImageObject", "url": "https://geoptim.io/favicon.svg"}},
+  "url": "https://geoptim.io/blog/ai-ready",
+  "image": "https://geoptim.io/og-image.png",
+  "mainEntityOfPage": "https://geoptim.io/blog/ai-ready",
+  "keywords": ["AI Ready", "GEO", "visibilité IA", "Schema.org", "llms.txt", "robots.txt", "optimisation IA"]
+}
+</script>
+<style>
+:root{--navy:#0f1f3d;--navy2:#1a3360;--gold:#c9a84c;--gold2:#e0bc60;--cream:#faf8f5;--cream2:#f4f1eb;--border:#e8e4dc;--text:#0f1f3d;--text2:#4a4438;--text3:#6b6358;--text4:#aaa09a;--green:#1a7a4a}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--cream);color:var(--text);font-family:'DM Sans',sans-serif;line-height:1.7}
+a{color:var(--navy);text-decoration:none}
+a:hover{text-decoration:underline}
+nav{background:rgba(250,248,245,.97);backdrop-filter:blur(14px);border-bottom:1px solid var(--border);padding:0 32px;height:64px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+.logo{display:flex;align-items:center;gap:8px;text-decoration:none}
+.logo-dot{width:9px;height:9px;background:var(--gold);border-radius:50%}
+.logo-name{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--navy)}
+.btn-cta{background:var(--navy);color:#fff;padding:10px 22px;border-radius:9px;font-weight:600;font-size:13px;text-decoration:none;transition:background .2s}
+.btn-cta:hover{background:var(--navy2);text-decoration:none}
+main{max-width:740px;margin:0 auto;padding:60px 32px 80px}
+.tag{display:inline-flex;align-items:center;gap:7px;font-family:'DM Mono',monospace;font-size:11px;color:var(--gold);letter-spacing:.08em;text-transform:uppercase;background:#fef9ed;border:1px solid #f0e0a0;padding:5px 14px;border-radius:999px;margin-bottom:20px}
+.meta{font-family:'DM Mono',monospace;font-size:11px;color:var(--text4);margin-bottom:32px;display:flex;gap:16px}
+h1{font-family:'Playfair Display',serif;font-size:clamp(28px,4vw,46px);font-weight:900;line-height:1.1;letter-spacing:-.02em;color:var(--navy);margin-bottom:16px}
+h2{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--navy);margin:40px 0 14px}
+p{font-size:16px;color:var(--text2);line-height:1.8;margin-bottom:20px;font-weight:300}
+.checklist{list-style:none;margin-bottom:24px}
+.checklist li{padding:10px 0;border-bottom:1px solid var(--cream2);font-size:15px;color:var(--text2);display:flex;gap:12px;align-items:flex-start}
+.checklist li::before{content:"✓";color:var(--green);font-weight:700;flex-shrink:0;margin-top:2px}
+.divider{border:none;border-top:1px solid var(--border);margin:48px 0}
+.cta-box{background:var(--navy);border-radius:16px;padding:36px;text-align:center;margin-top:48px}
+.cta-box h3{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:#fff;margin-bottom:10px}
+.cta-box p{color:#5a7a96;font-size:14px;margin-bottom:24px}
+.btn-gold{background:var(--gold);color:var(--navy);padding:12px 28px;border-radius:9px;font-weight:700;font-size:14px;text-decoration:none;display:inline-block;transition:background .2s}
+.btn-gold:hover{background:var(--gold2);text-decoration:none}
+.breadcrumb{font-size:12px;color:var(--text4);margin-bottom:32px}
+.breadcrumb a{color:var(--text4)}
+.breadcrumb a:hover{color:var(--navy)}
+footer{background:var(--navy);padding:32px;text-align:center;font-size:12px;color:#3a5a7a}
+footer a{color:#5a7a96}
+@media(max-width:600px){main{padding:40px 20px 60px}nav{padding:0 20px}}
+</style>
+</head>
+<body>
+<nav>
+  <a class="logo" href="/">
+    <div class="logo-dot"></div>
+    <span class="logo-name">Geoptim</span>
+  </a>
+  <a class="btn-cta" href="/">Analyser mon site →</a>
+</nav>
+<main>
+  <div class="breadcrumb"><a href="/">Accueil</a> › <a href="/#sec-blog">Blog</a> › AI Ready</div>
+  <div class="tag">Conception</div>
+  <h1>AI Ready : les 5 critères d'un site vraiment visible par les IA</h1>
+  <div class="meta">
+    <span>20 janvier 2026</span>
+    <span>7 min de lecture</span>
+  </div>
+
+  <p>Le terme « AI Ready » est devenu un buzzword. Tout le monde prétend l'être. Mais dans la pratique, la grande majorité des sites web restent invisibles pour ChatGPT, Claude, Perplexity et Gemini. Voici ce que cela signifie concrètement.</p>
+
+  <h2>1. Crawlabilité IA</h2>
+  <p>Votre robots.txt doit explicitement autoriser GPTBot, ClaudeBot, PerplexityBot, Google-Extended, xAI-Bot (Grok), MistralBot (Mistral Le Chat), DeepSeekBot et Copilot-Bot — soit 30+ crawlers au total. Beaucoup de sites, configurés par défaut ou par des CMS anciens, bloquent ces robots sans le savoir.</p>
+  <p>C'est le critère n°1, car si les crawlers IA ne peuvent pas lire votre site, aucun autre effort n'a d'impact. Vérifiez votre robots.txt dès maintenant.</p>
+
+  <h2>2. Fichier llms.txt</h2>
+  <p>Ce fichier Markdown résume votre identité, votre activité et vos services dans un format pensé pour être lu par les LLMs. Il s'agit de votre présentation directe aux modèles de langage : qui vous êtes, ce que vous faites, comment vous contacter.</p>
+  <p>Standard émergent depuis 2024, il est désormais reconnu par Perplexity, Claude, et plusieurs autres modèles. Un llms.txt bien rédigé peut multiplier par 2 à 5 votre visibilité dans les réponses IA.</p>
+
+  <h2>3. Données structurées JSON-LD</h2>
+  <p>Les balises Schema.org transmettent aux IA les métadonnées essentielles. Organization, Person, FAQPage, Service, Product : chaque type répond à un type de requête différent. Un restaurant qui intègre un LocalBusiness Schema.org sera plus facilement cité quand un utilisateur demande « quel restaurant italien à Lyon ? ».</p>
+  <p>Le JSON-LD est le format recommandé — il est propre, non intrusif, et lu en priorité par Google et les LLMs avant même votre contenu HTML.</p>
+
+  <h2>4. Architecture factuelle du contenu</h2>
+  <p>Les IA citent les contenus qui répondent directement. Chaque page devrait comporter au moins une section formulée comme une question suivie d'une réponse directe. Les titres sous forme de questions (H2, H3), les listes à puces, les tableaux comparatifs — tout ce qui facilite l'extraction d'une information précise est un signal positif.</p>
+  <p>À l'inverse, les pages trop promotionnelles, sans densité informationnelle, sont systématiquement ignorées par les LLMs au profit de sources plus factuelles.</p>
+
+  <h2>5. Cohérence et fraîcheur</h2>
+  <p>Un site dont le contenu est cohérent, à jour et non contradictoire sera mieux représenté dans les modèles. Si votre page d'accueil dit que vous êtes à Paris, mais vos autres pages mentionnent Lyon, les modèles auront du mal à vous situer correctement — et préféreront une source plus claire.</p>
+  <p>La fraîcheur compte aussi : un contenu mis à jour régulièrement, avec des dates visibles, est préféré à un contenu sans date ou manifestement obsolète.</p>
+
+  <hr class="divider"/>
+
+  <h2>La checklist AI Ready</h2>
+  <ul class="checklist">
+    <li>robots.txt avec 30+ crawlers IA autorisés (GPTBot, ClaudeBot, PerplexityBot…)</li>
+    <li>Fichier llms.txt à la racine du domaine</li>
+    <li>Schema.org JSON-LD complet (Organization + FAQPage minimum)</li>
+    <li>Au moins une section en format Q&amp;R par page clé</li>
+    <li>Contenu à jour, cohérent, daté</li>
+  </ul>
+
+  <div class="cta-box">
+    <h3>Vérifiez votre score AI Ready</h3>
+    <p>Analyse gratuite de vos 5 critères — score GEO sur 100 et recommandations personnalisées en 60 secondes.</p>
+    <a class="btn-gold" href="/">Tester mon site gratuitement →</a>
+  </div>
+</main>
+<footer>
+  <p>© 2026 <a href="/">Geoptim</a> · <a href="/#sec-blog">Blog</a> · <a href="/mentions-legales">Mentions légales</a></p>
+</footer>
+</body>
+</html>
