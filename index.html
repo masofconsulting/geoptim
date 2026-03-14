@@ -47,7 +47,7 @@ nav{position:sticky;top:0;z-index:200;background:rgba(250,248,245,.95);backdrop-
 .logo-dot{width:9px;height:9px;background:var(--gold);border-radius:50%}
 .logo-name{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--navy)}
 .nav-links{display:flex;align-items:center;gap:20px}
-.nl{font-size:13px;font-weight:500;color:var(--text3);transition:color .2s;padding:4px}
+.nl{font-size:13px;font-weight:500;color:var(--text3);transition:color .2s;padding:4px;text-decoration:none;background:none;border:none;cursor:pointer;font-family:inherit}
 .nl:hover{color:var(--navy)}
 .btn-nav{background:var(--navy);color:#fff;padding:10px 22px;border-radius:9px;font-weight:600;font-size:13px;transition:background .2s}
 .btn-nav:hover{background:var(--navy2)}
@@ -220,7 +220,7 @@ footer{background:var(--navy);padding:52px 32px 32px}
 .fi2{max-width:1100px;margin:0 auto}
 .fg2{display:grid;grid-template-columns:1.6fr 1fr 1fr;gap:48px;margin-bottom:44px}
 .fh{font-family:'DM Mono',monospace;font-size:10px;color:#2a4060;text-transform:uppercase;letter-spacing:.1em;margin-bottom:14px}
-.fl{display:block;font-size:13px;color:#5a7a96;margin-bottom:9px;transition:color .2s;text-align:left}
+.fl{display:block;font-size:13px;color:#5a7a96;margin-bottom:9px;transition:color .2s;text-align:left;text-decoration:none;background:none;border:none;cursor:pointer;padding:0;font-family:inherit}
 .fl:hover{color:#fff}
 .fb{border-top:1px solid rgba(255,255,255,.07);padding-top:24px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
 .fc2{font-family:'DM Mono',monospace;font-size:11px;color:#1a3050}
@@ -455,9 +455,9 @@ footer{background:var(--navy);padding:52px 32px 32px}
     <button class="logo" id="btnLogo"><div class="logo-dot"></div><span class="logo-name">Geoptim</span></button>
     <div class="nav-links">
       <button class="nl" id="btnHow">Comment ça marche</button>
-      <button class="nl" id="btnPricing">Tarif</button>
-      <button class="nl" id="btnFaq">FAQ</button>
-      <button class="nl" id="btnBlog">Blog</button>
+      <a href="/tarifs" class="nl">Tarifs</a>
+      <a href="/faq" class="nl">FAQ</a>
+      <a href="/a-propos" class="nl">À propos</a>
       <button class="btn-nav" id="btnNavCta">Analyser mon site →</button>
     </div>
   </div>
@@ -714,8 +714,9 @@ footer{background:var(--navy);padding:52px 32px 32px}
           <div class="fh">Produit</div>
           <button class="fl" id="btnFooterAnalyze">Analyser mon site</button>
           <button class="fl" id="btnFooterHow">Comment ça marche</button>
-          <button class="fl" id="btnFooterPricing">Tarif</button>
-          <button class="fl" id="btnFooterFaq">FAQ</button>
+          <a href="/tarifs" class="fl">Tarifs</a>
+          <a href="/faq" class="fl">FAQ</a>
+          <a href="/a-propos" class="fl">À propos</a>
           <button class="fl" id="btnFooterBlog">Blog</button>
         </div>
         <div>
@@ -1207,9 +1208,6 @@ function goFocus() {
 // ── BUTTON WIRING ──
 document.getElementById('btnLogo').onclick = function() { goPage('home'); };
 document.getElementById('btnHow').onclick = function() { goSection('sec-how'); };
-document.getElementById('btnPricing').onclick = function() { goSection('sec-pricing'); };
-document.getElementById('btnBlog').onclick = function() { goSection('sec-blog'); };
-document.getElementById('btnFaq').onclick = function() { goSection('sec-faq'); };
 document.getElementById('btnNavCta').onclick = goFocus;
 document.getElementById('btnPricingCta').onclick = goFocus;
 document.getElementById('btnPricingPackCta').onclick = goFocus;
@@ -1221,9 +1219,7 @@ document.getElementById('btnArtBack').onclick = function() { goPage('home'); };
 document.getElementById('btnArtCta').onclick = function() { goPage('home'); goFocus(); };
 document.getElementById('btnFooterAnalyze').onclick = goFocus;
 document.getElementById('btnFooterHow').onclick = function() { goSection('sec-how'); };
-document.getElementById('btnFooterPricing').onclick = function() { goSection('sec-pricing'); };
 document.getElementById('btnFooterBlog').onclick = function() { goSection('sec-blog'); };
-document.getElementById('btnFooterFaq').onclick = function() { goSection('sec-faq'); };
 document.getElementById('btnPay').onclick = processPayment;
 document.getElementById('btnModClose').onclick = closeModal;
 document.getElementById('analyzeBtn').onclick = startAnalysis;
