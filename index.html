@@ -2230,7 +2230,7 @@ function renderFiles() {
       grid.innerHTML += '<div class="fc ul" style="border-color:' + m.color + '28">' +
         '<div class="fct"><div class="fic" style="background:' + m.color + '15;border:1px solid ' + m.color + '25">' + m.icon + '</div><div style="flex:1"><div class="fn" style="color:var(--navy)">' + m.title + '</div><div class="ff">' + m.filename + '</div></div><span class="frd">✓ Prêt</span></div>' +
         '<div class="fpv">' + preview + '…</div>' +
-        '<div class="fa"><button class="dlb" style="background:' + m.color + '" onclick="dlFile(\'' + m.key + '\',\'' + m.filename + '\')">↓ Télécharger</button><button class="cpb" onclick="cpFile(\'' + m.key + '\',this)">⧉</button></div>' +
+        '<div class="fa"><button class="dlb" style="background:' + m.color + '" onclick="dlFile(\'' + m.key + '\',\'' + m.filename + '\')">↓ Télécharger</button><button class="cpb" onclick="cpFile(\'' + m.key + '\',this)">⧉</button><button class="cpb" title="Régénérer" onclick="clearFileCache(\'' + m.key + '\')" style="font-size:14px">↺</button></div>' +
         '</div>';
     }
   }
@@ -2250,6 +2250,19 @@ function cpFile(key, btn) {
     btn.textContent = '✓'; btn.style.color = '#1a7a4a';
     setTimeout(function() { btn.textContent = '⧉'; btn.style.color = ''; }, 2000);
   });
+}
+
+function clearFileCache(key) {
+  var analysisUrl = getCurrentUrl();
+  var purchases = JSON.parse(localStorage.getItem('geo_purchases') || '[]');
+  for (var i = 0; i < purchases.length; i++) {
+    if (purchases[i].analysisUrl === analysisUrl && purchases[i].generatedFiles) {
+      delete purchases[i].generatedFiles[key];
+    }
+  }
+  localStorage.setItem('geo_purchases', JSON.stringify(purchases));
+  if (result && result.files) delete result.files[key];
+  renderFiles();
 }
 
 // ── MODAL ──
