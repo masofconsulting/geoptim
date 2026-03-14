@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Schema.org : le guide complet pour être compris par les IA | Geoptim</title>
+<link rel="canonical" href="https://geoptim.io/blog/schema-org-guide"/>
+<meta name="description" content="Découvrez comment Schema.org et les données structurées JSON-LD permettent aux IA de comprendre votre site. Guide complet des types essentiels et erreurs à éviter."/>
+<meta name="robots" content="index, follow"/>
+<meta property="og:type" content="article"/>
+<meta property="og:locale" content="fr_FR"/>
+<meta property="og:site_name" content="Geoptim"/>
+<meta property="og:title" content="Schema.org : le guide complet pour être compris par les IA"/>
+<meta property="og:description" content="Comment Schema.org et JSON-LD permettent aux IA de comprendre et citer votre site."/>
+<meta property="og:url" content="https://geoptim.io/blog/schema-org-guide"/>
+<meta property="og:image" content="https://geoptim.io/og-image.png"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="Schema.org : le guide complet pour être compris par les IA"/>
+<meta name="twitter:description" content="Comment Schema.org et JSON-LD permettent aux IA de comprendre et citer votre site."/>
+<meta name="twitter:image" content="https://geoptim.io/og-image.png"/>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Schema.org : le guide complet pour être compris par les IA",
+  "description": "Découvrez comment Schema.org et les données structurées JSON-LD permettent aux IA de comprendre votre site. Guide complet des types essentiels et erreurs à éviter.",
+  "datePublished": "2026-03-14",
+  "dateModified": "2026-03-14",
+  "author": {"@type": "Organization", "name": "Geoptim", "url": "https://geoptim.io"},
+  "publisher": {"@type": "Organization", "name": "Geoptim", "url": "https://geoptim.io", "logo": {"@type": "ImageObject", "url": "https://geoptim.io/favicon.svg"}},
+  "url": "https://geoptim.io/blog/schema-org-guide",
+  "image": "https://geoptim.io/og-image.png",
+  "mainEntityOfPage": "https://geoptim.io/blog/schema-org-guide",
+  "keywords": ["Schema.org", "JSON-LD", "données structurées", "GEO", "SEO", "visibilité IA", "Google", "ChatGPT"]
+}
+</script>
+<style>
+:root{--navy:#0f1f3d;--navy2:#1a3360;--gold:#c9a84c;--gold2:#e0bc60;--cream:#faf8f5;--cream2:#f4f1eb;--border:#e8e4dc;--text:#0f1f3d;--text2:#4a4438;--text3:#6b6358;--text4:#aaa09a}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--cream);color:var(--text);font-family:'DM Sans',sans-serif;line-height:1.7}
+a{color:var(--navy);text-decoration:none}
+a:hover{text-decoration:underline}
+nav{background:rgba(250,248,245,.97);backdrop-filter:blur(14px);border-bottom:1px solid var(--border);padding:0 32px;height:64px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+.logo{display:flex;align-items:center;gap:8px;text-decoration:none}
+.logo-dot{width:9px;height:9px;background:var(--gold);border-radius:50%}
+.logo-name{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--navy)}
+.btn-cta{background:var(--navy);color:#fff;padding:10px 22px;border-radius:9px;font-weight:600;font-size:13px;text-decoration:none;transition:background .2s}
+.btn-cta:hover{background:var(--navy2);text-decoration:none}
+main{max-width:740px;margin:0 auto;padding:60px 32px 80px}
+.tag{display:inline-flex;align-items:center;gap:7px;font-family:'DM Mono',monospace;font-size:11px;color:var(--gold);letter-spacing:.08em;text-transform:uppercase;background:#fef9ed;border:1px solid #f0e0a0;padding:5px 14px;border-radius:999px;margin-bottom:20px}
+.meta{font-family:'DM Mono',monospace;font-size:11px;color:var(--text4);margin-bottom:32px;display:flex;gap:16px}
+h1{font-family:'Playfair Display',serif;font-size:clamp(28px,4vw,46px);font-weight:900;line-height:1.1;letter-spacing:-.02em;color:var(--navy);margin-bottom:16px}
+h2{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--navy);margin:40px 0 14px}
+p{font-size:16px;color:var(--text2);line-height:1.8;margin-bottom:20px;font-weight:300}
+.divider{border:none;border-top:1px solid var(--border);margin:48px 0}
+.cta-box{background:var(--navy);border-radius:16px;padding:36px;text-align:center;margin-top:48px}
+.cta-box h3{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:#fff;margin-bottom:10px}
+.cta-box p{color:#5a7a96;font-size:14px;margin-bottom:24px}
+.btn-gold{background:var(--gold);color:var(--navy);padding:12px 28px;border-radius:9px;font-weight:700;font-size:14px;text-decoration:none;display:inline-block;transition:background .2s}
+.btn-gold:hover{background:var(--gold2);text-decoration:none}
+.breadcrumb{font-size:12px;color:var(--text4);margin-bottom:32px}
+.breadcrumb a{color:var(--text4)}
+.breadcrumb a:hover{color:var(--navy)}
+footer{background:var(--navy);padding:32px;text-align:center;font-size:12px;color:#3a5a7a}
+footer a{color:#5a7a96}
+.nav-links{display:flex;align-items:center;gap:20px}.nl{font-size:13px;font-weight:500;color:var(--text3);transition:color .2s;padding:4px;text-decoration:none}.nl:hover{color:var(--navy)}
+@media(max-width:600px){main{padding:40px 20px 60px}nav{padding:0 20px}}
+@media(max-width:640px){.nav-links .nl{display:none}}
+</style>
+</head>
+<body>
+<nav>
+  <a class="logo" href="/">
+    <div class="logo-dot"></div>
+    <span class="logo-name">Geoptim</span>
+  </a>
+  <div class="nav-links">
+    <a href="/tarifs" class="nl">Tarifs</a>
+    <a href="/faq" class="nl">FAQ</a>
+    <a href="/a-propos" class="nl">À propos</a>
+    <a href="/blog" class="nl">Blog</a>
+    <a class="btn-cta" href="/">Analyser mon site →</a>
+  </div>
+</nav>
+<main>
+  <div class="breadcrumb"><a href="/">Accueil</a> › <a href="/blog">Blog</a> › Schema.org et IA</div>
+  <div class="tag">Guide pratique</div>
+  <h1>Schema.org : le guide complet pour être compris par les IA</h1>
+  <div class="meta">
+    <span>14 mars 2026</span>
+    <span>8 min de lecture</span>
+  </div>
+
+  <p>Votre site contient peut-être un contenu remarquable, mais si les moteurs de recherche et les IA ne comprennent pas sa structure, il reste invisible. Schema.org est le vocabulaire universel qui permet aux machines de lire vos pages comme un humain lirait une fiche d'identité : avec des champs clairs, des relations explicites et zéro ambiguïté.</p>
+
+  <p>Longtemps cantonné au SEO technique, Schema.org devient un levier central du GEO (Generative Engine Optimization). Les modèles de langage comme ChatGPT, Perplexity ou les AI Overviews de Google exploitent directement les données structurées pour formuler leurs réponses. Un site correctement balisé a significativement plus de chances d'être cité dans une réponse générée par l'IA.</p>
+
+  <h2>Ce que Schema.org change concrètement</h2>
+
+  <p>Schema.org est un standard ouvert, maintenu conjointement par Google, Microsoft, Yahoo et Yandex. Il définit des centaines de types d'entités (Organization, Person, Product, Event, Article, etc.) et leurs propriétés. Quand vous ajoutez ces balises à vos pages, vous ne changez pas ce que l'utilisateur voit. Vous changez ce que la machine comprend.</p>
+
+  <p>Pour les moteurs de recherche classiques, cela se traduit par des rich snippets : étoiles, prix, FAQ dépliables dans les résultats. Pour les IA génératives, l'impact est plus profond. Un LLM qui crawle votre page et trouve un bloc JSON-LD de type FAQPage avec des questions et réponses structurées va pouvoir extraire cette information avec une confiance bien supérieure à celle qu'il accorderait à un paragraphe de texte libre. La donnée structurée agit comme une source vérifiée, facile à parser et à citer.</p>
+
+  <h2>JSON-LD : le format privilégié</h2>
+
+  <p>Il existe trois syntaxes pour implémenter Schema.org : Microdata (attributs HTML inline), RDFa (attributs XML) et JSON-LD (bloc JavaScript dans le head). Google recommande explicitement JSON-LD, et c'est aussi le format le plus simple à maintenir.</p>
+
+  <p>Un bloc JSON-LD se place dans une balise script de type application/ld+json, généralement dans le head de la page. Il contient un objet avec un contexte (@context pointant vers schema.org), un type (@type définissant l'entité) et les propriétés associées. Par exemple, pour une organisation, vous déclarez le nom, l'URL, le logo, les coordonnées et les réseaux sociaux. Pour un article, vous précisez le titre, l'auteur, la date de publication et l'image.</p>
+
+  <p>L'avantage du JSON-LD est qu'il est complètement découplé du HTML visible. Vous pouvez le générer dynamiquement, le modifier sans toucher au template, et empiler plusieurs blocs sur une même page sans conflit.</p>
+
+  <h2>Les 6 types essentiels pour la visibilité IA</h2>
+
+  <p><strong>Organization</strong> est la base. Il identifie votre entreprise avec son nom, son URL, son logo et ses profils sociaux. Sans ce type, les IA ne savent pas à quelle entité rattacher votre contenu. Déclarez-le sur votre page d'accueil au minimum.</p>
+
+  <p><strong>FAQPage</strong> est probablement le type le plus puissant pour le GEO. Chaque paire question-réponse devient un bloc structuré que les IA peuvent extraire et reformuler directement. Les AI Overviews de Google puisent massivement dans les FAQPage pour construire leurs résumés.</p>
+
+  <p><strong>LocalBusiness</strong> est indispensable pour les entreprises avec une présence physique. Adresse, horaires, téléphone, zone de service : ces informations structurées alimentent directement les réponses locales des IA.</p>
+
+  <p><strong>Product</strong> et <strong>Service</strong> permettent de décrire vos offres avec prix, disponibilité, avis et caractéristiques. Un LLM qui compare des solutions pourra citer vos produits avec précision s'ils sont correctement balisés.</p>
+
+  <p><strong>Person</strong> est crucial pour les indépendants, auteurs et experts. Il établit un lien d'autorité entre une personne et son contenu, ce que les IA utilisent pour évaluer la crédibilité d'une source (le fameux E-E-A-T de Google, appliqué au monde génératif).</p>
+
+  <p><strong>Article</strong> structure vos contenus éditoriaux : titre, auteur, date, image. C'est le type utilisé par Google News, Discover et les AI Overviews pour identifier et classer les contenus informatifs.</p>
+
+  <h2>Les erreurs qui neutralisent vos données structurées</h2>
+
+  <p>La première erreur est de baliser sans cohérence. Si votre JSON-LD déclare un nom d'entreprise différent de celui affiché sur la page, Google et les IA détecteront l'incohérence et ignoreront le balisage. Les données structurées doivent refléter exactement le contenu visible.</p>
+
+  <p>La deuxième erreur fréquente est d'oublier les propriétés obligatoires. Chaque type Schema.org a des champs requis. Un Article sans datePublished, un Product sans name ou un LocalBusiness sans address seront rejetés par les validateurs et ignorés par les crawlers.</p>
+
+  <p>Troisième piège : ne baliser que la page d'accueil. Chaque page doit porter ses propres données structurées. Votre page de service a besoin d'un balisage Service. Votre FAQ doit contenir un FAQPage. Vos articles de blog nécessitent chacun un balisage Article. Les IA crawlent page par page, pas site par site.</p>
+
+  <p>Enfin, beaucoup de sites utilisent encore Microdata au lieu de JSON-LD, ce qui rend le balisage fragile : toute modification du HTML peut casser les données structurées sans que personne ne s'en aperçoive.</p>
+
+  <h2>Schema.org et les IA génératives : le lien direct</h2>
+
+  <p>Quand ChatGPT, Perplexity ou Gemini formulent une réponse, ils s'appuient sur des sources qu'ils jugent fiables et faciles à exploiter. Les données structurées cochent les deux cases. Un site avec un balisage Organization complet, des FAQPage sur ses pages de contenu et des Product sur ses pages commerciales envoie un signal clair : cette source est sérieuse, son information est vérifiable, et elle est facile à extraire.</p>
+
+  <p>Les AI Overviews de Google vont encore plus loin. Elles utilisent directement le Knowledge Graph, qui est alimenté en grande partie par les données Schema.org des sites web. Être présent dans le Knowledge Graph via un balisage correct, c'est multiplier ses chances d'apparaître dans les réponses générées en haut de la page de résultats.</p>
+
+  <p>Le Schema.org n'est plus un bonus technique pour obtenir de jolis résultats enrichis. C'est une infrastructure de visibilité, un langage que les IA parlent nativement. Les sites qui l'ignorent se privent d'un canal de découverte qui ne fera que croître dans les années à venir.</p>
+
+  <hr class="divider"/>
+
+  <div class="cta-box">
+    <h3>Vérifiez votre Schema.org</h3>
+    <p>Analyse gratuite de vos données structurées, score GEO sur 100 en 60 secondes.</p>
+    <a class="btn-gold" href="/">Analyser mon site gratuitement →</a>
+  </div>
+</main>
+<footer>
+  <p>© 2026 <a href="/">Geoptim</a> · <a href="/blog">Blog</a> · <a href="/mentions-legales">Mentions légales</a></p>
+</footer>
+</body>
+</html>

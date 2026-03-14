@@ -45,6 +45,36 @@
   status = 200
 
 [[redirects]]
+  from = "/blog/schema-org-guide"
+  to = "/blog/schema-org-guide.html"
+  status = 200
+
+[[redirects]]
+  from = "/blog/robots-txt-ia"
+  to = "/blog/robots-txt-ia.html"
+  status = 200
+
+[[redirects]]
+  from = "/blog/contenu-ia-optimise"
+  to = "/blog/contenu-ia-optimise.html"
+  status = 200
+
+[[redirects]]
+  from = "/blog/notoriete-llm"
+  to = "/blog/notoriete-llm.html"
+  status = 200
+
+[[redirects]]
+  from = "/blog/faq-seo-ia"
+  to = "/blog/faq-seo-ia.html"
+  status = 200
+
+[[redirects]]
+  from = "/blog/geo-local"
+  to = "/blog/geo-local.html"
+  status = 200
+
+[[redirects]]
   from = "/blog"
   to = "/blog/index.html"
   status = 200
