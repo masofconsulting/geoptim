@@ -110,8 +110,8 @@ Réponds UNIQUEMENT avec ce JSON sans markdown :
 }`;
 
     const data = await callAnthropic(KEY, {
-      model: "claude-haiku-4-5-20251001",
-      max_tokens: 1000,
+      model: "claude-sonnet-4-6",
+      max_tokens: 1500,
       temperature: 0,
       messages: [{ role: "user", content: prompt }]
     }, 22000);

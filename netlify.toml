@@ -3,6 +3,21 @@
   functions = "netlify/functions"
 
 [[redirects]]
+  from = "/tarifs"
+  to = "/tarifs.html"
+  status = 200
+
+[[redirects]]
+  from = "/faq"
+  to = "/faq.html"
+  status = 200
+
+[[redirects]]
+  from = "/a-propos"
+  to = "/a-propos.html"
+  status = 200
+
+[[redirects]]
   from = "/blog/geo-vs-seo"
   to = "/blog/geo-vs-seo.html"
   status = 200
