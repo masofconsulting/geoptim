@@ -35,7 +35,7 @@ exports.handler = async (event) => {
 
     const isPaid         = session.payment_status === "paid";
     const email          = (session.customer_details && session.customer_details.email) || "";
-    const amount         = session.amount_total || 4900;
+    const amount         = (session.amount_total != null) ? session.amount_total : 4900;
     const created        = session.created || Math.floor(Date.now() / 1000);
     const siteName       = (session.metadata && session.metadata.site_name)       || "";
     const siteUrl        = (session.metadata && session.metadata.site_url)        || "";
