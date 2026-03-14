@@ -128,7 +128,7 @@ h1 em{font-style:italic;color:var(--gold)}
 
 /* BLOG */
 .blog-g{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
-.ac{background:#fff;border:1px solid var(--border);border-radius:16px;overflow:hidden;cursor:pointer;transition:box-shadow .2s,transform .2s}
+.ac{display:block;background:#fff;border:1px solid var(--border);border-radius:16px;overflow:hidden;cursor:pointer;transition:box-shadow .2s,transform .2s;text-decoration:none;color:inherit}
 .ac:hover{box-shadow:0 10px 36px rgba(15,31,61,.1);transform:translateY(-3px)}
 .ab{padding:28px 28px 20px}
 .at{font-family:'DM Mono',monospace;font-size:10px;color:var(--gold);text-transform:uppercase;letter-spacing:.08em;background:#fef9ed;border:1px solid #f0e0a0;padding:3px 11px;border-radius:999px;display:inline-block;margin-bottom:14px}
@@ -458,6 +458,7 @@ footer{background:var(--navy);padding:52px 32px 32px}
       <a href="/tarifs" class="nl">Tarifs</a>
       <a href="/faq" class="nl">FAQ</a>
       <a href="/a-propos" class="nl">À propos</a>
+      <a href="/blog" class="nl">Blog</a>
       <button class="btn-nav" id="btnNavCta">Analyser mon site →</button>
     </div>
   </div>
@@ -516,7 +517,7 @@ footer{background:var(--navy);padding:52px 32px 32px}
       <div class="steps">
         <div class="step"><div class="step-n">01</div><div class="step-t">Entrez votre URL</div><p class="step-d">Collez l'adresse de votre site. Notre IA l'analyse en profondeur : robots.txt, Schema.org, présence d'un llms.txt, structure du contenu pour les moteurs génératifs.</p></div>
         <div class="step"><div class="step-n">02</div><div class="step-t">Recevez votre diagnostic</div><p class="step-d">Un score GEO sur 100, un détail par catégorie, les points forts, les faiblesses et les priorités d'action. L'analyse complète est entièrement gratuite.</p></div>
-        <div class="step"><div class="step-n">03</div><div class="step-t">Téléchargez vos fichiers</div><p class="step-d">Choisissez un fichier à 19 € ou le pack complet à 49 €. Générés par Claude Opus, personnalisés à votre activité, prêts à déployer.</p></div>
+        <div class="step"><div class="step-n">03</div><div class="step-t">Téléchargez vos fichiers</div><p class="step-d">Choisissez un fichier à 19 € ou le pack complet à 49 €. Personnalisés à votre activité par IA, prêts à déployer.</p></div>
       </div>
     </div>
   </div>
@@ -548,7 +549,7 @@ footer{background:var(--navy);padding:52px 32px 32px}
           <div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--text4);margin-top:4px;margin-bottom:24px">paiement unique · par fichier</div>
           <div class="pf"><span style="color:var(--navy)">→</span>Analyse GEO gratuite incluse</div>
           <div class="pf"><span style="color:var(--navy)">→</span>1 fichier au choix</div>
-          <div class="pf"><span style="color:var(--navy)">→</span>Généré par Claude Opus (qualité max)</div>
+          <div class="pf"><span style="color:var(--navy)">→</span>Personnalisé à votre activité</div>
           <div class="pf"><span style="color:var(--navy)">→</span>Téléchargement immédiat</div>
           <button class="btn-nav" id="btnPricingCta" style="width:100%;margin-top:24px;padding:14px;border-radius:10px;font-size:14px">Analyser mon site →</button>
         </div>
@@ -717,7 +718,7 @@ footer{background:var(--navy);padding:52px 32px 32px}
           <a href="/tarifs" class="fl">Tarifs</a>
           <a href="/faq" class="fl">FAQ</a>
           <a href="/a-propos" class="fl">À propos</a>
-          <button class="fl" id="btnFooterBlog">Blog</button>
+          <a href="/blog" class="fl">Blog</a>
         </div>
         <div>
           <div class="fh">Articles</div>
@@ -736,7 +737,7 @@ footer{background:var(--navy);padding:52px 32px 32px}
           <button class="fc2" style="background:none;border:none;cursor:pointer;padding:0" onclick="goLegal('mentions')">Mentions légales</button>
           <button class="fc2" style="background:none;border:none;cursor:pointer;padding:0" onclick="goLegal('rgpd')">Confidentialité</button>
           <button class="fc2" style="background:none;border:none;cursor:pointer;padding:0" onclick="goLegal('cgv')">CGV</button>
-          <span class="fc2">Propulsé par Claude · Anthropic</span>
+          <span class="fc2">Optimisation IA · Anthropic</span>
         </div>
       </div>
     </div>
@@ -962,7 +963,7 @@ footer{background:var(--navy);padding:52px 32px 32px}
           <li><strong>Schema.org JSON-LD</strong> — balises structurées Organization, FAQPage, Person</li>
           <li><strong>Page FAQ GEO-optimisée</strong> — 9+ questions/réponses sectorielles en HTML</li>
         </ul>
-        <p>Ces fichiers sont générés par intelligence artificielle (Claude — Anthropic) sur la base des données publiques du site analysé.</p>
+        <p>Ces fichiers sont générés par intelligence artificielle sur la base des données publiques du site analysé.</p>
       </div>
       <div class="l-block">
         <h2 style="margin-top:0">Article 3 — Prix</h2>
@@ -1219,7 +1220,6 @@ document.getElementById('btnArtBack').onclick = function() { goPage('home'); };
 document.getElementById('btnArtCta').onclick = function() { goPage('home'); goFocus(); };
 document.getElementById('btnFooterAnalyze').onclick = goFocus;
 document.getElementById('btnFooterHow').onclick = function() { goSection('sec-how'); };
-document.getElementById('btnFooterBlog').onclick = function() { goSection('sec-blog'); };
 document.getElementById('btnPay').onclick = processPayment;
 document.getElementById('btnModClose').onclick = closeModal;
 document.getElementById('analyzeBtn').onclick = startAnalysis;
@@ -2135,7 +2135,7 @@ function renderFiles() {
       grid.innerHTML += '<div class="fc" style="border-color:' + m.color + '28">' +
         '<div class="fct"><div class="fic" style="background:' + m.color + '15;border:1px solid ' + m.color + '25">' + m.icon + '</div><div style="flex:1"><div class="fn" style="color:var(--navy)">' + m.title + '</div><div class="ff">' + m.filename + '</div></div>' +
         '<span style="font-size:11px;background:#f0fdf4;color:#166534;border:1px solid #bbf7d0;border-radius:999px;padding:3px 10px;font-family:\'DM Mono\',monospace">Acheté ✓</span></div>' +
-        '<div style="font-size:13px;color:var(--text3);margin:12px 0 4px;line-height:1.6">Fichier acheté — générez-le maintenant avec Claude Opus.</div>' +
+        '<div style="font-size:13px;color:var(--text3);margin:12px 0 4px;line-height:1.6">Fichier acheté — cliquez sur Générer pour le créer.</div>' +
         '<div class="fa" style="margin-top:10px">' +
           '<button id="gen-btn-' + m.key + '" onclick="generateFile(\'' + m.key + '\')" style="width:100%;padding:11px;border-radius:8px;background:' + m.color + ';color:#fff;font-weight:600;font-size:13px;cursor:pointer;border:none">Générer →</button>' +
         '</div>' +

@@ -31,7 +31,7 @@ exports.handler = async (event) => {
 ${ctx}
 
 ━━━ CONTENU BRUT RÉCUPÉRÉ DU SITE ━━━
-${(rawContent || '').slice(0, 5000)}
+${(rawContent || '').slice(0, 2500)}
 
 ━━━ RÈGLES ABSOLUES ━━━
 1. Utilise le contenu brut pour compléter les données manquantes dans les données extraites.
@@ -97,9 +97,9 @@ Réponds UNIQUEMENT avec le HTML brut, sans markdown ni backtick.`;
 
     const data = await callAnthropic(KEY, {
       model: "claude-sonnet-4-6",
-      max_tokens: 3500,
+      max_tokens: 2500,
       messages: [{ role: "user", content: prompt }]
-    }, 22000);
+    }, 24000);
 
     if (data.error) throw new Error(data.error.message);
     const text = (data.content || []).map(b => b.text || "").join("").trim()
