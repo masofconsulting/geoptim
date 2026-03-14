@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>How ChatGPT Selects Its Sources, and How to Become One | Geoptim</title>
+<link rel="canonical" href="https://geoptim.io/en/blog/chatgpt-sources"/>
+<meta name="description" content="Language models have specific criteria for deciding which sources to cite. Understanding their logic is the first step to appearing in responses from ChatGPT, Claude, and Perplexity."/>
+<meta name="robots" content="index, follow"/>
+<meta property="og:type" content="article"/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:site_name" content="Geoptim"/>
+<meta property="og:title" content="How ChatGPT Selects Its Sources, and How to Become One"/>
+<meta property="og:description" content="Language models have specific criteria for deciding which sources to cite. Understanding their logic is the first step."/>
+<meta property="og:url" content="https://geoptim.io/en/blog/chatgpt-sources"/>
+<meta property="og:image" content="https://geoptim.io/og-image.png"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="How ChatGPT Selects Its Sources, and How to Become One"/>
+<meta name="twitter:description" content="Language models have specific criteria for deciding which sources to cite."/>
+<meta name="twitter:image" content="https://geoptim.io/og-image.png"/>
+<link rel="alternate" hreflang="fr" href="https://geoptim.io/blog/chatgpt-sources"/>
+<link rel="alternate" hreflang="en" href="https://geoptim.io/en/blog/chatgpt-sources"/>
+<link rel="alternate" hreflang="x-default" href="https://geoptim.io/blog/chatgpt-sources"/>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "How ChatGPT Selects Its Sources, and How to Become One",
+  "description": "Language models have specific criteria for deciding which sources to cite. Understanding their logic is the first step to appearing in AI responses.",
+  "inLanguage": "en",
+  "datePublished": "2026-02-14",
+  "dateModified": "2026-02-14",
+  "author": {"@type": "Organization", "name": "Geoptim", "url": "https://geoptim.io"},
+  "publisher": {"@type": "Organization", "name": "Geoptim", "url": "https://geoptim.io", "logo": {"@type": "ImageObject", "url": "https://geoptim.io/favicon.svg"}},
+  "url": "https://geoptim.io/en/blog/chatgpt-sources",
+  "image": "https://geoptim.io/og-image.png",
+  "mainEntityOfPage": "https://geoptim.io/en/blog/chatgpt-sources",
+  "keywords": ["ChatGPT sources", "LLM citation", "GEO", "AI crawlers robots.txt", "llms.txt", "Schema.org JSON-LD"]
+}
+</script>
+<style>
+:root{--navy:#0f1f3d;--navy2:#1a3360;--gold:#c9a84c;--gold2:#e0bc60;--cream:#faf8f5;--cream2:#f4f1eb;--border:#e8e4dc;--text:#0f1f3d;--text2:#4a4438;--text3:#6b6358;--text4:#aaa09a}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--cream);color:var(--text);font-family:'DM Sans',sans-serif;line-height:1.7}
+a{color:var(--navy);text-decoration:none}
+a:hover{text-decoration:underline}
+nav{background:rgba(250,248,245,.97);backdrop-filter:blur(14px);border-bottom:1px solid var(--border);padding:0 32px;height:64px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+.logo{display:flex;align-items:center;gap:8px;text-decoration:none}
+.logo-dot{width:9px;height:9px;background:var(--gold);border-radius:50%}
+.logo-name{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--navy)}
+.btn-cta{background:var(--navy);color:#fff;padding:10px 22px;border-radius:9px;font-weight:600;font-size:13px;text-decoration:none;transition:background .2s}
+.btn-cta:hover{background:var(--navy2);text-decoration:none}
+main{max-width:740px;margin:0 auto;padding:60px 32px 80px}
+.tag{display:inline-flex;align-items:center;gap:7px;font-family:'DM Mono',monospace;font-size:11px;color:var(--gold);letter-spacing:.08em;text-transform:uppercase;background:#fef9ed;border:1px solid #f0e0a0;padding:5px 14px;border-radius:999px;margin-bottom:20px}
+.meta{font-family:'DM Mono',monospace;font-size:11px;color:var(--text4);margin-bottom:32px;display:flex;gap:16px}
+h1{font-family:'Playfair Display',serif;font-size:clamp(28px,4vw,46px);font-weight:900;line-height:1.1;letter-spacing:-.02em;color:var(--navy);margin-bottom:16px}
+h2{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--navy);margin:40px 0 14px}
+p{font-size:16px;color:var(--text2);line-height:1.8;margin-bottom:20px;font-weight:300}
+.divider{border:none;border-top:1px solid var(--border);margin:48px 0}
+.cta-box{background:var(--navy);border-radius:16px;padding:36px;text-align:center;margin-top:48px}
+.cta-box h3{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:#fff;margin-bottom:10px}
+.cta-box p{color:#5a7a96;font-size:14px;margin-bottom:24px}
+.btn-gold{background:var(--gold);color:var(--navy);padding:12px 28px;border-radius:9px;font-weight:700;font-size:14px;text-decoration:none;display:inline-block;transition:background .2s}
+.btn-gold:hover{background:var(--gold2);text-decoration:none}
+.breadcrumb{font-size:12px;color:var(--text4);margin-bottom:32px}
+.breadcrumb a{color:var(--text4)}
+.breadcrumb a:hover{color:var(--navy)}
+footer{background:var(--navy);padding:32px;text-align:center;font-size:12px;color:#3a5a7a}
+footer a{color:#5a7a96}
+.nav-links{display:flex;align-items:center;gap:20px}.nl{font-size:13px;font-weight:500;color:var(--text3);transition:color .2s;padding:4px;text-decoration:none}.nl:hover{color:var(--navy)}
+@media(max-width:600px){main{padding:40px 20px 60px}nav{padding:0 20px}}
+@media(max-width:640px){.nav-links .nl{display:none}}
+</style>
+</head>
+<body>
+<nav>
+  <a class="logo" href="/en/">
+    <div class="logo-dot"></div>
+    <span class="logo-name">Geoptim</span>
+  </a>
+  <div class="nav-links">
+    <a href="/en/pricing" class="nl">Pricing</a>
+    <a href="/en/faq" class="nl">FAQ</a>
+    <a href="/en/about" class="nl">About</a>
+    <a href="/en/blog" class="nl">Blog</a>
+    <a href="/blog/chatgpt-sources" class="nl" style="font-weight:600;color:var(--gold)">&#127467;&#127479; FR</a>
+    <a class="btn-cta" href="/en/">Analyze my site &#8594;</a>
+  </div>
+</nav>
+<main>
+  <div class="breadcrumb"><a href="/en/">Home</a> &#8250; <a href="/en/blog">Blog</a> &#8250; LLM Sources</div>
+  <div class="tag">Technical</div>
+  <h1>How ChatGPT Selects Its Sources, and How to Become One</h1>
+  <div class="meta">
+    <span>February 14, 2026</span>
+    <span>8 min read</span>
+  </div>
+
+  <p>The question every marketing leader should be asking in 2026 is no longer "Am I on the first page of Google?" but rather "Am I cited when someone asks an AI about my industry?"</p>
+
+  <h2>The 4 selection criteria of LLMs</h2>
+  <p><strong>1. Technical accessibility</strong>: The crawler must be able to read your site. A robots.txt that blocks GPTBot, ClaudeBot, or MistralBot excludes your site from those models' indexes entirely. This is the baseline: if AI bots cannot crawl your content, you do not exist for them.</p>
+  <p><strong>2. Information structure</strong>: AI models prefer content that directly answers a question. A factual paragraph will always be favored over a promotional one. H2 and H3 headings phrased as questions, bullet lists, and direct concise answers: all of these significantly increase your chances of being cited.</p>
+  <p><strong>3. Structured data</strong>: Schema.org JSON-LD is the language AI reads before your actual content. Organization, FAQPage, Service, Person: these markup types tell models exactly what you do, who you are, and why you are a trustworthy source.</p>
+  <p><strong>4. Authority and consistency</strong>: A site whose content is coherent, non-contradictory, and regularly updated inspires greater confidence in models. Content freshness and consistency are positive signals for all LLMs.</p>
+
+  <h2>The key role of the llms.txt file</h2>
+  <p>An emerging standard first proposed in 2024, the llms.txt file contains a structured Markdown summary of your business. It is your letter of introduction to LLMs. Placed at the root of your domain (e.g., <code>https://your-site.com/llms.txt</code>), it summarizes who you are, what you do, and how to reach you.</p>
+  <p>Twenty minutes of work for potential visibility to hundreds of millions of ChatGPT, Claude, Perplexity, and Mistral Le Chat users. Models that have adopted this standard prioritize sites that use it &#8212; notably Perplexity, which was an early adopter.</p>
+
+  <h2>What you can do right now</h2>
+  <p>Start with an audit of your site's current state: does your robots.txt allow AI crawlers? Do you have an llms.txt file? Is your Schema.org markup complete and up to date? These three questions cover the essentials.</p>
+  <p>Once you have this baseline assessment, the fixes are quick to implement, and their impact on your AI visibility can be measurable within weeks.</p>
+
+  <hr class="divider"/>
+
+  <div class="cta-box">
+    <h3>Discover your GEO score in 60 seconds</h3>
+    <p>Free analysis: robots.txt, llms.txt, Schema.org, AI-ready content. Score out of 100 with recommendations.</p>
+    <a class="btn-gold" href="/en/">Analyze my site for free &#8594;</a>
+  </div>
+</main>
+<footer>
+  <p>&#169; 2026 <a href="/en/">Geoptim</a> &#183; <a href="/en/blog">Blog</a> &#183; <a href="/en/legal">Legal</a></p>
+</footer>
+</body>
+</html>

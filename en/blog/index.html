@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Geoptim Blog: GEO, AI and Visibility in AI Assistants</title>
+<link rel="canonical" href="https://geoptim.io/en/blog"/>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
+<meta name="description" content="Articles on GEO (Generative Engine Optimization), visibility in ChatGPT, Perplexity, Claude and Gemini, and best practices to optimize your site for AI."/>
+<meta property="og:title" content="Geoptim Blog: GEO and AI Visibility"/>
+<meta property="og:description" content="Articles on GEO, visibility in AI assistants, and optimization best practices."/>
+<meta property="og:url" content="https://geoptim.io/en/blog"/>
+<meta property="og:type" content="website"/>
+<meta property="og:locale" content="en_US"/>
+<meta name="twitter:card" content="summary"/>
+<link rel="alternate" hreflang="fr" href="https://geoptim.io/blog"/>
+<link rel="alternate" hreflang="en" href="https://geoptim.io/en/blog"/>
+<link rel="alternate" hreflang="x-default" href="https://geoptim.io/blog"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+:root{--navy:#0f1f3d;--gold:#c9a84c;--cream:#faf8f5;--border:#e8e4dc;--text:#0f1f3d;--text2:#4a4438;--text3:#6b6358;--text4:#aaa09a}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--cream);color:var(--text);font-family:'DM Sans',sans-serif;line-height:1.7}
+a{text-decoration:none;color:inherit}
+nav{position:sticky;top:0;z-index:100;background:rgba(250,248,245,.95);backdrop-filter:blur(14px);border-bottom:1px solid var(--border)}
+.ni{max-width:1100px;margin:0 auto;padding:0 32px;height:64px;display:flex;align-items:center;justify-content:space-between}
+.logo{display:flex;align-items:center;gap:8px;font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--navy)}
+.logo-dot{width:9px;height:9px;background:var(--gold);border-radius:50%}
+.btn-nav{background:var(--navy);color:#fff;padding:10px 22px;border-radius:9px;font-weight:600;font-size:13px;cursor:pointer;border:none}
+.hero{max-width:860px;margin:0 auto;padding:72px 32px 56px}
+.tag{display:inline-flex;align-items:center;gap:7px;font-family:'DM Mono',monospace;font-size:11px;color:var(--gold);letter-spacing:.08em;text-transform:uppercase;background:#fef9ed;border:1px solid #f0e0a0;padding:5px 14px;border-radius:999px;margin-bottom:22px}
+h1{font-family:'Playfair Display',serif;font-size:clamp(28px,4vw,44px);font-weight:900;color:var(--navy);margin-bottom:12px;line-height:1.12}
+.sub{font-size:16px;color:var(--text3);font-weight:300;max-width:560px}
+.grid{max-width:1100px;margin:0 auto;padding:0 32px 80px;display:grid;grid-template-columns:repeat(2,1fr);gap:24px}
+.card{display:block;background:#fff;border:1px solid var(--border);border-radius:16px;overflow:hidden;transition:box-shadow .2s,transform .2s}
+.card:hover{box-shadow:0 10px 36px rgba(15,31,61,.1);transform:translateY(-3px)}
+.cb{padding:28px 28px 20px}
+.ctag{display:inline-block;font-family:'DM Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:var(--gold);background:#fef9ed;border:1px solid #f0e0a0;padding:3px 10px;border-radius:999px;margin-bottom:14px}
+.cread{font-family:'DM Mono',monospace;font-size:10px;color:var(--text4)}
+.ch{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--navy);margin:10px 0 10px;line-height:1.25}
+.ce{font-size:14px;color:var(--text3);line-height:1.7}
+.cf{display:flex;justify-content:space-between;align-items:center;padding:16px 28px;border-top:1px solid var(--border)}
+.cd{font-family:'DM Mono',monospace;font-size:10px;color:var(--text4)}
+.cr{font-size:13px;color:var(--gold);font-weight:600}
+footer{background:var(--navy);padding:32px;text-align:center;font-size:12px;color:#5a7a96}
+footer a{color:var(--gold)}
+.nav-links{display:flex;align-items:center;gap:20px}.nl{font-size:13px;font-weight:500;color:var(--text3);transition:color .2s;padding:4px;text-decoration:none}.nl:hover{color:var(--navy)}
+@media(max-width:640px){.grid{grid-template-columns:1fr}.hero{padding:48px 20px 40px}}
+@media(max-width:600px){.nav-links .nl{display:none}}
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Blog",
+  "name": "Geoptim Blog",
+  "url": "https://geoptim.io/en/blog",
+  "inLanguage": "en",
+  "description": "Articles on GEO, visibility in AI assistants, and optimization best practices.",
+  "publisher": {"@type": "Organization", "name": "Geoptim", "url": "https://geoptim.io"}
+}
+</script>
+</head>
+<body>
+<nav>
+  <div class="ni">
+    <a href="/en/" class="logo"><span class="logo-dot"></span>Geoptim</a>
+    <div class="nav-links">
+      <a href="/en/pricing" class="nl">Pricing</a>
+      <a href="/en/faq" class="nl">FAQ</a>
+      <a href="/en/about" class="nl">About</a>
+      <a href="/en/blog" class="nl">Blog</a>
+      <a href="/blog" class="nl" style="font-weight:600;color:var(--gold)">&#127467;&#127479; FR</a>
+      <a href="/en/" class="btn-nav">Analyze my site &#8594;</a>
+    </div>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="tag">Blog</div>
+  <h1>GEO in Practice</h1>
+  <p class="sub">Strategies, guides, and analysis to optimize your website's visibility in AI assistants.</p>
+</div>
+
+<div class="grid">
+
+  <a href="/en/blog/geo-vs-seo" class="card">
+    <div class="cb">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+        <span class="ctag">Strategy</span>
+        <span class="cread">6 min</span>
+      </div>
+      <h2 class="ch">GEO vs SEO: Why Your Digital Strategy Is Already Outdated</h2>
+      <p class="ce">In 2026, one in three searches bypasses Google entirely, going straight to an AI assistant. Here's what that concretely changes.</p>
+    </div>
+    <div class="cf"><span class="cd">Feb 28, 2026</span><span class="cr">Read &#8594;</span></div>
+  </a>
+
+  <a href="/en/blog/chatgpt-sources" class="card">
+    <div class="cb">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+        <span class="ctag">Technical</span>
+        <span class="cread">8 min</span>
+      </div>
+      <h2 class="ch">How ChatGPT Selects Its Sources, and How to Become One</h2>
+      <p class="ce">Language models have specific criteria for deciding which sources to cite. Understanding their logic is the first step.</p>
+    </div>
+    <div class="cf"><span class="cd">Feb 14, 2026</span><span class="cr">Read &#8594;</span></div>
+  </a>
+
+  <a href="/en/blog/llms-txt" class="card">
+    <div class="cb">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+        <span class="ctag">Practical guide</span>
+        <span class="cread">5 min</span>
+      </div>
+      <h2 class="ch">The llms.txt File: The New robots.txt for the AI Era</h2>
+      <p class="ce">Proposed in 2024, the llms.txt standard is gaining traction fast. Everything you need to know to create one.</p>
+    </div>
+    <div class="cf"><span class="cd">Feb 3, 2026</span><span class="cr">Read &#8594;</span></div>
+  </a>
+
+  <a href="/en/blog/ai-ready" class="card">
+    <div class="cb">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+        <span class="ctag">Design</span>
+        <span class="cread">7 min</span>
+      </div>
+      <h2 class="ch">AI Ready: 5 Criteria for a Website Truly Visible to AI</h2>
+      <p class="ce">Being "AI Ready" doesn't mean adding a chatbot. It means rethinking your site architecture.</p>
+    </div>
+    <div class="cf"><span class="cd">Jan 20, 2026</span><span class="cr">Read &#8594;</span></div>
+  </a>
+
+</div>
+
+<footer>
+  <p>&#169; 2026 Geoptim &#183; <a href="/en/">Home</a> &#183; <a href="/en/pricing">Pricing</a> &#183; <a href="/en/faq">FAQ</a> &#183; <a href="/en/about">About</a></p>
+</footer>
+</body>
+</html>
