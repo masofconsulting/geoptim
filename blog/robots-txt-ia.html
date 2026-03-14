@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>robots.txt et IA : les erreurs qui rendent votre site invisible | Geoptim</title>
+<link rel="canonical" href="https://geoptim.io/blog/robots-txt-ia"/>
+<meta name="description" content="Votre robots.txt bloque peut-être les crawlers IA sans que vous le sachiez. Découvrez les 30+ bots IA, les erreurs fréquentes et comment les corriger."/>
+<meta name="robots" content="index, follow"/>
+<meta property="og:type" content="article"/>
+<meta property="og:locale" content="fr_FR"/>
+<meta property="og:site_name" content="Geoptim"/>
+<meta property="og:title" content="robots.txt et IA : les erreurs qui rendent votre site invisible"/>
+<meta property="og:description" content="Votre robots.txt bloque peut-être les crawlers IA. Découvrez les erreurs fréquentes et comment les corriger."/>
+<meta property="og:url" content="https://geoptim.io/blog/robots-txt-ia"/>
+<meta property="og:image" content="https://geoptim.io/og-image.png"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="robots.txt et IA : les erreurs qui rendent votre site invisible"/>
+<meta name="twitter:description" content="Votre robots.txt bloque peut-être les crawlers IA. Découvrez les erreurs fréquentes et comment les corriger."/>
+<meta name="twitter:image" content="https://geoptim.io/og-image.png"/>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "robots.txt et IA : les erreurs qui rendent votre site invisible",
+  "description": "Votre robots.txt bloque peut-être les crawlers IA sans que vous le sachiez. Découvrez les 30+ bots IA, les erreurs fréquentes et comment les corriger.",
+  "datePublished": "2026-03-12",
+  "dateModified": "2026-03-12",
+  "author": {"@type": "Organization", "name": "Geoptim", "url": "https://geoptim.io"},
+  "publisher": {"@type": "Organization", "name": "Geoptim", "url": "https://geoptim.io", "logo": {"@type": "ImageObject", "url": "https://geoptim.io/favicon.svg"}},
+  "url": "https://geoptim.io/blog/robots-txt-ia",
+  "image": "https://geoptim.io/og-image.png",
+  "mainEntityOfPage": "https://geoptim.io/blog/robots-txt-ia",
+  "keywords": ["robots.txt", "GPTBot", "ClaudeBot", "PerplexityBot", "crawlers IA", "GEO", "visibilité IA", "blocage IA"]
+}
+</script>
+<style>
+:root{--navy:#0f1f3d;--navy2:#1a3360;--gold:#c9a84c;--gold2:#e0bc60;--cream:#faf8f5;--cream2:#f4f1eb;--border:#e8e4dc;--text:#0f1f3d;--text2:#4a4438;--text3:#6b6358;--text4:#aaa09a}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--cream);color:var(--text);font-family:'DM Sans',sans-serif;line-height:1.7}
+a{color:var(--navy);text-decoration:none}
+a:hover{text-decoration:underline}
+nav{background:rgba(250,248,245,.97);backdrop-filter:blur(14px);border-bottom:1px solid var(--border);padding:0 32px;height:64px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+.logo{display:flex;align-items:center;gap:8px;text-decoration:none}
+.logo-dot{width:9px;height:9px;background:var(--gold);border-radius:50%}
+.logo-name{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--navy)}
+.btn-cta{background:var(--navy);color:#fff;padding:10px 22px;border-radius:9px;font-weight:600;font-size:13px;text-decoration:none;transition:background .2s}
+.btn-cta:hover{background:var(--navy2);text-decoration:none}
+main{max-width:740px;margin:0 auto;padding:60px 32px 80px}
+.tag{display:inline-flex;align-items:center;gap:7px;font-family:'DM Mono',monospace;font-size:11px;color:var(--gold);letter-spacing:.08em;text-transform:uppercase;background:#fef9ed;border:1px solid #f0e0a0;padding:5px 14px;border-radius:999px;margin-bottom:20px}
+.meta{font-family:'DM Mono',monospace;font-size:11px;color:var(--text4);margin-bottom:32px;display:flex;gap:16px}
+h1{font-family:'Playfair Display',serif;font-size:clamp(28px,4vw,46px);font-weight:900;line-height:1.1;letter-spacing:-.02em;color:var(--navy);margin-bottom:16px}
+h2{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--navy);margin:40px 0 14px}
+p{font-size:16px;color:var(--text2);line-height:1.8;margin-bottom:20px;font-weight:300}
+.divider{border:none;border-top:1px solid var(--border);margin:48px 0}
+.cta-box{background:var(--navy);border-radius:16px;padding:36px;text-align:center;margin-top:48px}
+.cta-box h3{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:#fff;margin-bottom:10px}
+.cta-box p{color:#5a7a96;font-size:14px;margin-bottom:24px}
+.btn-gold{background:var(--gold);color:var(--navy);padding:12px 28px;border-radius:9px;font-weight:700;font-size:14px;text-decoration:none;display:inline-block;transition:background .2s}
+.btn-gold:hover{background:var(--gold2);text-decoration:none}
+.breadcrumb{font-size:12px;color:var(--text4);margin-bottom:32px}
+.breadcrumb a{color:var(--text4)}
+.breadcrumb a:hover{color:var(--navy)}
+footer{background:var(--navy);padding:32px;text-align:center;font-size:12px;color:#3a5a7a}
+footer a{color:#5a7a96}
+.nav-links{display:flex;align-items:center;gap:20px}.nl{font-size:13px;font-weight:500;color:var(--text3);transition:color .2s;padding:4px;text-decoration:none}.nl:hover{color:var(--navy)}
+@media(max-width:600px){main{padding:40px 20px 60px}nav{padding:0 20px}}
+@media(max-width:640px){.nav-links .nl{display:none}}
+</style>
+</head>
+<body>
+<nav>
+  <a class="logo" href="/">
+    <div class="logo-dot"></div>
+    <span class="logo-name">Geoptim</span>
+  </a>
+  <div class="nav-links">
+    <a href="/tarifs" class="nl">Tarifs</a>
+    <a href="/faq" class="nl">FAQ</a>
+    <a href="/a-propos" class="nl">À propos</a>
+    <a href="/blog" class="nl">Blog</a>
+    <a class="btn-cta" href="/">Analyser mon site →</a>
+  </div>
+</nav>
+<main>
+  <div class="breadcrumb"><a href="/">Accueil</a> › <a href="/blog">Blog</a> › robots.txt et IA</div>
+  <div class="tag">Technique</div>
+  <h1>robots.txt et IA : les erreurs qui rendent votre site invisible</h1>
+  <div class="meta">
+    <span>12 mars 2026</span>
+    <span>6 min de lecture</span>
+  </div>
+
+  <p>Un fichier de quelques lignes, souvent créé une seule fois et jamais relu. Le robots.txt est pourtant le premier filtre entre votre site et les crawlers qui alimentent les IA génératives. Si ce fichier est mal configuré, ChatGPT, Perplexity et les AI Overviews de Google ne verront jamais votre contenu. Vous serez invisible, sans le savoir.</p>
+
+  <h2>Comment fonctionne le robots.txt pour les IA</h2>
+
+  <p>Le robots.txt est un fichier texte placé à la racine de votre site (example.com/robots.txt) qui indique aux robots d'indexation quelles pages ils peuvent ou ne peuvent pas explorer. Son fonctionnement repose sur un principe simple : vous déclarez un User-agent (le nom du bot) suivi de règles Allow ou Disallow pour les chemins concernés.</p>
+
+  <p>Historiquement, ce fichier servait à guider Googlebot et Bingbot. Mais depuis 2023, une nouvelle génération de crawlers est apparue. OpenAI a lancé GPTBot pour alimenter ChatGPT. Anthropic utilise ClaudeBot. Perplexity envoie PerplexityBot. Meta déploie Meta-ExternalAgent. Google lui-même a ajouté Google-Extended, un crawler dédié à l'entraînement de ses modèles IA, distinct de Googlebot.</p>
+
+  <p>Ces bots respectent le robots.txt. Ce qui signifie que si vous les bloquez, volontairement ou par accident, votre contenu disparaît de leurs bases de connaissances.</p>
+
+  <h2>Les 3 erreurs les plus fréquentes</h2>
+
+  <p><strong>Le Disallow global.</strong> C'est l'erreur la plus radicale et la plus courante. Un bloc User-agent: * suivi de Disallow: / bloque tous les robots sans exception. Certains CMS génèrent cette configuration par défaut en mode "maintenance" ou "pré-lancement", et personne ne pense à la retirer une fois le site en production. Résultat : ni Google, ni les IA ne peuvent accéder au contenu.</p>
+
+  <p><strong>L'ignorance des nouveaux bots.</strong> Beaucoup de développeurs connaissent Googlebot mais n'ont jamais entendu parler de GPTBot ou de ClaudeBot. Ils ne pensent pas à vérifier si leur robots.txt bloque ces crawlers, soit explicitement, soit via une règle générique trop large. Un site peut parfaitement être indexé par Google tout en étant complètement invisible pour les IA génératives.</p>
+
+  <p><strong>Les plugins de sécurité trop agressifs.</strong> Sur WordPress, Drupal ou d'autres CMS, les extensions de sécurité ajoutent souvent des règles robots.txt automatiques pour bloquer les "bots suspects". Or, GPTBot, ClaudeBot et PerplexityBot sont relativement récents et figurent fréquemment dans les listes de bots bloqués par ces plugins. Vérifiez les règles générées automatiquement par vos extensions.</p>
+
+  <h2>Les 30+ crawlers IA à connaître</h2>
+
+  <p>L'écosystème des crawlers IA a explosé. Voici les principaux bots actifs en 2026, regroupés par catégorie.</p>
+
+  <p><strong>Crawlers des grands modèles :</strong> GPTBot (OpenAI / ChatGPT), OAI-SearchBot (OpenAI Search), ClaudeBot (Anthropic / Claude), Google-Extended (Google / Gemini), PerplexityBot (Perplexity), Meta-ExternalAgent (Meta / Llama), Bytespider (ByteDance / Doubao), Applebot-Extended (Apple Intelligence), cohere-ai (Cohere).</p>
+
+  <p><strong>Crawlers de moteurs de recherche IA :</strong> YouBot (You.com), Phind (Phind.com), BraveBot (Brave Search AI), Exabot (Exa.ai).</p>
+
+  <p><strong>Crawlers d'entraînement et de données :</strong> CCBot (Common Crawl), DataForSeoBot, Diffbot, Omgili, PetalBot (Huawei), Kangaroo Bot, Timpibot, Webz.io, img2dataset, Sidetrade.</p>
+
+  <p><strong>Crawlers d'entreprises tech :</strong> FacebookBot (Meta), Amazonbot (Amazon / Alexa), anthropic-ai, Friendlycrawler (Cloudflare), ISSCyberRiskCrawler, Seekport.</p>
+
+  <p>Cette liste continue de s'allonger. Chaque mois, de nouveaux bots apparaissent. Un robots.txt qui ne les prend pas en compte risque de bloquer des sources de trafic IA majeures.</p>
+
+  <h2>Bloquer les scrapers sans bloquer les IA</h2>
+
+  <p>La question légitime est : faut-il tout autoriser ? Non. La stratégie optimale consiste à distinguer trois catégories de bots. Les crawlers de recherche (Googlebot, Bingbot) doivent toujours être autorisés. Les crawlers IA de consultation (GPTBot, ClaudeBot, PerplexityBot) doivent aussi être autorisés si vous souhaitez être cité dans les réponses IA. Les crawlers d'entraînement (Google-Extended, CCBot) peuvent être bloqués si vous ne souhaitez pas que votre contenu serve à entraîner des modèles.</p>
+
+  <p>La distinction est importante. Bloquer GPTBot empêche ChatGPT de citer votre site dans ses réponses en temps réel. Bloquer Google-Extended empêche Google d'utiliser votre contenu pour entraîner Gemini, mais n'affecte pas votre indexation classique ni les AI Overviews (qui utilisent Googlebot).</p>
+
+  <p>La configuration recommandée : autorisez User-agent: * avec les restrictions nécessaires pour vos pages privées, puis bloquez individuellement les crawlers d'entraînement si vous le souhaitez.</p>
+
+  <h2>L'impact immédiat d'une correction</h2>
+
+  <p>Corriger un robots.txt mal configuré produit des résultats rapides. Les crawlers IA passent régulièrement, souvent plusieurs fois par semaine pour les sites actifs. Une fois le blocage levé, votre contenu devient accessible aux IA en quelques jours. Les sites qui corrigent un Disallow global constatent généralement une augmentation de leurs citations IA dans les deux semaines suivantes.</p>
+
+  <p>C'est l'une des corrections GEO les plus simples et les plus rentables. Pas de refonte de contenu, pas de nouveau balisage, pas de travail éditorial. Juste quelques lignes à modifier dans un fichier texte. Encore faut-il savoir que le problème existe.</p>
+
+  <hr class="divider"/>
+
+  <div class="cta-box">
+    <h3>Votre robots.txt bloque-t-il les IA ?</h3>
+    <p>Analyse gratuite de votre robots.txt et de vos 30+ crawlers IA en 60 secondes.</p>
+    <a class="btn-gold" href="/">Tester mon robots.txt →</a>
+  </div>
+</main>
+<footer>
+  <p>© 2026 <a href="/">Geoptim</a> · <a href="/blog">Blog</a> · <a href="/mentions-legales">Mentions légales</a></p>
+</footer>
+</body>
+</html>
