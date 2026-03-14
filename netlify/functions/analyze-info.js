@@ -1,38 +1,49 @@
 // Netlify v2 — accumule le stream Anthropic, retourne JSON complet
-async function callAnthropicStreaming(KEY, body) {
+async function callAnthropicStreaming(KEY, body, timeoutMs) {
   const MAX = 3;
   for (let attempt = 0; attempt < MAX; attempt++) {
-    const res = await fetch("https://api.anthropic.com/v1/messages", {
-      method: "POST",
-      headers: { "Content-Type": "application/json", "x-api-key": KEY, "anthropic-version": "2023-06-01" },
-      body: JSON.stringify({ ...body, stream: true })
-    });
-    if (!res.ok) {
-      const errData = await res.json().catch(() => ({}));
-      if (errData.error?.type === 'overloaded_error' && attempt < MAX - 1) {
-        await new Promise(r => setTimeout(r, 2000));
-        continue;
+    const ctrl = new AbortController();
+    const tid = setTimeout(() => ctrl.abort(), timeoutMs);
+    try {
+      const res = await fetch("https://api.anthropic.com/v1/messages", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "x-api-key": KEY, "anthropic-version": "2023-06-01" },
+        body: JSON.stringify({ ...body, stream: true }),
+        signal: ctrl.signal
+      });
+      if (!res.ok) {
+        clearTimeout(tid);
+        const errData = await res.json().catch(() => ({}));
+        if (errData.error?.type === 'overloaded_error' && attempt < MAX - 1) {
+          await new Promise(r => setTimeout(r, 2000));
+          continue;
+        }
+        throw new Error(errData.error?.message || `Erreur Anthropic ${res.status}`);
       }
-      throw new Error(errData.error?.message || `Erreur Anthropic ${res.status}`);
-    }
-    const reader = res.body.getReader();
-    const decoder = new TextDecoder();
-    let buf = '', text = '';
-    while (true) {
-      const { done, value } = await reader.read();
-      if (done) break;
-      buf += decoder.decode(value, { stream: true });
-      const lines = buf.split('\n');
-      buf = lines.pop();
-      for (const line of lines) {
-        if (!line.startsWith('data: ')) continue;
-        let ev;
-        try { ev = JSON.parse(line.slice(6)); } catch { continue; }
-        if (ev.type === 'content_block_delta' && ev.delta?.type === 'text_delta') text += ev.delta.text;
-        if (ev.type === 'error') throw new Error(ev.error?.message || 'Erreur stream Anthropic');
+      const reader = res.body.getReader();
+      const decoder = new TextDecoder();
+      let buf = '', text = '';
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        buf += decoder.decode(value, { stream: true });
+        const lines = buf.split('\n');
+        buf = lines.pop();
+        for (const line of lines) {
+          if (!line.startsWith('data: ')) continue;
+          let ev;
+          try { ev = JSON.parse(line.slice(6)); } catch { continue; }
+          if (ev.type === 'content_block_delta' && ev.delta?.type === 'text_delta') text += ev.delta.text;
+          if (ev.type === 'error') throw new Error(ev.error?.message || 'Erreur stream Anthropic');
+        }
       }
+      clearTimeout(tid);
+      return text;
+    } catch(e) {
+      clearTimeout(tid);
+      if (e.name === 'AbortError' && attempt < MAX - 1) continue;
+      throw e;
     }
-    return text;
   }
 }
 
@@ -156,7 +167,7 @@ Réponds UNIQUEMENT avec ce JSON sans markdown :
       model: "claude-sonnet-4-6",
       max_tokens: 4000,
       messages: [{ role: "user", content: prompt }]
-    });
+    }, 23000);
 
     const clean = text.trim().replace(/^```json\n?/,'').replace(/\n?```$/,'').trim();
     const match = clean.match(/\{[\s\S]*\}/);
