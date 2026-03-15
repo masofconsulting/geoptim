@@ -2091,7 +2091,14 @@ async function generateFile(fileKey) {
   }
 
   var btn = document.getElementById('gen-btn-' + fileKey);
-  if (btn) { btn.textContent = 'Generating…'; btn.disabled = true; }
+  if (btn) {
+    btn.textContent = 'Generating…'; btn.disabled = true;
+    var hint = document.createElement('div');
+    hint.id = 'gen-hint-' + fileKey;
+    hint.style.cssText = 'font-family:DM Mono,monospace;font-size:11px;color:#9e9789;margin-top:8px;text-align:center';
+    hint.textContent = 'Generation may take 1 to 2 minutes';
+    btn.parentNode.appendChild(hint);
+  }
 
   var apiMap = { llms: 'generate-llms', schema: 'generate-schema', faq: 'generate-faq' };
   var ctx = buildCtx(domain, result);
@@ -2134,6 +2141,7 @@ async function generateFile(fileKey) {
     renderFiles();
   } catch (err) {
     if (btn) { btn.textContent = 'Retry →'; btn.disabled = false; }
+    var h = document.getElementById('gen-hint-' + fileKey); if (h) h.remove();
     alert('Generation error: ' + err.message);
   }
 }
