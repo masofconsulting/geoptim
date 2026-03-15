@@ -2,7 +2,25 @@
   "permissions": {
     "allow": [
       "Bash(gh auth status)",
-      "Bash(git -C /Users/hugomanteau/Downloads/geoptim-main remote -v)"
+      "Bash(git -C /Users/hugomanteau/Downloads/geoptim-main remote -v)",
+      "Bash(/opt/homebrew/bin/gh auth status)",
+      "Bash(git checkout -b feature/refonte-tarifs-generation-carte)",
+      "Bash(git add index.html netlify.toml sitemap.xml tarifs.html faq.html a-propos.html netlify/functions/analyze-info.js netlify/functions/analyze-score.js netlify/functions/create-checkout.js netlify/functions/generate-faq.js netlify/functions/generate-llms.js netlify/functions/generate-schema.js netlify/functions/verify-payment.js)",
+      "Bash(git commit:*)",
+      "Bash(git push -u origin feature/refonte-tarifs-generation-carte)",
+      "Bash(git add:*)",
+      "Bash(/opt/homebrew/bin/gh pr:*)",
+      "Bash(git push:*)",
+      "Bash(npx netlify:*)",
+      "Read(//opt/homebrew/**)",
+      "Read(//Users/hugomanteau/**)",
+      "Read(//Applications/**)",
+      "Bash(/opt/homebrew/bin/brew install:*)",
+      "Bash(/opt/homebrew/bin/npx netlify:*)",
+      "Bash(find:*)",
+      "Bash(git checkout:*)",
+      "Bash(git stash:*)",
+      "mcp__Claude_Preview__preview_start"
     ]
   }
 }
