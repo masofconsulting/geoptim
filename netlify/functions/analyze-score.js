@@ -86,9 +86,9 @@ export default async (req) => {
   const prompt = `Tu es un auditeur GEO. Évalue ce site avec des critères précis et reproductibles. Utilise temperature=0 mentalement : pour des données identiques, tu dois toujours donner le même score.
 
 URL : ${url}
-robots.txt : ${robots.slice(0,600) || '(absent)'}
+robots.txt : ${robots.slice(0,1500) || '(absent)'}
 llms.txt : ${llmsInfo}
-JSON-LD détecté : ${homeJsonLd ? homeJsonLd.slice(0,1200) : '(aucun)'}
+JSON-LD détecté : ${homeJsonLd ? homeJsonLd.slice(0,3000) : '(aucun)'}
 Homepage : ${homeText}
 
 CRITÈRES DE NOTATION (chaque critère sur 25) :
