@@ -46,7 +46,7 @@ export default async (req) => {
   try { ({ domain, name, ctx, rawContent, lang } = await req.json()); }
   catch { return new Response(JSON.stringify({ error: "JSON invalide" }), { status: 400, headers: { 'Content-Type': 'application/json' } }); }
 
-  const content = (rawContent || '').slice(0, 12000);
+  const content = (rawContent || '').slice(0, 30000);
   const isEn = lang && lang !== 'fr';
 
   const systemPrompt = isEn
