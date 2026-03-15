@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 40">
+  <!-- Radar icon -->
+  <circle cx="20" cy="20" r="12" fill="none" stroke="#c9a84c" stroke-width="2" opacity="0.2"/>
+  <circle cx="20" cy="20" r="7" fill="none" stroke="#c9a84c" stroke-width="1.6" opacity="0.4"/>
+  <circle cx="20" cy="20" r="2.8" fill="#c9a84c"/>
+  <line x1="20" y1="20" x2="28.5" y2="12.5" stroke="#c9a84c" stroke-width="1.4" stroke-linecap="round" opacity="0.65"/>
+  <!-- Text -->
+  <text x="40" y="26" font-family="Georgia, 'Playfair Display', serif" font-size="22" font-weight="700" fill="#0f1e2e" letter-spacing="-0.3">Geoptim</text>
+</svg>
