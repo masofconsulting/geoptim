@@ -127,7 +127,7 @@ RÈGLES :
       try {
         for await (const chunk of streamAnthropic(KEY, {
           model: "claude-sonnet-4-6",
-          max_tokens: 16000,
+          max_tokens: 16384,
           system: systemPrompt,
           messages: [{ role: "user", content: prompt }]
         })) {

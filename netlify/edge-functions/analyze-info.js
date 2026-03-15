@@ -66,6 +66,9 @@ export default async (req) => {
       } catch { continue; }
       if (/\.(png|jpe?g|gif|svg|webp|ico|css|js|pdf|zip|mp[34]|woff2?|ttf|eot)$/i.test(href)) continue;
       if (/\/(cdn-cgi|wp-content|wp-includes|wp-admin|assets|static|_next|\.well-known|feed|rss)\//i.test(href)) continue;
+      // Skip alternate language versions and blog pages
+      if (/^\/(en|es|de|it|pt|nl|ar|zh|ja|ko)(\/|$)/i.test(href)) continue;
+      if (/\/blog(\/|$)/i.test(href)) continue;
       if (href === '/') continue;
       links.add(href);
     }
@@ -93,11 +96,30 @@ export default async (req) => {
   const homeHtml = await fetchRaw(base + '/', 5000);
   const homeText = stripHtml(homeHtml);
 
-  const discoveredLinks = extractLinks(homeHtml, base);
-  const pagesToFetch = discoveredLinks.slice(0, 15);
+  // Depth-1: discover links from homepage
+  const depth1Links = extractLinks(homeHtml, base);
+  const allLinks = new Set(depth1Links);
 
-  const pageResults = await Promise.all(
-    pagesToFetch.map(async (path) => {
+  // Fetch depth-1 pages (up to 15) and collect their HTML for depth-2 discovery
+  const depth1Pages = depth1Links.slice(0, 15);
+  const depth1Results = await Promise.all(
+    depth1Pages.map(async (path) => {
+      const html = await fetchRaw(base + path, 3000);
+      if (!html) return null;
+      const text = stripHtml(html);
+      if (!text || text.length < 50) return null;
+      // Discover depth-2 links from this page
+      for (const link of extractLinks(html, base)) allLinks.add(link);
+      return { path, text };
+    })
+  );
+
+  // Depth-2: fetch newly discovered pages not already fetched
+  const fetchedPaths = new Set(depth1Pages);
+  fetchedPaths.add('/');
+  const depth2Links = [...allLinks].filter(p => !fetchedPaths.has(p)).slice(0, 10);
+  const depth2Results = await Promise.all(
+    depth2Links.map(async (path) => {
       const html = await fetchRaw(base + path, 3000);
       const text = stripHtml(html);
       if (!text || text.length < 50) return null;
@@ -109,12 +131,12 @@ export default async (req) => {
     homeText ? '=== ACCUEIL (/) ===\n' + homeText : ''
   ];
 
-  for (const page of pageResults) {
+  for (const page of [...depth1Results, ...depth2Results]) {
     if (!page) continue;
     sections.push('=== PAGE ' + page.path + ' ===\n' + page.text);
   }
 
-  const rawContent = sections.filter(Boolean).join('\n\n').slice(0, 30000);
+  const rawContent = sections.filter(Boolean).join('\n\n').slice(0, 50000);
 
   const prompt = `Tu es un expert en extraction d'information business. Extrais toutes les données réelles de ce site de façon exhaustive.
 
@@ -122,7 +144,7 @@ URL : ${url}
 
 CONTENU RÉCUPÉRÉ (plusieurs pages) :
 ---
-${rawContent.slice(0, 16000)}
+${rawContent.slice(0, 24000)}
 ---
 
 RÈGLES STRICTES :
