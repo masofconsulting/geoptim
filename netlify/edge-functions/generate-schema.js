@@ -1,4 +1,3 @@
-// Netlify v2 - streaming, appel unique (cohérence cross-schemas)
 async function* streamAnthropic(KEY, body) {
   const MAX = 3;
   for (let attempt = 0; attempt < MAX; attempt++) {
@@ -38,7 +37,7 @@ async function* streamAnthropic(KEY, body) {
 
 export default async (req) => {
   if (req.method !== "POST") return new Response("Method Not Allowed", { status: 405 });
-  const KEY = process.env.ANTHROPIC_API_KEY;
+  const KEY = Deno.env.get("ANTHROPIC_API_KEY");
   if (!KEY) return new Response(JSON.stringify({ error: "clé manquante" }), { status: 500, headers: { 'Content-Type': 'application/json' } });
 
   let domain, name, ctx, rawContent, lang;
@@ -57,7 +56,6 @@ export default async (req) => {
     ? `<!-- GEO optimization by Geoptim.io - https://geoptim.io -->`
     : `<!-- Optimisation GEO par Geoptim.io - https://geoptim.io -->`;
 
-  // Schema.org prompt - same structure regardless of language; text values follow site language
   const langNote = isEn
     ? `Write all text values (name, description, question texts, answer texts) in English.`
     : `Écris toutes les valeurs textuelles (name, description, questions, réponses) dans la langue du site.`;

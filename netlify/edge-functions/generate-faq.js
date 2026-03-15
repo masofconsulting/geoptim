@@ -1,5 +1,3 @@
-// Netlify v2 - streaming response
-// Anthropic SSE → ReadableStream → frontend lit chunk par chunk
 async function* streamAnthropic(KEY, body) {
   const MAX = 3;
   for (let attempt = 0; attempt < MAX; attempt++) {
@@ -39,7 +37,7 @@ async function* streamAnthropic(KEY, body) {
 
 export default async (req) => {
   if (req.method !== "POST") return new Response("Method Not Allowed", { status: 405 });
-  const KEY = process.env.ANTHROPIC_API_KEY;
+  const KEY = Deno.env.get("ANTHROPIC_API_KEY");
   if (!KEY) return new Response(JSON.stringify({ error: "clé manquante" }), { status: 500, headers: { 'Content-Type': 'application/json' } });
 
   let domain, name, ctx, rawContent, lang;

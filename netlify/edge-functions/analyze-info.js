@@ -1,5 +1,3 @@
-// Netlify v2 - streaming immédiat → frontend accumule et parse le JSON
-// rawContent ajouté en suffixe __RC__ après le stream Claude
 async function* streamAnthropic(KEY, body) {
   const MAX = 3;
   for (let attempt = 0; attempt < MAX; attempt++) {
@@ -39,7 +37,7 @@ async function* streamAnthropic(KEY, body) {
 
 export default async (req) => {
   if (req.method !== "POST") return new Response("Method Not Allowed", { status: 405 });
-  const KEY = process.env.ANTHROPIC_API_KEY;
+  const KEY = Deno.env.get("ANTHROPIC_API_KEY");
   if (!KEY) return new Response(JSON.stringify({ error: "ANTHROPIC_API_KEY manquante" }), { status: 500, headers: { 'Content-Type': 'application/json' } });
 
   function stripHtml(html) {
@@ -61,13 +59,11 @@ export default async (req) => {
     while ((m = re.exec(html)) !== null) {
       let href = m[1].split('#')[0].split('?')[0].trim();
       if (!href || href === '/') continue;
-      // Build absolute URL
       try {
         const abs = new URL(href, base);
         if (abs.origin !== new URL(base).origin) continue;
         href = abs.pathname;
       } catch { continue; }
-      // Exclude non-content paths
       if (/\.(png|jpe?g|gif|svg|webp|ico|css|js|pdf|zip|mp[34]|woff2?|ttf|eot)$/i.test(href)) continue;
       if (/\/(cdn-cgi|wp-content|wp-includes|wp-admin|assets|static|_next|\.well-known|feed|rss)\//i.test(href)) continue;
       if (href === '/') continue;
@@ -94,17 +90,12 @@ export default async (req) => {
   const domain = url.replace(/https?:\/\//,'').replace(/\/.*$/,'');
   const base = 'https://' + domain;
 
-  // ── Étape 1 : Fetch homepage HTML brut ──────────────────────────────────
   const homeHtml = await fetchRaw(base + '/', 5000);
   const homeText = stripHtml(homeHtml);
 
-  // ── Étape 2 : Découvrir les liens internes ──────────────────────────────
   const discoveredLinks = extractLinks(homeHtml, base);
-
-  // Limiter à 15 pages max
   const pagesToFetch = discoveredLinks.slice(0, 15);
 
-  // ── Étape 3 : Fetch toutes les pages découvertes en parallèle ───────────
   const pageResults = await Promise.all(
     pagesToFetch.map(async (path) => {
       const html = await fetchRaw(base + path, 3000);
@@ -114,7 +105,6 @@ export default async (req) => {
     })
   );
 
-  // ── Étape 4 : Assembler le rawContent ───────────────────────────────────
   const sections = [
     homeText ? '=== ACCUEIL (/) ===\n' + homeText : ''
   ];
@@ -187,7 +177,6 @@ Réponds UNIQUEMENT avec ce JSON sans markdown :
         })) {
           ctrl.enqueue(enc.encode(chunk));
         }
-        // Ajoute rawContent en suffixe pour le frontend
         ctrl.enqueue(enc.encode('\n__RC__' + JSON.stringify(rawContent)));
         ctrl.close();
       } catch(err) {
