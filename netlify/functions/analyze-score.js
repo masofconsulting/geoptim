@@ -81,7 +81,7 @@ export default async (req) => {
 
 URL : ${url}
 robots.txt : ${robots.slice(0,600) || '(absent)'}
-llms.txt : ${llms.slice(0,400) || '(absent)'}
+llms.txt : ${llms.slice(0,2000) || '(absent)'}
 JSON-LD détecté : ${homeJsonLd ? homeJsonLd.slice(0,1200) : '(aucun)'}
 Homepage : ${homeText}
 
