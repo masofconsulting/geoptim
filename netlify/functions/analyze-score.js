@@ -71,17 +71,23 @@ export default async (req) => {
   const [homeRaw, robots, llms] = await Promise.all([
     fetchSafe(base + '/', 4000, false),
     fetchSafe(base + '/robots.txt', 2000, false),
-    fetchSafe(base + '/llms.txt', 2000, false),
+    fetchSafe(base + '/llms.txt', 4000, false),
   ]);
 
   const homeJsonLd = extractJsonLd(homeRaw);
   const homeText = stripHtml(homeRaw).slice(0, 2000);
 
+  // Extract llms.txt section headers so Claude can count them
+  const llmsSections = llms ? llms.split('\n').filter(l => /^#{1,3}\s/.test(l)).join('\n') : '';
+  const llmsInfo = llms
+    ? `${llms.slice(0,2000)}\n\n[SECTIONS DÉTECTÉES (${llmsSections.split('\n').length} sections) :\n${llmsSections}\n]`
+    : '(absent)';
+
   const prompt = `Tu es un auditeur GEO. Évalue ce site avec des critères précis et reproductibles. Utilise temperature=0 mentalement : pour des données identiques, tu dois toujours donner le même score.
 
 URL : ${url}
 robots.txt : ${robots.slice(0,600) || '(absent)'}
-llms.txt : ${llms.slice(0,2000) || '(absent)'}
+llms.txt : ${llmsInfo}
 JSON-LD détecté : ${homeJsonLd ? homeJsonLd.slice(0,1200) : '(aucun)'}
 Homepage : ${homeText}
 
