@@ -17,13 +17,15 @@ exports.handler = async (event) => {
       billingName, billingAddress, billingType, billingVat,
       purchaseType, // 'single' | 'pack' (défaut: 'pack')
       fileKey,      // 'robots' | 'llms' | 'schema' | 'faq' | null (pour pack)
-      promoCode     // code promo optionnel
+      promoCode,    // code promo optionnel
+      currency      // 'eur' | 'usd' (défaut: 'eur')
     } = JSON.parse(event.body);
 
     const host   = event.headers["x-forwarded-host"] || event.headers.host || "geoptim.io";
     const origin = `https://${host}`;
     const label  = siteName || siteUrl || "votre site";
     const type   = purchaseType || "pack";
+    const cur    = currency === "usd" ? "usd" : "eur";
 
     // Tarification — validation promo côté serveur (ne jamais faire confiance au client)
     const base = type === "pack" ? 4900 : 1900;
@@ -61,7 +63,7 @@ exports.handler = async (event) => {
     params.append("success_url", `${origin}/?payment=success&session_id={CHECKOUT_SESSION_ID}`);
     params.append("cancel_url",  `${origin}/?payment=cancelled`);
     params.append("line_items[0][quantity]", "1");
-    params.append("line_items[0][price_data][currency]", "eur");
+    params.append("line_items[0][price_data][currency]", cur);
     params.append("line_items[0][price_data][unit_amount]", String(amount));
     params.append("line_items[0][price_data][product_data][name]", productName);
     params.append("line_items[0][price_data][product_data][description]", productDesc);

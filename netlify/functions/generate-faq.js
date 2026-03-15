@@ -42,13 +42,53 @@ export default async (req) => {
   const KEY = process.env.ANTHROPIC_API_KEY;
   if (!KEY) return new Response(JSON.stringify({ error: "clé manquante" }), { status: 500, headers: { 'Content-Type': 'application/json' } });
 
-  let domain, name, ctx, rawContent;
-  try { ({ domain, name, ctx, rawContent } = await req.json()); }
+  let domain, name, ctx, rawContent, lang;
+  try { ({ domain, name, ctx, rawContent, lang } = await req.json()); }
   catch { return new Response(JSON.stringify({ error: "JSON invalide" }), { status: 400, headers: { 'Content-Type': 'application/json' } }); }
 
   const content = (rawContent || '').slice(0, 3000);
+  const isEn = lang && lang !== 'fr';
 
-  const prompt = `Génère une page FAQ HTML complète et optimale pour ce site. HTML brut uniquement, sans backtick ni balise style.
+  const systemPrompt = isEn
+    ? "You are a GEO and technical SEO expert. You generate complete, accurate and useful FAQ pages using only the real data provided. You never truncate your response."
+    : "Tu es un expert en optimisation GEO et SEO technique. Tu génères des pages FAQ complètes, précises et utiles, en utilisant uniquement les données réelles fournies. Tu ne tronques jamais ta réponse.";
+
+  const prompt = isEn
+    ? `Generate a complete and optimal HTML FAQ page for this website. Raw HTML only, no backticks or style tags.
+
+DATA:
+${ctx}
+
+SITE CONTENT:
+${content}
+
+STRUCTURE:
+- Create as many thematic sections as the site content justifies (between 2 and 5 sections depending on content richness)
+- In each section, generate as many questions as relevant (between 3 and 6 per theme)
+- Themes should be derived from the actual industry: services/offerings, pricing/quotes, process/timelines, guarantees/support, contact/areas, team/expertise, etc.
+
+FORMAT:
+<article class="faq-page">
+  <header class="faq-header">
+    <h1>Frequently Asked Questions: ${name}</h1>
+    <p class="faq-intro">[real activity, client types, geographic area, value proposition, 2-3 precise sentences]</p>
+  </header>
+  <section class="faq-section">
+    <h2>[Relevant theme for this site]</h2>
+    <div class="faq-item" id="[seo-kebab-slug]"><h3>[precise long-tail question a client would ask]</h3><p>[complete answer in prose, 70-80 words, concrete and useful, no lists or bullet points]</p></div>
+    [repeat for each question in the theme]
+  </section>
+  [repeat for each relevant theme]
+  <footer class="faq-footer">GEO optimization by <a href="https://geoptim.io">Geoptim.io</a></footer>
+</article>
+
+RULES:
+- Fully adapt the structure to the analyzed site, do not force any theme absent from the content
+- Real data only, no invention
+- Each answer in prose without lists or bullet points, 70-80 words
+- IDs are descriptive SEO kebab-case slugs in English
+- ALWAYS end with the footer and </article>`
+    : `Génère une page FAQ HTML complète et optimale pour ce site. HTML brut uniquement, sans backtick ni balise style.
 
 DONNÉES :
 ${ctx}
@@ -90,7 +130,7 @@ RÈGLES :
         for await (const chunk of streamAnthropic(KEY, {
           model: "claude-sonnet-4-6",
           max_tokens: 8000,
-          system: "Tu es un expert en optimisation GEO et SEO technique. Tu génères des pages FAQ complètes, précises et utiles, en utilisant uniquement les données réelles fournies. Tu ne tronques jamais ta réponse.",
+          system: systemPrompt,
           messages: [{ role: "user", content: prompt }]
         })) {
           ctrl.enqueue(enc.encode(chunk));
