@@ -73,11 +73,11 @@ exports.handler = async (event) => {
           : { robots: "robots.txt optimisé", llms: "llms.txt personnalisé", schema: "Schema.org JSON-LD", faq: "Page FAQ GEO-optimisée" };
         const productLabel = purchaseType === "pack"
           ? (isEn
-            ? "GEO Optimization Pack — 4 files (robots.txt, llms.txt, Schema.org JSON-LD, FAQ GEO)"
-            : "Pack Optimisation GEO — 4 fichiers (robots.txt, llms.txt, Schema.org JSON-LD, FAQ GEO)")
+            ? "GEO Optimization Pack - 4 files (robots.txt, llms.txt, Schema.org JSON-LD, FAQ GEO)"
+            : "Pack Optimisation GEO - 4 fichiers (robots.txt, llms.txt, Schema.org JSON-LD, FAQ GEO)")
           : (isEn
-            ? `GEO File — ${FILE_LABELS[fileKey] || fileKey}`
-            : `Fichier GEO — ${FILE_LABELS[fileKey] || fileKey}`);
+            ? `GEO File - ${FILE_LABELS[fileKey] || fileKey}`
+            : `Fichier GEO - ${FILE_LABELS[fileKey] || fileKey}`);
 
         const emailHtml = `<!DOCTYPE html><html lang="${isEn ? 'en' : 'fr'}"><head><meta charset="UTF-8"><title>${isEn ? 'Receipt' : 'Reçu'} ${num}</title>
 <style>body{font-family:system-ui,sans-serif;color:#1f2937;max-width:600px;margin:0 auto;padding:0}
@@ -127,7 +127,7 @@ ${isEn ? `<div class="ttc"><span>Total</span><span>${fmt(ttc)}</span></div>` : `
             from: "Geoptim <receipts@geoptim.io>",
             to:   [email],
             bcc:  ["contact@geoptim.io"],
-            subject: isEn ? `Your GEO files are ready — Geoptim` : `Votre reçu Geoptim — ${num}`,
+            subject: isEn ? `Your GEO files are ready - Geoptim` : `Votre reçu Geoptim - ${num}`,
             html: emailHtml
           }),
           signal: AbortSignal.timeout(5000)

@@ -1,4 +1,4 @@
-// Netlify v2 — streaming immédiat → frontend accumule et parse le JSON
+// Netlify v2 - streaming immédiat → frontend accumule et parse le JSON
 async function* streamAnthropic(KEY, body) {
   const MAX = 3;
   for (let attempt = 0; attempt < MAX; attempt++) {
@@ -87,21 +87,21 @@ Homepage : ${homeText}
 
 CRITÈRES DE NOTATION (chaque critère sur 25) :
 
-ROBOTS (0-25) — évalue la présence et l'exhaustivité des directives crawlers IA :
+ROBOTS (0-25) : évalue la présence et l'exhaustivité des directives crawlers IA :
 • 0 : robots.txt totalement absent (404)
-• 1-7 : robots.txt présent MAIS aucun crawler IA mentionné (ni GPTBot, ni ClaudeBot, etc.) — donne 5
+• 1-7 : robots.txt présent MAIS aucun crawler IA mentionné (ni GPTBot, ni ClaudeBot, etc.), donne 5
 • 8-14 : 1 à 2 crawlers IA présents (ex: GPTBot uniquement ou Google-Extended)
 • 15-20 : 3 à 5 crawlers IA présents
 • 21-25 : 6+ crawlers IA majeurs couverts (GPTBot, ClaudeBot, PerplexityBot, Google-Extended, xAI-Bot, MistralBot, DeepSeekBot)
 Important : si robots.txt présent sans aucun crawler IA → score entre 3 et 7, PAS 0.
 
-LLMSTXT (0-25) — présence et qualité du fichier llms.txt :
+LLMSTXT (0-25) : présence et qualité du fichier llms.txt :
 • 0 : absent (404 ou vide)
 • 1-10 : présent mais moins de 3 sections exploitables
 • 11-18 : présent avec 3 à 6 sections structurées
 • 19-25 : présent et complet (7+ sections : présentation, services, équipe, contact, usages IA…)
 
-SCHEMA (0-25) — richesse des données structurées JSON-LD :
+SCHEMA (0-25) : richesse des données structurées JSON-LD :
 • 0-3 : aucun JSON-LD ni microdata détecté
 • 4-8 : JSON-LD minimaliste (WebSite ou BreadcrumbList seuls)
 • 9-15 : Organization ou LocalBusiness avec quelques champs (name, url, description)
@@ -109,7 +109,7 @@ SCHEMA (0-25) — richesse des données structurées JSON-LD :
 • 21-25 : type précis + FAQPage + adresse + contact + sameAs + hasOfferCatalog complets
 Important : si JSON-LD basique présent → minimum 4, PAS 0.
 
-CONTENT (0-25) — structure et lisibilité du contenu pour les IA :
+CONTENT (0-25) : structure et lisibilité du contenu pour les IA :
 • 0-7 : contenu peu structuré, peu de titres, texte dense et difficile à parser
 • 8-14 : contenu moyennement structuré avec quelques H2
 • 15-20 : bon contenu, H2/H3 clairs, paragraphes lisibles, données concrètes

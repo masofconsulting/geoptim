@@ -1,4 +1,4 @@
-// Netlify v2 — streaming, appel unique (cohérence cross-schemas)
+// Netlify v2 - streaming, appel unique (cohérence cross-schemas)
 async function* streamAnthropic(KEY, body) {
   const MAX = 3;
   for (let attempt = 0; attempt < MAX; attempt++) {
@@ -54,10 +54,10 @@ export default async (req) => {
 
   const breadcrumbLabel = isEn ? 'Home' : 'Accueil';
   const commentGeo = isEn
-    ? `<!-- GEO optimization by Geoptim.io — https://geoptim.io -->`
-    : `<!-- Optimisation GEO par Geoptim.io — https://geoptim.io -->`;
+    ? `<!-- GEO optimization by Geoptim.io - https://geoptim.io -->`
+    : `<!-- Optimisation GEO par Geoptim.io - https://geoptim.io -->`;
 
-  // Schema.org prompt — same structure regardless of language; text values follow site language
+  // Schema.org prompt - same structure regardless of language; text values follow site language
   const langNote = isEn
     ? `Write all text values (name, description, question texts, answer texts) in English.`
     : `Écris toutes les valeurs textuelles (name, description, questions, réponses) dans la langue du site.`;
@@ -74,9 +74,9 @@ ${isEn ? 'GENERATE ALL RELEVANT BLOCKS' : 'GÉNÈRE TOUS LES BLOCS PERTINENTS'} 
 
 ${langNote}
 
-<!-- ${name} — Schema.org JSON-LD | Geoptim.io | ${isEn ? 'Paste in <head> via RankMath, Yoast or Insert Headers & Footers' : 'Coller dans <head> via RankMath, Yoast ou Insert Headers & Footers'} -->
+<!-- ${name} - Schema.org JSON-LD | Geoptim.io | ${isEn ? 'Paste in <head> via RankMath, Yoast or Insert Headers & Footers' : 'Coller dans <head> via RankMath, Yoast ou Insert Headers & Footers'} -->
 
-<!-- ═══ 1. ${isEn ? 'ORGANIZATION / LOCAL BUSINESS — always included' : 'ORGANISATION / LOCAL BUSINESS — toujours inclus'} ═══ -->
+<!-- ═══ 1. ${isEn ? 'ORGANIZATION / LOCAL BUSINESS - always included' : 'ORGANISATION / LOCAL BUSINESS - toujours inclus'} ═══ -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -90,22 +90,22 @@ ${langNote}
 </script>
 ${isEn ? 'Available precise types' : 'Types précis disponibles'} : LocalBusiness, LegalService, Notary, Attorney, MedicalBusiness, Physician, Dentist, Optician, Veterinary, AccountingService, FinancialService, InsuranceAgency, RealEstateAgent, Restaurant, CafeOrCoffeeShop, Bakery, FoodEstablishment, Store, ClothingStore, BookStore, AutoRepair, AutoDealer, Plumber, Electrician, HVACBusiness, Locksmith, Painter, Roofer, ConstructionBusiness, MovingCompany, CleaningService, LandscapingBusiness, HairSalon, SpaOrBeautySalon, NailSalon, GymOrHealthClub, SportsActivityLocation, ITService, SoftwareCompany, EducationalOrganization, TutoringCenter, DayCare, etc.
 
-<!-- ═══ 2. WEBSITE — ${isEn ? 'always included' : 'toujours inclus'} ═══ -->
+<!-- ═══ 2. WEBSITE - ${isEn ? 'always included' : 'toujours inclus'} ═══ -->
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"WebSite","@id":"https://${domain}/#website","url":"https://${domain}","name":"[${isEn ? 'name' : 'nom'}]","description":"[description]","publisher":{"@id":"https://${domain}/#org"}}
 </script>
 
-<!-- ═══ 3. ${isEn ? 'PERSON(S) — one tag per identified person, omit if none' : 'PERSONNE(S) — une balise par personne identifiée, omettre si aucune'} ═══ -->
+<!-- ═══ 3. ${isEn ? 'PERSON(S) - one tag per identified person, omit if none' : 'PERSONNE(S) - une balise par personne identifiée, omettre si aucune'} ═══ -->
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"Person","@id":"https://${domain}/#[slug]","name":"...","jobTitle":"...","worksFor":{"@id":"https://${domain}/#org"}[+ email, telephone, description, knowsAbout, hasCredential, sameAs ${isEn ? 'if found' : 'si trouvés'}]}
 </script>
 
-<!-- ═══ 4. ${isEn ? 'SERVICE(S) — one block per identified service, omit if none' : 'SERVICE(S) — un bloc par prestation identifiée, omettre si aucune'} ═══ -->
+<!-- ═══ 4. ${isEn ? 'SERVICE(S) - one block per identified service, omit if none' : 'SERVICE(S) - un bloc par prestation identifiée, omettre si aucune'} ═══ -->
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"Service","name":"...","description":"...","provider":{"@id":"https://${domain}/#org"}[+ serviceType, areaServed, offers ${isEn ? 'with price/priceCurrency if found' : 'avec price/priceCurrency si trouvés'}]}
 </script>
 
-<!-- ═══ 5. FAQPAGE — ${isEn ? 'sector-adapted questions, omit if insufficient content' : 'questions adaptées au secteur, omettre si contenu insuffisant'} ═══ -->
+<!-- ═══ 5. FAQPAGE - ${isEn ? 'sector-adapted questions, omit if insufficient content' : 'questions adaptées au secteur, omettre si contenu insuffisant'} ═══ -->
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
 [${isEn ? 'Between 6 and 12 Q&A depending on site richness. Each entry' : 'Entre 6 et 12 Q&A selon la richesse du site. Chaque entrée'} :
@@ -113,12 +113,12 @@ ${isEn ? 'Available precise types' : 'Types précis disponibles'} : LocalBusines
 ]}
 </script>
 
-<!-- ═══ 6. AGGREGATERATING — ${isEn ? 'only if reviews/ratings found in content' : 'uniquement si avis/notes trouvés dans le contenu'} ═══ -->
+<!-- ═══ 6. AGGREGATERATING - ${isEn ? 'only if reviews/ratings found in content' : 'uniquement si avis/notes trouvés dans le contenu'} ═══ -->
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"[${isEn ? 'same type as Organization' : 'même type que l\'Organisation'}]","@id":"https://${domain}/#org","aggregateRating":{"@type":"AggregateRating","ratingValue":"...","reviewCount":"...","bestRating":"5"}}
 </script>
 
-<!-- ═══ 7. BREADCRUMBLIST — ${isEn ? 'if multi-level navigation identified' : 'si navigation multi-niveaux identifiée'} ═══ -->
+<!-- ═══ 7. BREADCRUMBLIST - ${isEn ? 'if multi-level navigation identified' : 'si navigation multi-niveaux identifiée'} ═══ -->
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"${breadcrumbLabel}","item":"https://${domain}"}[, ${isEn ? 'other levels if relevant' : 'autres niveaux si pertinents'}]]}
 </script>

@@ -1,4 +1,4 @@
-// Netlify v2 — streaming immédiat → frontend accumule et parse le JSON
+// Netlify v2 - streaming immédiat → frontend accumule et parse le JSON
 // rawContent ajouté en suffixe __RC__ après le stream Claude
 async function* streamAnthropic(KEY, body) {
   const MAX = 3;

@@ -1,4 +1,4 @@
-// Netlify v2 — streaming response
+// Netlify v2 - streaming response
 // Anthropic SSE → ReadableStream → frontend lit chunk par chunk
 async function* streamAnthropic(KEY, body) {
   const MAX = 3;

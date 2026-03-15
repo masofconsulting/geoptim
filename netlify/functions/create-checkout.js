@@ -1,5 +1,5 @@
 // netlify/functions/create-checkout.js
-// Crée une session Stripe Checkout — 19 € (fichier unique) ou 49 € (pack 4 fichiers)
+// Crée une session Stripe Checkout - 19 € (fichier unique) ou 49 € (pack 4 fichiers)
 
 exports.handler = async (event) => {
   if (event.httpMethod !== "POST") {
@@ -30,7 +30,7 @@ exports.handler = async (event) => {
     const type   = purchaseType || "pack";
     const cur    = currency === "usd" ? "usd" : "eur";
 
-    // Tarification — validation promo côté serveur (ne jamais faire confiance au client)
+    // Tarification - validation promo côté serveur (ne jamais faire confiance au client)
     const base = type === "pack" ? 4900 : 1900;
     let amount = base;
     let promoPercent = 0;
@@ -50,12 +50,12 @@ exports.handler = async (event) => {
       ? { robots: "Optimized robots.txt", llms: "Custom llms.txt", schema: "Schema.org JSON-LD", faq: "GEO-optimized FAQ Page" }
       : { robots: "robots.txt optimisé", llms: "llms.txt personnalisé", schema: "Schema.org JSON-LD", faq: "Page FAQ GEO-optimisée" };
     const productName = type === "pack"
-      ? (isEn ? "GEO Optimization Pack — 4 files" : "Pack Optimisation GEO — 4 fichiers")
-      : (isEn ? `GEO File — ${FILE_LABELS[fileKey] || fileKey || "file"}` : `Fichier GEO — ${FILE_LABELS[fileKey] || fileKey || "fichier"}`);
+      ? (isEn ? "GEO Optimization Pack - 4 files" : "Pack Optimisation GEO - 4 fichiers")
+      : (isEn ? `GEO File - ${FILE_LABELS[fileKey] || fileKey || "file"}` : `Fichier GEO - ${FILE_LABELS[fileKey] || fileKey || "fichier"}`);
     const productDesc = type === "pack"
       ? (isEn
-        ? `4 custom GEO files for ${label} — robots.txt, llms.txt, Schema.org JSON-LD, FAQ GEO`
-        : `4 fichiers GEO personnalisés pour ${label} — robots.txt, llms.txt, Schema.org JSON-LD, FAQ GEO`)
+        ? `4 custom GEO files for ${label} : robots.txt, llms.txt, Schema.org JSON-LD, FAQ GEO`
+        : `4 fichiers GEO personnalisés pour ${label} : robots.txt, llms.txt, Schema.org JSON-LD, FAQ GEO`)
       : (isEn
         ? `${FILE_LABELS[fileKey] || fileKey || "GEO File"} custom for ${label}`
         : `${FILE_LABELS[fileKey] || fileKey || "Fichier GEO"} personnalisé pour ${label}`);
@@ -75,7 +75,7 @@ exports.handler = async (event) => {
     params.append("line_items[0][price_data][unit_amount]", String(amount));
     params.append("line_items[0][price_data][product_data][name]", productName);
     params.append("line_items[0][price_data][product_data][description]", productDesc);
-    params.append("payment_intent_data[description]", `Geoptim — ${productName} pour ${label}`);
+    params.append("payment_intent_data[description]", `Geoptim - ${productName} pour ${label}`);
     params.append("metadata[site_url]",       siteUrl       || "");
     params.append("metadata[site_name]",      siteName      || "");
     params.append("metadata[billing_name]",   billingName   || "");
