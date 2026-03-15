@@ -54,14 +54,36 @@ export default async (req) => {
       .trim();
   }
 
-  async function fetchSafe(u, ms) {
+  function extractLinks(html, base) {
+    const links = new Set();
+    const re = /href=["']([^"'#]+?)["']/gi;
+    let m;
+    while ((m = re.exec(html)) !== null) {
+      let href = m[1].split('#')[0].split('?')[0].trim();
+      if (!href || href === '/') continue;
+      // Build absolute URL
+      try {
+        const abs = new URL(href, base);
+        if (abs.origin !== new URL(base).origin) continue;
+        href = abs.pathname;
+      } catch { continue; }
+      // Exclude non-content paths
+      if (/\.(png|jpe?g|gif|svg|webp|ico|css|js|pdf|zip|mp[34]|woff2?|ttf|eot)$/i.test(href)) continue;
+      if (/\/(cdn-cgi|wp-content|wp-includes|wp-admin|assets|static|_next|\.well-known|feed|rss)\//i.test(href)) continue;
+      if (href === '/') continue;
+      links.add(href);
+    }
+    return [...links];
+  }
+
+  async function fetchRaw(u, ms) {
     try {
       const r = await fetch(u, {
         headers: { 'User-Agent': 'Mozilla/5.0 (compatible; GeoptimBot/1.0; +https://geoptim.io)' },
         signal: AbortSignal.timeout(ms)
       });
       if (!r.ok) return '';
-      return stripHtml(await r.text());
+      return await r.text();
     } catch(e) { return ''; }
   }
 
@@ -72,40 +94,37 @@ export default async (req) => {
   const domain = url.replace(/https?:\/\//,'').replace(/\/.*$/,'');
   const base = 'https://' + domain;
 
-  // ── Fetch agressif : 12 pages en parallèle avec timeouts courts ──────────
-  const [
-    home, contact, mentions,
-    equipe1, equipe2, equipe3, equipe4,
-    expertises1, expertises2, expertises3,
-    cabinet, honoraires
-  ] = await Promise.all([
-    fetchSafe(base + '/',                    4000),
-    fetchSafe(base + '/contact',             3000),
-    fetchSafe(base + '/mentions-legales',    3000),
-    fetchSafe(base + '/equipe',              3000),
-    fetchSafe(base + '/avocats',             3000),
-    fetchSafe(base + '/l-equipe',            3000),
-    fetchSafe(base + '/notre-equipe',        3000),
-    fetchSafe(base + '/expertises',          3000),
-    fetchSafe(base + '/domaines',            3000),
-    fetchSafe(base + '/domaines-d-intervention', 3000),
-    fetchSafe(base + '/cabinet',             3000),
-    fetchSafe(base + '/honoraires',          3000),
-  ]);
+  // ── Étape 1 : Fetch homepage HTML brut ──────────────────────────────────
+  const homeHtml = await fetchRaw(base + '/', 5000);
+  const homeText = stripHtml(homeHtml);
 
+  // ── Étape 2 : Découvrir les liens internes ──────────────────────────────
+  const discoveredLinks = extractLinks(homeHtml, base);
+
+  // Limiter à 15 pages max
+  const pagesToFetch = discoveredLinks.slice(0, 15);
+
+  // ── Étape 3 : Fetch toutes les pages découvertes en parallèle ───────────
+  const pageResults = await Promise.all(
+    pagesToFetch.map(async (path) => {
+      const html = await fetchRaw(base + path, 3000);
+      const text = stripHtml(html);
+      if (!text || text.length < 50) return null;
+      return { path, text };
+    })
+  );
+
+  // ── Étape 4 : Assembler le rawContent ───────────────────────────────────
   const sections = [
-    home              ? '=== ACCUEIL ===\n'      + home.slice(0, 3000) : '',
-    contact           ? '=== CONTACT ===\n'      + contact.slice(0, 1500) : '',
-    mentions          ? '=== MENTIONS ===\n'     + mentions.slice(0, 1000) : '',
-    (equipe1 || equipe2 || equipe3 || equipe4)
-      ? '=== ÉQUIPE ===\n' + [equipe1, equipe2, equipe3, equipe4].filter(Boolean).join(' ').slice(0, 2500) : '',
-    (expertises1 || expertises2 || expertises3)
-      ? '=== EXPERTISES ===\n' + [expertises1, expertises2, expertises3].filter(Boolean).join(' ').slice(0, 2500) : '',
-    cabinet           ? '=== CABINET ===\n'      + cabinet.slice(0, 1500) : '',
-    honoraires        ? '=== HONORAIRES ===\n'   + honoraires.slice(0, 1000) : '',
-  ].filter(Boolean);
+    homeText ? '=== ACCUEIL (/) ===\n' + homeText : ''
+  ];
 
-  const rawContent = sections.join('\n\n').slice(0, 12000);
+  for (const page of pageResults) {
+    if (!page) continue;
+    sections.push('=== PAGE ' + page.path + ' ===\n' + page.text);
+  }
+
+  const rawContent = sections.filter(Boolean).join('\n\n').slice(0, 30000);
 
   const prompt = `Tu es un expert en extraction d'information business. Extrais toutes les données réelles de ce site de façon exhaustive.
 
@@ -113,7 +132,7 @@ URL : ${url}
 
 CONTENU RÉCUPÉRÉ (plusieurs pages) :
 ---
-${rawContent.slice(0, 8000)}
+${rawContent.slice(0, 16000)}
 ---
 
 RÈGLES STRICTES :
