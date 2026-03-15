@@ -2860,9 +2860,13 @@ function renderBlog() {
   var grid = document.getElementById('blogGrid');
   if (!grid) return;
   var html = '';
-  for (var i = 0; i < ARTICLES.length; i++) {
+  var max = 4;
+  for (var i = 0; i < Math.min(ARTICLES.length, max); i++) {
     var a = ARTICLES[i];
     html += '<a class="ac" href="' + a.slug + '" onclick="event.preventDefault();openArticle(' + a.id + ')"><div class="ab"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px"><span class="at">' + a.tag + '</span><span style="font-family:\'DM Mono\',monospace;font-size:10px;color:var(--text4)">' + a.read + '</span></div><h3 class="ah">' + a.title + '</h3><p class="ae">' + a.excerpt + '</p></div><div class="af"><span class="ad">' + a.date + '</span><span class="ar">Lire →</span></div></a>';
+  }
+  if (ARTICLES.length > max) {
+    html += '<a href="/blog" class="ac" style="display:flex;align-items:center;justify-content:center;min-height:180px;border:2px dashed var(--border);background:transparent"><span style="font-size:15px;font-weight:600;color:var(--gold)">Voir les ' + ARTICLES.length + ' articles →</span></a>';
   }
   grid.innerHTML = html;
   var fa = document.getElementById('footerArticles');
