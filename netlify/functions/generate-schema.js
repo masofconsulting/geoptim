@@ -46,147 +46,91 @@ export default async (req) => {
   catch { return new Response(JSON.stringify({ error: "JSON invalide" }), { status: 400, headers: { 'Content-Type': 'application/json' } }); }
 
   const content = (rawContent || '').slice(0, 3000);
-  const isEn = lang === 'en';
-
-  const prompt = isEn
-    ? `Generate a complete schema-jsonld.html file optimized for this website. Raw HTML only, no backticks.
-
-DATA:
-${ctx}
-
-WEBSITE CONTENT:
-${content}
-
-GENERATE ALL RELEVANT BLOCKS below. Use the same @id "https://${domain}/#org" so blocks reference each other.
-
-<!-- ${name} — Schema.org JSON-LD | Geoptim.io | Paste in <head> via RankMath, Yoast or Insert Headers & Footers -->
-
-<!-- ═══ 1. ORGANIZATION / LOCAL BUSINESS — always included ═══ -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": ["[PreciseType]", "Organization"],
-  "@id": "https://${domain}/#org",
-  "name": "...",
-  "description": "...",
-  "url": "https://${domain}"
-  [+ all found fields: telephone, email, address (full PostalAddress), geo (GeoCoordinates), openingHours, openingHoursSpecification, priceRange, areaServed, sameAs (all social profiles), hasOfferCatalog (all services)]
-}
-</script>
-Available precise types: LocalBusiness, LegalService, Notary, Attorney, MedicalBusiness, Physician, Dentist, Optician, Veterinary, AccountingService, FinancialService, InsuranceAgency, RealEstateAgent, Restaurant, CafeOrCoffeeShop, Bakery, FoodEstablishment, Store, ClothingStore, BookStore, AutoRepair, AutoDealer, Plumber, Electrician, HVACBusiness, Locksmith, Painter, Roofer, ConstructionBusiness, MovingCompany, CleaningService, LandscapingBusiness, HairSalon, SpaOrBeautySalon, NailSalon, GymOrHealthClub, SportsActivityLocation, ITService, SoftwareCompany, EducationalOrganization, TutoringCenter, DayCare, etc.
-
-<!-- ═══ 2. WEBSITE — always included ═══ -->
-<script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebSite","@id":"https://${domain}/#website","url":"https://${domain}","name":"[name]","description":"[description]","publisher":{"@id":"https://${domain}/#org"}}
-</script>
-
-<!-- ═══ 3. PERSON(S) — one tag per identified person, omit if none ═══ -->
-<script type="application/ld+json">
-{"@context":"https://schema.org","@type":"Person","@id":"https://${domain}/#[slug]","name":"...","jobTitle":"...","worksFor":{"@id":"https://${domain}/#org"}[+ email, telephone, description, knowsAbout, hasCredential, sameAs if found]}
-</script>
-
-<!-- ═══ 4. SERVICE(S) — one block per identified service, omit if none ═══ -->
-<script type="application/ld+json">
-{"@context":"https://schema.org","@type":"Service","name":"...","description":"...","provider":{"@id":"https://${domain}/#org"}[+ serviceType, areaServed, offers with price/priceCurrency if found]}
-</script>
-
-<!-- ═══ 5. FAQPAGE — questions adapted to the sector, omit if insufficient content ═══ -->
-<script type="application/ld+json">
-{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
-[Between 6 and 12 Q&A depending on site richness. Each entry:
-{"@type":"Question","name":"[long-tail question]","acceptedAnswer":{"@type":"Answer","text":"[answer 40-60 words]"}}]
-]}
-</script>
-
-<!-- ═══ 6. AGGREGATERATING — only if reviews/ratings found in content ═══ -->
-<script type="application/ld+json">
-{"@context":"https://schema.org","@type":"[same type as Organization]","@id":"https://${domain}/#org","aggregateRating":{"@type":"AggregateRating","ratingValue":"...","reviewCount":"...","bestRating":"5"}}
-</script>
-
-<!-- ═══ 7. BREADCRUMBLIST — if multi-level navigation identified ═══ -->
-<script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://${domain}"}[, other levels if relevant]]}
-</script>
-
-<!-- GEO optimization by Geoptim.io — https://geoptim.io -->
-
-RULES:
-- Valid and minified JSON (except the Organization block which can be indented for readability)
-- Most precise @type possible
-- Real values only, no fabrication
-- Omit fields without data and entire blocks without data
-- @ids reference each other for maximum consistency`
-    : `Génère un fichier schema-jsonld.html complet et optimal pour ce site. HTML brut uniquement, sans backtick.
-
-DONNÉES :
-${ctx}
-
-CONTENU DU SITE :
-${content}
-
-GÉNÈRE TOUS LES BLOCS PERTINENTS ci-dessous. Utilise le même @id "https://${domain}/#org" pour que les blocs se référencent entre eux.
-
-<!-- ${name} — Schema.org JSON-LD | Geoptim.io | Coller dans <head> via RankMath, Yoast ou Insert Headers & Footers -->
-
-<!-- ═══ 1. ORGANISATION / LOCAL BUSINESS — toujours inclus ═══ -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": ["[TypePrécis]", "Organization"],
-  "@id": "https://${domain}/#org",
-  "name": "...",
-  "description": "...",
-  "url": "https://${domain}"
-  [+ tous les champs trouvés : telephone, email, address (PostalAddress complet), geo (GeoCoordinates), openingHours, openingHoursSpecification, priceRange, areaServed, sameAs (tous profils sociaux), hasOfferCatalog (tous services)]
-}
-</script>
-Types précis disponibles : LocalBusiness, LegalService, Notary, Attorney, MedicalBusiness, Physician, Dentist, Optician, Veterinary, AccountingService, FinancialService, InsuranceAgency, RealEstateAgent, Restaurant, CafeOrCoffeeShop, Bakery, FoodEstablishment, Store, ClothingStore, BookStore, AutoRepair, AutoDealer, Plumber, Electrician, HVACBusiness, Locksmith, Painter, Roofer, ConstructionBusiness, MovingCompany, CleaningService, LandscapingBusiness, HairSalon, SpaOrBeautySalon, NailSalon, GymOrHealthClub, SportsActivityLocation, ITService, SoftwareCompany, EducationalOrganization, TutoringCenter, DayCare, etc.
-
-<!-- ═══ 2. WEBSITE — toujours inclus ═══ -->
-<script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebSite","@id":"https://${domain}/#website","url":"https://${domain}","name":"[nom]","description":"[description]","publisher":{"@id":"https://${domain}/#org"}}
-</script>
-
-<!-- ═══ 3. PERSONNE(S) — une balise par personne identifiée, omettre si aucune ═══ -->
-<script type="application/ld+json">
-{"@context":"https://schema.org","@type":"Person","@id":"https://${domain}/#[slug]","name":"...","jobTitle":"...","worksFor":{"@id":"https://${domain}/#org"}[+ email, telephone, description, knowsAbout, hasCredential, sameAs si trouvés]}
-</script>
-
-<!-- ═══ 4. SERVICE(S) — un bloc par prestation identifiée, omettre si aucune ═══ -->
-<script type="application/ld+json">
-{"@context":"https://schema.org","@type":"Service","name":"...","description":"...","provider":{"@id":"https://${domain}/#org"}[+ serviceType, areaServed, offers avec price/priceCurrency si trouvés]}
-</script>
-
-<!-- ═══ 5. FAQPAGE — questions adaptées au secteur, omettre si contenu insuffisant ═══ -->
-<script type="application/ld+json">
-{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
-[Entre 6 et 12 Q&A selon la richesse du site. Chaque entrée :
-{"@type":"Question","name":"[question longue traîne]","acceptedAnswer":{"@type":"Answer","text":"[réponse 40-60 mots]"}}]
-]}
-</script>
-
-<!-- ═══ 6. AGGREGATERATING — uniquement si avis/notes trouvés dans le contenu ═══ -->
-<script type="application/ld+json">
-{"@context":"https://schema.org","@type":"[même type que l'Organisation]","@id":"https://${domain}/#org","aggregateRating":{"@type":"AggregateRating","ratingValue":"...","reviewCount":"...","bestRating":"5"}}
-</script>
-
-<!-- ═══ 7. BREADCRUMBLIST — si navigation multi-niveaux identifiée ═══ -->
-<script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Accueil","item":"https://${domain}"}[, autres niveaux si pertinents]]}
-</script>
-
-<!-- Optimisation GEO par Geoptim.io — https://geoptim.io -->
-
-RÈGLES :
-- JSON valide et minifié (sauf le bloc Organisation qui peut être indenté pour lisibilité)
-- @type le plus précis possible
-- Valeurs réelles uniquement, aucune invention
-- Omets les champs sans données et les blocs entiers sans données
-- Les @id se référencent entre eux pour une cohérence maximale`;
+  const isEn = lang && lang !== 'fr';
 
   const systemPrompt = isEn
-    ? "You are a Schema.org and structured data expert. You generate complete, valid and consistent JSON-LD files, with @id references between blocks. You only use real data provided."
+    ? "You are a Schema.org and structured data expert. You generate complete, valid and coherent JSON-LD files with @id references between blocks. You use only real data provided."
     : "Tu es un expert Schema.org et structured data. Tu génères des fichiers JSON-LD complets, valides et cohérents, avec des @id qui se référencent entre les blocs. Tu utilises uniquement les données réelles fournies.";
+
+  const breadcrumbLabel = isEn ? 'Home' : 'Accueil';
+  const commentGeo = isEn
+    ? `<!-- GEO optimization by Geoptim.io — https://geoptim.io -->`
+    : `<!-- Optimisation GEO par Geoptim.io — https://geoptim.io -->`;
+
+  // Schema.org prompt — same structure regardless of language; text values follow site language
+  const langNote = isEn
+    ? `Write all text values (name, description, question texts, answer texts) in English.`
+    : `Écris toutes les valeurs textuelles (name, description, questions, réponses) dans la langue du site.`;
+
+  const prompt = `${isEn ? 'Generate' : 'Génère'} un fichier schema-jsonld.html complet et optimal pour ce site. HTML brut uniquement, sans backtick.
+
+${isEn ? 'DATA' : 'DONNÉES'} :
+${ctx}
+
+${isEn ? 'SITE CONTENT' : 'CONTENU DU SITE'} :
+${content}
+
+${isEn ? 'GENERATE ALL RELEVANT BLOCKS' : 'GÉNÈRE TOUS LES BLOCS PERTINENTS'} ci-dessous. ${isEn ? 'Use' : 'Utilise'} le même @id "https://${domain}/#org" ${isEn ? 'so blocks reference each other' : 'pour que les blocs se référencent entre eux'}.
+
+${langNote}
+
+<!-- ${name} — Schema.org JSON-LD | Geoptim.io | ${isEn ? 'Paste in <head> via RankMath, Yoast or Insert Headers & Footers' : 'Coller dans <head> via RankMath, Yoast ou Insert Headers & Footers'} -->
+
+<!-- ═══ 1. ${isEn ? 'ORGANIZATION / LOCAL BUSINESS — always included' : 'ORGANISATION / LOCAL BUSINESS — toujours inclus'} ═══ -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": ["[${isEn ? 'PreciseType' : 'TypePrécis'}]", "Organization"],
+  "@id": "https://${domain}/#org",
+  "name": "...",
+  "description": "...",
+  "url": "https://${domain}"
+  [+ ${isEn ? 'all fields found' : 'tous les champs trouvés'} : telephone, email, address (PostalAddress ${isEn ? 'full' : 'complet'}), geo (GeoCoordinates), openingHours, openingHoursSpecification, priceRange, areaServed, sameAs (${isEn ? 'all social profiles' : 'tous profils sociaux'}), hasOfferCatalog (${isEn ? 'all services' : 'tous services'})]
+}
+</script>
+${isEn ? 'Available precise types' : 'Types précis disponibles'} : LocalBusiness, LegalService, Notary, Attorney, MedicalBusiness, Physician, Dentist, Optician, Veterinary, AccountingService, FinancialService, InsuranceAgency, RealEstateAgent, Restaurant, CafeOrCoffeeShop, Bakery, FoodEstablishment, Store, ClothingStore, BookStore, AutoRepair, AutoDealer, Plumber, Electrician, HVACBusiness, Locksmith, Painter, Roofer, ConstructionBusiness, MovingCompany, CleaningService, LandscapingBusiness, HairSalon, SpaOrBeautySalon, NailSalon, GymOrHealthClub, SportsActivityLocation, ITService, SoftwareCompany, EducationalOrganization, TutoringCenter, DayCare, etc.
+
+<!-- ═══ 2. WEBSITE — ${isEn ? 'always included' : 'toujours inclus'} ═══ -->
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebSite","@id":"https://${domain}/#website","url":"https://${domain}","name":"[${isEn ? 'name' : 'nom'}]","description":"[description]","publisher":{"@id":"https://${domain}/#org"}}
+</script>
+
+<!-- ═══ 3. ${isEn ? 'PERSON(S) — one tag per identified person, omit if none' : 'PERSONNE(S) — une balise par personne identifiée, omettre si aucune'} ═══ -->
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Person","@id":"https://${domain}/#[slug]","name":"...","jobTitle":"...","worksFor":{"@id":"https://${domain}/#org"}[+ email, telephone, description, knowsAbout, hasCredential, sameAs ${isEn ? 'if found' : 'si trouvés'}]}
+</script>
+
+<!-- ═══ 4. ${isEn ? 'SERVICE(S) — one block per identified service, omit if none' : 'SERVICE(S) — un bloc par prestation identifiée, omettre si aucune'} ═══ -->
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Service","name":"...","description":"...","provider":{"@id":"https://${domain}/#org"}[+ serviceType, areaServed, offers ${isEn ? 'with price/priceCurrency if found' : 'avec price/priceCurrency si trouvés'}]}
+</script>
+
+<!-- ═══ 5. FAQPAGE — ${isEn ? 'sector-adapted questions, omit if insufficient content' : 'questions adaptées au secteur, omettre si contenu insuffisant'} ═══ -->
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+[${isEn ? 'Between 6 and 12 Q&A depending on site richness. Each entry' : 'Entre 6 et 12 Q&A selon la richesse du site. Chaque entrée'} :
+{"@type":"Question","name":"[${isEn ? 'long-tail question' : 'question longue traîne'}]","acceptedAnswer":{"@type":"Answer","text":"[${isEn ? 'answer 40-60 words' : 'réponse 40-60 mots'}]"}}]
+]}
+</script>
+
+<!-- ═══ 6. AGGREGATERATING — ${isEn ? 'only if reviews/ratings found in content' : 'uniquement si avis/notes trouvés dans le contenu'} ═══ -->
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"[${isEn ? 'same type as Organization' : 'même type que l\'Organisation'}]","@id":"https://${domain}/#org","aggregateRating":{"@type":"AggregateRating","ratingValue":"...","reviewCount":"...","bestRating":"5"}}
+</script>
+
+<!-- ═══ 7. BREADCRUMBLIST — ${isEn ? 'if multi-level navigation identified' : 'si navigation multi-niveaux identifiée'} ═══ -->
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"${breadcrumbLabel}","item":"https://${domain}"}[, ${isEn ? 'other levels if relevant' : 'autres niveaux si pertinents'}]]}
+</script>
+
+${commentGeo}
+
+${isEn ? 'RULES' : 'RÈGLES'} :
+- ${isEn ? 'Valid and minified JSON (except Organization block which can be indented)' : 'JSON valide et minifié (sauf le bloc Organisation qui peut être indenté pour lisibilité)'}
+- ${isEn ? 'Most precise @type possible' : '@type le plus précis possible'}
+- ${isEn ? 'Real values only, no invention' : 'Valeurs réelles uniquement, aucune invention'}
+- ${isEn ? 'Omit fields without data and entire blocks without data' : 'Omets les champs sans données et les blocs entiers sans données'}
+- ${isEn ? '@ids reference each other for maximum coherence' : 'Les @id se référencent entre eux pour une cohérence maximale'}`;
 
   const enc = new TextEncoder();
   const stream = new ReadableStream({

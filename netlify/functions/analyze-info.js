@@ -124,6 +124,7 @@ RÈGLES STRICTES :
 - services : TOUS les domaines d'expertise mentionnés explicitement, sans limite de nombre.
 - offers : TOUTES les offres et prestations identifiées, avec descriptions si disponibles.
 - tone : "vouvoiement" si le site utilise vous/votre, "tutoiement" si tu/te/ton.
+- lang : code ISO 639-1 de la langue principale du contenu du site (ex: "fr", "en", "es", "de", "it", "pt"). Détecte depuis le contenu réel, pas depuis l'URL.
 - problemsSolved : 5 vraies douleurs clients déduites des services réels.
 - sectorKeywords : 8 requêtes longue traîne réelles que les clients taperaient.
 - useCases : 6 situations concrètes liées aux vrais services.
@@ -134,6 +135,7 @@ Réponds UNIQUEMENT avec ce JSON sans markdown :
   "siteName": "...",
   "siteDescription": "une phrase précise sur ce que fait réellement ce site",
   "siteType": "type précis (ex: Cabinet d'avocats, Agence SEO, Startup SaaS...)",
+  "lang": "fr",
   "siteInfo": {
     "mainActivity": "description complète de l'activité principale",
     "location": "ville + région depuis adresse ou null",

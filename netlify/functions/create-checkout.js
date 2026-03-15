@@ -18,7 +18,8 @@ exports.handler = async (event) => {
       purchaseType, // 'single' | 'pack' (défaut: 'pack')
       fileKey,      // 'robots' | 'llms' | 'schema' | 'faq' | null (pour pack)
       promoCode,    // code promo optionnel
-      lang          // 'en' for English, default French
+      lang,         // 'en' for English, default French
+      currency      // 'eur' | 'usd' (défaut: 'eur')
     } = JSON.parse(event.body);
 
     const isEn = lang === 'en';
@@ -27,6 +28,7 @@ exports.handler = async (event) => {
     const origin = `https://${host}`;
     const label  = siteName || siteUrl || "votre site";
     const type   = purchaseType || "pack";
+    const cur    = currency === "usd" ? "usd" : "eur";
 
     // Tarification — validation promo côté serveur (ne jamais faire confiance au client)
     const base = type === "pack" ? 4900 : 1900;
@@ -69,7 +71,7 @@ exports.handler = async (event) => {
       ? `${origin}/en/?payment=cancelled`
       : `${origin}/?payment=cancelled`);
     params.append("line_items[0][quantity]", "1");
-    params.append("line_items[0][price_data][currency]", isEn ? "usd" : "eur");
+    params.append("line_items[0][price_data][currency]", cur);
     params.append("line_items[0][price_data][unit_amount]", String(amount));
     params.append("line_items[0][price_data][product_data][name]", productName);
     params.append("line_items[0][price_data][product_data][description]", productDesc);

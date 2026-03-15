@@ -27,6 +27,21 @@ nav{position:sticky;top:0;z-index:100;background:rgba(250,248,245,.95);backdrop-
 .logo{display:flex;align-items:center;gap:8px;font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--navy)}
 .logo-dot{width:9px;height:9px;background:var(--gold);border-radius:50%}
 .btn-nav{background:var(--navy);color:#fff;padding:10px 22px;border-radius:9px;font-weight:600;font-size:13px;cursor:pointer;border:none;text-decoration:none}
+.mob-right{display:none;align-items:center;gap:10px}
+.burger{width:38px;height:38px;display:flex;align-items:center;justify-content:center;background:none;border:1.5px solid var(--border);border-radius:9px;cursor:pointer;flex-shrink:0;transition:border-color .2s}
+.burger:hover{border-color:var(--navy)}
+.burger span{display:block;width:16px;height:1.5px;background:var(--navy);position:relative;transition:all .3s}
+.burger span::before,.burger span::after{content:'';position:absolute;width:16px;height:1.5px;background:var(--navy);transition:all .3s}
+.burger span::before{top:-5px}
+.burger span::after{top:5px}
+.burger.open span{background:transparent}
+.burger.open span::before{top:0;transform:rotate(45deg)}
+.burger.open span::after{top:0;transform:rotate(-45deg)}
+.mob-menu{display:none;position:absolute;top:calc(100% + 1px);left:0;right:0;background:var(--cream);border-bottom:1px solid var(--border);padding:8px 16px 16px;flex-direction:column;box-shadow:0 12px 40px rgba(15,31,61,.1)}
+.mob-menu.open{display:flex}
+.mob-menu a{display:block;width:100%;padding:12px 14px;font-size:15px;font-weight:500;color:var(--navy);border-bottom:1px solid var(--border);transition:color .2s}
+.mob-menu a:last-of-type{border-bottom:none}
+.mob-menu a:hover{color:var(--gold)}
 .wrap{max-width:780px;margin:0 auto;padding:72px 32px 80px}
 .tag{display:inline-flex;align-items:center;gap:7px;font-family:'DM Mono',monospace;font-size:11px;color:var(--gold);letter-spacing:.08em;text-transform:uppercase;background:#fef9ed;border:1px solid #f0e0a0;padding:5px 14px;border-radius:999px;margin-bottom:22px}
 h1{font-family:'Playfair Display',serif;font-size:clamp(28px,4vw,44px);font-weight:900;color:var(--navy);margin-bottom:12px;line-height:1.12}
@@ -50,7 +65,7 @@ footer{background:var(--navy);padding:32px;text-align:center;font-size:12px;colo
 footer a{color:var(--gold)}
 .nav-links{display:flex;align-items:center;gap:20px}.nl{font-size:13px;font-weight:500;color:var(--text3);transition:color .2s;padding:4px;text-decoration:none}.nl:hover{color:var(--navy)}
 @media(max-width:640px){.wrap{padding:48px 20px 60px}}
-@media(max-width:600px){.nav-links .nl{display:none}}
+@media(max-width:600px){.nav-links{display:none}.mob-right{display:flex}}
 </style>
 <script type="application/ld+json">
 {
@@ -102,8 +117,22 @@ footer a{color:var(--gold)}
       <a href="/blog" class="nl">Blog</a>
       <a href="/" class="btn-nav">Analyser mon site →</a>
     </div>
+    <div class="mob-right">
+      <a href="/" class="btn-nav" style="font-size:12px;padding:9px 16px">Analyser mon site →</a>
+      <button class="burger" id="burgerBtn" aria-label="Menu"><span></span></button>
+    </div>
+    <div class="mob-menu" id="mobMenu">
+      <a href="/tarifs">Tarifs</a>
+      <a href="/faq">FAQ</a>
+      <a href="/a-propos">À propos</a>
+      <a href="/blog">Blog</a>
+    </div>
   </div>
 </nav>
+<script>
+var b=document.getElementById('burgerBtn'),m=document.getElementById('mobMenu');
+b.onclick=function(){b.classList.toggle('open');m.classList.toggle('open')};
+</script>
 
 <div class="wrap">
   <div class="tag">FAQ</div>
