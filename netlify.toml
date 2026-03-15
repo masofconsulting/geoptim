@@ -127,16 +127,16 @@
   timeout = 26
 
 [functions."analyze-info"]
-  timeout = 26
+  timeout = 60
 
 [functions."generate-llms"]
-  timeout = 26
+  timeout = 60
 
 [functions."generate-schema"]
-  timeout = 26
+  timeout = 60
 
 [functions."generate-faq"]
-  timeout = 26
+  timeout = 60
 
 [functions."create-checkout"]
   timeout = 10
