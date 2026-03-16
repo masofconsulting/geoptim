@@ -74,7 +74,30 @@ footer a{color:var(--gold)}
 .nav-dd:hover .dd-menu{display:block}
 .dd-menu a{display:block;padding:8px 18px;font-size:13px;font-weight:500;color:var(--text2);transition:color .2s,background .2s}
 .dd-menu a:hover{color:var(--navy);background:var(--cream)}
-@media(max-width:640px){.wrap{padding:48px 20px 60px}.info-grid{grid-template-columns:1fr}.code-block{padding:16px 18px;font-size:12px}}
+.visual-flow{background:#fff;border:1px solid var(--border);border-radius:16px;padding:36px 32px;margin:0 0 56px}
+.visual-flow h3{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--navy);text-align:center;margin-bottom:28px}
+.vf-cols{display:grid;grid-template-columns:1fr 1fr;gap:0;position:relative}
+.vf-cols::before{content:'';position:absolute;left:50%;top:0;bottom:0;border-left:2px dashed var(--border)}
+.vf-col{padding:0 24px}
+.vf-label{text-align:center;padding:10px 20px;border-radius:10px;font-weight:600;font-size:14px;margin-bottom:20px}
+.vf-label.old{background:#f5f3ef;color:var(--text2);border:1px solid var(--border)}
+.vf-label.new{background:#ede8f5;color:#5b3e9e;border:1px solid #d4c8ea}
+.vf-step{text-align:center;padding:14px 16px;border-radius:10px;margin-bottom:8px;font-size:13px}
+.vf-step strong{display:block;font-size:14px;margin-bottom:2px}
+.vf-step.neutral{background:#f5f3ef;border:1px solid var(--border);color:var(--text2)}
+.vf-step.warm{background:#fef9ed;border:1px solid #f0e0a0;color:var(--text2)}
+.vf-step.accent{background:#fdf0f0;border:1px solid #f0c8c8;color:#a04040}
+.vf-step.good{background:#edf7f0;border:1px solid #b8e0c0;color:#2a6040}
+.vf-step.info{background:#ede8f5;border:1px solid #d4c8ea;color:#5b3e9e}
+.vf-arrow{text-align:center;font-size:18px;color:var(--text4);margin:4px 0}
+.vf-summary{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:24px}
+.vf-summary-box{text-align:center;padding:16px;border-radius:12px;font-size:13px}
+.vf-summary-box strong{display:block;font-size:14px;margin-bottom:4px}
+.vf-summary-box.green{background:#edf7f0;border:1px solid #b8e0c0;color:#2a6040}
+.vf-summary-box.purple{background:#ede8f5;border:1px solid #d4c8ea;color:#5b3e9e}
+.vf-conclusion{background:#ede8f5;border-radius:12px;padding:20px 24px;text-align:center;margin-top:20px;font-size:14px;color:var(--text2)}
+.vf-conclusion strong{color:var(--navy);display:block;font-size:15px;margin-bottom:4px}
+@media(max-width:640px){.wrap{padding:48px 20px 60px}.info-grid{grid-template-columns:1fr}.code-block{padding:16px 18px;font-size:12px}.vf-cols{grid-template-columns:1fr;gap:24px}.vf-cols::before{display:none}.vf-col{padding:0}.vf-summary{grid-template-columns:1fr}.visual-flow{padding:24px 18px}}
 @media(max-width:600px){.nav-links{display:none}.mob-right{display:flex}}
 </style>
 <script type="application/ld+json">
@@ -108,6 +131,7 @@ footer a{color:var(--gold)}
       <a href="/en/faq" class="nl">FAQ</a>
       <a href="/en/about" class="nl">About</a>
       <a href="/en/blog" class="nl">Blog</a>
+      <a href="/guide/robots-txt" class="nl" style="font-size:12px">FR</a>
       <a href="/en/" class="btn-nav">Analyze my site &rarr;</a>
     </div>
     <div class="mob-right">
@@ -125,6 +149,8 @@ footer a{color:var(--gold)}
       <a href="/en/faq">FAQ</a>
       <a href="/en/about">About</a>
       <a href="/en/blog">Blog</a>
+      <span class="mob-group-label" style="margin-top:4px">Language</span>
+      <a href="/guide/robots-txt">Francais</a>
     </div>
   </div>
 </nav>
@@ -137,6 +163,33 @@ b.onclick=function(){b.classList.toggle('open');m.classList.toggle('open')};
   <div class="tag">GEO Guide</div>
   <h1>robots.txt: the gateway for AI to your website</h1>
   <p class="lead">robots.txt has been around since 1994. But with the arrival of AI crawlers, its role has fundamentally changed. A misconfigured robots.txt can make your site completely invisible to ChatGPT, Claude, and Perplexity.</p>
+
+  <div class="visual-flow">
+    <h3>Your site as seen by AI crawlers</h3>
+    <div class="vf-cols">
+      <div class="vf-col">
+        <div class="vf-label old">Restrictive robots.txt</div>
+        <div class="vf-step neutral"><strong>GPTBot arrives</strong>Wants to read your pages</div>
+        <div class="vf-arrow">↓</div>
+        <div class="vf-step accent"><strong>Disallow: /</strong>Access denied</div>
+        <div class="vf-arrow">↓</div>
+        <div class="vf-step accent"><strong>Result</strong>ChatGPT never mentions you</div>
+      </div>
+      <div class="vf-col">
+        <div class="vf-label new">GEO-optimized robots.txt</div>
+        <div class="vf-step warm"><strong>GPTBot arrives</strong>Wants to read your pages</div>
+        <div class="vf-arrow">↓</div>
+        <div class="vf-step good"><strong>Allow: /</strong>Access granted</div>
+        <div class="vf-arrow">↓</div>
+        <div class="vf-step good"><strong>Result</strong>Your site is read and cited by AI</div>
+      </div>
+    </div>
+    <div class="vf-summary">
+      <div class="vf-summary-box green"><strong>30+ AI crawlers</strong>GPTBot, ClaudeBot, PerplexityBot, Grok...</div>
+      <div class="vf-summary-box purple"><strong>1 control file</strong>At the root: /robots.txt</div>
+    </div>
+    <div class="vf-conclusion"><strong>Bad robots.txt = invisible to AI.</strong>Good robots.txt = the open door to ChatGPT, Claude and Perplexity responses.</div>
+  </div>
 
   <div class="section">
     <h2>What is robots.txt?</h2>
