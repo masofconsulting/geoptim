@@ -24,7 +24,7 @@
 <link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -43,35 +43,35 @@
 }
 </script>
 <style>
-:root{--navy:#0f1f3d;--navy2:#1a3360;--gold:#c9a84c;--gold2:#e0bc60;--cream:#faf8f5;--cream2:#f4f1eb;--border:#e8e4dc;--text:#0f1f3d;--text2:#4a4438;--text3:#6b6358;--text4:#aaa09a}
+:root{--navy:#3d3b38;--navy2:#4d4b47;--gold:#c9a84c;--gold2:#a8862e;--cream:#f8f6f1;--cream2:#f2efe8;--border:#e2ddd4;--text:#1a1714;--text2:#3d3730;--text3:#5c5549;--text4:#8a8278}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{background:var(--cream);color:var(--text);font-family:'DM Sans',sans-serif;line-height:1.7}
+body{background:var(--cream);color:var(--text);font-family:'Inter',sans-serif;line-height:1.7}
 a{color:var(--navy);text-decoration:none}
 a:hover{text-decoration:underline}
-nav{background:rgba(250,248,245,.97);backdrop-filter:blur(14px);border-bottom:1px solid var(--border);padding:0 32px;height:64px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+nav{background:rgba(248,246,241,.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:0 32px;height:72px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
 .logo{display:flex;align-items:center;gap:8px;text-decoration:none}
-.logo-dot{width:9px;height:9px;background:var(--gold);border-radius:50%}
-.logo-name{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--navy)}
+.logo-name{font-family:'Inter',sans-serif;font-size:20px;font-weight:900;letter-spacing:-.03em;color:var(--navy)}
+.logo-accent{color:var(--gold)}
 .btn-cta{background:var(--navy);color:#fff;padding:10px 22px;border-radius:9px;font-weight:600;font-size:13px;text-decoration:none;transition:background .2s}
 .btn-cta:hover{background:var(--navy2);text-decoration:none}
 main{max-width:740px;margin:0 auto;padding:60px 32px 80px}
 .tag{display:inline-flex;align-items:center;gap:7px;font-family:'DM Mono',monospace;font-size:11px;color:var(--gold);letter-spacing:.08em;text-transform:uppercase;background:#fef9ed;border:1px solid #f0e0a0;padding:5px 14px;border-radius:999px;margin-bottom:20px}
 .meta{font-family:'DM Mono',monospace;font-size:11px;color:var(--text4);margin-bottom:32px;display:flex;gap:16px}
-h1{font-family:'Playfair Display',serif;font-size:clamp(28px,4vw,46px);font-weight:900;line-height:1.1;letter-spacing:-.02em;color:var(--navy);margin-bottom:16px}
-h2{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--navy);margin:40px 0 14px}
+h1{font-family:'Inter',sans-serif;font-size:clamp(28px,4vw,46px);font-weight:900;line-height:1.1;letter-spacing:-.02em;color:var(--navy);margin-bottom:16px}
+h2{font-family:'Inter',sans-serif;font-size:22px;font-weight:700;color:var(--navy);margin:40px 0 14px}
 p{font-size:16px;color:var(--text2);line-height:1.8;margin-bottom:20px;font-weight:300}
 .divider{border:none;border-top:1px solid var(--border);margin:48px 0}
 .cta-box{background:var(--navy);border-radius:16px;padding:36px;text-align:center;margin-top:48px}
-.cta-box h3{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:#fff;margin-bottom:10px}
-.cta-box p{color:#5a7a96;font-size:14px;margin-bottom:24px}
+.cta-box h3{font-family:'Inter',sans-serif;font-size:22px;font-weight:700;color:#fff;margin-bottom:10px}
+.cta-box p{color:rgba(255,255,255,.35);font-size:14px;margin-bottom:24px}
 .btn-gold{background:var(--gold);color:var(--navy);padding:12px 28px;border-radius:9px;font-weight:700;font-size:14px;text-decoration:none;display:inline-block;transition:background .2s}
 .btn-gold:hover{background:var(--gold2);text-decoration:none}
 .breadcrumb{font-size:12px;color:var(--text4);margin-bottom:32px}
 .breadcrumb a{color:var(--text4)}
 .breadcrumb a:hover{color:var(--navy)}
-footer{background:var(--navy);padding:32px;text-align:center;font-size:12px;color:#8ba3b8}
-footer a{color:#8ba3b8}
+footer{background:var(--navy);padding:32px;text-align:center;font-size:12px;color:rgba(255,255,255,.5)}
+footer a{color:rgba(255,255,255,.5)}
 .nav-dd{position:relative}.nav-dd .nl{display:inline-flex;align-items:center;gap:4px}
 .dd-menu{display:none;position:absolute;top:calc(100% + 8px);left:-12px;background:#fff;border:1px solid var(--border);border-radius:10px;padding:8px 0;min-width:210px;box-shadow:0 8px 30px rgba(15,31,61,.1);z-index:300}
 .dd-menu::before{content:'';position:absolute;top:-10px;left:0;right:0;height:10px}
@@ -88,7 +88,7 @@ footer a{color:#8ba3b8}
 <nav>
   <a class="logo" href="/en/">
     <svg viewBox="0 0 24 24" width="22" height="22" style="flex-shrink:0"><circle cx="12" cy="12" r="9" fill="none" stroke="#c9a84c" stroke-width="1.8" opacity="0.22"/><circle cx="12" cy="12" r="5" fill="none" stroke="#c9a84c" stroke-width="1.5" opacity="0.42"/><circle cx="12" cy="12" r="2" fill="#c9a84c"/><line x1="12" y1="12" x2="19" y2="6" stroke="#c9a84c" stroke-width="1.3" stroke-linecap="round" opacity="0.65"/></svg>
-    <span class="logo-name">Geoptim</span>
+    <span class="logo-name">Geoptim<span class="logo-accent">.</span></span>
   </a>
   <div class="nav-links">
     <div class="nav-dd">
