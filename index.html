@@ -569,7 +569,7 @@ footer{background:var(--navy);padding:52px 32px 32px}
       <div>
         <div class="tag"><span class="tag-dot"></span>GEO · Generative Engine Optimization</div>
         <h1>Votre site est-il<br/><em>optimisé</em> pour les IA ?</h1>
-        <p class="hero-sub">Entrez une URL. Notre IA analyse votre site et génère les 4 fichiers qui signalent votre expertise à ChatGPT, Claude, Perplexity et Gemini, avant que vos concurrents le fassent.</p>
+        <p class="hero-sub">Quand un prospect demande à ChatGPT, Perplexity ou Claude un conseil dans votre domaine, est-ce votre site qui est recommandé, ou celui de votre concurrent ? Analysez votre visibilité IA gratuitement.</p>
         <div class="iw">
           <input id="urlInput" type="text" placeholder="https://votre-site.fr" autocomplete="off"/>
           <button id="analyzeBtn">Analyser →</button>
@@ -600,10 +600,10 @@ footer{background:var(--navy);padding:52px 32px 32px}
 
   <div class="ds">
     <div class="feats">
-      <div><div class="fi">🔍</div><div class="ft">Analyse complète</div><div class="fd">robots.txt, Schema.org, llms.txt, structure du contenu : tout est audité.</div></div>
-      <div><div class="fi">📊</div><div class="ft">Score GEO /100</div><div class="fd">Un diagnostic précis par catégorie pour savoir exactement quoi corriger.</div></div>
-      <div><div class="fi">📁</div><div class="ft">4 fichiers générés</div><div class="fd">robots.txt, llms.txt, JSON-LD et FAQ, personnalisés pour votre site.</div></div>
-      <div><div class="fi">⚡</div><div class="ft">Livraison immédiate</div><div class="fd">Téléchargez dès le paiement. Prêts à déployer sur WordPress ou tout CMS.</div></div>
+      <div><div class="fi">🔍</div><div class="ft">Diagnostic de visibilité IA</div><div class="fd">Découvrez si les IA comme ChatGPT et Perplexity peuvent trouver, lire et recommander votre site.</div></div>
+      <div><div class="fi">📊</div><div class="ft">Score de visibilité /100</div><div class="fd">Mesurez votre présence dans les réponses IA, catégorie par catégorie.</div></div>
+      <div><div class="fi">📁</div><div class="ft">4 fichiers d'optimisation</div><div class="fd">Tout ce qu'il faut pour que les IA vous citent comme référence dans votre secteur.</div></div>
+      <div><div class="fi">⚡</div><div class="ft">Résultats immédiats</div><div class="fd">Déployez en 5 minutes. Les IA commencent à vous référencer dès la mise en ligne.</div></div>
     </div>
   </div>
 
@@ -856,6 +856,14 @@ footer{background:var(--navy);padding:52px 32px 32px}
       <div class="clbl">Diagnostic</div>
       <p style="font-size:14px;color:var(--text2);line-height:1.75;font-weight:300" id="summaryTxt">—</p>
     </div>
+    <!-- IMPACT BLOCK - visible si score < 80 -->
+    <div id="impactCard" style="display:none;background:linear-gradient(135deg,#f0f4ff,#e8eeff);border:1.5px solid #a8b8e0;border-radius:16px;padding:28px 32px;margin-bottom:16px">
+      <div style="display:flex;align-items:center;gap:14px;margin-bottom:14px">
+        <div style="width:48px;height:48px;background:#fff;border:1.5px solid #a8b8e0;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0">🚀</div>
+        <div style="font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:var(--navy)" id="impactTitle">Ce que Geoptim changerait pour votre site</div>
+      </div>
+      <p style="font-size:14px;color:#1f2937;line-height:1.75;font-weight:300;margin:0" id="impactTxt"></p>
+    </div>
     <div class="g2">
       <div class="card">
         <div class="clbl">Score GEO global</div>
@@ -899,7 +907,7 @@ footer{background:var(--navy);padding:52px 32px 32px}
     </div>
 
     <div class="ub" id="unlockBanner">
-      <div class="ut"><h3>Générez vos fichiers GEO</h3><p id="unlockDesc">Personnalisés pour votre site.</p></div>
+      <div class="ut"><h3 id="unlockTitle">Rendez votre site visible pour les IA</h3><p id="unlockDesc">Recevez les fichiers qui permettent à ChatGPT, Claude et Perplexity de citer et recommander votre site.</p></div>
       <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
         <button class="btn-gold" id="btnUnlock" onclick="openModal('pack')" style="padding:12px 22px;font-size:14px">Pack 4 fichiers · 49 €</button>
         <button id="btnUnlockSingle" onclick="openModal('single-choice')" style="padding:12px 18px;font-size:13px;background:#fff;border:1.5px solid var(--navy);border-radius:9px;font-weight:600;color:var(--navy)">1 fichier · 19 €</button>
@@ -2253,7 +2261,8 @@ function renderResults(url) {
   setTxt('summaryTxt', r.summary || '—');
   setStyle('summaryCard', 'borderLeftColor', c);
   setTxt('filesSub', '4 fichiers générés pour ' + (r.siteName || 'votre site') + '.');
-  setTxt('unlockDesc', 'Personnalisés pour ' + (r.siteName || 'votre site') + '.');
+  setTxt('unlockTitle', 'Rendez ' + (r.siteName || 'votre site') + ' visible pour les IA');
+  setTxt('unlockDesc', 'Recevez les fichiers qui permettent à ChatGPT, Claude et Perplexity de citer et recommander votre site.');
   setTxt('modDesc', '4 fichiers personnalisés pour ' + (r.siteName || 'votre site') + '.');
   // Ring
   var arc = document.getElementById('scoreArc');
@@ -2281,6 +2290,15 @@ function renderResults(url) {
     badge.style.color = c;
   }
   setTxt('scoreDesc', r.siteDescription || '—');
+  // Impact block
+  var impactCard = document.getElementById('impactCard');
+  if (impactCard && r.impact && s < 80) {
+    setTxt('impactTxt', r.impact);
+    setTxt('impactTitle', 'Ce que Geoptim changerait pour ' + (r.siteName || 'votre site'));
+    impactCard.style.display = 'block';
+  } else if (impactCard) {
+    impactCard.style.display = 'none';
+  }
   // Bars
   var barsDiv = document.getElementById('barsDiv');
   barsDiv.innerHTML = '';

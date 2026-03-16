@@ -133,7 +133,8 @@ Réponds UNIQUEMENT avec ce JSON sans markdown :
   },
   "strengths": ["point fort 1", "point fort 2", "point fort 3"],
   "improvements": ["action prioritaire 1", "action prioritaire 2", "action prioritaire 3", "action prioritaire 4"],
-  "summary": "diagnostic GEO en 2-3 phrases"
+  "summary": "diagnostic GEO en 2-3 phrases",
+  "impact": "2-3 phrases concrètes et personnalisées expliquant ce que CE site gagnerait avec un meilleur score GEO. Mentionne le secteur d'activité détecté, donne un exemple de requête IA où ce site pourrait apparaître (ex: 'Quand un prospect demande à ChatGPT un expert en [secteur] à [ville]...'), et le bénéfice concret (être cité, recommandé, générer des contacts). Ne parle PAS de fichiers techniques, parle uniquement de résultats business. N'utilise jamais le tiret cadratin."
 }`;
 
   const enc = new TextEncoder();
