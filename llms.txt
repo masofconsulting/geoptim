@@ -98,6 +98,15 @@ Aucun abonnement. Aucune inscription requise pour l'analyse. Paiement unique pou
 
 ---
 
+## Guide GEO — Pages explicatives
+
+- **Fichier llms.txt : le fichier qui parle aux IA pour vous** — https://geoptim.io/guide/llms-txt
+- **Fichier robots.txt : la porte d'entree des IA vers votre site** — https://geoptim.io/guide/robots-txt
+- **Schema.org JSON-LD : la carte d'identite numerique de votre entreprise** — https://geoptim.io/guide/schema-org
+- **FAQ optimisee GEO : le contenu que les IA adorent citer** — https://geoptim.io/guide/faq-geo
+
+---
+
 ## Pages principales
 
 - **Accueil / Analyse gratuite :** https://geoptim.io

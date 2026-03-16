@@ -214,4 +214,84 @@
     <priority>0.8</priority>
   </url>
 
+  <url>
+    <loc>https://geoptim.io/guide/llms-txt</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://geoptim.io/guide/llms-txt"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://geoptim.io/en/guide/llms-txt"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://geoptim.io/guide/llms-txt"/>
+    <lastmod>2026-03-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://geoptim.io/en/guide/llms-txt</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://geoptim.io/guide/llms-txt"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://geoptim.io/en/guide/llms-txt"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://geoptim.io/guide/llms-txt"/>
+    <lastmod>2026-03-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://geoptim.io/guide/robots-txt</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://geoptim.io/guide/robots-txt"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://geoptim.io/en/guide/robots-txt"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://geoptim.io/guide/robots-txt"/>
+    <lastmod>2026-03-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://geoptim.io/en/guide/robots-txt</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://geoptim.io/guide/robots-txt"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://geoptim.io/en/guide/robots-txt"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://geoptim.io/guide/robots-txt"/>
+    <lastmod>2026-03-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://geoptim.io/guide/schema-org</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://geoptim.io/guide/schema-org"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://geoptim.io/en/guide/schema-org"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://geoptim.io/guide/schema-org"/>
+    <lastmod>2026-03-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://geoptim.io/en/guide/schema-org</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://geoptim.io/guide/schema-org"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://geoptim.io/en/guide/schema-org"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://geoptim.io/guide/schema-org"/>
+    <lastmod>2026-03-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://geoptim.io/guide/faq-geo</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://geoptim.io/guide/faq-geo"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://geoptim.io/en/guide/faq-geo"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://geoptim.io/guide/faq-geo"/>
+    <lastmod>2026-03-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://geoptim.io/en/guide/faq-geo</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://geoptim.io/guide/faq-geo"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://geoptim.io/en/guide/faq-geo"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://geoptim.io/guide/faq-geo"/>
+    <lastmod>2026-03-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
 </urlset>

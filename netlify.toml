@@ -75,6 +75,46 @@
   status = 200
 
 [[redirects]]
+  from = "/guide/llms-txt"
+  to = "/guide/llms-txt.html"
+  status = 200
+
+[[redirects]]
+  from = "/guide/robots-txt"
+  to = "/guide/robots-txt.html"
+  status = 200
+
+[[redirects]]
+  from = "/guide/schema-org"
+  to = "/guide/schema-org.html"
+  status = 200
+
+[[redirects]]
+  from = "/guide/faq-geo"
+  to = "/guide/faq-geo.html"
+  status = 200
+
+[[redirects]]
+  from = "/en/guide/llms-txt"
+  to = "/en/guide/llms-txt.html"
+  status = 200
+
+[[redirects]]
+  from = "/en/guide/robots-txt"
+  to = "/en/guide/robots-txt.html"
+  status = 200
+
+[[redirects]]
+  from = "/en/guide/schema-org"
+  to = "/en/guide/schema-org.html"
+  status = 200
+
+[[redirects]]
+  from = "/en/guide/faq-geo"
+  to = "/en/guide/faq-geo.html"
+  status = 200
+
+[[redirects]]
   from = "/blog"
   to = "/blog/index.html"
   status = 200

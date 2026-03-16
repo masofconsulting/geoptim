@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"/>
+<title>llms.txt : le fichier qui parle aux IA pour vous | Geoptim</title>
+<link rel="canonical" href="https://geoptim.io/guide/llms-txt"/>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
+<meta name="description" content="Qu'est-ce que llms.txt, pourquoi ce fichier est essentiel pour votre visibilite dans les reponses IA, et comment le mettre en place sur votre site."/>
+<meta property="og:title" content="llms.txt : le fichier qui parle aux IA pour vous"/>
+<meta property="og:description" content="Le guide technique complet du fichier llms.txt pour le referencement IA (GEO)."/>
+<meta property="og:url" content="https://geoptim.io/guide/llms-txt"/>
+<meta property="og:type" content="article"/>
+<meta name="twitter:card" content="summary"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+:root{--navy:#0f1f3d;--gold:#c9a84c;--cream:#faf8f5;--border:#e8e4dc;--text:#0f1f3d;--text2:#4a4438;--text3:#6b6358;--text4:#aaa09a}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--cream);color:var(--text);font-family:'DM Sans',sans-serif;line-height:1.7}
+a{text-decoration:none;color:var(--gold)}
+nav{position:sticky;top:0;z-index:100;background:rgba(250,248,245,.95);backdrop-filter:blur(14px);border-bottom:1px solid var(--border)}
+.ni{max-width:1100px;margin:0 auto;padding:0 32px;height:64px;display:flex;align-items:center;justify-content:space-between}
+.logo{display:flex;align-items:center;gap:8px;font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--navy)}
+.logo-dot{width:9px;height:9px;background:var(--gold);border-radius:50%}
+.btn-nav{background:var(--navy);color:#fff;padding:10px 22px;border-radius:9px;font-weight:600;font-size:13px;cursor:pointer;border:none;text-decoration:none;color:#fff}
+.mob-right{display:none;align-items:center;gap:10px}
+.burger{width:38px;height:38px;display:flex;align-items:center;justify-content:center;background:none;border:1.5px solid var(--border);border-radius:9px;cursor:pointer;flex-shrink:0;transition:border-color .2s}
+.burger:hover{border-color:var(--navy)}
+.burger span{display:block;width:16px;height:1.5px;background:var(--navy);position:relative;transition:all .3s}
+.burger span::before,.burger span::after{content:'';position:absolute;width:16px;height:1.5px;background:var(--navy);transition:all .3s}
+.burger span::before{top:-5px}
+.burger span::after{top:5px}
+.burger.open span{background:transparent}
+.burger.open span::before{top:0;transform:rotate(45deg)}
+.burger.open span::after{top:0;transform:rotate(-45deg)}
+.mob-menu{display:none;position:absolute;top:calc(100% + 1px);left:0;right:0;background:var(--cream);border-bottom:1px solid var(--border);padding:8px 16px 16px;flex-direction:column;box-shadow:0 12px 40px rgba(15,31,61,.1)}
+.mob-menu.open{display:flex}
+.mob-menu a{display:block;width:100%;padding:12px 14px;font-size:15px;font-weight:500;color:var(--navy);border-bottom:1px solid var(--border);transition:color .2s}
+.mob-menu a:last-of-type{border-bottom:none}
+.mob-menu a:hover{color:var(--gold)}
+.mob-menu .mob-group-label{font-family:'DM Mono',monospace;font-size:10px;color:var(--text4);text-transform:uppercase;letter-spacing:.08em;padding:14px 14px 4px;border-bottom:none}
+.wrap{max-width:780px;margin:0 auto;padding:72px 32px 80px}
+.tag{display:inline-flex;align-items:center;gap:7px;font-family:'DM Mono',monospace;font-size:11px;color:var(--gold);letter-spacing:.08em;text-transform:uppercase;background:#fef9ed;border:1px solid #f0e0a0;padding:5px 14px;border-radius:999px;margin-bottom:22px}
+h1{font-family:'Playfair Display',serif;font-size:clamp(28px,4vw,44px);font-weight:900;color:var(--navy);margin-bottom:16px;line-height:1.12}
+.lead{font-size:17px;color:var(--text2);font-weight:300;line-height:1.8;margin-bottom:48px;max-width:640px}
+.section{margin-bottom:56px}
+.section h2{font-family:'Playfair Display',serif;font-size:24px;font-weight:700;color:var(--navy);margin-bottom:18px;padding-bottom:10px;border-bottom:2px solid var(--navy)}
+.section p{font-size:15px;color:var(--text2);line-height:1.8;margin-bottom:14px}
+.section p:last-child{margin:0}
+.section strong{color:var(--navy)}
+.section ul{margin:12px 0 14px 20px;font-size:15px;color:var(--text2);line-height:1.8}
+.section ul li{margin-bottom:6px}
+.code-block{background:#1a1a2e;color:#e0e0e0;border-radius:10px;padding:24px 28px;font-family:'DM Mono',monospace;font-size:13px;line-height:1.7;overflow-x:auto;margin:20px 0;white-space:pre}
+.code-block .comment{color:#6b7280}
+.code-block .key{color:#c9a84c}
+.cta-box{background:var(--navy);border-radius:16px;padding:40px 36px;text-align:center;margin-top:64px}
+.cta-box h2{font-family:'Playfair Display',serif;font-size:26px;font-weight:700;color:#fff;margin-bottom:10px}
+.cta-box p{font-size:14px;color:#5a7a96;margin-bottom:24px}
+.btn-gold{background:var(--gold);color:var(--navy);padding:13px 32px;border-radius:9px;font-weight:700;font-size:15px;text-decoration:none;display:inline-block}
+.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:24px}
+.info-card{background:#fff;border:1px solid var(--border);border-radius:12px;padding:20px 22px}
+.info-card .label{font-family:'DM Mono',monospace;font-size:10px;color:var(--text4);text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px}
+.info-card .value{font-size:14px;color:var(--text2);font-weight:500}
+footer{background:var(--navy);padding:32px;text-align:center;font-size:12px;color:#5a7a96}
+footer a{color:var(--gold)}
+.nav-links{display:flex;align-items:center;gap:20px}.nl{font-size:13px;font-weight:500;color:var(--text3);transition:color .2s;padding:4px;text-decoration:none}.nl:hover{color:var(--navy)}
+.nav-dd{position:relative}.nav-dd .nl{display:inline-flex;align-items:center;gap:4px}
+.dd-menu{display:none;position:absolute;top:calc(100% + 8px);left:-12px;background:#fff;border:1px solid var(--border);border-radius:10px;padding:8px 0;min-width:210px;box-shadow:0 8px 30px rgba(15,31,61,.1)}
+.nav-dd:hover .dd-menu{display:block}
+.dd-menu a{display:block;padding:8px 18px;font-size:13px;font-weight:500;color:var(--text2);transition:color .2s,background .2s}
+.dd-menu a:hover{color:var(--navy);background:var(--cream)}
+@media(max-width:640px){.wrap{padding:48px 20px 60px}.info-grid{grid-template-columns:1fr}.code-block{padding:16px 18px;font-size:12px}}
+@media(max-width:600px){.nav-links{display:none}.mob-right{display:flex}}
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "llms.txt : le fichier qui parle aux IA pour vous",
+  "description": "Guide technique complet du fichier llms.txt pour le referencement IA generatif (GEO).",
+  "url": "https://geoptim.io/guide/llms-txt",
+  "datePublished": "2026-03-16",
+  "author": {"@type": "Organization", "name": "Geoptim", "url": "https://geoptim.io"},
+  "publisher": {"@type": "Organization", "name": "Geoptim", "url": "https://geoptim.io"}
+}
+</script>
+</head>
+<body>
+<nav>
+  <div class="ni">
+    <a href="/" class="logo" style="text-decoration:none"><span class="logo-dot"></span>Geoptim</a>
+    <div class="nav-links">
+      <div class="nav-dd">
+        <a href="/guide/llms-txt" class="nl">Guide GEO <svg width="10" height="10" viewBox="0 0 10 10" style="margin-top:1px"><path d="M2 4l3 3 3-3" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <div class="dd-menu">
+          <a href="/guide/llms-txt">Fichier llms.txt</a>
+          <a href="/guide/robots-txt">Fichier robots.txt</a>
+          <a href="/guide/schema-org">Schema.org JSON-LD</a>
+          <a href="/guide/faq-geo">FAQ optimisee GEO</a>
+        </div>
+      </div>
+      <a href="/tarifs" class="nl">Tarifs</a>
+      <a href="/faq" class="nl">FAQ</a>
+      <a href="/a-propos" class="nl">A propos</a>
+      <a href="/blog" class="nl">Blog</a>
+      <a href="/" class="btn-nav">Analyser mon site →</a>
+    </div>
+    <div class="mob-right">
+      <a href="/" class="btn-nav" style="font-size:12px;padding:9px 16px">Analyser mon site →</a>
+      <button class="burger" id="burgerBtn" aria-label="Menu"><span></span></button>
+    </div>
+    <div class="mob-menu" id="mobMenu">
+      <span class="mob-group-label">Guide GEO</span>
+      <a href="/guide/llms-txt">Fichier llms.txt</a>
+      <a href="/guide/robots-txt">Fichier robots.txt</a>
+      <a href="/guide/schema-org">Schema.org JSON-LD</a>
+      <a href="/guide/faq-geo">FAQ optimisee GEO</a>
+      <span class="mob-group-label" style="margin-top:4px">Navigation</span>
+      <a href="/tarifs">Tarifs</a>
+      <a href="/faq">FAQ</a>
+      <a href="/a-propos">A propos</a>
+      <a href="/blog">Blog</a>
+    </div>
+  </div>
+</nav>
+<script>
+var b=document.getElementById('burgerBtn'),m=document.getElementById('mobMenu');
+b.onclick=function(){b.classList.toggle('open');m.classList.toggle('open')};
+</script>
+
+<div class="wrap">
+  <div class="tag">Guide GEO</div>
+  <h1>llms.txt : le fichier qui parle aux IA pour vous</h1>
+  <p class="lead">Le robots.txt disait aux moteurs de recherche ou aller. Le llms.txt dit aux intelligences artificielles comment vous comprendre. C'est le fichier de controle du referencement IA.</p>
+
+  <div class="section">
+    <h2>Qu'est-ce que llms.txt ?</h2>
+    <p>Le fichier <strong>llms.txt</strong> est un document au format Markdown, place a la racine de votre site (<code>votresite.com/llms.txt</code>), qui fournit aux modeles de langage (LLMs) une description structuree de votre entreprise, de vos services et de votre positionnement.</p>
+    <p>Contrairement a vos pages web classiques (pleines de menus, scripts, cookies et elements visuels), le llms.txt est un fichier propre, sans bruit, que l'IA peut lire et comprendre instantanement.</p>
+    <p>La specification a ete proposee par Jeremy Howard (co-fondateur de fast.ai et Answer.ai) et adoptee par un nombre croissant de sites et de plateformes IA.</p>
+  </div>
+
+  <div class="section">
+    <h2>Pourquoi c'est important</h2>
+    <p>La visibilite en ligne se joue desormais dans les reponses IA. ChatGPT, Perplexity, Claude, Google AI Overview : ces outils repondent directement aux questions de vos prospects. Si votre marque n'est pas correctement comprise par l'IA, elle n'est tout simplement pas citee.</p>
+    <div class="info-grid">
+      <div class="info-card">
+        <div class="label">Sans llms.txt</div>
+        <div class="value">L'IA reconstruit une image de vous depuis vos pages, vos concurrents, des forums. Souvent approximative ou incorrecte.</div>
+      </div>
+      <div class="info-card">
+        <div class="label">Avec llms.txt</div>
+        <div class="value">Vous donnez a l'IA le narratif exact que vous voulez qu'elle retienne et repete dans ses reponses.</div>
+      </div>
+    </div>
+    <p style="margin-top:20px">Moins de 1% des sites ont un llms.txt aujourd'hui. Les entreprises qui l'adoptent maintenant se positionnent comme sources de reference dans les corpus des IA.</p>
+  </div>
+
+  <div class="section">
+    <h2>Comment ca marche</h2>
+    <p>Quand un LLM (ChatGPT, Claude, Perplexity, Gemini) doit repondre a une question impliquant votre domaine d'activite, il cherche des informations fiables. Le processus est le suivant :</p>
+    <ul>
+      <li><strong>Crawl</strong> : les agents IA (GPTBot, ClaudeBot, PerplexityBot) explorent votre site regulierement</li>
+      <li><strong>Extraction</strong> : ils tentent d'extraire du sens a partir de votre HTML. Mais les menus, scripts et elements visuels polluent la comprehension</li>
+      <li><strong>llms.txt</strong> : si present, ce fichier est lu en priorite. Il donne a l'IA un resume structure, sans ambiguite, de qui vous etes et ce que vous faites</li>
+      <li><strong>Synthese</strong> : le LLM utilise ces informations pour formuler sa reponse. Un llms.txt clair augmente considerablement la probabilite d'etre cite correctement</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>Structure du fichier</h2>
+    <p>Un fichier llms.txt bien construit suit une structure Markdown claire. Voici les sections essentielles :</p>
+    <div class="code-block"><span class="comment"># Nom de l'entreprise</span>
+
+<span class="comment">> Description courte (1-2 phrases)</span>
+
+<span class="key">## A propos</span>
+Presentation de l'entreprise, mission, positionnement.
+
+<span class="key">## Services</span>
+Liste des services ou produits proposes.
+
+<span class="key">## Clients cibles</span>
+A qui s'adressent vos offres.
+
+<span class="key">## Coordonnees</span>
+- Site : https://votresite.com
+- Email : contact@votresite.com
+- Localisation : Ville, Pays</div>
+    <p>Le fichier doit etre factuel, concis et ne contenir que des informations verifiables. Les LLMs ignorent les affirmations marketing vagues.</p>
+  </div>
+
+  <div class="section">
+    <h2>Impact sur le SEO classique</h2>
+    <p>Les crawlers de Google utilisent de plus en plus des modeles IA pour evaluer la pertinence d'un site. Un contenu structure pour les LLMs est aussi plus facile a interpreter par les algorithmes de ranking.</p>
+    <p>Le llms.txt ne remplace pas le SEO technique (balises title, meta, sitemap). Il le complete en ajoutant une couche de comprehension semantique que ni le HTML ni le robots.txt ne fournissent.</p>
+  </div>
+
+  <div class="section">
+    <h2>Ce que Geoptim genere pour vous</h2>
+    <p>Geoptim analyse votre site, extrait les informations cles (activite, services, zone geographique, contenu existant) et genere un fichier llms.txt sur mesure, redige par Claude Sonnet.</p>
+    <p>Le fichier est pret a deployer : vous le placez a la racine de votre site et les IA commencent a l'utiliser immediatement. Aucune configuration supplementaire requise.</p>
+  </div>
+
+  <div class="cta-box">
+    <h2>Verifiez votre visibilite IA</h2>
+    <p>Analyse GEO complete en 60 secondes. Decouvrez si votre site est pret pour les LLMs.</p>
+    <a href="/" class="btn-gold">Analyser mon site →</a>
+  </div>
+</div>
+
+<footer>
+  <p>© 2026 Geoptim · <a href="/">Accueil</a> · <a href="/tarifs">Tarifs</a> · <a href="/faq">FAQ</a> · <a href="/#sec-legal">Mentions legales</a></p>
+</footer>
+</body>
+</html>

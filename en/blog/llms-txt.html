@@ -75,6 +75,12 @@ pre code{background:none;border:none;padding:0;font-size:13px;line-height:1.7;co
 .breadcrumb a:hover{color:var(--navy)}
 footer{background:var(--navy);padding:32px;text-align:center;font-size:12px;color:#3a5a7a}
 footer a{color:#5a7a96}
+.nav-dd{position:relative}.nav-dd .nl{display:inline-flex;align-items:center;gap:4px}
+.dd-menu{display:none;position:absolute;top:calc(100% + 8px);left:-12px;background:#fff;border:1px solid var(--border);border-radius:10px;padding:8px 0;min-width:210px;box-shadow:0 8px 30px rgba(15,31,61,.1);z-index:300}
+.nav-dd:hover .dd-menu{display:block}
+.dd-menu a{display:block;padding:8px 18px;font-size:13px;font-weight:500;color:var(--text2);transition:color .2s,background .2s}
+.dd-menu a:hover{color:var(--navy);background:var(--cream)}
+.mob-menu .mob-group-label{font-family:'DM Mono',monospace;font-size:10px;color:var(--text4);text-transform:uppercase;letter-spacing:.08em;padding:14px 14px 4px;border-bottom:none}
 .nav-links{display:flex;align-items:center;gap:20px}.nl{font-size:13px;font-weight:500;color:var(--text3);transition:color .2s;padding:4px;text-decoration:none}.nl:hover{color:var(--navy)}
 @media(max-width:600px){main{padding:40px 20px 60px}nav{padding:0 20px}}
 @media(max-width:640px){.nav-links .nl{display:none}}
@@ -87,6 +93,15 @@ footer a{color:#5a7a96}
     <span class="logo-name">Geoptim</span>
   </a>
   <div class="nav-links">
+    <div class="nav-dd">
+      <a href="/en/guide/llms-txt" class="nl">GEO Guide <svg width="10" height="10" viewBox="0 0 10 10" style="margin-top:1px"><path d="M2 4l3 3 3-3" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      <div class="dd-menu">
+        <a href="/en/guide/llms-txt">llms.txt file</a>
+        <a href="/en/guide/robots-txt">robots.txt file</a>
+        <a href="/en/guide/schema-org">Schema.org JSON-LD</a>
+        <a href="/en/guide/faq-geo">GEO-optimized FAQ</a>
+      </div>
+    </div>
     <a href="/en/pricing" class="nl">Pricing</a>
     <a href="/en/faq" class="nl">FAQ</a>
     <a href="/en/about" class="nl">About</a>

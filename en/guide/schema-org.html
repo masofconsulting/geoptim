@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"/>
+<title>Schema.org JSON-LD: structuring your data for AI | Geoptim</title>
+<link rel="canonical" href="https://geoptim.io/en/guide/schema-org"/>
+<link rel="alternate" hreflang="fr" href="https://geoptim.io/guide/schema-org"/>
+<link rel="alternate" hreflang="en" href="https://geoptim.io/en/guide/schema-org"/>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
+<meta name="description" content="How Schema.org JSON-LD markup helps generative AI understand your business and cite you in their responses."/>
+<meta property="og:title" content="Schema.org JSON-LD: structuring your data for AI"/>
+<meta property="og:description" content="The technical guide to Schema.org JSON-LD for generative AI optimization (GEO)."/>
+<meta property="og:url" content="https://geoptim.io/en/guide/schema-org"/>
+<meta property="og:type" content="article"/>
+<meta name="twitter:card" content="summary"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+:root{--navy:#0f1f3d;--gold:#c9a84c;--cream:#faf8f5;--border:#e8e4dc;--text:#0f1f3d;--text2:#4a4438;--text3:#6b6358;--text4:#aaa09a}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--cream);color:var(--text);font-family:'DM Sans',sans-serif;line-height:1.7}
+a{text-decoration:none;color:var(--gold)}
+nav{position:sticky;top:0;z-index:100;background:rgba(250,248,245,.95);backdrop-filter:blur(14px);border-bottom:1px solid var(--border)}
+.ni{max-width:1100px;margin:0 auto;padding:0 32px;height:64px;display:flex;align-items:center;justify-content:space-between}
+.logo{display:flex;align-items:center;gap:8px;font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--navy)}
+.logo-dot{width:9px;height:9px;background:var(--gold);border-radius:50%}
+.btn-nav{background:var(--navy);color:#fff;padding:10px 22px;border-radius:9px;font-weight:600;font-size:13px;cursor:pointer;border:none;text-decoration:none;color:#fff}
+.mob-right{display:none;align-items:center;gap:10px}
+.burger{width:38px;height:38px;display:flex;align-items:center;justify-content:center;background:none;border:1.5px solid var(--border);border-radius:9px;cursor:pointer;flex-shrink:0;transition:border-color .2s}
+.burger:hover{border-color:var(--navy)}
+.burger span{display:block;width:16px;height:1.5px;background:var(--navy);position:relative;transition:all .3s}
+.burger span::before,.burger span::after{content:'';position:absolute;width:16px;height:1.5px;background:var(--navy);transition:all .3s}
+.burger span::before{top:-5px}
+.burger span::after{top:5px}
+.burger.open span{background:transparent}
+.burger.open span::before{top:0;transform:rotate(45deg)}
+.burger.open span::after{top:0;transform:rotate(-45deg)}
+.mob-menu{display:none;position:absolute;top:calc(100% + 1px);left:0;right:0;background:var(--cream);border-bottom:1px solid var(--border);padding:8px 16px 16px;flex-direction:column;box-shadow:0 12px 40px rgba(15,31,61,.1)}
+.mob-menu.open{display:flex}
+.mob-menu a{display:block;width:100%;padding:12px 14px;font-size:15px;font-weight:500;color:var(--navy);border-bottom:1px solid var(--border);transition:color .2s}
+.mob-menu a:last-of-type{border-bottom:none}
+.mob-menu a:hover{color:var(--gold)}
+.mob-menu .mob-group-label{font-family:'DM Mono',monospace;font-size:10px;color:var(--text4);text-transform:uppercase;letter-spacing:.08em;padding:14px 14px 4px;border-bottom:none}
+.wrap{max-width:780px;margin:0 auto;padding:72px 32px 80px}
+.tag{display:inline-flex;align-items:center;gap:7px;font-family:'DM Mono',monospace;font-size:11px;color:var(--gold);letter-spacing:.08em;text-transform:uppercase;background:#fef9ed;border:1px solid #f0e0a0;padding:5px 14px;border-radius:999px;margin-bottom:22px}
+h1{font-family:'Playfair Display',serif;font-size:clamp(28px,4vw,44px);font-weight:900;color:var(--navy);margin-bottom:16px;line-height:1.12}
+.lead{font-size:17px;color:var(--text2);font-weight:300;line-height:1.8;margin-bottom:48px;max-width:640px}
+.section{margin-bottom:56px}
+.section h2{font-family:'Playfair Display',serif;font-size:24px;font-weight:700;color:var(--navy);margin-bottom:18px;padding-bottom:10px;border-bottom:2px solid var(--navy)}
+.section p{font-size:15px;color:var(--text2);line-height:1.8;margin-bottom:14px}
+.section p:last-child{margin:0}
+.section strong{color:var(--navy)}
+.section ul{margin:12px 0 14px 20px;font-size:15px;color:var(--text2);line-height:1.8}
+.section ul li{margin-bottom:6px}
+.code-block{background:#1a1a2e;color:#e0e0e0;border-radius:10px;padding:24px 28px;font-family:'DM Mono',monospace;font-size:13px;line-height:1.7;overflow-x:auto;margin:20px 0;white-space:pre}
+.code-block .comment{color:#6b7280}
+.code-block .key{color:#c9a84c}
+.code-block .str{color:#86efac}
+.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:24px}
+.info-card{background:#fff;border:1px solid var(--border);border-radius:12px;padding:20px 22px}
+.info-card .label{font-family:'DM Mono',monospace;font-size:10px;color:var(--text4);text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px}
+.info-card .value{font-size:14px;color:var(--text2);font-weight:500}
+.cta-box{background:var(--navy);border-radius:16px;padding:40px 36px;text-align:center;margin-top:64px}
+.cta-box h2{font-family:'Playfair Display',serif;font-size:26px;font-weight:700;color:#fff;margin-bottom:10px}
+.cta-box p{font-size:14px;color:#5a7a96;margin-bottom:24px}
+.btn-gold{background:var(--gold);color:var(--navy);padding:13px 32px;border-radius:9px;font-weight:700;font-size:15px;text-decoration:none;display:inline-block}
+footer{background:var(--navy);padding:32px;text-align:center;font-size:12px;color:#5a7a96}
+footer a{color:var(--gold)}
+.nav-links{display:flex;align-items:center;gap:20px}.nl{font-size:13px;font-weight:500;color:var(--text3);transition:color .2s;padding:4px;text-decoration:none}.nl:hover{color:var(--navy)}
+.nav-dd{position:relative}.nav-dd .nl{display:inline-flex;align-items:center;gap:4px}
+.dd-menu{display:none;position:absolute;top:calc(100% + 8px);left:-12px;background:#fff;border:1px solid var(--border);border-radius:10px;padding:8px 0;min-width:210px;box-shadow:0 8px 30px rgba(15,31,61,.1)}
+.nav-dd:hover .dd-menu{display:block}
+.dd-menu a{display:block;padding:8px 18px;font-size:13px;font-weight:500;color:var(--text2);transition:color .2s,background .2s}
+.dd-menu a:hover{color:var(--navy);background:var(--cream)}
+@media(max-width:640px){.wrap{padding:48px 20px 60px}.info-grid{grid-template-columns:1fr}.code-block{padding:16px 18px;font-size:12px}}
+@media(max-width:600px){.nav-links{display:none}.mob-right{display:flex}}
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Schema.org JSON-LD: structuring your data for AI",
+  "description": "Technical guide to Schema.org JSON-LD markup for generative AI optimization (GEO).",
+  "url": "https://geoptim.io/en/guide/schema-org",
+  "datePublished": "2026-03-16",
+  "author": {"@type": "Organization", "name": "Geoptim", "url": "https://geoptim.io"},
+  "publisher": {"@type": "Organization", "name": "Geoptim", "url": "https://geoptim.io"}
+}
+</script>
+</head>
+<body>
+<nav>
+  <div class="ni">
+    <a href="/en/" class="logo" style="text-decoration:none"><span class="logo-dot"></span>Geoptim</a>
+    <div class="nav-links">
+      <div class="nav-dd">
+        <a href="/en/guide/llms-txt" class="nl">GEO Guide <svg width="10" height="10" viewBox="0 0 10 10" style="margin-top:1px"><path d="M2 4l3 3 3-3" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <div class="dd-menu">
+          <a href="/en/guide/llms-txt">llms.txt file</a>
+          <a href="/en/guide/robots-txt">robots.txt file</a>
+          <a href="/en/guide/schema-org">Schema.org JSON-LD</a>
+          <a href="/en/guide/faq-geo">GEO-optimized FAQ</a>
+        </div>
+      </div>
+      <a href="/en/pricing" class="nl">Pricing</a>
+      <a href="/en/faq" class="nl">FAQ</a>
+      <a href="/en/about" class="nl">About</a>
+      <a href="/en/blog" class="nl">Blog</a>
+      <a href="/en/" class="btn-nav">Analyze my site &rarr;</a>
+    </div>
+    <div class="mob-right">
+      <a href="/en/" class="btn-nav" style="font-size:12px;padding:9px 16px">Analyze my site &rarr;</a>
+      <button class="burger" id="burgerBtn" aria-label="Menu"><span></span></button>
+    </div>
+    <div class="mob-menu" id="mobMenu">
+      <span class="mob-group-label">GEO Guide</span>
+      <a href="/en/guide/llms-txt">llms.txt file</a>
+      <a href="/en/guide/robots-txt">robots.txt file</a>
+      <a href="/en/guide/schema-org">Schema.org JSON-LD</a>
+      <a href="/en/guide/faq-geo">GEO-optimized FAQ</a>
+      <span class="mob-group-label" style="margin-top:4px">Navigation</span>
+      <a href="/en/pricing">Pricing</a>
+      <a href="/en/faq">FAQ</a>
+      <a href="/en/about">About</a>
+      <a href="/en/blog">Blog</a>
+    </div>
+  </div>
+</nav>
+<script>
+var b=document.getElementById('burgerBtn'),m=document.getElementById('mobMenu');
+b.onclick=function(){b.classList.toggle('open');m.classList.toggle('open')};
+</script>
+
+<div class="wrap">
+  <div class="tag">GEO Guide</div>
+  <h1>Schema.org JSON-LD: your business's digital identity card</h1>
+  <p class="lead">Schema.org markup turns your website into a structured database that search engines and AI can read without ambiguity. It is the difference between being understood and being guessed at.</p>
+
+  <div class="section">
+    <h2>What is Schema.org?</h2>
+    <p><strong>Schema.org</strong> is a standardized vocabulary, jointly created by Google, Microsoft, Yahoo, and Yandex, that allows you to describe your web page content in a structured way.</p>
+    <p><strong>JSON-LD</strong> (JavaScript Object Notation for Linked Data) is the Google-recommended method for integrating this markup. It is placed in a <code>&lt;script type="application/ld+json"&gt;</code> tag in the <code>&lt;head&gt;</code> of your pages.</p>
+    <p>Unlike traditional meta tags (title, description), Schema.org describes entities (business, product, person, event) with relationships between them.</p>
+  </div>
+
+  <div class="section">
+    <h2>Why it is essential for AI</h2>
+    <p>LLMs do not "see" your website the way a human does. They process raw text. Schema.org provides them with structured factual data they can use directly:</p>
+    <div class="info-grid">
+      <div class="info-card">
+        <div class="label">Identity</div>
+        <div class="value">Legal name, registration number, address, industry. AI knows exactly who you are.</div>
+      </div>
+      <div class="info-card">
+        <div class="label">Offerings</div>
+        <div class="value">Services, products, pricing, service areas. AI can recommend your offerings with precision.</div>
+      </div>
+      <div class="info-card">
+        <div class="label">Credibility</div>
+        <div class="value">Customer reviews, certifications, years of experience. AI evaluates your reliability.</div>
+      </div>
+      <div class="info-card">
+        <div class="label">Relationships</div>
+        <div class="value">Links between entities (@id). AI builds a knowledge graph of your business.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>Key Schema.org types for GEO</h2>
+    <p>For a business seeking visibility in AI responses, here are the priority types:</p>
+    <ul>
+      <li><strong>Organization / LocalBusiness</strong>: business identity, contact details, logo, service area</li>
+      <li><strong>WebSite</strong>: information about the website itself, internal search potential</li>
+      <li><strong>Service / Product</strong>: detailed description of each offering with pricing and availability</li>
+      <li><strong>FAQPage</strong>: structured Q&A, directly usable by AI</li>
+      <li><strong>BreadcrumbList</strong>: navigation hierarchy, helps AI understand site architecture</li>
+      <li><strong>Review / AggregateRating</strong>: customer reviews and ratings, a trust signal for LLMs</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>Markup example</h2>
+    <p>Here is what Schema.org JSON-LD markup looks like for a business:</p>
+    <div class="code-block">&lt;script type=<span class="str">"application/ld+json"</span>&gt;
+{
+  <span class="key">"@context"</span>: <span class="str">"https://schema.org"</span>,
+  <span class="key">"@type"</span>: <span class="str">"Organization"</span>,
+  <span class="key">"@id"</span>: <span class="str">"https://yoursite.com/#org"</span>,
+  <span class="key">"name"</span>: <span class="str">"Company Name"</span>,
+  <span class="key">"url"</span>: <span class="str">"https://yoursite.com"</span>,
+  <span class="key">"description"</span>: <span class="str">"Business description"</span>,
+  <span class="key">"address"</span>: {
+    <span class="key">"@type"</span>: <span class="str">"PostalAddress"</span>,
+    <span class="key">"streetAddress"</span>: <span class="str">"123 Example Street"</span>,
+    <span class="key">"postalCode"</span>: <span class="str">"10001"</span>,
+    <span class="key">"addressLocality"</span>: <span class="str">"New York"</span>
+  },
+  <span class="key">"contactPoint"</span>: {
+    <span class="key">"@type"</span>: <span class="str">"ContactPoint"</span>,
+    <span class="key">"email"</span>: <span class="str">"contact@yoursite.com"</span>,
+    <span class="key">"contactType"</span>: <span class="str">"customer service"</span>
+  }
+}
+&lt;/script&gt;</div>
+    <p>The <code>@id</code> attribute is particularly important: it creates cross-references between your entities, allowing AI to build a complete knowledge graph of your business.</p>
+  </div>
+
+  <div class="section">
+    <h2>Measurable impact</h2>
+    <p>Schema.org markup produces concrete results:</p>
+    <ul>
+      <li><strong>Google Rich Snippets</strong>: star ratings, FAQ, breadcrumbs in search results</li>
+      <li><strong>Knowledge Panels</strong>: information boxes on the right side of Google results</li>
+      <li><strong>AI citations</strong>: LLMs use structured data as a reliable source for their responses</li>
+      <li><strong>Voice search</strong>: voice assistants (Siri, Alexa, Google Assistant) directly leverage Schema.org</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>What Geoptim generates for you</h2>
+    <p>Geoptim analyzes your website and generates a complete Schema.org JSON-LD markup tailored to your business. The file includes:</p>
+    <ul>
+      <li>The most relevant Schema.org type for your business (Organization, LocalBusiness, etc.)</li>
+      <li>Cross-references via <code>@id</code> between all entities</li>
+      <li>Information extracted from your site (name, address, services, contact)</li>
+      <li>A ready-to-paste format for the <code>&lt;head&gt;</code> of your homepage</li>
+    </ul>
+  </div>
+
+  <div class="cta-box">
+    <h2>Does your site have Schema.org?</h2>
+    <p>Full GEO analysis in 60 seconds. Discover your structured data score.</p>
+    <a href="/en/" class="btn-gold">Analyze my site &rarr;</a>
+  </div>
+</div>
+
+<footer>
+  <p>&copy; 2026 Geoptim &middot; <a href="/en/">Home</a> &middot; <a href="/en/pricing">Pricing</a> &middot; <a href="/en/faq">FAQ</a> &middot; <a href="/en/#sec-legal">Legal</a></p>
+</footer>
+</body>
+</html>

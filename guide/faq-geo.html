@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"/>
+<title>FAQ optimisee GEO : etre cite dans les reponses IA | Geoptim</title>
+<link rel="canonical" href="https://geoptim.io/guide/faq-geo"/>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
+<meta name="description" content="Pourquoi une page FAQ optimisee pour le GEO est un levier majeur de visibilite dans les reponses de ChatGPT, Claude et Perplexity."/>
+<meta property="og:title" content="FAQ optimisee GEO : etre cite dans les reponses IA"/>
+<meta property="og:description" content="Le guide technique de la FAQ GEO pour le referencement IA generatif."/>
+<meta property="og:url" content="https://geoptim.io/guide/faq-geo"/>
+<meta property="og:type" content="article"/>
+<meta name="twitter:card" content="summary"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+:root{--navy:#0f1f3d;--gold:#c9a84c;--cream:#faf8f5;--border:#e8e4dc;--text:#0f1f3d;--text2:#4a4438;--text3:#6b6358;--text4:#aaa09a}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--cream);color:var(--text);font-family:'DM Sans',sans-serif;line-height:1.7}
+a{text-decoration:none;color:var(--gold)}
+nav{position:sticky;top:0;z-index:100;background:rgba(250,248,245,.95);backdrop-filter:blur(14px);border-bottom:1px solid var(--border)}
+.ni{max-width:1100px;margin:0 auto;padding:0 32px;height:64px;display:flex;align-items:center;justify-content:space-between}
+.logo{display:flex;align-items:center;gap:8px;font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--navy)}
+.logo-dot{width:9px;height:9px;background:var(--gold);border-radius:50%}
+.btn-nav{background:var(--navy);color:#fff;padding:10px 22px;border-radius:9px;font-weight:600;font-size:13px;cursor:pointer;border:none;text-decoration:none;color:#fff}
+.mob-right{display:none;align-items:center;gap:10px}
+.burger{width:38px;height:38px;display:flex;align-items:center;justify-content:center;background:none;border:1.5px solid var(--border);border-radius:9px;cursor:pointer;flex-shrink:0;transition:border-color .2s}
+.burger:hover{border-color:var(--navy)}
+.burger span{display:block;width:16px;height:1.5px;background:var(--navy);position:relative;transition:all .3s}
+.burger span::before,.burger span::after{content:'';position:absolute;width:16px;height:1.5px;background:var(--navy);transition:all .3s}
+.burger span::before{top:-5px}
+.burger span::after{top:5px}
+.burger.open span{background:transparent}
+.burger.open span::before{top:0;transform:rotate(45deg)}
+.burger.open span::after{top:0;transform:rotate(-45deg)}
+.mob-menu{display:none;position:absolute;top:calc(100% + 1px);left:0;right:0;background:var(--cream);border-bottom:1px solid var(--border);padding:8px 16px 16px;flex-direction:column;box-shadow:0 12px 40px rgba(15,31,61,.1)}
+.mob-menu.open{display:flex}
+.mob-menu a{display:block;width:100%;padding:12px 14px;font-size:15px;font-weight:500;color:var(--navy);border-bottom:1px solid var(--border);transition:color .2s}
+.mob-menu a:last-of-type{border-bottom:none}
+.mob-menu a:hover{color:var(--gold)}
+.mob-menu .mob-group-label{font-family:'DM Mono',monospace;font-size:10px;color:var(--text4);text-transform:uppercase;letter-spacing:.08em;padding:14px 14px 4px;border-bottom:none}
+.wrap{max-width:780px;margin:0 auto;padding:72px 32px 80px}
+.tag{display:inline-flex;align-items:center;gap:7px;font-family:'DM Mono',monospace;font-size:11px;color:var(--gold);letter-spacing:.08em;text-transform:uppercase;background:#fef9ed;border:1px solid #f0e0a0;padding:5px 14px;border-radius:999px;margin-bottom:22px}
+h1{font-family:'Playfair Display',serif;font-size:clamp(28px,4vw,44px);font-weight:900;color:var(--navy);margin-bottom:16px;line-height:1.12}
+.lead{font-size:17px;color:var(--text2);font-weight:300;line-height:1.8;margin-bottom:48px;max-width:640px}
+.section{margin-bottom:56px}
+.section h2{font-family:'Playfair Display',serif;font-size:24px;font-weight:700;color:var(--navy);margin-bottom:18px;padding-bottom:10px;border-bottom:2px solid var(--navy)}
+.section p{font-size:15px;color:var(--text2);line-height:1.8;margin-bottom:14px}
+.section p:last-child{margin:0}
+.section strong{color:var(--navy)}
+.section ul{margin:12px 0 14px 20px;font-size:15px;color:var(--text2);line-height:1.8}
+.section ul li{margin-bottom:6px}
+.code-block{background:#1a1a2e;color:#e0e0e0;border-radius:10px;padding:24px 28px;font-family:'DM Mono',monospace;font-size:13px;line-height:1.7;overflow-x:auto;margin:20px 0;white-space:pre}
+.code-block .comment{color:#6b7280}
+.code-block .key{color:#c9a84c}
+.code-block .tag-hl{color:#60a5fa}
+.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:24px}
+.info-card{background:#fff;border:1px solid var(--border);border-radius:12px;padding:20px 22px}
+.info-card .label{font-family:'DM Mono',monospace;font-size:10px;color:var(--text4);text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px}
+.info-card .value{font-size:14px;color:var(--text2);font-weight:500}
+.cta-box{background:var(--navy);border-radius:16px;padding:40px 36px;text-align:center;margin-top:64px}
+.cta-box h2{font-family:'Playfair Display',serif;font-size:26px;font-weight:700;color:#fff;margin-bottom:10px}
+.cta-box p{font-size:14px;color:#5a7a96;margin-bottom:24px}
+.btn-gold{background:var(--gold);color:var(--navy);padding:13px 32px;border-radius:9px;font-weight:700;font-size:15px;text-decoration:none;display:inline-block}
+footer{background:var(--navy);padding:32px;text-align:center;font-size:12px;color:#5a7a96}
+footer a{color:var(--gold)}
+.nav-links{display:flex;align-items:center;gap:20px}.nl{font-size:13px;font-weight:500;color:var(--text3);transition:color .2s;padding:4px;text-decoration:none}.nl:hover{color:var(--navy)}
+.nav-dd{position:relative}.nav-dd .nl{display:inline-flex;align-items:center;gap:4px}
+.dd-menu{display:none;position:absolute;top:calc(100% + 8px);left:-12px;background:#fff;border:1px solid var(--border);border-radius:10px;padding:8px 0;min-width:210px;box-shadow:0 8px 30px rgba(15,31,61,.1)}
+.nav-dd:hover .dd-menu{display:block}
+.dd-menu a{display:block;padding:8px 18px;font-size:13px;font-weight:500;color:var(--text2);transition:color .2s,background .2s}
+.dd-menu a:hover{color:var(--navy);background:var(--cream)}
+@media(max-width:640px){.wrap{padding:48px 20px 60px}.info-grid{grid-template-columns:1fr}.code-block{padding:16px 18px;font-size:12px}}
+@media(max-width:600px){.nav-links{display:none}.mob-right{display:flex}}
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "FAQ optimisee GEO : etre cite dans les reponses IA",
+  "description": "Guide technique de la FAQ optimisee GEO pour le referencement IA generatif.",
+  "url": "https://geoptim.io/guide/faq-geo",
+  "datePublished": "2026-03-16",
+  "author": {"@type": "Organization", "name": "Geoptim", "url": "https://geoptim.io"},
+  "publisher": {"@type": "Organization", "name": "Geoptim", "url": "https://geoptim.io"}
+}
+</script>
+</head>
+<body>
+<nav>
+  <div class="ni">
+    <a href="/" class="logo" style="text-decoration:none"><span class="logo-dot"></span>Geoptim</a>
+    <div class="nav-links">
+      <div class="nav-dd">
+        <a href="/guide/llms-txt" class="nl">Guide GEO <svg width="10" height="10" viewBox="0 0 10 10" style="margin-top:1px"><path d="M2 4l3 3 3-3" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <div class="dd-menu">
+          <a href="/guide/llms-txt">Fichier llms.txt</a>
+          <a href="/guide/robots-txt">Fichier robots.txt</a>
+          <a href="/guide/schema-org">Schema.org JSON-LD</a>
+          <a href="/guide/faq-geo">FAQ optimisee GEO</a>
+        </div>
+      </div>
+      <a href="/tarifs" class="nl">Tarifs</a>
+      <a href="/faq" class="nl">FAQ</a>
+      <a href="/a-propos" class="nl">A propos</a>
+      <a href="/blog" class="nl">Blog</a>
+      <a href="/" class="btn-nav">Analyser mon site →</a>
+    </div>
+    <div class="mob-right">
+      <a href="/" class="btn-nav" style="font-size:12px;padding:9px 16px">Analyser mon site →</a>
+      <button class="burger" id="burgerBtn" aria-label="Menu"><span></span></button>
+    </div>
+    <div class="mob-menu" id="mobMenu">
+      <span class="mob-group-label">Guide GEO</span>
+      <a href="/guide/llms-txt">Fichier llms.txt</a>
+      <a href="/guide/robots-txt">Fichier robots.txt</a>
+      <a href="/guide/schema-org">Schema.org JSON-LD</a>
+      <a href="/guide/faq-geo">FAQ optimisee GEO</a>
+      <span class="mob-group-label" style="margin-top:4px">Navigation</span>
+      <a href="/tarifs">Tarifs</a>
+      <a href="/faq">FAQ</a>
+      <a href="/a-propos">A propos</a>
+      <a href="/blog">Blog</a>
+    </div>
+  </div>
+</nav>
+<script>
+var b=document.getElementById('burgerBtn'),m=document.getElementById('mobMenu');
+b.onclick=function(){b.classList.toggle('open');m.classList.toggle('open')};
+</script>
+
+<div class="wrap">
+  <div class="tag">Guide GEO</div>
+  <h1>FAQ optimisee GEO : le contenu que les IA adorent citer</h1>
+  <p class="lead">Les IA generatives fonctionnent par questions-reponses. Une page FAQ bien structuree est le format le plus naturel pour etre repris dans les reponses de ChatGPT, Claude et Perplexity.</p>
+
+  <div class="section">
+    <h2>Qu'est-ce qu'une FAQ GEO ?</h2>
+    <p>Une <strong>FAQ GEO</strong> (Generative Engine Optimization) est une page de questions-reponses concue specifiquement pour etre lue et citee par les modeles de langage. Elle se distingue d'une FAQ classique par plusieurs aspects :</p>
+    <ul>
+      <li><strong>Questions formulees comme les vrais utilisateurs</strong> : les questions reprennent les formulations exactes que les gens posent a ChatGPT ou Perplexity</li>
+      <li><strong>Reponses factuelles et concises</strong> : chaque reponse va droit au but, sans texte marketing superflu</li>
+      <li><strong>Balisage FAQPage Schema.org</strong> : le code structure qui permet aux IA de parser la page instantanement</li>
+      <li><strong>HTML semantique</strong> : structure propre avec des balises <code>&lt;article&gt;</code>, <code>&lt;h2&gt;</code>, <code>&lt;p&gt;</code> que les crawlers interpretent facilement</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>Pourquoi les IA citent les FAQ</h2>
+    <p>Le fonctionnement des LLMs explique pourquoi les FAQ sont un format privilegie :</p>
+    <div class="info-grid">
+      <div class="info-card">
+        <div class="label">Format Q&A natif</div>
+        <div class="value">Les LLMs sont entraines sur des millions de paires question-reponse. Une FAQ correspond exactement a leur mode de raisonnement.</div>
+      </div>
+      <div class="info-card">
+        <div class="label">Reponses extractibles</div>
+        <div class="value">Chaque reponse est autonome et peut etre citee independamment, sans devoir extraire du contexte d'un long paragraphe.</div>
+      </div>
+      <div class="info-card">
+        <div class="label">Signal de confiance</div>
+        <div class="value">Une FAQ detaillee avec balisage Schema.org est interpretee comme une source autoritaire sur le sujet.</div>
+      </div>
+      <div class="info-card">
+        <div class="label">Couverture semantique</div>
+        <div class="value">Chaque question couvre un angle different de votre activite, multipliant les chances d'etre pertinent pour une requete donnee.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>Anatomie d'une FAQ GEO efficace</h2>
+    <p>Une FAQ GEO performante suit des regles precises :</p>
+    <ul>
+      <li><strong>6 a 10 questions</strong> : assez pour couvrir les sujets cles, pas trop pour diluer la pertinence</li>
+      <li><strong>Reponses de 40 a 80 mots</strong> : assez longues pour etre completes, assez courtes pour etre citees en entier</li>
+      <li><strong>Vocabulaire du secteur</strong> : utiliser les termes techniques et commerciaux que vos prospects emploient</li>
+      <li><strong>Donnees factuelles</strong> : chiffres, zones geographiques, annees d'experience, certifications</li>
+      <li><strong>Pas de jargon marketing</strong> : les IA ignorent les superlatifs vagues ("leader", "meilleur", "innovant")</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>Structure HTML recommandee</h2>
+    <p>La structure HTML doit combiner lisibilite humaine et balisage machine :</p>
+    <div class="code-block"><span class="tag-hl">&lt;article class="faq-page"&gt;</span>
+  <span class="tag-hl">&lt;h1&gt;</span>Questions frequentes - Nom Entreprise<span class="tag-hl">&lt;/h1&gt;</span>
+
+  <span class="tag-hl">&lt;section&gt;</span>
+    <span class="tag-hl">&lt;h2&gt;</span>Quels services proposez-vous ?<span class="tag-hl">&lt;/h2&gt;</span>
+    <span class="tag-hl">&lt;p&gt;</span>Reponse factuelle et concise...<span class="tag-hl">&lt;/p&gt;</span>
+  <span class="tag-hl">&lt;/section&gt;</span>
+
+  <span class="tag-hl">&lt;section&gt;</span>
+    <span class="tag-hl">&lt;h2&gt;</span>Dans quelle zone intervenez-vous ?<span class="tag-hl">&lt;/h2&gt;</span>
+    <span class="tag-hl">&lt;p&gt;</span>Reponse avec donnees geographiques...<span class="tag-hl">&lt;/p&gt;</span>
+  <span class="tag-hl">&lt;/section&gt;</span>
+<span class="tag-hl">&lt;/article&gt;</span>
+
+<span class="comment">&lt;!-- + balisage FAQPage Schema.org JSON-LD --&gt;</span></div>
+    <p>Le balisage <strong>FAQPage Schema.org</strong> est ajoute en parallele dans le <code>&lt;head&gt;</code>. Il reprend chaque paire question-reponse dans un format que Google et les IA parsent automatiquement.</p>
+  </div>
+
+  <div class="section">
+    <h2>Double impact : SEO + GEO</h2>
+    <p>Une FAQ GEO bien construite produit un double effet :</p>
+    <ul>
+      <li><strong>SEO classique</strong> : le balisage FAQPage genere des rich snippets dans Google (questions depliables sous votre resultat), augmentant le taux de clic</li>
+      <li><strong>GEO</strong> : les LLMs utilisent vos reponses comme source pour leurs syntheses, vous citant nommement quand la question correspond</li>
+      <li><strong>Position zero</strong> : Google utilise de plus en plus les FAQ structurees pour ses AI Overviews, le nouveau format de reponse en haut des resultats</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>Ce que Geoptim genere pour vous</h2>
+    <p>Geoptim analyse le contenu de votre site et genere une page FAQ optimisee GEO comprenant :</p>
+    <ul>
+      <li>6 questions formulees a partir de votre activite reelle (pas de questions generiques)</li>
+      <li>Reponses factuelles redigees par Claude Sonnet, basees uniquement sur le contenu de votre site</li>
+      <li>HTML semantique propre, pret a deployer sur n'importe quel CMS</li>
+      <li>Balisage FAQPage Schema.org JSON-LD integre</li>
+    </ul>
+    <p>Le fichier est une page HTML autonome que vous pouvez heberger a <code>/faq</code> sur votre site. Les IA et Google commencent a l'exploiter des l'indexation.</p>
+  </div>
+
+  <div class="cta-box">
+    <h2>Generez votre FAQ GEO</h2>
+    <p>Analyse gratuite en 60 secondes. Obtenez une FAQ sur mesure pour votre site.</p>
+    <a href="/" class="btn-gold">Analyser mon site →</a>
+  </div>
+</div>
+
+<footer>
+  <p>© 2026 Geoptim · <a href="/">Accueil</a> · <a href="/tarifs">Tarifs</a> · <a href="/faq">FAQ</a> · <a href="/#sec-legal">Mentions legales</a></p>
+</footer>
+</body>
+</html>
