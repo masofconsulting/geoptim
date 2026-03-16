@@ -511,7 +511,7 @@ footer{background:var(--navy);padding:52px 32px 32px}
         <h1>Is your website<br/><em>optimized</em> for AI?</h1>
         <p class="hero-sub">When a prospect asks ChatGPT, Perplexity or Claude for advice in your field, is it your website that gets recommended, or your competitor's? Check your AI visibility for free.</p>
         <div class="iw">
-          <input id="urlInput" type="text" placeholder="https://your-site.com" autocomplete="off"/>
+          <input id="urlInput" type="text" placeholder="https://your-website.com" autocomplete="off"/>
           <button id="analyzeBtn">Analyze →</button>
         </div>
         <div class="trust">
@@ -1304,7 +1304,7 @@ document.getElementById('modal').onclick = function(e) { if (e.target === this) 
 // ── ANALYSIS ──
 function startAnalysis() {
   var raw = document.getElementById('urlInput').value.trim();
-  if (!raw || raw.indexOf('.') === -1) { alert('Enter a valid URL (e.g. https://your-site.com)'); return; }
+  if (!raw || raw.indexOf('.') === -1) { alert('Enter a valid URL (e.g. https://your-website.com)'); return; }
   var url = raw.indexOf('http') === 0 ? raw : 'https://' + raw;
   result = null;
   goPage('loading');
