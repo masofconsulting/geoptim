@@ -1468,7 +1468,7 @@ function startAnalysis() {
     setTimeout(function(){ stepEl.textContent = STEPS[si]; stepEl.style.opacity = '1'; }, 250);
   }, 1900);
 
-  // ── Chip animation (6 chips over ~15s) ──
+  // ── Chip animation (6 chips over ~25s) ──
   var loadChips = document.querySelectorAll('.lchip');
   loadChips.forEach(function(c){ c.classList.remove('show','scanning','done'); var sp = c.querySelector('.lchip-spinner'); if(sp) sp.remove(); });
   var ci = 0;
@@ -1483,8 +1483,8 @@ function startAnalysis() {
       chip.classList.remove('scanning'); chip.classList.add('done');
       var sp = icon.querySelector('.lchip-spinner'); if(sp) sp.remove();
       ci++;
-      setTimeout(processChip, 500);
-    }, 2000);
+      setTimeout(processChip, 700);
+    }, 3500);
   }
   setTimeout(processChip, 800);
 
