@@ -492,7 +492,7 @@ footer{background:var(--navy);padding:52px 32px 32px}
       <div>
         <div class="tag"><span class="tag-dot"></span>GEO · Generative Engine Optimization</div>
         <h1>Is your website<br/><em>optimized</em> for AI?</h1>
-        <p class="hero-sub">Enter a URL. Our AI analyzes your site and generates the 4 files that signal your expertise to ChatGPT, Claude, Perplexity and Gemini, before your competitors do.</p>
+        <p class="hero-sub">When a prospect asks ChatGPT, Perplexity or Claude for advice in your field, is it your website that gets recommended, or your competitor's? Check your AI visibility for free.</p>
         <div class="iw">
           <input id="urlInput" type="text" placeholder="https://your-site.com" autocomplete="off"/>
           <button id="analyzeBtn">Analyze →</button>
@@ -523,10 +523,10 @@ footer{background:var(--navy);padding:52px 32px 32px}
 
   <div class="ds">
     <div class="feats">
-      <div><div class="fi">🔍</div><div class="ft">Full analysis</div><div class="fd">robots.txt, Schema.org, llms.txt, content structure: everything is audited.</div></div>
-      <div><div class="fi">📊</div><div class="ft">GEO Score /100</div><div class="fd">A precise category-by-category diagnosis to know exactly what to fix.</div></div>
-      <div><div class="fi">📁</div><div class="ft">4 files generated</div><div class="fd">robots.txt, llms.txt, JSON-LD and FAQ, customized for your site.</div></div>
-      <div><div class="fi">⚡</div><div class="ft">Instant delivery</div><div class="fd">Download right after payment. Ready to deploy on WordPress or any CMS.</div></div>
+      <div><div class="fi">🔍</div><div class="ft">AI visibility diagnosis</div><div class="fd">Find out if AIs like ChatGPT and Perplexity can find, read and recommend your site.</div></div>
+      <div><div class="fi">📊</div><div class="ft">Visibility score /100</div><div class="fd">Measure your presence in AI answers, category by category.</div></div>
+      <div><div class="fi">📁</div><div class="ft">4 optimization files</div><div class="fd">Everything needed for AIs to cite you as a reference in your industry.</div></div>
+      <div><div class="fi">⚡</div><div class="ft">Instant results</div><div class="fd">Deploy in 5 minutes. AIs start referencing you as soon as files go live.</div></div>
     </div>
   </div>
 
@@ -778,6 +778,14 @@ footer{background:var(--navy);padding:52px 32px 32px}
       <div class="clbl">Diagnosis</div>
       <p style="font-size:14px;color:var(--text2);line-height:1.75;font-weight:300" id="summaryTxt">—</p>
     </div>
+    <!-- IMPACT BLOCK - visible if score < 80 -->
+    <div id="impactCard" style="display:none;background:linear-gradient(135deg,#f0f4ff,#e8eeff);border:1.5px solid #a8b8e0;border-radius:16px;padding:28px 32px;margin-bottom:16px">
+      <div style="display:flex;align-items:center;gap:14px;margin-bottom:14px">
+        <div style="width:48px;height:48px;background:#fff;border:1.5px solid #a8b8e0;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0">🚀</div>
+        <div style="font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:var(--navy)" id="impactTitle">What Geoptim would change for your site</div>
+      </div>
+      <p style="font-size:14px;color:#1f2937;line-height:1.75;font-weight:300;margin:0" id="impactTxt"></p>
+    </div>
     <div class="g2">
       <div class="card">
         <div class="clbl">Overall GEO Score</div>
@@ -821,7 +829,7 @@ footer{background:var(--navy);padding:52px 32px 32px}
     </div>
 
     <div class="ub" id="unlockBanner">
-      <div class="ut"><h3>Generate your GEO files</h3><p id="unlockDesc">Customized for your site.</p></div>
+      <div class="ut"><h3 id="unlockTitle">Make your site visible to AI</h3><p id="unlockDesc">Get the files that allow ChatGPT, Claude and Perplexity to cite and recommend your site.</p></div>
       <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
         <button class="btn-gold" id="btnUnlock" onclick="openModal('pack')" style="padding:12px 22px;font-size:14px">4-file bundle · $49</button>
         <button id="btnUnlockSingle" onclick="openModal('single-choice')" style="padding:12px 18px;font-size:13px;background:#fff;border:1.5px solid var(--navy);border-radius:9px;font-weight:600;color:var(--navy)">1 file · $19</button>
@@ -2163,7 +2171,8 @@ function renderResults(url) {
   setTxt('summaryTxt', r.summary || '—');
   setStyle('summaryCard', 'borderLeftColor', c);
   setTxt('filesSub', '4 files generated for ' + (r.siteName || 'your website') + '.');
-  setTxt('unlockDesc', 'Customized for ' + (r.siteName || 'your website') + '.');
+  setTxt('unlockTitle', 'Make ' + (r.siteName || 'your website') + ' visible to AI');
+  setTxt('unlockDesc', 'Get the files that allow ChatGPT, Claude and Perplexity to cite and recommend your site.');
   setTxt('modDesc', '4 customized files for ' + (r.siteName || 'your website') + '.');
   // Ring
   var arc = document.getElementById('scoreArc');
@@ -2191,6 +2200,15 @@ function renderResults(url) {
     badge.style.color = c;
   }
   setTxt('scoreDesc', r.siteDescription || '—');
+  // Impact block
+  var impactCard = document.getElementById('impactCard');
+  if (impactCard && r.impact && s < 80) {
+    setTxt('impactTxt', r.impact);
+    setTxt('impactTitle', 'What Geoptim would change for ' + (r.siteName || 'your website'));
+    impactCard.style.display = 'block';
+  } else if (impactCard) {
+    impactCard.style.display = 'none';
+  }
   // Bars
   var barsDiv = document.getElementById('barsDiv');
   barsDiv.innerHTML = '';
@@ -2279,7 +2297,7 @@ function renderFiles() {
     // d'une session précédente quand l'URL analysée n'a pas d'achat)
     banner.style.display = 'flex';
     banner.style.background = '';
-    banner.innerHTML = '<div class="ut"><h3>Generate your GEO files</h3><p id="unlockDesc">Customized for your website.</p></div>'
+    banner.innerHTML = '<div class="ut"><h3 id="unlockTitle">Make your site visible to AI</h3><p id="unlockDesc">Get the files that allow ChatGPT, Claude and Perplexity to cite and recommend your site.</p></div>'
       + '<div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">'
       + '<button class="btn-gold" id="btnUnlock" onclick="openModal(\'pack\')" style="padding:12px 22px;font-size:14px">4-file pack · $49</button>'
       + '<button id="btnUnlockSingle" onclick="openModal(\'single-choice\')" style="padding:12px 18px;font-size:13px;background:#fff;border:1.5px solid var(--navy);border-radius:9px;font-weight:600;color:var(--navy)">1 file · $19</button>'

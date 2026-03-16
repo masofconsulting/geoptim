@@ -2387,7 +2387,7 @@ function renderFiles() {
     // d'une session précédente quand l'URL analysée n'a pas d'achat)
     banner.style.display = 'flex';
     banner.style.background = '';
-    banner.innerHTML = '<div class="ut"><h3>Générez vos fichiers GEO</h3><p id="unlockDesc">Personnalisés pour votre site.</p></div>'
+    banner.innerHTML = '<div class="ut"><h3 id="unlockTitle">Rendez votre site visible pour les IA</h3><p id="unlockDesc">Recevez les fichiers qui permettent à ChatGPT, Claude et Perplexity de citer et recommander votre site.</p></div>'
       + '<div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">'
       + '<button class="btn-gold" id="btnUnlock" onclick="openModal(\'pack\')" style="padding:12px 22px;font-size:14px">Pack 4 fichiers · 49 €</button>'
       + '<button id="btnUnlockSingle" onclick="openModal(\'single-choice\')" style="padding:12px 18px;font-size:13px;background:#fff;border:1.5px solid var(--navy);border-radius:9px;font-weight:600;color:var(--navy)">1 fichier · 19 €</button>'
