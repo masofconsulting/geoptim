@@ -38,8 +38,11 @@ body{background:var(--cream);color:var(--text);font-family:'Inter',sans-serif;fo
 button{cursor:pointer;font-family:inherit;border:none;background:none;padding:0}
 @keyframes fadeIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
 @keyframes spin{to{transform:rotate(360deg)}}
-@keyframes scan{0%{top:0;opacity:1}85%{top:100%;opacity:1}100%{top:100%;opacity:0}}
-@keyframes pulse{0%,100%{transform:scale(1);opacity:.35}50%{transform:scale(1.08);opacity:.12}}
+@keyframes morph{0%{border-radius:60% 40% 50% 50%/50% 60% 40% 50%;transform:rotate(0deg) scale(1)}25%{border-radius:40% 60% 40% 60%/60% 40% 60% 40%;transform:rotate(5deg) scale(1.04)}50%{border-radius:50% 50% 60% 40%/40% 50% 50% 60%;transform:rotate(-3deg) scale(.97)}75%{border-radius:60% 40% 40% 60%/50% 60% 40% 50%;transform:rotate(4deg) scale(1.02)}100%{border-radius:60% 40% 50% 50%/50% 60% 40% 50%;transform:rotate(0deg) scale(1)}}
+@keyframes orbitTilt{0%{transform:rotateX(60deg) rotateZ(0deg)}100%{transform:rotateX(60deg) rotateZ(360deg)}}
+@keyframes logoBreath{0%,100%{transform:scale(1);filter:drop-shadow(0 0 12px rgba(201,168,76,.15))}50%{transform:scale(1.06);filter:drop-shadow(0 0 24px rgba(201,168,76,.25))}}
+@keyframes particleFloat{0%,100%{transform:translateY(0) translateX(0)}25%{transform:translateY(-12px) translateX(6px)}50%{transform:translateY(-5px) translateX(-8px)}75%{transform:translateY(8px) translateX(4px)}}
+@keyframes ambientSlide{0%{transform:translateX(-100%)}100%{transform:translateX(100%)}}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
 @keyframes modalIn{from{opacity:0;transform:scale(.94)}to{opacity:1;transform:scale(1)}}
 @keyframes shine{0%{left:-100%}100%{left:100%}}
@@ -217,14 +220,49 @@ h1 em{font-style:normal;background:linear-gradient(135deg,#a8862e,#c9a84c);-webk
 /* LOADING */
 #pg-loading{min-height:70vh;display:none;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:60px 24px}
 #pg-loading.on{display:flex}
-.scanner{width:130px;height:130px;position:relative;margin-bottom:36px}
-.sr{position:absolute;inset:0;border-radius:50%;border:1.5px solid rgba(201,168,76,.15);animation:pulse 2.6s ease-in-out infinite}
-.sr:nth-child(2){inset:18px;animation-delay:.5s}
-.sr:nth-child(3){inset:36px;animation-delay:1s}
-.sc2{position:absolute;inset:50px;background:linear-gradient(135deg,var(--gold),var(--navy));border-radius:50%}
-.sl{position:absolute;left:0;right:0;height:1.5px;background:linear-gradient(90deg,transparent,var(--gold),transparent);animation:scan 2s linear infinite}
-#stepTxt{font-family:'DM Mono',monospace;font-size:13px;color:var(--gold);min-height:22px;margin-bottom:8px}
-#stepUrl{font-family:'DM Mono',monospace;font-size:11px;color:#c8c2b8}
+.load-scene{position:relative;width:340px;height:340px;margin-bottom:32px}
+.blob-layer{position:absolute;inset:0;display:flex;align-items:center;justify-content:center}
+.blob-outer{width:180px;height:180px;position:relative}
+.blob-shape{position:absolute;inset:0;border-radius:60% 40% 50% 50%/50% 60% 40% 50%;animation:morph 8s ease-in-out infinite}
+.blob-shape.b1{background:radial-gradient(ellipse at 30% 30%,rgba(201,168,76,.18),rgba(201,168,76,.04))}
+.blob-shape.b2{inset:-28px;background:radial-gradient(ellipse at 70% 60%,rgba(201,168,76,.08),transparent);animation-duration:10s;animation-direction:reverse;filter:blur(14px)}
+.blob-shape.b3{inset:18px;background:radial-gradient(ellipse at 50% 50%,rgba(201,168,76,.22),rgba(201,168,76,.06));animation-duration:6s;animation-delay:-2s}
+.orbit-layer{position:absolute;inset:0;perspective:600px}
+.orbit-path{position:absolute;border-radius:50%;border:1px solid rgba(201,168,76,.06)}
+.op1{inset:25px;animation:orbitTilt 20s linear infinite}
+.op2{inset:8px;animation:orbitTilt 25s linear infinite reverse}
+.particles{position:absolute;inset:0}
+.particle{position:absolute;border-radius:50%;background:var(--gold);animation:particleFloat var(--dur) ease-in-out infinite}
+.p1{width:3px;height:3px;top:25%;left:18%;opacity:.4;--dur:4s}
+.p2{width:2px;height:2px;top:60%;left:12%;opacity:.25;--dur:5.5s;animation-delay:-1s}
+.p3{width:3px;height:3px;top:15%;right:25%;opacity:.3;--dur:6s;animation-delay:-2s}
+.p4{width:2px;height:2px;top:70%;right:20%;opacity:.2;--dur:4.5s;animation-delay:-3s}
+.p5{width:3px;height:3px;bottom:18%;left:30%;opacity:.35;--dur:5s;animation-delay:-.5s}
+.center-logo{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;z-index:5}
+.logo-glow{width:64px;height:64px;display:flex;align-items:center;justify-content:center;border-radius:50%;background:radial-gradient(circle,rgba(248,246,241,.95) 40%,rgba(248,246,241,0) 70%);animation:logoBreath 4s ease-in-out infinite}
+.load-chips{position:absolute;inset:0;z-index:10}
+.lchip{position:absolute;display:flex;align-items:center;gap:7px;background:rgba(255,255,255,.92);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(201,168,76,.08);border-radius:12px;padding:7px 14px 7px 10px;font-family:'DM Mono',monospace;font-size:11px;color:var(--text4);white-space:nowrap;opacity:0;transform:translateY(8px) scale(.92);transition:all .7s cubic-bezier(.16,1,.3,1);box-shadow:0 4px 24px rgba(0,0,0,.04)}
+.lchip.show{opacity:1;transform:translateY(0) scale(1)}
+.lchip.scanning{border-color:rgba(201,168,76,.2);box-shadow:0 4px 24px rgba(0,0,0,.04),0 0 0 4px rgba(201,168,76,.06)}
+.lchip.done{border-color:rgba(201,168,76,.3);color:var(--gold);box-shadow:0 4px 24px rgba(201,168,76,.08)}
+.lchip-icon{width:20px;height:20px;border-radius:6px;display:flex;align-items:center;justify-content:center;background:rgba(201,168,76,.06);transition:all .5s;flex-shrink:0;position:relative}
+.lchip.scanning .lchip-icon{background:rgba(201,168,76,.12)}
+.lchip.done .lchip-icon{background:rgba(201,168,76,.18)}
+.lchip-spinner{width:10px;height:10px;border:1.5px solid rgba(201,168,76,.15);border-top-color:var(--gold);border-radius:50%;animation:spin .7s linear infinite;position:absolute;top:50%;left:50%;margin:-5px 0 0 -5px}
+.lchip-check{opacity:0;transform:scale(0);transition:all .4s cubic-bezier(.16,1,.3,1)}
+.lchip.done .lchip-check{opacity:1;transform:scale(1)}
+.lc0{top:2%;left:50%;transform:translateX(-50%) translateY(8px) scale(.92)}.lc0.show{transform:translateX(-50%) translateY(0) scale(1)}
+.lc1{top:22%;right:0}
+.lc2{top:52%;right:-2%}
+.lc3{bottom:2%;left:50%;transform:translateX(-50%) translateY(8px) scale(.92)}.lc3.show{transform:translateX(-50%) translateY(0) scale(1)}
+.lc4{top:52%;left:-2%}
+.lc5{top:22%;left:0}
+.load-info{text-align:center}
+.ambient{width:200px;height:2px;border-radius:2px;background:rgba(201,168,76,.06);margin:0 auto 16px;overflow:hidden;position:relative}
+.ambient-fill{position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(201,168,76,.3),transparent);animation:ambientSlide 2s ease-in-out infinite}
+#stepTxt{font-family:'DM Mono',monospace;font-size:14px;color:var(--gold);min-height:22px;margin-bottom:6px;transition:opacity .3s}
+#stepUrl{font-family:'DM Mono',monospace;font-size:11px;color:var(--text4);margin-bottom:16px;opacity:.6}
+.load-note{font-size:12px;color:var(--text4);opacity:.5}
 
 /* RESULTS */
 .rw{max-width:1100px;margin:0 auto;padding:48px 32px 80px}
@@ -861,13 +899,26 @@ footer{background:var(--navy);padding:48px 40px 28px}
 <!-- LOADING -->
 <div id="pg-loading" class="pg">
   <div style="min-height:70vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:60px 24px">
-    <div class="scanner">
-      <div class="sr"></div><div class="sr"></div><div class="sr"></div>
-      <div class="sl"></div><div class="sc2"></div>
+    <div class="load-scene">
+      <div class="blob-layer"><div class="blob-outer"><div class="blob-shape b2"></div><div class="blob-shape b1"></div><div class="blob-shape b3"></div></div></div>
+      <div class="orbit-layer"><div class="orbit-path op1"></div><div class="orbit-path op2"></div></div>
+      <div class="particles"><div class="particle p1"></div><div class="particle p2"></div><div class="particle p3"></div><div class="particle p4"></div><div class="particle p5"></div></div>
+      <div class="center-logo"><div class="logo-glow"><svg viewBox="0 0 24 24" width="32" height="32"><circle cx="12" cy="12" r="9" fill="none" stroke="#c9a84c" stroke-width="1.8" opacity=".3"/><circle cx="12" cy="12" r="5" fill="none" stroke="#c9a84c" stroke-width="1.5" opacity=".5"/><circle cx="12" cy="12" r="2" fill="#c9a84c"/><line x1="12" y1="12" x2="19" y2="6" stroke="#c9a84c" stroke-width="1.3" stroke-linecap="round" opacity=".7"/></svg></div></div>
+      <div class="load-chips">
+        <div class="lchip lc0" id="lch0"><div class="lchip-icon"><svg class="lchip-check" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>robots.txt</div>
+        <div class="lchip lc1" id="lch1"><div class="lchip-icon"><svg class="lchip-check" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>llms.txt</div>
+        <div class="lchip lc2" id="lch2"><div class="lchip-icon"><svg class="lchip-check" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>Schema.org</div>
+        <div class="lchip lc3" id="lch3"><div class="lchip-icon"><svg class="lchip-check" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>Content</div>
+        <div class="lchip lc4" id="lch4"><div class="lchip-icon"><svg class="lchip-check" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>Structure</div>
+        <div class="lchip lc5" id="lch5"><div class="lchip-icon"><svg class="lchip-check" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>GEO Score</div>
+      </div>
     </div>
-    <div id="stepTxt">Connecting to site…</div>
-    <div id="stepUrl"></div>
-    <div style="font-family:'DM Mono',monospace;font-size:11px;color:#9e9789;margin-top:12px">In-depth analysis may take 1 to 2 minutes</div>
+    <div class="load-info">
+      <div class="ambient"><div class="ambient-fill"></div></div>
+      <div id="stepTxt">Connecting to site…</div>
+      <div id="stepUrl"></div>
+      <div class="load-note">In-depth analysis may take 1 to 2 minutes</div>
+    </div>
   </div>
 </div>
 
@@ -1408,12 +1459,34 @@ function startAnalysis() {
   goPage('loading');
   document.getElementById('stepUrl').textContent = url;
   var si = 0;
-  document.getElementById('stepTxt').textContent = STEPS[0];
+  var stepEl = document.getElementById('stepTxt');
+  stepEl.textContent = STEPS[0];
   clearInterval(stepInterval);
   stepInterval = setInterval(function() {
     si = (si + 1) % STEPS.length;
-    document.getElementById('stepTxt').textContent = STEPS[si];
+    stepEl.style.opacity = '0';
+    setTimeout(function(){ stepEl.textContent = STEPS[si]; stepEl.style.opacity = '1'; }, 250);
   }, 1900);
+
+  // ── Chip animation (6 chips over ~15s) ──
+  var loadChips = document.querySelectorAll('.lchip');
+  loadChips.forEach(function(c){ c.classList.remove('show','scanning','done'); var sp = c.querySelector('.lchip-spinner'); if(sp) sp.remove(); });
+  var ci = 0;
+  function processChip(){
+    if(ci >= loadChips.length) return;
+    var chip = loadChips[ci];
+    chip.classList.add('show','scanning');
+    var icon = chip.querySelector('.lchip-icon');
+    var spinner = document.createElement('div'); spinner.className = 'lchip-spinner';
+    icon.insertBefore(spinner, icon.firstChild);
+    setTimeout(function(){
+      chip.classList.remove('scanning'); chip.classList.add('done');
+      var sp = icon.querySelector('.lchip-spinner'); if(sp) sp.remove();
+      ci++;
+      setTimeout(processChip, 500);
+    }, 2000);
+  }
+  setTimeout(processChip, 800);
 
   // ── Lit un stream texte, détecte __GEOPTIM_ERROR__ et __RC__, retourne objet JSON ──
   async function readJsonStream(resp, hasRawContent) {
