@@ -49,9 +49,10 @@ html{scroll-behavior:smooth}
 body{background:var(--cream);color:var(--text);font-family:'Inter',sans-serif;line-height:1.7}
 a{color:var(--navy);text-decoration:none}
 a:hover{text-decoration:underline}
-nav{background:rgba(248,246,241,.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:0 32px;height:72px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
-.logo{display:flex;align-items:center;gap:8px;text-decoration:none}
-.logo-name{font-family:'Inter',sans-serif;font-size:20px;font-weight:900;letter-spacing:-.03em;color:var(--navy)}
+nav{background:rgba(248,246,241,.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:0;position:sticky;top:0;z-index:100}
+.ni{max-width:1200px;margin:0 auto;padding:0 40px;height:72px;display:flex;align-items:center;justify-content:space-between}
+.logo{display:flex;align-items:center;gap:0;text-decoration:none}
+.logo-name{font-family:'Inter',sans-serif;font-size:22px;font-weight:900;letter-spacing:-.03em;color:var(--navy)}
 .logo-accent{color:var(--gold)}
 .btn-cta{background:var(--navy);color:#fff;padding:10px 22px;border-radius:9px;font-weight:600;font-size:13px;text-decoration:none;transition:background .2s}
 .btn-cta:hover{background:var(--navy2);text-decoration:none}
@@ -80,12 +81,13 @@ footer a{color:rgba(255,255,255,.5)}
 .dd-menu a:hover{color:var(--navy);background:var(--cream)}
 .mob-menu .mob-group-label{font-family:'DM Mono',monospace;font-size:10px;color:var(--text4);text-transform:uppercase;letter-spacing:.08em;padding:14px 14px 4px;border-bottom:none}
 .nav-links{display:flex;align-items:center;gap:20px}.nl{font-size:13px;font-weight:500;color:var(--text3);transition:color .2s;padding:4px;text-decoration:none}.nl:hover{color:var(--navy)}
-@media(max-width:600px){main{padding:40px 20px 60px}nav{padding:0 20px}}
+@media(max-width:600px){main{padding:40px 20px 60px}.ni{padding:0 16px}}
 @media(max-width:640px){.nav-links .nl{display:none}}
 </style>
 </head>
 <body>
 <nav>
+  <div class="ni">
   <a class="logo" href="/en/">
     <svg viewBox="0 0 24 24" width="22" height="22" style="flex-shrink:0"><circle cx="12" cy="12" r="9" fill="none" stroke="#c9a84c" stroke-width="1.8" opacity="0.22"/><circle cx="12" cy="12" r="5" fill="none" stroke="#c9a84c" stroke-width="1.5" opacity="0.42"/><circle cx="12" cy="12" r="2" fill="#c9a84c"/><line x1="12" y1="12" x2="19" y2="6" stroke="#c9a84c" stroke-width="1.3" stroke-linecap="round" opacity="0.65"/></svg>
     <span class="logo-name">Geoptim<span class="logo-accent">.</span></span>
@@ -107,6 +109,7 @@ footer a{color:rgba(255,255,255,.5)}
     <a href="/en/blog" class="nl">Blog</a>
     <a href="/blog/geo-vs-seo" class="nl" style="font-weight:600;color:var(--gold)">&#127467;&#127479; FR</a>
     <a class="btn-cta" href="/en/">Analyze my website &#8594;</a>
+  </div>
   </div>
 </nav>
 <main>

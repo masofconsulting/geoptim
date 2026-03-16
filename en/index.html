@@ -75,7 +75,22 @@ nav{position:sticky;top:0;z-index:200;background:rgba(248,246,241,.92);backdrop-
 .nav-dd:hover .dd-menu{display:block}
 .dd-menu a{display:block;padding:8px 18px;font-size:13px;font-weight:500;color:var(--text2);transition:color .2s,background .2s;text-decoration:none}
 .dd-menu a:hover{color:var(--navy);background:var(--cream)}
-.mob-menu .mob-group-label{font-family:'DM Mono',monospace;font-size:10px;color:var(--text4);text-transform:uppercase;letter-spacing:.08em;padding:14px 14px 4px;border-bottom:none}
+.mob-right{display:none;align-items:center;gap:10px}
+.burger{width:38px;height:38px;display:flex;align-items:center;justify-content:center;background:none;border:1.5px solid var(--border);border-radius:9px;cursor:pointer;flex-shrink:0;transition:border-color .2s}
+.burger:hover{border-color:var(--navy)}
+.burger span{display:block;width:16px;height:1.5px;background:var(--navy);position:relative;transition:all .3s}
+.burger span::before,.burger span::after{content:'';position:absolute;width:16px;height:1.5px;background:var(--navy);transition:all .3s}
+.burger span::before{top:-5px}
+.burger span::after{top:5px}
+.burger.open span{background:transparent}
+.burger.open span::before{top:0;transform:rotate(45deg)}
+.burger.open span::after{top:0;transform:rotate(-45deg)}
+.mob-menu{display:none;position:absolute;top:calc(100% + 1px);left:0;right:0;background:var(--cream);border-bottom:1px solid var(--border);padding:8px 16px 16px;flex-direction:column;box-shadow:0 12px 40px rgba(15,31,61,.1)}
+.mob-menu.open{display:flex}
+.mob-menu a,.mob-menu button{display:block;width:100%;text-align:left;padding:12px 14px;font-size:15px;font-weight:500;color:var(--navy);text-decoration:none;background:none;border:none;border-bottom:1px solid var(--border);cursor:pointer;font-family:inherit;transition:color .2s}
+.mob-menu a:last-of-type,.mob-menu button:last-of-type{border-bottom:none}
+.mob-menu a:hover,.mob-menu button:hover{color:var(--gold)}
+.mob-menu .mob-group-label{font-family:'DM Mono',monospace;font-size:10px;color:var(--text4);text-transform:uppercase;letter-spacing:.08em;padding:14px 14px 4px;border-bottom:none;display:block;width:100%}
 .nav-links{display:flex;align-items:center;gap:24px}
 .nl{font-size:14px;font-weight:500;color:rgba(26,23,20,.45);transition:color .2s;padding:4px;text-decoration:none;background:none;border:none;cursor:pointer;font-family:inherit}
 .nl:hover{color:var(--navy)}
@@ -281,8 +296,8 @@ footer{background:var(--navy);padding:48px 40px 28px}
 .fb{border-top:1px solid rgba(255,255,255,.07);padding-top:24px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
 .fc2{font-family:'DM Mono',monospace;font-size:11px;color:rgba(255,255,255,.3)}
 
-@media(max-width:860px){.hero-g,.price-g{grid-template-columns:1fr}.hv{display:none}.feats{grid-template-columns:1fr 1fr}.fg2{grid-template-columns:1fr}}
-@media(max-width:600px){.g2,.fg,.steps,.inc-g,.blog-g{grid-template-columns:1fr}.nav-links .nl{display:none}.ni{padding:0 16px;height:60px}.btn-nav{padding:10px 18px;font-size:13px;box-shadow:none}.hero-s{padding:44px 20px 40px}h1{font-size:clamp(30px,8vw,38px)}.stitle::after{width:36px;margin-top:10px}.ds{padding:44px 20px}.feats{gap:24px}.ft{font-size:15px}.sec{padding:60px 20px}.stitle{font-size:clamp(24px,6vw,30px)}.step{padding:24px 22px}.cream-s{padding:56px 20px}.white-s{padding:60px 20px}.pc{padding:32px 26px}.pa{font-size:50px}.ab{padding:24px 24px 18px}.ah{font-size:17px}.cta-s{padding:56px 20px}.rw{padding:36px 20px 64px}.ub{padding:24px 22px}.card{padding:22px 20px}.fc{padding:18px 20px}}
+@media(max-width:860px){.hero-g,.price-g{grid-template-columns:1fr}.hv{margin-top:32px}.feats{grid-template-columns:1fr 1fr}.fg2{grid-template-columns:1fr}}
+@media(max-width:600px){.g2,.fg,.steps,.inc-g,.blog-g{grid-template-columns:1fr}.nav-links{display:none}.mob-right{display:flex}.ni{padding:0 16px;height:60px}.btn-nav{padding:10px 18px;font-size:13px;box-shadow:none}.hero-s{padding:44px 20px 40px}h1{font-size:clamp(30px,8vw,38px)}.stitle::after{width:36px;margin-top:10px}.ds{padding:44px 20px}.feats{gap:24px}.ft{font-size:15px}.sec{padding:60px 20px}.stitle{font-size:clamp(24px,6vw,30px)}.step{padding:24px 22px}.cream-s{padding:56px 20px}.white-s{padding:60px 20px}.pc{padding:32px 26px}.pa{font-size:50px}.ab{padding:24px 24px 18px}.ah{font-size:17px}.cta-s{padding:56px 20px}.rw{padding:36px 20px 64px}.ub{padding:24px 22px}.card{padding:22px 20px}.fc{padding:18px 20px}}
 
 /* REVIEWS */
 .rv-g{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
@@ -544,6 +559,26 @@ footer{background:var(--navy);padding:48px 40px 28px}
       <a href="/en/blog" class="nl">Blog</a>
       <a href="/" class="nl" style="font-size:12px">FR</a>
       <button class="btn-nav" id="btnNavCta">Analyze my website →</button>
+    </div>
+    <div class="mob-right">
+      <button class="btn-nav" id="mobCta" style="font-size:12px;padding:9px 16px">Analyze my website →</button>
+      <button class="burger" id="burgerBtn" aria-label="Menu"><span></span></button>
+    </div>
+    <div class="mob-menu" id="mobMenu">
+      <button id="mobHow">How it works</button>
+      <span class="mob-group-label">GEO Guide</span>
+      <a href="/en/guide/llms-txt">llms.txt file</a>
+      <a href="/en/guide/robots-txt">robots.txt file</a>
+      <a href="/en/guide/schema-org">Schema.org JSON-LD</a>
+      <a href="/en/guide/faq-geo">GEO-optimized FAQ</a>
+      <a href="/en/guide/installation">Installation guide</a>
+      <span class="mob-group-label" style="margin-top:4px">Navigation</span>
+      <a href="/en/pricing">Pricing</a>
+      <a href="/en/faq">FAQ</a>
+      <a href="/en/about">About</a>
+      <a href="/en/blog">Blog</a>
+      <span class="mob-group-label" style="margin-top:4px">Language</span>
+      <a href="/">Français</a>
     </div>
   </div>
 </nav>
@@ -1339,6 +1374,10 @@ function goFocus() {
 document.getElementById('btnLogo').onclick = function() { goPage('home'); };
 document.getElementById('btnHow').onclick = function() { goSection('sec-how'); };
 document.getElementById('btnNavCta').onclick = goFocus;
+var _b=document.getElementById('burgerBtn'),_m=document.getElementById('mobMenu');
+if(_b&&_m){_b.onclick=function(){_b.classList.toggle('open');_m.classList.toggle('open')};}
+var _mc=document.getElementById('mobCta');if(_mc){_mc.onclick=goFocus;}
+var _mh=document.getElementById('mobHow');if(_mh){_mh.onclick=function(){_m.classList.remove('open');_b.classList.remove('open');goSection('sec-how');}}
 document.getElementById('btnPricingCta').onclick = goFocus;
 document.getElementById('btnPricingPackCta').onclick = goFocus;
 document.getElementById('btnCtaBanner').onclick = goFocus;
