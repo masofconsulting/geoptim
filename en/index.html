@@ -2735,16 +2735,16 @@ function applyPromo() {
     window._promoData = { code: code, percent: data.percent, finalAmount: data.finalAmount, isFree: data.isFree };
     var baseStr  = '$' + (purchaseType === 'pack' ? '49' : '19');
     if (data.isFree) {
-      if (priceEl) priceEl.innerHTML = '<span style="text-decoration:line-through;font-size:16px;color:var(--text4)">' + baseStr + '</span> <span style="color:#16a34a">Free</span>';
-      if (btnPay)  { btnPay.textContent = 'Get for free →'; btnPay.style.background = '#16a34a'; }
-      msgEl.textContent = 'Valid code, 100% free access!'; msgEl.style.color = '#16a34a';
+      if (priceEl) priceEl.innerHTML = '<span style="text-decoration:line-through;font-size:16px;color:var(--text4)">' + baseStr + '</span> <span style="font-weight:700;color:var(--gold)">Free</span>';
+      if (btnPay)  { btnPay.textContent = 'Get for free →'; btnPay.style.background = 'var(--navy)'; }
+      msgEl.textContent = 'Valid code, 100% free access!'; msgEl.style.color = 'var(--gold)';
     } else {
       var finalStr = (data.finalAmount / 100 % 1 === 0)
         ? '$' + (data.finalAmount / 100).toFixed(0)
         : '$' + (data.finalAmount / 100).toFixed(2);
       if (priceEl) priceEl.innerHTML = '<span style="text-decoration:line-through;font-size:16px;color:var(--text4)">' + baseStr + '</span> ' + finalStr;
       if (btnPay)  { btnPay.textContent = 'Pay ' + finalStr + ' →'; btnPay.style.background = ''; }
-      msgEl.textContent = '−' + data.percent + '% applied.'; msgEl.style.color = '#16a34a';
+      msgEl.textContent = '−' + data.percent + '% applied.'; msgEl.style.color = 'var(--gold)';
     }
   })
   .catch(function() { msgEl.textContent = 'Network error.'; msgEl.style.color = '#c0392b'; window._promoData = null; });
