@@ -115,6 +115,16 @@
   status = 200
 
 [[redirects]]
+  from = "/guide/installation"
+  to = "/guide/installation.html"
+  status = 200
+
+[[redirects]]
+  from = "/en/guide/installation"
+  to = "/en/guide/installation.html"
+  status = 200
+
+[[redirects]]
   from = "/blog"
   to = "/blog/index.html"
   status = 200

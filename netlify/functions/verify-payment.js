@@ -114,6 +114,7 @@ ${isEn ? `<div class="ttc"><span>Total</span><span>${fmt(ttc)}</span></div>` : `
 <div class="ttc"><span>Total TTC</span><span>${fmt(ttc)}</span></div>`}
 </div>
 <p class="note">${isEn ? 'Payment by credit card via Stripe. Digital service delivered immediately.' : 'Paiement par carte bancaire via Stripe. Service numérique livré immédiatement &mdash; droit de rétractation non applicable (art. L221-28 Code de la consommation).'}</p>
+<p class="note" style="margin-top:12px">${isEn ? '📋 <a href="https://geoptim.io/en/guide/installation" style="color:#c9a84c">Installation guide</a> &mdash; Step-by-step instructions to deploy your files on WordPress, Webflow, Shopify or any website.' : '📋 <a href="https://geoptim.io/guide/installation" style="color:#c9a84c">Guide d\'installation</a> &mdash; Instructions pas a pas pour deployer vos fichiers sur WordPress, Webflow, Shopify ou tout autre site.'}</p>
 <div class="foot">${isEn ? 'Geoptim is a service by HM CAPITAL' : 'Geoptim est un service de HM CAPITAL'} &mdash; contact@geoptim.io &mdash; geoptim.io</div>
 </div></body></html>`;
 

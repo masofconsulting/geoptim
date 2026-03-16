@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"/>
+<title>How to install your GEO files on your website | Geoptim</title>
+<link rel="canonical" href="https://geoptim.io/en/guide/installation"/>
+<link rel="alternate" hreflang="fr" href="https://geoptim.io/guide/installation"/>
+<link rel="alternate" hreflang="en" href="https://geoptim.io/en/guide/installation"/>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
+<meta name="description" content="Step-by-step guide to install your GEO optimization files (robots.txt, llms.txt, Schema.org, FAQ) on WordPress, Webflow, Shopify or any website."/>
+<meta property="og:title" content="How to install your GEO files on your website"/>
+<meta property="og:description" content="Step-by-step guide to install GEO optimization files on WordPress, Webflow, Shopify or any website."/>
+<meta property="og:url" content="https://geoptim.io/en/guide/installation"/>
+<meta property="og:type" content="article"/>
+<meta name="twitter:card" content="summary"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+:root{--navy:#0f1f3d;--gold:#c9a84c;--cream:#faf8f5;--border:#e8e4dc;--text:#0f1f3d;--text2:#4a4438;--text3:#6b6358;--text4:#aaa09a}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--cream);color:var(--text);font-family:'DM Sans',sans-serif;line-height:1.7}
+a{text-decoration:none;color:var(--gold)}
+nav{position:sticky;top:0;z-index:100;background:rgba(250,248,245,.95);backdrop-filter:blur(14px);border-bottom:1px solid var(--border)}
+.ni{max-width:1100px;margin:0 auto;padding:0 32px;height:64px;display:flex;align-items:center;justify-content:space-between}
+.logo{display:flex;align-items:center;gap:8px;font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--navy)}
+.logo-dot{width:9px;height:9px;background:var(--gold);border-radius:50%}
+.btn-nav{background:var(--navy);color:#fff;padding:10px 22px;border-radius:9px;font-weight:600;font-size:13px;cursor:pointer;border:none;text-decoration:none;color:#fff}
+.mob-right{display:none;align-items:center;gap:10px}
+.burger{width:38px;height:38px;display:flex;align-items:center;justify-content:center;background:none;border:1.5px solid var(--border);border-radius:9px;cursor:pointer;flex-shrink:0;transition:border-color .2s}
+.burger:hover{border-color:var(--navy)}
+.burger span{display:block;width:16px;height:1.5px;background:var(--navy);position:relative;transition:all .3s}
+.burger span::before,.burger span::after{content:'';position:absolute;width:16px;height:1.5px;background:var(--navy);transition:all .3s}
+.burger span::before{top:-5px}
+.burger span::after{top:5px}
+.burger.open span{background:transparent}
+.burger.open span::before{top:0;transform:rotate(45deg)}
+.burger.open span::after{top:0;transform:rotate(-45deg)}
+.mob-menu{display:none;position:absolute;top:calc(100% + 1px);left:0;right:0;background:var(--cream);border-bottom:1px solid var(--border);padding:8px 16px 16px;flex-direction:column;box-shadow:0 12px 40px rgba(15,31,61,.1)}
+.mob-menu.open{display:flex}
+.mob-menu a{display:block;width:100%;padding:12px 14px;font-size:15px;font-weight:500;color:var(--navy);border-bottom:1px solid var(--border);transition:color .2s}
+.mob-menu a:last-of-type{border-bottom:none}
+.mob-menu a:hover{color:var(--gold)}
+.mob-menu .mob-group-label{font-family:'DM Mono',monospace;font-size:10px;color:var(--text4);text-transform:uppercase;letter-spacing:.08em;padding:14px 14px 4px;border-bottom:none}
+.wrap{max-width:780px;margin:0 auto;padding:72px 32px 80px}
+.tag{display:inline-flex;align-items:center;gap:7px;font-family:'DM Mono',monospace;font-size:11px;color:var(--gold);letter-spacing:.08em;text-transform:uppercase;background:#fef9ed;border:1px solid #f0e0a0;padding:5px 14px;border-radius:999px;margin-bottom:22px}
+h1{font-family:'Playfair Display',serif;font-size:clamp(28px,4vw,44px);font-weight:900;color:var(--navy);margin-bottom:16px;line-height:1.12}
+.lead{font-size:17px;color:var(--text2);font-weight:300;line-height:1.8;margin-bottom:48px;max-width:640px}
+.section{margin-bottom:56px}
+.section h2{font-family:'Playfair Display',serif;font-size:24px;font-weight:700;color:var(--navy);margin-bottom:18px;padding-bottom:10px;border-bottom:2px solid var(--navy)}
+.section p{font-size:15px;color:var(--text2);line-height:1.8;margin-bottom:14px}
+.section p:last-child{margin:0}
+.section strong{color:var(--navy)}
+.section ul{margin:12px 0 14px 20px;font-size:15px;color:var(--text2);line-height:1.8}
+.section ul li{margin-bottom:6px}
+.code-block{background:#1a1a2e;color:#e0e0e0;border-radius:10px;padding:24px 28px;font-family:'DM Mono',monospace;font-size:13px;line-height:1.7;overflow-x:auto;margin:20px 0;white-space:pre}
+.code-block .comment{color:#6b7280}
+.code-block .key{color:#c9a84c}
+.cta-box{background:var(--navy);border-radius:16px;padding:40px 36px;text-align:center;margin-top:64px}
+.cta-box h2{font-family:'Playfair Display',serif;font-size:26px;font-weight:700;color:#fff;margin-bottom:10px}
+.cta-box p{font-size:14px;color:#5a7a96;margin-bottom:24px}
+.btn-gold{background:var(--gold);color:var(--navy);padding:13px 32px;border-radius:9px;font-weight:700;font-size:15px;text-decoration:none;display:inline-block}
+.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:24px}
+.info-card{background:#fff;border:1px solid var(--border);border-radius:12px;padding:20px 22px}
+.info-card .label{font-family:'DM Mono',monospace;font-size:10px;color:var(--text4);text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px}
+.info-card .value{font-size:14px;color:var(--text2);font-weight:500}
+footer{background:var(--navy);padding:32px;text-align:center;font-size:12px;color:#5a7a96}
+footer a{color:var(--gold)}
+.nav-links{display:flex;align-items:center;gap:20px}.nl{font-size:13px;font-weight:500;color:var(--text3);transition:color .2s;padding:4px;text-decoration:none}.nl:hover{color:var(--navy)}
+.nav-dd{position:relative}.nav-dd .nl{display:inline-flex;align-items:center;gap:4px}
+.dd-menu{display:none;position:absolute;top:calc(100% + 8px);left:-12px;background:#fff;border:1px solid var(--border);border-radius:10px;padding:8px 0;min-width:210px;box-shadow:0 8px 30px rgba(15,31,61,.1)}
+.dd-menu::before{content:'';position:absolute;top:-10px;left:0;right:0;height:10px}
+.nav-dd:hover .dd-menu{display:block}
+.dd-menu a{display:block;padding:8px 18px;font-size:13px;font-weight:500;color:var(--text2);transition:color .2s,background .2s}
+.dd-menu a:hover{color:var(--navy);background:var(--cream)}
+.visual-flow{background:#fff;border:1px solid var(--border);border-radius:16px;padding:36px 32px;margin:0 0 56px}
+.visual-flow h3{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--navy);text-align:center;margin-bottom:28px}
+.vf-cols{display:grid;grid-template-columns:1fr 1fr;gap:0;position:relative}
+.vf-cols::before{content:'';position:absolute;left:50%;top:0;bottom:0;border-left:2px dashed var(--border)}
+.vf-col{padding:0 24px}
+.vf-label{text-align:center;padding:10px 20px;border-radius:10px;font-weight:600;font-size:14px;margin-bottom:20px}
+.vf-label.old{background:#f5f3ef;color:var(--text2);border:1px solid var(--border)}
+.vf-label.new{background:#ede8f5;color:#5b3e9e;border:1px solid #d4c8ea}
+.vf-step{text-align:center;padding:14px 16px;border-radius:10px;margin-bottom:8px;font-size:13px}
+.vf-step strong{display:block;font-size:14px;margin-bottom:2px}
+.vf-step.neutral{background:#f5f3ef;border:1px solid var(--border);color:var(--text2)}
+.vf-step.warm{background:#fef9ed;border:1px solid #f0e0a0;color:var(--text2)}
+.vf-step.accent{background:#fdf0f0;border:1px solid #f0c8c8;color:#a04040}
+.vf-step.good{background:#edf7f0;border:1px solid #b8e0c0;color:#2a6040}
+.vf-step.info{background:#ede8f5;border:1px solid #d4c8ea;color:#5b3e9e}
+.vf-arrow{text-align:center;font-size:18px;color:var(--text4);margin:4px 0}
+.vf-summary{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:24px}
+.vf-summary-box{text-align:center;padding:16px;border-radius:12px;font-size:13px}
+.vf-summary-box strong{display:block;font-size:14px;margin-bottom:4px}
+.vf-summary-box.green{background:#edf7f0;border:1px solid #b8e0c0;color:#2a6040}
+.vf-summary-box.purple{background:#ede8f5;border:1px solid #d4c8ea;color:#5b3e9e}
+.vf-conclusion{background:#ede8f5;border-radius:12px;padding:20px 24px;text-align:center;margin-top:20px;font-size:14px;color:var(--text2)}
+.vf-conclusion strong{color:var(--navy);display:block;font-size:15px;margin-bottom:4px}
+.platform-tabs{display:flex;gap:8px;margin:16px 0 12px;flex-wrap:wrap}
+.platform-tab{padding:6px 16px;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer;border:1.5px solid var(--border);background:#fff;color:var(--text3);transition:all .2s}
+.platform-tab.active{background:var(--navy);color:#fff;border-color:var(--navy)}
+.platform-content{display:none;margin-top:8px}
+.platform-content.active{display:block}
+.copy-box{background:#edf7f0;border:1px solid #b8e0c0;border-radius:10px;padding:20px 24px;margin:20px 0;position:relative}
+.copy-box p{font-size:14px;color:var(--text2);line-height:1.7;margin:0}
+.copy-btn{position:absolute;top:12px;right:12px;background:var(--navy);color:#fff;border:none;padding:6px 14px;border-radius:7px;font-size:11px;font-weight:600;cursor:pointer}
+@media(max-width:640px){.wrap{padding:48px 20px 60px}.info-grid{grid-template-columns:1fr}.code-block{padding:16px 18px;font-size:12px}.vf-cols{grid-template-columns:1fr;gap:24px}.vf-cols::before{display:none}.vf-col{padding:0}.vf-summary{grid-template-columns:1fr}.visual-flow{padding:24px 18px}.platform-tabs{gap:6px}.platform-tab{padding:5px 12px;font-size:11px}}
+@media(max-width:600px){.nav-links{display:none}.mob-right{display:flex}}
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "How to install your GEO files on your website",
+  "description": "Step-by-step guide to install GEO optimization files on WordPress, Webflow, Shopify or any website.",
+  "url": "https://geoptim.io/en/guide/installation",
+  "datePublished": "2026-03-16",
+  "author": {"@type": "Organization", "name": "Geoptim", "url": "https://geoptim.io"},
+  "publisher": {"@type": "Organization", "name": "Geoptim", "url": "https://geoptim.io"}
+}
+</script>
+</head>
+<body>
+<nav>
+  <div class="ni">
+    <a href="/en/" class="logo" style="text-decoration:none"><span class="logo-dot"></span>Geoptim</a>
+    <div class="nav-links">
+      <div class="nav-dd">
+        <a href="/en/guide/llms-txt" class="nl">GEO Guide <svg width="10" height="10" viewBox="0 0 10 10" style="margin-top:1px"><path d="M2 4l3 3 3-3" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <div class="dd-menu">
+          <a href="/en/guide/llms-txt">llms.txt file</a>
+          <a href="/en/guide/robots-txt">robots.txt file</a>
+          <a href="/en/guide/schema-org">Schema.org JSON-LD</a>
+          <a href="/en/guide/faq-geo">GEO-optimized FAQ</a>
+          <a href="/en/guide/installation">Installation guide</a>
+        </div>
+      </div>
+      <a href="/en/pricing" class="nl">Pricing</a>
+      <a href="/en/faq" class="nl">FAQ</a>
+      <a href="/en/about" class="nl">About</a>
+      <a href="/en/blog" class="nl">Blog</a>
+      <a href="/guide/installation" class="nl" style="font-size:12px">FR</a>
+      <a href="/en/" class="btn-nav">Analyze my site &rarr;</a>
+    </div>
+    <div class="mob-right">
+      <a href="/en/" class="btn-nav" style="font-size:12px;padding:9px 16px">Analyze my site &rarr;</a>
+      <button class="burger" id="burgerBtn" aria-label="Menu"><span></span></button>
+    </div>
+    <div class="mob-menu" id="mobMenu">
+      <span class="mob-group-label">GEO Guide</span>
+      <a href="/en/guide/llms-txt">llms.txt file</a>
+      <a href="/en/guide/robots-txt">robots.txt file</a>
+      <a href="/en/guide/schema-org">Schema.org JSON-LD</a>
+      <a href="/en/guide/faq-geo">GEO-optimized FAQ</a>
+      <a href="/en/guide/installation">Installation guide</a>
+      <span class="mob-group-label" style="margin-top:4px">Navigation</span>
+      <a href="/en/pricing">Pricing</a>
+      <a href="/en/faq">FAQ</a>
+      <a href="/en/about">About</a>
+      <a href="/en/blog">Blog</a>
+      <span class="mob-group-label" style="margin-top:4px">Language</span>
+      <a href="/guide/installation">Francais</a>
+    </div>
+  </div>
+</nav>
+<script>
+var b=document.getElementById('burgerBtn'),m=document.getElementById('mobMenu');
+b.onclick=function(){b.classList.toggle('open');m.classList.toggle('open')};
+</script>
+
+<div class="wrap">
+  <div class="tag">GEO Guide</div>
+  <h1>How to install your GEO files</h1>
+  <p class="lead">You have received your optimization files. Here is how to deploy them on your website, step by step, whether you use WordPress, Webflow, Shopify or a classic hosting.</p>
+
+  <div class="visual-flow">
+    <h3>4 files, 4 locations</h3>
+    <div class="info-grid" style="grid-template-columns:1fr 1fr">
+      <div class="info-card">
+        <div class="label">robots.txt</div>
+        <div class="value">Site root<br><code style="font-size:11px;color:var(--gold)">yoursite.com/robots.txt</code></div>
+      </div>
+      <div class="info-card">
+        <div class="label">llms.txt</div>
+        <div class="value">Site root<br><code style="font-size:11px;color:var(--gold)">yoursite.com/llms.txt</code></div>
+      </div>
+      <div class="info-card">
+        <div class="label">Schema.org JSON-LD</div>
+        <div class="value">In the <code style="font-size:11px;color:var(--gold)">&lt;head&gt;</code> of your homepage</div>
+      </div>
+      <div class="info-card">
+        <div class="label">FAQ page</div>
+        <div class="value">New page on your site<br><code style="font-size:11px;color:var(--gold)">yoursite.com/faq</code></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section" id="sec-robots">
+    <h2>1. Install the robots.txt file</h2>
+    <p>The robots.txt file must be placed at the root of your website. It is the first file that AI crawlers check.</p>
+    <div class="platform-tabs">
+      <span class="platform-tab active" data-platform="ftp" onclick="switchTab('sec-robots','ftp')">Classic hosting (FTP)</span>
+      <span class="platform-tab" data-platform="wp" onclick="switchTab('sec-robots','wp')">WordPress</span>
+      <span class="platform-tab" data-platform="wf" onclick="switchTab('sec-robots','wf')">Webflow</span>
+      <span class="platform-tab" data-platform="sh" onclick="switchTab('sec-robots','sh')">Shopify</span>
+    </div>
+    <div class="platform-content active" id="sec-robots-ftp">
+      <p>Connect to your hosting via an FTP client (FileZilla, Cyberduck). Navigate to the root folder of your site (often <code>public_html/</code> or <code>www/</code>). Upload the <strong>robots.txt</strong> file at the root. If one already exists, replace it.</p>
+      <p>Verify: open <code>yoursite.com/robots.txt</code> in your browser.</p>
+    </div>
+    <div class="platform-content" id="sec-robots-wp">
+      <p>Two options:</p>
+      <ul>
+        <li><strong>If using Yoast SEO:</strong> Yoast &gt; Tools &gt; File Editor &gt; robots.txt. Paste content and save.</li>
+        <li><strong>If using RankMath:</strong> RankMath &gt; General Settings &gt; Edit robots.txt.</li>
+        <li><strong>Otherwise:</strong> upload via FTP to the WordPress root folder (same level as <code>wp-config.php</code>).</li>
+      </ul>
+    </div>
+    <div class="platform-content" id="sec-robots-wf">
+      <p>In project settings: <strong>Project Settings &gt; SEO &gt; Robots.txt</strong>. Paste the generated content and publish the site.</p>
+    </div>
+    <div class="platform-content" id="sec-robots-sh">
+      <p>Shopify doesn't allow direct robots.txt editing from the interface. Go to <strong>Theme &gt; Edit Code &gt; Templates &gt; robots.txt.liquid</strong>. Edit the content according to the generated rules.</p>
+    </div>
+  </div>
+
+  <div class="section" id="sec-llms">
+    <h2>2. Install the llms.txt file</h2>
+    <p>The llms.txt file must also be placed at the root of your site. It is the file that AI reads first to understand your business.</p>
+    <div class="platform-tabs">
+      <span class="platform-tab active" data-platform="ftp" onclick="switchTab('sec-llms','ftp')">Classic hosting (FTP)</span>
+      <span class="platform-tab" data-platform="wp" onclick="switchTab('sec-llms','wp')">WordPress</span>
+      <span class="platform-tab" data-platform="wf" onclick="switchTab('sec-llms','wf')">Webflow</span>
+      <span class="platform-tab" data-platform="sh" onclick="switchTab('sec-llms','sh')">Shopify</span>
+    </div>
+    <div class="platform-content active" id="sec-llms-ftp">
+      <p>Same procedure as robots.txt. Upload <strong>llms.txt</strong> to the root via FTP.</p>
+      <p>Verify: <code>yoursite.com/llms.txt</code> should display the Markdown content.</p>
+    </div>
+    <div class="platform-content" id="sec-llms-wp">
+      <p>Upload the file via FTP to the WordPress root folder (same level as <code>wp-config.php</code>). Important: don't upload it in <code>/wp-content/</code> but at the root.</p>
+      <p>Verify that <code>yoursite.com/llms.txt</code> works.</p>
+    </div>
+    <div class="platform-content" id="sec-llms-wf">
+      <p>Webflow doesn't allow placing files at the root. Solution: host the file on a static hosting service (e.g., Netlify Drop, GitHub Pages) on a subdomain, or use a redirect rule in Webflow settings.</p>
+    </div>
+    <div class="platform-content" id="sec-llms-sh">
+      <p>Shopify doesn't allow placing arbitrary files at the root. Create a dedicated page at <code>/pages/llms-txt</code> with plain text content, or use a third-party service with redirection.</p>
+    </div>
+  </div>
+
+  <div class="section" id="sec-schema">
+    <h2>3. Add the Schema.org markup</h2>
+    <p>The Schema.org JSON-LD code must be inserted in the <code>&lt;head&gt;</code> tag of your homepage. It is an invisible <code>&lt;script&gt;</code> block for visitors but read by Google and AI.</p>
+    <div class="platform-tabs">
+      <span class="platform-tab active" data-platform="ftp" onclick="switchTab('sec-schema','ftp')">Classic hosting (HTML)</span>
+      <span class="platform-tab" data-platform="wp" onclick="switchTab('sec-schema','wp')">WordPress</span>
+      <span class="platform-tab" data-platform="wf" onclick="switchTab('sec-schema','wf')">Webflow</span>
+      <span class="platform-tab" data-platform="sh" onclick="switchTab('sec-schema','sh')">Shopify</span>
+    </div>
+    <div class="platform-content active" id="sec-schema-ftp">
+      <p>Open your homepage HTML file (often <code>index.html</code>). Paste the <code>&lt;script type="application/ld+json"&gt;...&lt;/script&gt;</code> block just before the <code>&lt;/head&gt;</code> tag. Save and upload.</p>
+    </div>
+    <div class="platform-content" id="sec-schema-wp">
+      <p>Recommended plugin: <strong>WPCode</strong> (Insert Headers and Footers). Install the plugin, go to WPCode &gt; Header &amp; Footer &gt; Header. Paste the script block.</p>
+      <p>Alternatively with RankMath: RankMath &gt; Schema (on homepage). Or with Yoast: use a companion plugin for custom JSON-LD.</p>
+    </div>
+    <div class="platform-content" id="sec-schema-wf">
+      <p><strong>Project Settings &gt; Custom Code &gt; Head Code.</strong> Paste the <code>&lt;script type="application/ld+json"&gt;</code> block in the "Head Code" field. Publish the site.</p>
+    </div>
+    <div class="platform-content" id="sec-schema-sh">
+      <p><strong>Theme &gt; Edit Code &gt; Layout &gt; theme.liquid.</strong> Paste the script block just before the <code>&lt;/head&gt;</code> tag. Save.</p>
+    </div>
+  </div>
+
+  <div class="section" id="sec-faq">
+    <h2>4. Create the FAQ page</h2>
+    <p>The FAQ is a complete HTML file to host as a new page on your site. It already contains the FAQPage Schema.org markup.</p>
+    <div class="platform-tabs">
+      <span class="platform-tab active" data-platform="ftp" onclick="switchTab('sec-faq','ftp')">Classic hosting (HTML)</span>
+      <span class="platform-tab" data-platform="wp" onclick="switchTab('sec-faq','wp')">WordPress</span>
+      <span class="platform-tab" data-platform="wf" onclick="switchTab('sec-faq','wf')">Webflow</span>
+      <span class="platform-tab" data-platform="sh" onclick="switchTab('sec-faq','sh')">Shopify</span>
+    </div>
+    <div class="platform-content active" id="sec-faq-ftp">
+      <p>Create a <code>faq.html</code> file in your site folder. Paste the generated content. Add a link to this page in your navigation.</p>
+      <p>Verify: <code>yoursite.com/faq</code> should display the page.</p>
+    </div>
+    <div class="platform-content" id="sec-faq-wp">
+      <p>Pages &gt; Add New. Switch to HTML/Code editor (not visual). Paste the generated HTML. Publish. Add to your menu (Appearance &gt; Menus). The FAQPage Schema.org markup is already included.</p>
+    </div>
+    <div class="platform-content" id="sec-faq-wf">
+      <p>Pages &gt; Add. Add an <strong>"Embed"</strong> component to the page. Paste the HTML content. Publish. Add the page to your navigation.</p>
+    </div>
+    <div class="platform-content" id="sec-faq-sh">
+      <p>Online Store &gt; Pages &gt; Add page. Switch to HTML mode in the editor. Paste content. Publish. Add the page to your navigation menu (Navigation &gt; Main menu).</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>Have your developer handle it</h2>
+    <p>If you prefer not to handle the files yourself, forward this message to your web developer or agency:</p>
+    <div class="copy-box">
+      <button class="copy-btn" onclick="copyMsg()">Copy</button>
+      <p id="prestaMsg">Hi,
+
+I would like to integrate 4 GEO optimization files on my website [SITE URL].
+
+Here are the files to install:
+
+1. robots.txt - place at the site root (replace existing if needed)
+2. llms.txt - place at the site root (new file)
+3. Schema.org JSON-LD - paste in the &lt;head&gt; of the homepage (&lt;script type="application/ld+json"&gt; block)
+4. FAQ page - create as a new page accessible from /faq
+
+The files are attached to this email / available in my Geoptim account.
+
+Please confirm once they are live.</p>
+    </div>
+  </div>
+
+  <div class="cta-box">
+    <h2>Don't have your files yet?</h2>
+    <p>Analyze your site for free and get your personalized GEO optimization files.</p>
+    <a href="/en/" class="btn-gold">Analyze my site &rarr;</a>
+  </div>
+</div>
+
+<footer>
+  <p>&copy; 2026 Geoptim &middot; <a href="/en/">Home</a> &middot; <a href="/en/pricing">Pricing</a> &middot; <a href="/en/faq">FAQ</a> &middot; <a href="/en/#sec-legal">Legal</a></p>
+</footer>
+
+<script>
+function switchTab(section, platform) {
+  var tabs = document.querySelectorAll('#' + section + ' .platform-tab');
+  var contents = document.querySelectorAll('#' + section + ' .platform-content');
+  tabs.forEach(function(t) { t.classList.remove('active'); });
+  contents.forEach(function(c) { c.classList.remove('active'); });
+  document.querySelector('#' + section + ' [data-platform="' + platform + '"]').classList.add('active');
+  document.querySelector('#' + section + '-' + platform).classList.add('active');
+}
+function copyMsg() {
+  var text = document.getElementById('prestaMsg').textContent;
+  navigator.clipboard.writeText(text);
+  var btn = document.querySelector('.copy-btn');
+  btn.textContent = 'Copied!';
+  setTimeout(function() { btn.textContent = 'Copy'; }, 2000);
+}
+</script>
+</body>
+</html>
