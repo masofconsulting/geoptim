@@ -98,6 +98,7 @@ No subscription. No sign-up required for analysis. One-time payment for files. S
 - **robots.txt file: the gateway for AI to your site** — https://geoptim.io/en/guide/robots-txt
 - **Schema.org JSON-LD: your business's digital identity card** — https://geoptim.io/en/guide/schema-org
 - **GEO-optimized FAQ: the content AI loves to cite** — https://geoptim.io/en/guide/faq-geo
+- **How to integrate your GEO files on your website** — https://geoptim.io/en/guide/installation
 
 ---
 

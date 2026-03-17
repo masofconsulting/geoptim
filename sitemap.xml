@@ -294,4 +294,34 @@
     <priority>0.8</priority>
   </url>
 
+  <url>
+    <loc>https://geoptim.io/guide/installation</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://geoptim.io/guide/installation"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://geoptim.io/en/guide/installation"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://geoptim.io/guide/installation"/>
+    <lastmod>2026-03-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://geoptim.io/en/guide/installation</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://geoptim.io/guide/installation"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://geoptim.io/en/guide/installation"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://geoptim.io/guide/installation"/>
+    <lastmod>2026-03-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://geoptim.io/en/blog</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://geoptim.io/blog"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://geoptim.io/en/blog"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://geoptim.io/blog"/>
+    <lastmod>2026-03-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
 </urlset>

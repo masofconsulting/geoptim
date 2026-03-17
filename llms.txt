@@ -104,6 +104,7 @@ Aucun abonnement. Aucune inscription requise pour l'analyse. Paiement unique pou
 - **Fichier robots.txt : la porte d'entree des IA vers votre site** — https://geoptim.io/guide/robots-txt
 - **Schema.org JSON-LD : la carte d'identite numerique de votre entreprise** — https://geoptim.io/guide/schema-org
 - **FAQ optimisee GEO : le contenu que les IA adorent citer** — https://geoptim.io/guide/faq-geo
+- **Comment integrer vos fichiers GEO sur votre site** — https://geoptim.io/guide/installation
 
 ---
 
