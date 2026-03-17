@@ -131,8 +131,9 @@ h1 em{font-style:normal;background:linear-gradient(135deg,#a8862e,#c9a84c);-webk
 #urlInput::placeholder{color:rgba(0,0,0,.25)}
 #analyzeBtn{background:linear-gradient(135deg,#c9a84c,#a8862e);padding:0 32px;font-weight:700;font-size:15px;color:#fff;white-space:nowrap;transition:all .25s}
 #analyzeBtn:hover{box-shadow:0 4px 16px rgba(201,168,76,.3)}
-.trust{display:flex;gap:28px;margin-top:24px;flex-wrap:wrap}
-.trust span{font-size:13px;color:rgba(26,23,20,.4);font-weight:500}
+.trust{display:flex;gap:28px;margin-top:24px;flex-wrap:wrap;max-width:540px;justify-content:center}
+.trust span{font-size:13px;color:rgba(26,23,20,.4);font-weight:500;display:inline-flex;align-items:center;gap:6px}
+.trust span::before{content:'';display:inline-block;width:14px;height:14px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23b8960c' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E") no-repeat center;flex-shrink:0}
 /* Hero visual */
 .hv{background:#fff;border:2px solid rgba(201,168,76,.2);border-radius:20px;padding:0;box-shadow:0 24px 64px rgba(26,23,20,.1),0 4px 12px rgba(201,168,76,.06);position:relative;overflow:hidden}
 .hv::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,#c9a84c,#e8d08c,#c9a84c)}
@@ -218,9 +219,9 @@ h1 em{font-style:normal;background:linear-gradient(135deg,#a8862e,#c9a84c);-webk
 
 /* BLOG */
 .blog-g{display:grid;grid-template-columns:repeat(2,1fr);gap:24px}
-.ac{display:block;background:#fff;border:1px solid var(--border);border-radius:18px;overflow:hidden;cursor:pointer;transition:all .3s cubic-bezier(.16,1,.3,1);text-decoration:none;color:inherit}
+.ac{display:flex;flex-direction:column;background:#fff;border:1px solid var(--border);border-radius:18px;overflow:hidden;cursor:pointer;transition:all .3s cubic-bezier(.16,1,.3,1);text-decoration:none;color:inherit}
 .ac:hover{box-shadow:0 12px 40px rgba(15,31,61,.1);transform:translateY(-4px);border-color:var(--gold)}
-.ab{padding:30px 30px 22px}
+.ab{padding:30px 30px 22px;flex:1}
 .at{font-size:10px;font-weight:600;color:var(--gold2);text-transform:uppercase;letter-spacing:.08em;background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.18);padding:4px 12px;border-radius:999px;display:inline-block;margin-bottom:16px}
 .ah{font-size:19px;font-weight:800;color:var(--navy);line-height:1.3;margin-bottom:12px;letter-spacing:-.01em}
 .ae{font-size:14px;color:var(--text3);line-height:1.7;font-weight:400}
@@ -847,7 +848,7 @@ footer{background:var(--navy);padding:48px 40px 28px}
             <div><div class="rv-name">Thomas M.</div><div class="rv-role">Fondateur · Agence SEO Lyon</div></div>
           </div>
           <div class="rv-stars">★★★★★</div>
-          <p class="rv-txt">« Outil indispensable en 2026. Je l'ai intégré dans ma checklist d'audit client. Le robots.txt généré est irréprochable, le llms.txt personnalisé fait exactement ce qu'il faut. ROI immédiat pour 29 €. »</p>
+          <p class="rv-txt">« Outil indispensable en 2026. Je l'ai intégré dans ma checklist d'audit client. Le robots.txt généré est irréprochable, le llms.txt personnalisé fait exactement ce qu'il faut. ROI immédiat pour 49 €. »</p>
           <div class="rv-date">Janvier 2026 · recommande à tous ses clients</div>
         </div>
         <div class="rv-c">
@@ -865,7 +866,7 @@ footer{background:var(--navy);padding:48px 40px 28px}
             <div><div class="rv-name">Antoine R.</div><div class="rv-role">Consultant stratégie digitale</div></div>
           </div>
           <div class="rv-stars">★★★★☆</div>
-          <p class="rv-txt">« Très bon outil, diagnostic précis et fichiers bien construits. J'aurais aimé une option pour régénérer un seul fichier sans repayer, mais pour 29 € le pack complet, difficile de se plaindre. »</p>
+          <p class="rv-txt">« Très bon outil, diagnostic précis et fichiers bien construits. J'aurais aimé une option pour régénérer un seul fichier sans repayer, mais pour 49 € le pack complet, difficile de se plaindre. »</p>
           <div class="rv-date">Janvier 2026 · recommande</div>
         </div>
         <div class="rv-c">
@@ -1268,7 +1269,7 @@ footer{background:var(--navy);padding:48px 40px 28px}
       <div class="l-block">
         <h2 style="margin-top:0">Article 11. Médiation</h2>
         <p>Conformément à l'article L612-1 du Code de la consommation, le Client peut recourir gratuitement à un médiateur de la consommation en cas de litige non résolu avec le Prestataire.</p>
-        <p>Médiateur compétent : [NOM DU MÉDIATEUR], [URL du médiateur]<br>
+        <p>Médiateur compétent : CM2C (Centre de la Médiation de la Consommation de Conciliateurs de Justice), <a href="https://www.cm2c.net" target="_blank" rel="noopener" style="color:var(--gold)">www.cm2c.net</a><br>
         Contact Prestataire : <a href="mailto:contact@geoptim.io" style="color:var(--gold)">contact@geoptim.io</a></p>
       </div>
     </div>
