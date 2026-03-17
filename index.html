@@ -1602,6 +1602,7 @@ function startAnalysis() {
     var info  = results[1];
 
     result = {
+      analysisUrl:     url,
       siteName:        info.siteName        || '',
       siteDescription: info.siteDescription || '',
       siteType:        info.siteType        || '',
@@ -2346,6 +2347,7 @@ function getFilePurchaseInfo(fileKey, analysisUrl) {
 
 function getCurrentUrl() {
   var v = document.getElementById('urlInput').value.trim();
+  if (!v && result && result.analysisUrl) return result.analysisUrl;
   return v.indexOf('http') === 0 ? v : 'https://' + v;
 }
 
@@ -2966,6 +2968,7 @@ function processPayment() {
   // Restaurer l'état
   document.getElementById('urlInput').value = savedUrl;
   result = savedResult;
+  result.analysisUrl = savedUrl;
   result.files = result.files || { robots:'', llms:'', schema:'', faq:'' };
   renderResults(savedUrl);
   goPage('results');
