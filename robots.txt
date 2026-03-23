@@ -1,5 +1,7 @@
 # robots.txt — geoptim.io
-# Optimisé GEO — 08/03/2026
+# Optimise GEO — 23/03/2026
+
+# --- Moteurs de recherche traditionnels ---
 
 User-agent: Googlebot
 Allow: /
@@ -13,7 +15,17 @@ Allow: /
 User-agent: YandexBot
 Allow: /
 
-# OpenAI (ChatGPT, SearchGPT)
+User-agent: Baiduspider
+Allow: /
+
+User-agent: Sogou
+Allow: /
+
+User-agent: NaverBot
+Allow: /
+
+# --- OpenAI (ChatGPT, SearchGPT) ---
+
 User-agent: GPTBot
 Allow: /
 
@@ -23,7 +35,8 @@ Allow: /
 User-agent: ChatGPT-User
 Allow: /
 
-# Anthropic (Claude)
+# --- Anthropic (Claude) ---
+
 User-agent: ClaudeBot
 Allow: /
 
@@ -33,64 +46,95 @@ Allow: /
 User-agent: anthropic-ai
 Allow: /
 
-# Google (Gemini, AI Overviews)
+# --- Google (Gemini, AI Overviews) ---
+
 User-agent: Google-Extended
 Allow: /
 
-User-agent: GeminiBot
+User-agent: GoogleOther
 Allow: /
 
-# Microsoft (Copilot)
+# --- Microsoft (Copilot, Bing Chat) ---
+
 User-agent: Copilot-Bot
 Allow: /
 
 User-agent: bingbot-chat
 Allow: /
 
-# Perplexity AI
+# --- Perplexity AI ---
+
 User-agent: PerplexityBot
 Allow: /
 
-# Mistral AI
+# --- Mistral AI ---
+
 User-agent: MistralBot
 Allow: /
 
 User-agent: mistral-ai
 Allow: /
 
-# xAI (Grok)
+# --- xAI (Grok) ---
+
 User-agent: xAI-Bot
 Allow: /
 
 User-agent: grok
 Allow: /
 
-# Meta
+# --- Meta (Meta AI) ---
+
 User-agent: Meta-ExternalAgent
 Allow: /
 
 User-agent: Meta-ExternalFetcher
 Allow: /
 
-# Apple
+User-agent: FacebookBot
+Allow: /
+
+# --- Apple (Siri, Apple Intelligence) ---
+
 User-agent: Applebot
 Allow: /
 
 User-agent: Applebot-Extended
 Allow: /
 
-# DeepSeek
+# --- DeepSeek ---
+
 User-agent: DeepSeekBot
 Allow: /
 
 User-agent: deepseek-ai
 Allow: /
 
-# Cohere
+# --- Cohere ---
+
 User-agent: cohere-ai
 Allow: /
 
-# Autres
+# --- Brave Search & AI ---
+
+User-agent: BraveBot
+Allow: /
+
+# --- Phind ---
+
+User-agent: PhindBot
+Allow: /
+
+# --- AI2 (Allen Institute) ---
+
+User-agent: AI2Bot
+Allow: /
+
+User-agent: Ai2Bot-Dolma
+Allow: /
+
+# --- Autres crawlers IA et indexation ---
+
 User-agent: YouBot
 Allow: /
 
@@ -109,7 +153,39 @@ Allow: /
 User-agent: DuckAssistBot
 Allow: /
 
+User-agent: Timpibot
+Allow: /
+
+User-agent: Webzio-Extended
+Allow: /
+
+User-agent: img2dataset
+Allow: /
+
+User-agent: omgili
+Allow: /
+
+User-agent: PetalBot
+Allow: /
+
+# --- Catch-all : autoriser tous les autres ---
+
+User-agent: *
+Allow: /
+
+# --- Pages internes protegees ---
+
+Disallow: /.netlify/
+Disallow: /_proto
+Disallow: /_anim
+
+# --- Sitemap et fichiers IA ---
+
 Sitemap: https://geoptim.io/sitemap.xml
 
-# Fichier llms.txt : https://geoptim.io/llms.txt
-# Optimisation GEO par Geoptim.io — https://geoptim.io
+# Fichiers llms.txt (standard GEO)
+# FR : https://geoptim.io/llms.txt
+# FR complet : https://geoptim.io/llms-full.txt
+# EN : https://geoptim.io/en/llms.txt
+# EN complet : https://geoptim.io/en/llms-full.txt
+# Optimisation GEO par Geoptim.io -- https://geoptim.io

@@ -1,10 +1,13 @@
 # Geoptim
 
-> Outil SaaS d'analyse et d'optimisation GEO (Generative Engine Optimization) — rend les sites web visibles auprès de ChatGPT, Claude, Perplexity, Gemini, Grok, Mistral Le Chat, DeepSeek et Microsoft Copilot.
+> Outil SaaS d'analyse et d'optimisation GEO (Generative Engine Optimization) -- rend les sites web visibles aupres de ChatGPT, Claude, Perplexity, Gemini, Grok, Mistral Le Chat, DeepSeek et Microsoft Copilot.
+
+- Documentation complete : https://geoptim.io/llms-full.txt
+- English version: https://geoptim.io/en/llms.txt
 
 ---
 
-## Présentation
+## Presentation
 
 Geoptim analyse la visibilité GEO d'un site web et génère automatiquement 4 fichiers d'optimisation personnalisés. L'outil détecte les problèmes techniques qui empêchent les crawlers IA de lire un site, et produit les fichiers nécessaires pour être cité par les principaux assistants IA.
 

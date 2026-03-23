@@ -1,6 +1,9 @@
 # Geoptim
 
-> SaaS tool for GEO (Generative Engine Optimization) analysis and optimization — makes websites visible to ChatGPT, Claude, Perplexity, Gemini, Grok, Mistral Le Chat, DeepSeek and Microsoft Copilot.
+> SaaS tool for GEO (Generative Engine Optimization) analysis and optimization -- makes websites visible to ChatGPT, Claude, Perplexity, Gemini, Grok, Mistral Le Chat, DeepSeek and Microsoft Copilot.
+
+- Full documentation: https://geoptim.io/en/llms-full.txt
+- Version francaise : https://geoptim.io/llms.txt
 
 ---
 
@@ -89,6 +92,12 @@ No subscription. No sign-up required for analysis. One-time payment for files. S
 - **How ChatGPT Chooses Its Sources — And How to Be One** — https://geoptim.io/en/blog/chatgpt-sources
 - **The llms.txt File: The New robots.txt for the AI Era** — https://geoptim.io/en/blog/llms-txt
 - **AI Ready: 5 Criteria for a Website Truly Visible to AI** — https://geoptim.io/en/blog/ai-ready
+- **Schema.org: The Complete Guide to Being Understood by AI** — https://geoptim.io/blog/schema-org-guide
+- **robots.txt and AI: The Mistakes That Make Your Site Invisible** — https://geoptim.io/blog/robots-txt-ia
+- **Writing Content That AI Cites: The 7 Golden Rules** — https://geoptim.io/blog/contenu-ia-optimise
+- **Authority and LLMs: Why Being Known Is No Longer Enough** — https://geoptim.io/blog/notoriete-llm
+- **Why a FAQ Page Is Your Best GEO Asset** — https://geoptim.io/blog/faq-seo-ia
+- **Local GEO: Getting Your Business Cited by AI in Your City** — https://geoptim.io/blog/geo-local
 
 ---
 
