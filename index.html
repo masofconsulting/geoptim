@@ -226,6 +226,39 @@ h1 em{font-style:normal;background:linear-gradient(135deg,#a8862e,#c9a84c);-webk
 .ad{font-size:12px;color:var(--text4)}
 .ar{font-size:12px;color:var(--navy);font-weight:600}
 
+/* SEO LONG-TAIL */
+.seo-s{max-width:1200px;margin:0 auto;padding:88px 40px}
+.seo-s h2{font-size:clamp(28px,3.5vw,40px);font-weight:900;color:var(--navy);line-height:1.15;margin-bottom:16px;letter-spacing:-.03em}
+.seo-intro{font-size:16px;color:var(--text3);line-height:1.75;max-width:720px;margin-bottom:48px}
+.seo-grid{display:grid;grid-template-columns:1fr 1fr;gap:32px}
+.seo-block h3{font-size:17px;font-weight:700;color:var(--navy);margin-bottom:10px;line-height:1.3}
+.seo-block p{font-size:14px;color:var(--text3);line-height:1.75;margin-bottom:8px}
+.seo-block a{color:var(--gold2);font-weight:600;font-size:13px;text-decoration:none;transition:color .2s}
+.seo-block a:hover{color:var(--navy)}
+/* STATS */
+.stats-s{background:var(--navy);padding:56px 40px}
+.stats-g{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:24px;text-align:center}
+.stat-n{font-size:clamp(28px,3.5vw,42px);font-weight:900;color:var(--gold);line-height:1;margin-bottom:6px}
+.stat-l{font-size:13px;color:rgba(255,255,255,.45);line-height:1.5}
+/* SECTORS */
+.sectors-s{max-width:1200px;margin:0 auto;padding:88px 40px}
+.sectors-g{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.sector-c{background:#fff;border:1px solid rgba(0,0,0,.06);border-radius:14px;padding:24px 22px;transition:all .3s cubic-bezier(.16,1,.3,1);box-shadow:0 2px 8px rgba(0,0,0,.03)}
+.sector-c:hover{border-color:var(--gold);transform:translateY(-3px);box-shadow:0 8px 32px rgba(15,31,61,.08)}
+.sector-ic{font-size:24px;margin-bottom:12px}
+.sector-t{font-size:15px;font-weight:700;color:var(--navy);margin-bottom:6px}
+.sector-d{font-size:13px;color:var(--text3);line-height:1.65}
+/* FAQ LINK */
+.faq-more{text-align:center;margin-top:28px}
+.faq-more a{font-size:14px;font-weight:600;color:var(--gold2);text-decoration:none;transition:color .2s}
+.faq-more a:hover{color:var(--navy)}
+/* BLOG STATIC */
+.blog-links{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}
+.blog-links a{font-size:13px;font-weight:500;color:var(--text3);background:var(--cream);border:1px solid var(--border);padding:6px 16px;border-radius:999px;text-decoration:none;transition:all .2s}
+.blog-links a:hover{border-color:var(--gold);color:var(--navy)}
+@media(max-width:860px){.seo-grid{grid-template-columns:1fr}.stats-g{grid-template-columns:repeat(2,1fr);gap:32px 24px}.sectors-g{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){.stats-g{grid-template-columns:1fr 1fr}.sectors-g{grid-template-columns:1fr}.seo-s,.sectors-s{padding:56px 20px}.stats-s{padding:40px 20px}}
+
 /* CTA */
 .cta-s{background:var(--navy);padding:80px 40px;text-align:center}
 .cta-s h2{font-size:clamp(26px,4vw,44px);font-weight:900;color:#fff;margin-bottom:18px;letter-spacing:-.03em}
@@ -912,6 +945,116 @@ footer{background:var(--navy);padding:48px 40px 28px}
         <div class="faq-item-ui">
           <button class="faq-q" onclick="toggleFaq(this)"><span>Quelle différence avec une agence SEO ?</span><span class="faq-icon">+</span></button>
           <div class="faq-a">Une agence SEO optimise pour Google. Geoptim optimise pour les assistants IA génératifs : deux choses distinctes et complémentaires.<br><br>Pour 19 à 49 €, Geoptim couvre l'ensemble des fichiers techniques GEO en quelques minutes. Une agence facturerait la même prestation entre 500 et 2 000 €.</div>
+        </div>
+      </div>
+      <div class="faq-more"><a href="/faq">Voir toutes les questions sur le GEO et Geoptim →</a></div>
+    </div>
+  </div>
+
+  <!-- SEO LONG-TAIL CONTENT -->
+  <div class="white-s reveal">
+    <div class="seo-s" style="padding-top:0;padding-bottom:0">
+      <div class="stag">Comprendre le GEO</div>
+      <h2 class="stitle">Pourquoi optimiser votre site pour les IA en 2026</h2>
+      <p class="seo-intro">Le GEO (Generative Engine Optimization) est la discipline qui permet a un site web d'etre cite dans les reponses des assistants IA. Les moteurs de recherche classiques perdent du terrain face a ChatGPT, Claude, Perplexity et Gemini. Voici ce que vous devez savoir pour ne pas rester invisible.</p>
+      <div class="seo-grid">
+        <div class="seo-block">
+          <h3>Comment etre cite par ChatGPT quand un client cherche votre metier</h3>
+          <p>Quand un utilisateur demande a ChatGPT "meilleur avocat droit des societes Paris" ou "agence marketing specialisee e-commerce", le modele s'appuie sur les donnees qu'il a pu indexer. Si votre site bloque GPTBot dans son robots.txt ou ne possede pas de fichier llms.txt, vous n'existez tout simplement pas dans ses reponses.</p>
+          <p>La solution : autoriser les crawlers IA, fournir un llms.txt clair qui decrit votre activite, et structurer vos donnees avec Schema.org JSON-LD. Geoptim genere ces 4 fichiers automatiquement a partir de l'analyse de votre site.</p>
+          <a href="/blog/chatgpt-sources">Comment ChatGPT choisit ses sources →</a>
+        </div>
+        <div class="seo-block">
+          <h3>Pourquoi votre site est invisible dans Perplexity et Claude</h3>
+          <p>Perplexity et Claude utilisent des crawlers specifiques (PerplexityBot, ClaudeBot) pour indexer les sites web. Si ces crawlers sont bloques, ou si votre site ne propose aucune structure lisible par les LLMs, les assistants IA ne peuvent ni vous trouver ni vous recommander.</p>
+          <p>Perplexity priorise les sites qui possedent un fichier llms.txt a la racine du domaine. Moins de 1 % des sites ont adopte ce standard : c'est un avantage concurrentiel immediat pour les premiers adoptants.</p>
+          <a href="/guide/llms-txt">Tout savoir sur le fichier llms.txt →</a>
+        </div>
+        <div class="seo-block">
+          <h3>robots.txt et crawlers IA : la difference entre etre indexe et etre bloque</h3>
+          <p>L'erreur la plus frequente : un robots.txt qui bloque tous les bots avec <code>User-agent: * / Disallow: /</code>. Cette configuration empeche GPTBot, ClaudeBot, PerplexityBot et tous les crawlers IA de lire votre site. Les corrections prennent effet des le prochain crawl, sous 24 a 48 heures.</p>
+          <p>Un robots.txt optimise GEO autorise explicitement plus de 30 crawlers IA tout en bloquant les scrapers indesirables. Geoptim detecte automatiquement votre configuration actuelle et genere un fichier adapte.</p>
+          <a href="/guide/robots-txt">Guide robots.txt pour les IA →</a>
+        </div>
+        <div class="seo-block">
+          <h3>Schema.org JSON-LD : ce que Google AI Overviews lit en premier</h3>
+          <p>Les AI Overviews de Google, les blocs IA qui s'affichent en tete des resultats de recherche, s'appuient fortement sur les donnees structurees Schema.org. Un balisage JSON-LD complet (Organization, FAQPage, Service, LocalBusiness) permet aux IA de comprendre precisement qui vous etes, ce que vous faites et ou vous etes.</p>
+          <p>Les sites qui combinent Schema.org et llms.txt sont 4 a 5 fois plus susceptibles d'etre cites correctement dans les reponses generees par les IA.</p>
+          <a href="/guide/schema-org">Guide Schema.org pour les IA →</a>
+        </div>
+        <div class="seo-block">
+          <h3>GEO vs SEO : deux strategies complementaires</h3>
+          <p>Le SEO optimise pour le clic dans les pages de resultats Google. Le GEO optimise pour la citation dans les reponses generees par les assistants IA. En 2026, les deux strategies sont indispensables : le SEO pour le trafic organique traditionnel, le GEO pour la visibilite dans les reponses de ChatGPT, Claude, Perplexity, Gemini et Grok.</p>
+          <p>La bonne nouvelle : les fichiers GEO (robots.txt, llms.txt, Schema.org) renforcent aussi le SEO classique en ameliorant la structure technique du site.</p>
+          <a href="/blog/geo-vs-seo">GEO vs SEO : l'article complet →</a>
+        </div>
+        <div class="seo-block">
+          <h3>Combien de temps pour apparaitre dans les reponses IA</h3>
+          <p>Les crawlers IA detectent les modifications de votre site sous 24 a 48 heures. L'impact concret sur les citations dans les reponses generees prend generalement 2 a 6 semaines, selon la frequence de crawl et la notoriete existante du domaine.</p>
+          <p>Les resultats sont plus rapides sur Perplexity (qui crawle activement les fichiers llms.txt) et sur les AI Overviews de Google (qui exploitent le Schema.org en temps reel).</p>
+          <a href="/blog/ai-ready">Les 5 criteres d'un site visible par les IA →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STATS -->
+  <div class="stats-s reveal">
+    <div class="stats-g">
+      <div><div class="stat-n">1 sur 3</div><div class="stat-l">recherches passent par une IA en 2026, sans transiter par Google</div></div>
+      <div><div class="stat-n">&lt; 1 %</div><div class="stat-l">des sites possedent un fichier llms.txt, standard lisible par les LLMs</div></div>
+      <div><div class="stat-n">4-5x</div><div class="stat-l">plus de citations pour les sites avec Schema.org + llms.txt combines</div></div>
+      <div><div class="stat-n">24-48h</div><div class="stat-l">pour que les crawlers IA detectent les modifications de votre site</div></div>
+    </div>
+  </div>
+
+  <!-- SECTORS -->
+  <div class="reveal">
+    <div class="sectors-s">
+      <div style="text-align:center;margin-bottom:48px">
+        <div class="stag" style="text-align:center">Pour tous les secteurs</div>
+        <h2 class="stitle stitle-center" style="text-align:center">Le GEO adapte a votre metier</h2>
+      </div>
+      <div class="sectors-g">
+        <div class="sector-c"><div class="sector-ic">&#9878;</div><div class="sector-t">Avocats et cabinets juridiques</div><p class="sector-d">Soyez cite quand un prospect demande "meilleur avocat droit des societes" a ChatGPT. Le llms.txt decrit vos specialites, le Schema.org structure vos coordonnees et domaines d'expertise.</p></div>
+        <div class="sector-c"><div class="sector-ic">&#128200;</div><div class="sector-t">Agences marketing et SEO</div><p class="sector-d">Integrez le GEO dans vos audits clients. Quand Perplexity recommande une agence, c'est celle dont le site est structure pour les LLMs. Proposez un avantage concurrentiel a vos clients.</p></div>
+        <div class="sector-c"><div class="sector-ic">&#128722;</div><div class="sector-t">E-commerce et boutiques en ligne</div><p class="sector-d">Vos produits sont ignores par les AI Overviews de Google ? Le Schema.org Product et le llms.txt permettent aux IA de comprendre et recommander votre catalogue.</p></div>
+        <div class="sector-c"><div class="sector-ic">&#129657;</div><div class="sector-t">Professionnels de sante</div><p class="sector-d">Kinesitherapeutes, dentistes, psychologues : quand un patient demande une recommandation a ChatGPT dans sa ville, le GEO local avec Schema.org LocalBusiness fait la difference.</p></div>
+        <div class="sector-c"><div class="sector-ic">&#127860;</div><div class="sector-t">Restaurants et commerces locaux</div><p class="sector-d">"Meilleur restaurant italien Lyon" demande a une IA : avec le GEO local, votre etablissement apparait dans les recommandations. Horaires, specialites et avis structures pour les LLMs.</p></div>
+        <div class="sector-c"><div class="sector-ic">&#128187;</div><div class="sector-t">SaaS et startups tech</div><p class="sector-d">Claude et Gemini comparent des outils SaaS quotidiennement. Le llms.txt et le Schema.org SoftwareApplication permettent aux IA de citer correctement votre produit dans les comparatifs.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STATIC BLOG/GUIDE LINKS -->
+  <div class="cream-s reveal">
+    <div style="max-width:1200px;margin:0 auto">
+      <div class="stag">Guides et articles</div>
+      <h2 class="stitle">Ressources pour maitriser le GEO</h2>
+      <p style="font-size:15px;color:var(--text3);margin-bottom:24px;max-width:600px">Guides pratiques et articles de fond pour comprendre le GEO et optimiser votre site pour les assistants IA.</p>
+      <div style="margin-bottom:28px">
+        <div style="font-size:13px;font-weight:700;color:var(--text4);text-transform:uppercase;letter-spacing:.08em;margin-bottom:12px">Guides GEO</div>
+        <div class="blog-links">
+          <a href="/guide/llms-txt">Fichier llms.txt</a>
+          <a href="/guide/robots-txt">Fichier robots.txt</a>
+          <a href="/guide/schema-org">Schema.org JSON-LD</a>
+          <a href="/guide/faq-geo">FAQ optimisee GEO</a>
+          <a href="/guide/installation">Integration des fichiers</a>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:13px;font-weight:700;color:var(--text4);text-transform:uppercase;letter-spacing:.08em;margin-bottom:12px">Articles</div>
+        <div class="blog-links">
+          <a href="/blog/geo-vs-seo">GEO vs SEO</a>
+          <a href="/blog/chatgpt-sources">Sources de ChatGPT</a>
+          <a href="/blog/llms-txt">Le fichier llms.txt</a>
+          <a href="/blog/ai-ready">Site AI Ready</a>
+          <a href="/blog/schema-org-guide">Guide Schema.org</a>
+          <a href="/blog/robots-txt-ia">robots.txt et IA</a>
+          <a href="/blog/contenu-ia-optimise">Contenu cite par les IA</a>
+          <a href="/blog/notoriete-llm">Notoriete et LLMs</a>
+          <a href="/blog/faq-seo-ia">FAQ et GEO</a>
+          <a href="/blog/geo-local">GEO local</a>
         </div>
       </div>
     </div>
