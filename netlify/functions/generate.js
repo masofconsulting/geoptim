@@ -1,10 +1,19 @@
+const { checkRateLimit } = require('./lib/rate-limit'); // SECURITY FIX: rate limiting
+
 exports.handler = async (event) => {
   if (event.httpMethod !== "POST") return { statusCode: 405, body: "Method Not Allowed" };
+  // SECURITY FIX: rate limit 5 req/min per IP
+  const rl = checkRateLimit(event, 5);
+  if (rl) return rl;
   const KEY = process.env.ANTHROPIC_API_KEY;
   if (!KEY) return { statusCode: 500, body: JSON.stringify({ error: "ANTHROPIC_API_KEY manquante" }) };
 
   try {
     const { url, siteInfo, siteName, siteType, siteDescription } = JSON.parse(event.body);
+    // SECURITY FIX: validate URL input
+    if (!url || typeof url !== 'string' || url.length > 2048) {
+      return { statusCode: 400, body: JSON.stringify({ error: "URL invalide" }) };
+    }
     const domain = url.replace(/https?:\/\//, '').replace(/\/.*$/, '');
     const info   = siteInfo || {};
     const name   = siteName || domain;
@@ -266,6 +275,7 @@ Réponds UNIQUEMENT avec le HTML, sans backtick.`)
 
   } catch (err) {
     console.error("generate error:", err);
-    return { statusCode: 500, body: JSON.stringify({ error: err.message }) };
+    // SECURITY FIX: never expose raw error messages to client
+    return { statusCode: 500, body: JSON.stringify({ error: "Erreur serveur" }) };
   }
 };

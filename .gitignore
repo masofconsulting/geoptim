@@ -3,3 +3,12 @@
 
 # Claude Code worktrees
 .claude/worktrees/
+
+# SECURITY FIX: exclude environment variable files
+.env
+.env.*
+.env.local
+.env.*.local
+
+# SECURITY FIX: exclude node_modules if ever added
+node_modules/

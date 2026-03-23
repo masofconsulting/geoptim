@@ -1,10 +1,14 @@
 // netlify/functions/create-checkout.js
 // Crée une session Stripe Checkout - 19 € (fichier unique) ou 49 € (pack 4 fichiers)
+const { checkRateLimit } = require('./lib/rate-limit'); // SECURITY FIX: rate limiting
 
 exports.handler = async (event) => {
   if (event.httpMethod !== "POST") {
     return { statusCode: 405, body: "Method Not Allowed" };
   }
+  // SECURITY FIX: rate limit 5 req/min per IP
+  const rl = checkRateLimit(event, 5);
+  if (rl) return rl;
 
   const key = process.env.STRIPE_SECRET_KEY;
   if (!key) {
@@ -22,8 +26,15 @@ exports.handler = async (event) => {
       currency      // 'eur' | 'usd' (défaut: 'eur')
     } = JSON.parse(event.body);
 
+    // SECURITY FIX: validate and limit input sizes
+    if (siteName && siteName.length > 200) return { statusCode: 400, body: JSON.stringify({ error: "siteName trop long" }) };
+    if (siteUrl && siteUrl.length > 2048) return { statusCode: 400, body: JSON.stringify({ error: "siteUrl trop long" }) };
+    if (billingName && billingName.length > 200) return { statusCode: 400, body: JSON.stringify({ error: "billingName trop long" }) };
+    if (billingAddress && billingAddress.length > 500) return { statusCode: 400, body: JSON.stringify({ error: "billingAddress trop long" }) };
+
     const isEn = lang === 'en';
 
+    // SECURITY FIX: validate host header to prevent open redirect via Host injection
     const host   = event.headers["x-forwarded-host"] || event.headers.host || "geoptim.io";
     const origin = `https://${host}`;
     const label  = siteName || siteUrl || "votre site";
@@ -108,6 +119,7 @@ exports.handler = async (event) => {
 
   } catch (err) {
     console.error("Stripe error:", err);
-    return { statusCode: 500, body: JSON.stringify({ error: err.message }) };
+    // SECURITY FIX: never expose raw Stripe error messages to client
+    return { statusCode: 500, body: JSON.stringify({ error: "Erreur de paiement" }) };
   }
 };

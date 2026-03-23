@@ -1,8 +1,12 @@
 // Valide un code promo. PROMO_CODES = JSON {"CODE": percent, ...}
 // Ex: {"LAUNCH50": 50, "MASOF": 100, "FRIEND20": 20}
+const { checkRateLimit } = require('./lib/rate-limit'); // SECURITY FIX: rate limiting
 
 exports.handler = async (event) => {
   if (event.httpMethod !== "POST") return { statusCode: 405 };
+  // SECURITY FIX: rate limit 10 req/min per IP (anti brute-force)
+  const rl = checkRateLimit(event, 10);
+  if (rl) return rl;
 
   let body;
   try { body = JSON.parse(event.body || '{}'); } catch {

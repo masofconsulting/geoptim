@@ -1,11 +1,15 @@
 // netlify/functions/verify-and-generate.js
 // Vérifie le paiement Stripe via fetch, puis génère les 4 fichiers GEO
 // Architecture : 1 appel Stripe + 3 appels Claude en parallèle (robots.txt généré sans IA)
+const { checkRateLimit } = require('./lib/rate-limit'); // SECURITY FIX: rate limiting
 
 exports.handler = async (event) => {
   if (event.httpMethod !== "POST") {
     return { statusCode: 405, body: "Method Not Allowed" };
   }
+  // SECURITY FIX: rate limit 5 req/min per IP
+  const rl = checkRateLimit(event, 5);
+  if (rl) return rl;
 
   const stripeKey = process.env.STRIPE_SECRET_KEY;
   const claudeKey = process.env.ANTHROPIC_API_KEY;
@@ -19,6 +23,15 @@ exports.handler = async (event) => {
     ({ stripeSessionId, analysisResult, siteUrl } = JSON.parse(event.body));
   } catch {
     return { statusCode: 400, body: JSON.stringify({ error: "Body invalide" }) };
+  }
+
+  // SECURITY FIX: validate stripeSessionId format (prevent injection into Stripe API URL)
+  if (!stripeSessionId || typeof stripeSessionId !== 'string' || !/^cs_/.test(stripeSessionId) || stripeSessionId.length > 200) {
+    return { statusCode: 400, body: JSON.stringify({ error: "stripeSessionId invalide" }) };
+  }
+  // SECURITY FIX: validate siteUrl
+  if (!siteUrl || typeof siteUrl !== 'string' || siteUrl.length > 2048) {
+    return { statusCode: 400, body: JSON.stringify({ error: "siteUrl invalide" }) };
   }
 
   // ── 1. VÉRIFIER LE PAIEMENT STRIPE ──────────────────────────────────────
@@ -309,6 +322,8 @@ HTML brut, sans backtick.`, 1500)
     };
 
   } catch (err) {
-    return { statusCode: 500, body: JSON.stringify({ error: "Génération : " + err.message }) };
+    console.error("generation error:", err);
+    // SECURITY FIX: never expose raw error messages to client
+    return { statusCode: 500, body: JSON.stringify({ error: "Erreur de génération" }) };
   }
 };

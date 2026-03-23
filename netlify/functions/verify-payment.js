@@ -1,10 +1,14 @@
 // netlify/functions/verify-payment.js
 // Vérifie qu'un paiement Stripe est bien complété et envoie le reçu par email
+const { checkRateLimit } = require('./lib/rate-limit'); // SECURITY FIX: rate limiting
 
 exports.handler = async (event) => {
   if (event.httpMethod !== "POST") {
     return { statusCode: 405, body: "Method Not Allowed" };
   }
+  // SECURITY FIX: rate limit 10 req/min per IP
+  const rl = checkRateLimit(event, 10);
+  if (rl) return rl;
 
   const key = process.env.STRIPE_SECRET_KEY;
   if (!key) {
@@ -18,8 +22,9 @@ exports.handler = async (event) => {
     return { statusCode: 400, body: JSON.stringify({ error: "Body invalide" }) };
   }
 
-  if (!stripeSessionId) {
-    return { statusCode: 400, body: JSON.stringify({ error: "stripeSessionId manquant" }) };
+  // SECURITY FIX: validate stripeSessionId format (prevent URL injection + enumeration)
+  if (!stripeSessionId || typeof stripeSessionId !== 'string' || !/^(cs_|PROMO-)/.test(stripeSessionId) || stripeSessionId.length > 200) {
+    return { statusCode: 400, body: JSON.stringify({ error: "stripeSessionId invalide" }) };
   }
 
   try {
@@ -50,6 +55,9 @@ exports.handler = async (event) => {
     const isEn           = lang === "en";
 
     // ── Envoi du reçu par email (non-bloquant) ─────────────────────────────
+    // SECURITY FIX: escape HTML in user-provided billing data for email
+    const esc = (s) => String(s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+
     if (isPaid && email && process.env.RESEND_API_KEY) {
       try {
         const ttc  = amount / 100;
@@ -100,12 +108,12 @@ td{padding:12px 14px;border-bottom:1px solid #f1f5f9;font-size:13px;vertical-ali
 <div class="body">
 <div class="cols">
 <div class="col"><h4>${isEn ? 'From' : 'Émetteur'}</h4><p><strong>HM CAPITAL</strong><br>SARL unipersonnelle<br>55 Rue du Bois d'Amour, 86280 Saint-Benoît<br>SIREN : 843 444 464 &mdash; TVA : FR37843444464</p></div>
-<div class="col"><h4>${isEn ? 'Customer' : 'Client'}</h4><p>${billingName ? '<strong>' + billingName + '</strong><br>' : ''}${billingAddress ? billingAddress + '<br>' : ''}${billingVat ? (isEn ? 'VAT: ' : 'TVA : ') + billingVat + '<br>' : ''}${email}</p></div>
+<div class="col"><h4>${isEn ? 'Customer' : 'Client'}</h4><p>${billingName ? '<strong>' + esc(billingName) + '</strong><br>' : ''}${billingAddress ? esc(billingAddress) + '<br>' : ''}${billingVat ? (isEn ? 'VAT: ' : 'TVA : ') + esc(billingVat) + '<br>' : ''}${esc(email)}</p></div>
 </div>
 <table>
 <thead><tr><th>Description</th><th style="text-align:right">${isEn ? 'Amount' : 'Montant HT'}</th></tr></thead>
 <tbody><tr>
-<td>${productLabel}${siteName ? '<br><span style="color:#6b7280;font-size:12px">' + (isEn ? 'Website: ' : 'Site : ') + siteName + '</span>' : ''}</td>
+<td>${productLabel}${siteName ? '<br><span style="color:#6b7280;font-size:12px">' + (isEn ? 'Website: ' : 'Site : ') + esc(siteName) + '</span>' : ''}</td>
 <td style="text-align:right;white-space:nowrap">${fmt(ht)}</td>
 </tr></tbody></table>
 <div class="totals">
@@ -150,6 +158,7 @@ ${isEn ? `<div class="ttc"><span>Total</span><span>${fmt(ttc)}</span></div>` : `
 
   } catch (err) {
     console.error("verify-payment error:", err);
-    return { statusCode: 500, body: JSON.stringify({ error: err.message }) };
+    // SECURITY FIX: never expose raw error messages to client
+    return { statusCode: 500, body: JSON.stringify({ error: "Erreur de vérification" }) };
   }
 };

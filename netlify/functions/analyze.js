@@ -127,6 +127,7 @@ JSON sans markdown:
 
   } catch(err) {
     console.error("analyze error:", err.message);
-    return { statusCode: 500, body: JSON.stringify({ error: err.message, url }) };
+    // SECURITY FIX: never expose raw error messages or URL to client
+    return { statusCode: 500, body: JSON.stringify({ error: "Erreur serveur" }) };
   }
 };
