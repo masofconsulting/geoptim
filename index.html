@@ -2495,7 +2495,9 @@ function getCurrentUrl() {
 }
 
 // ── ON-DEMAND FILE GENERATION (streaming) ──
+var _generating = false;
 async function generateFile(fileKey) {
+  if (_generating) { alert('Une génération est déjà en cours. Veuillez patienter.'); return; }
   if (!result) { alert('Lancez d\'abord une analyse.'); return; }
   var url = getCurrentUrl();
   var domain = url.replace(/https?:\/\//, '').replace(/\/.*$/, '');
@@ -2521,9 +2523,14 @@ async function generateFile(fileKey) {
     return;
   }
 
+  _generating = true;
+  // Disable all other generate buttons while one is running
+  var allGenBtns = document.querySelectorAll('[id^="gen-btn-"]');
+  for (var gi = 0; gi < allGenBtns.length; gi++) allGenBtns[gi].disabled = true;
+
   var btn = document.getElementById('gen-btn-' + fileKey);
   if (btn) {
-    btn.textContent = 'Génération…'; btn.disabled = true;
+    btn.textContent = 'Génération…';
     var hint = document.createElement('div');
     hint.id = 'gen-hint-' + fileKey;
     hint.style.cssText = 'font-family:DM Mono,monospace;font-size:11px;color:#9e9789;margin-top:8px;text-align:center';
@@ -2569,9 +2576,14 @@ async function generateFile(fileKey) {
     purchases[purchaseIdx].generatedFiles[fileKey] = content;
     localStorage.setItem('geo_purchases', JSON.stringify(purchases));
     result.files[fileKey] = content;
+    _generating = false;
     renderFiles();
   } catch (err) {
+    _generating = false;
     if (btn) { btn.textContent = 'Réessayer →'; btn.disabled = false; }
+    // Re-enable other generate buttons on error
+    var allGenBtns2 = document.querySelectorAll('[id^="gen-btn-"]');
+    for (var gi2 = 0; gi2 < allGenBtns2.length; gi2++) allGenBtns2[gi2].disabled = false;
     var h = document.getElementById('gen-hint-' + fileKey); if (h) h.remove();
     alert('Erreur génération : ' + err.message);
   }
