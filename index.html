@@ -2524,9 +2524,21 @@ async function generateFile(fileKey) {
   }
 
   _generating = true;
-  // Disable all other generate buttons while one is running
+  // Disable and grey out all other generate buttons while one is running
   var allGenBtns = document.querySelectorAll('[id^="gen-btn-"]');
-  for (var gi = 0; gi < allGenBtns.length; gi++) allGenBtns[gi].disabled = true;
+  for (var gi = 0; gi < allGenBtns.length; gi++) {
+    var gb = allGenBtns[gi];
+    gb.disabled = true;
+    if (gb.id !== 'gen-btn-' + fileKey) {
+      gb.textContent = 'Génération en cours. Merci de patienter.';
+      gb.style.background = '#ccc';
+      gb.style.color = '#888';
+      gb.style.cursor = 'not-allowed';
+    }
+  }
+  // Also hide regen buttons during generation
+  var regenBtns = document.querySelectorAll('[onclick^="clearFileCache"]');
+  for (var ri = 0; ri < regenBtns.length; ri++) regenBtns[ri].style.display = 'none';
 
   var btn = document.getElementById('gen-btn-' + fileKey);
   if (btn) {
@@ -2580,12 +2592,9 @@ async function generateFile(fileKey) {
     renderFiles();
   } catch (err) {
     _generating = false;
-    if (btn) { btn.textContent = 'Réessayer →'; btn.disabled = false; }
-    // Re-enable other generate buttons on error
-    var allGenBtns2 = document.querySelectorAll('[id^="gen-btn-"]');
-    for (var gi2 = 0; gi2 < allGenBtns2.length; gi2++) allGenBtns2[gi2].disabled = false;
     var h = document.getElementById('gen-hint-' + fileKey); if (h) h.remove();
     alert('Erreur génération : ' + err.message);
+    renderFiles();
   }
 }
 
@@ -2761,12 +2770,17 @@ function renderFiles() {
         '</div>';
     } else if (info.state === 'purchased') {
       // État 2 : acheté, pas encore généré
+      var genDisabled = _generating;
+      var genBtnStyle = genDisabled
+        ? 'width:100%;padding:11px;border-radius:8px;background:#ccc;color:#888;font-weight:600;font-size:13px;cursor:not-allowed;border:none'
+        : 'width:100%;padding:11px;border-radius:8px;background:' + m.color + ';color:#fff;font-weight:600;font-size:13px;cursor:pointer;border:none';
+      var genBtnTxt = genDisabled ? 'Génération en cours. Merci de patienter.' : 'Générer →';
       grid.innerHTML += '<div class="fc" style="border-color:' + m.color + '28">' +
         '<div class="fct"><div class="fic" style="background:' + m.color + '15;border:1px solid ' + m.color + '25">' + m.icon + '</div><div style="flex:1"><div class="fn" style="color:var(--navy)">' + m.title + '</div><div class="ff">' + m.filename + '</div></div>' +
         '<span style="font-size:11px;background:#f0fdf4;color:#166534;border:1px solid #bbf7d0;border-radius:999px;padding:3px 10px;font-family:\'DM Mono\',monospace">Acheté</span></div>' +
-        '<div style="font-size:13px;color:var(--text3);margin:12px 0 4px;line-height:1.6">Fichier acheté, cliquez sur Générer pour le créer.</div>' +
+        '<div style="font-size:13px;color:var(--text3);margin:12px 0 4px;line-height:1.6">' + (genDisabled ? 'Un autre fichier est en cours de génération.' : 'Fichier acheté, cliquez sur Générer pour le créer.') + '</div>' +
         '<div class="fa" style="margin-top:10px">' +
-          '<button id="gen-btn-' + m.key + '" onclick="generateFile(\'' + m.key + '\')" style="width:100%;padding:11px;border-radius:8px;background:' + m.color + ';color:#fff;font-weight:600;font-size:13px;cursor:pointer;border:none">Générer →</button>' +
+          '<button id="gen-btn-' + m.key + '" onclick="generateFile(\'' + m.key + '\')" ' + (genDisabled ? 'disabled ' : '') + 'style="' + genBtnStyle + '">' + genBtnTxt + '</button>' +
         '</div>' +
         '</div>';
     } else {
@@ -2777,7 +2791,7 @@ function renderFiles() {
       var dlLabel = downloaded ? '↓ Retélécharger' : '↓ Télécharger';
       var badgeTxt = downloaded ? 'Téléchargé' : 'Prêt';
       var badgeCls = downloaded ? 'style="font-size:11px;background:#f0fdf4;color:#166534;border:1px solid #bbf7d0;border-radius:999px;padding:3px 10px;font-family:\'DM Mono\',monospace"' : 'class="frd"';
-      var canRegen = getRegenCount(m.key, analysisUrl) < 1;
+      var canRegen = !_generating && getRegenCount(m.key, analysisUrl) < 1;
       grid.innerHTML += '<div class="fc ul" style="border-color:' + m.color + '28">' +
         '<div class="fct"><div class="fic" style="background:' + m.color + '15;border:1px solid ' + m.color + '25">' + m.icon + '</div><div style="flex:1"><div class="fn" style="color:var(--navy)">' + m.title + '</div><div class="ff">' + m.filename + '</div></div><span ' + badgeCls + '>' + badgeTxt + '</span></div>' +
         '<div class="fpv">' + preview + '…</div>' +
