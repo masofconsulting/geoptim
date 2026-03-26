@@ -2788,7 +2788,7 @@ function renderFiles() {
       var content = info.content || (result.files || {})[m.key] || '';
       var preview = content.slice(0, 200).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
       var downloaded = isFileDownloaded(m.key, analysisUrl);
-      var dlLabel = downloaded ? '↓ Retélécharger' : '↓ Télécharger';
+      var dlLabel = downloaded ? '↓ Télécharger à nouveau' : '↓ Télécharger';
       var badgeTxt = downloaded ? 'Téléchargé' : 'Prêt';
       var badgeCls = downloaded ? 'style="font-size:11px;background:#f0fdf4;color:#166534;border:1px solid #bbf7d0;border-radius:999px;padding:3px 10px;font-family:\'DM Mono\',monospace"' : 'class="frd"';
       var canRegen = !_generating && getRegenCount(m.key, analysisUrl) < 1;
@@ -2796,7 +2796,7 @@ function renderFiles() {
         '<div class="fct"><div class="fic" style="background:' + m.color + '15;border:1px solid ' + m.color + '25">' + m.icon + '</div><div style="flex:1"><div class="fn" style="color:var(--navy)">' + m.title + '</div><div class="ff">' + m.filename + '</div></div><span ' + badgeCls + '>' + badgeTxt + '</span></div>' +
         '<div class="fpv">' + preview + '…</div>' +
         '<div class="fa"><button class="dlb" style="background:' + m.color + '" onclick="dlFile(\'' + m.key + '\',\'' + m.filename + '\')">' + dlLabel + '</button><button class="cpb" onclick="cpFile(\'' + m.key + '\',this)">⧉</button>' +
-        (canRegen ? '<button class="cpb" title="Régénérer (1 fois)" onclick="clearFileCache(\'' + m.key + '\')" style="font-size:14px">↺</button>' : '') +
+        (canRegen ? '<button class="cpb" title="Générer à nouveau (1 fois)" onclick="clearFileCache(\'' + m.key + '\')" style="font-size:14px">↺</button>' : '') +
         '</div>' +
         '</div>';
     }
