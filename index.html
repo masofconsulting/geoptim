@@ -8,6 +8,20 @@
 <link rel="alternate" hreflang="fr" href="https://geoptim.io/"/>
 <link rel="alternate" hreflang="en" href="https://geoptim.io/en/"/>
 <link rel="alternate" hreflang="x-default" href="https://geoptim.io/"/>
+<script>
+// Client-side language detection (SEO-safe — bots still see FR homepage).
+// Redirects English browsers to /en/ only on first visit, avoiding loops.
+(function(){
+  try {
+    if (sessionStorage.getItem('lang_redirect_done')) return;
+    var lang = (navigator.language || navigator.userLanguage || '').toLowerCase();
+    if (lang.indexOf('en') === 0 && !/[?&](lang=fr|nolr=1)/.test(location.search)) {
+      sessionStorage.setItem('lang_redirect_done', '1');
+      location.replace('/en/');
+    }
+  } catch(e) {}
+})();
+</script>
 <link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
 <link rel="shortcut icon" href="/favicon.svg"/>
 <link rel="apple-touch-icon" href="/favicon.svg"/>

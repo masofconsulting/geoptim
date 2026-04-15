@@ -2,12 +2,9 @@
   publish = "."
   functions = "netlify/functions"
 
-# Language detection — redirect English browsers to /en/
-[[redirects]]
-  from = "/"
-  to = "/en/"
-  status = 302
-  conditions = {Language = ["en"]}
+# NOTE: language detection is handled client-side in index.html.
+# Server-side 302 redirects based on Accept-Language confuse Googlebot
+# (which sends en-US) and prevent proper indexing of the FR homepage.
 
 [[redirects]]
   from = "/tarifs"
