@@ -167,6 +167,12 @@
   to = "/en/blog/index.html"
   status = 200
 
+# IndexNow ping endpoint — triggers Bing/Yandex/Seznam/Naver recrawl
+[[redirects]]
+  from = "/indexnow-ping"
+  to = "/.netlify/functions/indexnow-ping"
+  status = 200
+
 # --- HTTP Headers (SEO + securite) ---
 
 [[headers]]
@@ -218,6 +224,13 @@
     Content-Type = "text/plain; charset=utf-8"
     Cache-Control = "public, max-age=86400"
 
+# IndexNow verification key file — must be served as plain text
+[[headers]]
+  for = "/c8f2a9e4b7d1e5a3f6b8c9d2e4f7a1b5.txt"
+  [headers.values]
+    Content-Type = "text/plain; charset=utf-8"
+    Cache-Control = "public, max-age=3600"
+
 [[headers]]
   for = "/*.css"
   [headers.values]
@@ -264,6 +277,9 @@
 
 [functions."verify-payment"]
   timeout = 10
+
+[functions."indexnow-ping"]
+  timeout = 20
 
 [functions."generate"]
   timeout = 26
